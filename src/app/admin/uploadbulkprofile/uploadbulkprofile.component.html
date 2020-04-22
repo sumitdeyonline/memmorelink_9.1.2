@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="single">
+        <div class="form-container">
+            <h2>Profile Bulk Upload</h2>
+
+            <!-- loader.component.html -->
+            <div ali class="progress-loader" [hidden]="!loading" >
+            
+                <mat-progress-spinner [mode]="'indeterminate'" [color]="'warn'" style="align-content: center;left:45%;">
+                </mat-progress-spinner>
+            
+            </div>                
+
+            <!-- <div ali class="progress-loader" [hidden]="!loading" style="align-content: center;left:45%;">
+            
+                <mat-progress-bar [mode]="'indeterminate'">
+                </mat-progress-bar>
+            
+            </div>   -->            
+            <a routerLink="/postsadminhome" *ngIf="auth.isAdminRole()"><i class="fa fa-arrow-left" style="font-size:24px;color:rgb(14, 2, 43)"></i></a>
+
+            <table>
+                <tr>
+                    <th>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label style="font-weight: bold;">Upload CSV file</label>
+                            </div>
+                            <div class="col">
+                                <label class="btn btn-default"> <input type="file" name="fileUpload" (change)="selectFile($event)">
+                                </label>&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-success" [disabled]="!selectedFiles || !resumeUploadEnabled" (click)="upload()">Upload</button>
+                                <!--a href="{{rUploadService.downloadURL}}" [hidden]="!resumeUploadEnabled" target="_blank">{{rUploadService.fileName}}</a-->
+                                &nbsp; <!--a href="{{rUploadService.downloadURL}}" [hidden]="!resumeUploadEnabled" target="_blank">Resume1</a-->
+                                <div style="color: green;" *ngIf="!resumeUploadEnabled">
+                                    Please Upload .csv file
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <button class="btn btn-success" [disabled]="!uploadToDBEnabled" (click)="uploadProfilesIntoDB()">Upload profile into Database</button>
+                    </td>
+                    <td style="color: red;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{SucessMessage}}
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-responsive table-hover" border="1"  style="width : 100%;">
+                <tbody>
+                    <ng-container *ngFor="let csvRec of csvRecords;let i=index">
+                        <tr>
+                            <ng-container *ngFor="let data of csvRec;let j=index"> 
+                                <td>{{data}}</td>
+                            </ng-container>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>  
+            <table>
+                <tr>
+                    <td style="color: red;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h2 style="color: red;">{{CompleteMessage}}</h2>
+                    </td>
+                </tr>
+            </table>            
+            
+<!-- 
+            <table>
+              <tr *ngFor="let csvRec of csvRecords;let i=index">
+                <th *ngFor="let data of csvRec;let j=index">{{data}}</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Sex</th>
+                <th>Address1</th>
+                <th>Address2</th>
+                <th>City</th>
+                <th>&nbsp;</th>
+              </tr>
+            </table> -->
+  
+          </div>
+        </div>
+    </div>

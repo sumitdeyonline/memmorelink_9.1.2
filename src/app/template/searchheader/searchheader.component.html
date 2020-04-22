@@ -1,0 +1,96 @@
+<div class="banner_1">
+	<div class="container">
+		<div id="search_wrapper1">
+		   <form #f="ngForm" (ngSubmit)="searchjob(f.value)">
+				<div id="search_form" class="clearfix">
+						&nbsp;
+					<h1>Start tech job search</h1>
+					<!-- <p> -->
+					<table>
+						<tr>
+							<td>
+								<input type="text" class="text" required="required" ngModel name="keyword" #username="ngModel" id="keyword" placeholder="" value="{{ keyword }}" [ngModel]="keyword" placeholder="Skills or Job title">
+							</td>
+							<td>
+								<!-- <input type="text" class="text" required="required" 
+								value= "location" 
+								ngModel name="location"
+								#username="ngModel" 
+								id="location" placeholder="" 
+								value="{{ location }}" 
+								[(ngModel)]="location" 
+								placeholder= "City, State or Zipcode"
+								ngxTypeahead
+								[taList]="states"
+								(taSelected)="selectedStatic($event,f.value)">	 -->
+								
+								
+								<input type="text" class="text" required="required" 
+								value= "location" 
+								ngModel name="location"
+								#username="ngModel" 
+								id="location" placeholder="" 
+								value="{{ location }}" 
+								[(ngModel)]="location" 
+								placeholder= "City, State or Zipcode"
+								[ngbTypeahead]="search" 
+								(keyup)="zipcodeSearch($event.target.value)"/>	
+
+
+								<!-- <div class="autocomplete" style="width:300px;">
+									<input type="text" class="text" required="required" 
+									value= "location" 
+									ngModel name="location"
+									#username="ngModel" 
+									id="location" placeholder="" 
+									value="{{ location }}" 
+									[(ngModel)]="location" 
+									placeholder= "City, State or Zipcode"
+
+									[ngbTypeahead]="TypeaheadSearch()"
+									autocomplete="off" spellcheck="false" 
+									list="citystate"
+									/>	
+								</div> -->
+								
+								<!-- <datalist id="citystate">
+									<option *ngFor="let cityzipM of result" >  
+										{{ cityzipM.city }}, {{ cityzipM.state }}
+									</option>
+								 </datalist> -->
+
+							</td>
+							<td>
+								<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Find Jobs"></label>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+
+
+<!-- 
+								<ul *ngIf="showTypeAhead" class=".typeahead, .tt-query, .tt-hint ">
+									<li *ngFor="let cityzipM of result" > 
+										{{ cityzipM.city }}, {{ cityzipM.state }}
+									</li>
+								</ul> -->
+							</td>
+							<td></td>														
+						</tr>
+					</table>
+
+          <!--input type="text" class="text" required="required" value= "location" ngModel name="location" #username="ngModel" id="location" placeholder="{{ location }}" value="Location" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Location';}"-->
+
+					<!-- </p> -->
+
+				</div>
+			</form>
+		</div>
+   </div>
+</div>
+
+
+
+
+
