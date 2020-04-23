@@ -68,10 +68,16 @@
         <a class="nav-link" routerLink="/about" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="auth.isAuthenticated() && !auth.isUserRole()">
           <a class="nav-link" routerLink="/valueservices" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;Post Job or Search Resume
           </a>
       </li>
+
+      <li class="nav-item" *ngIf="!auth.isAuthenticated()">
+        <a class="nav-link" routerLink="/valueservices" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;Post Job or Search Resume
+        </a>
+    </li>
+
       <li class="nav-item">
         <a class="nav-link" href='{{email}}' target="_top"><i class="fa fa-question-circle" aria-hidden="true"></i>
         </a>
@@ -83,11 +89,13 @@
       </li-->
     </ul>
     <ul class="nav navbar-nav">
-      <li><a routerLink="/userprofile" *ngIf="auth.isAuthenticated()">Upload Resume</a></li>
+      <li><a routerLink="/userprofile" *ngIf="auth.isAuthenticated() && auth.isUserRole()">Upload Resume</a></li>
       <li class="nav-item"><a routerLink="/login" *ngIf="!auth.isAuthenticated()">Login</a></li>
       <li><a routerLink="/signup" *ngIf="!auth.isAuthenticated()">Signup</a></li>
+      <!-- <li *ngIf="(auth.isAuthenticated() && auth.userProfile) || !auth.isUserRole()" class="username">| &nbsp;</li> -->
+      <li *ngIf="auth.isAuthenticated() && auth.isUserRole()" class="username">| &nbsp;</li>
       <li *ngIf="auth.isAuthenticated() && auth.userProfile" class="username">
-          | &nbsp;<img [src]="auth.userProfile?.picture" alt="{{ auth.userProfile.name }}"  height="20px" weidth="35px">&nbsp;{{ auth.userProfile.nickname }}&nbsp;|
+          <img [src]="auth.userProfile?.picture" alt="{{ auth.userProfile.name }}"  height="20px" weidth="35px">&nbsp;{{ auth.userProfile.nickname }}&nbsp;|
             <!--img src="{{auth.userProfile?.picture}}" class="avatar" alt="avatar" {{ auth.userProfile.name }} -->
       </li>
       <li><a routerLink="" (click) = "auth.logout()" *ngIf="auth.isAuthenticated()">Logout</a></li>

@@ -81,8 +81,11 @@
                     <table>
                       <tr>
                         <td>
-        
-                          <button class="btn_common btn-default" type="submit" value=" Submit" id="submit" name="submit" [hidden]="!signupForm.valid || password.value!=repassword.value || Fieldlength(password.value) < 5 || Fieldlength(repassword.value) < 5">
+                          <div style="color: red;" *ngIf="!signupForm.valid && signupForm.touched">
+                            (Please enter form fields)
+                          </div>   
+
+                          <button class="btn_common btn-default" type="submit" value=" Submit" id="submit" name="submit" [disabled]="!signupForm.valid || password.value!=repassword.value || Fieldlength(password.value) < 5 || Fieldlength(repassword.value) < 5">
                             <i class="fa fa-floppy-o"></i>&nbsp;Submit
                           </button>
                           &nbsp;&nbsp;

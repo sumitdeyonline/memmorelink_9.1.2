@@ -8,6 +8,7 @@ interface AuthSessionConfiguration {
     PostJobRole: string,
     ResumeSearchRole: string,
     AdminRole: string,
+    UserRole: string
 }
 
 export const SESSION_CONFIG: AuthSessionConfiguration = {
@@ -19,6 +20,6 @@ export const SESSION_CONFIG: AuthSessionConfiguration = {
     admin: 'admin',
     PostJobRole: 'PostJobRole',
     ResumeSearchRole: 'ResumeSearchRole',
-    AdminRole: 'AdminRole'
-
+    AdminRole: 'AdminRole',
+    UserRole: 'UserRole'
 };

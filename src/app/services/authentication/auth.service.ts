@@ -38,6 +38,7 @@ export class AuthService {
   isEmployerPostJobRole: boolean = false;
   isEmployerResumeSearchRole: boolean = false;
   isAdminUserRole: boolean = false;
+  isGeneralUserRole: boolean = false;
   UserRoled: UserRole[];
   loginErrorMsg: string;
 
@@ -203,6 +204,7 @@ export class AuthService {
     localStorage.removeItem(SESSION_CONFIG.PostJobRole);
     localStorage.removeItem(SESSION_CONFIG.ResumeSearchRole);
     localStorage.removeItem(SESSION_CONFIG.AdminRole);
+    localStorage.removeItem(SESSION_CONFIG.UserRole);
     // Go back to the home route
     this.router.navigate(['/login']);
   }
@@ -283,10 +285,14 @@ export class AuthService {
           this.isEmployerPostJobRole =  this.UserRoled[0].isEmployerPostJobRole;
           this.isEmployerResumeSearchRole =  this.UserRoled[0].isEmployerResumeSearchRole;
           this.isAdminUserRole =  this.UserRoled[0].isAdminUserRole;
+          if (this.UserRoled[0].RoleType == 'U') {
+            this.isGeneralUserRole = true;
+          } else { this.isGeneralUserRole = false}
 
           localStorage.setItem(SESSION_CONFIG.PostJobRole,JSON.stringify(this.isEmployerPostJobRole));
           localStorage.setItem(SESSION_CONFIG.ResumeSearchRole,JSON.stringify(this.isEmployerResumeSearchRole));
           localStorage.setItem(SESSION_CONFIG.AdminRole,JSON.stringify(this.isAdminUserRole));
+          localStorage.setItem(SESSION_CONFIG.UserRole,JSON.stringify(this.isGeneralUserRole));
           // console.log("Variable 1 "+this.isEmployerPostJobRole+ "  Session 1 :::::====>>> "+localStorage.getItem(SESSION_CONFIG.PostJobRole));
           // console.log("Variable 2  :::::====>>> "+this.isEmployerResumeSearchRole + " Session 2  :::::====>>>"+localStorage.getItem(SESSION_CONFIG.ResumeSearchRole));
           // console.log("Variable 3  :::::====>>> "+this.isAdminUserRole + "Session 3  :::::====>>> "+localStorage.getItem(SESSION_CONFIG.AdminRole));
@@ -343,6 +349,11 @@ export class AuthService {
     return false;
   }
 
+  public isUserRole() {
+    if (localStorage.getItem(SESSION_CONFIG.UserRole) == 'true')
+      return true;
+    return false; 
+  }
 
   public isResumeSearchRole() {
     //this.userRoleAssignment();

@@ -169,7 +169,7 @@ export class UserdetailsService {
         ref.where('userRole','==',userOrRole));      
     } else if (fieldType == 'A') {
       this.udCollection = this.afs.collection(FIREBASE_CONFIG.UserDetails, ref =>
-        ref);       
+        ref.where('userRole','in',['EmployerResumeSearch','EmployerPostJob','EmployerPowerUser']));       
     }
            //console.log("List Service ..... 4");
     this.userDetailc = this.udCollection.snapshotChanges().pipe(map(changes => {

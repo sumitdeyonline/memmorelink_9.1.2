@@ -22,7 +22,8 @@ export class ResumesearchComponent implements OnInit {
 
   client: any;
   index: any;
-  length: any = SEARCH_CONFIG.LIST_JOB_DESC_WIDTH;
+  length: any = SEARCH_CONFIG.LIST_JOB_DESI_POSITION_SKILLSET;
+
   // pager object
   pager: any = {};
 
@@ -30,6 +31,8 @@ export class ResumesearchComponent implements OnInit {
   pagedItems: any[];
   loading: boolean = false;
   pagesize = SEARCH_CONFIG.PAGE_SIZE;
+  noResultFound: string='';
+  
 
   constructor(private route: ActivatedRoute, private pagerService: PagerService, private router: Router, ) { }
 
@@ -42,6 +45,7 @@ export class ResumesearchComponent implements OnInit {
      /****** Need to open Later ********/
 
     //("Search Parameter ::::: "+searchResume.value.ResumeSearch);
+    this.noResultFound = '';
     const filter = 'isSearchable:true';
     this.client = algoliasearch(SEARCH_CONFIG.ALGOLIA_APP_ID, SEARCH_CONFIG.ALGOLIA_API_KEY,
       { protocol: SEARCH_CONFIG.PROTOCOLS });
@@ -60,6 +64,9 @@ export class ResumesearchComponent implements OnInit {
         //let j=0;
         //this.UserProfileFinal = [];
         this.UserProfile = data.hits;
+        if (this.UserProfile.length == 0)  {
+          this.notfoundAnything();
+        }        
         this.loading = false;
         this.setPage(1);
 
@@ -85,6 +92,12 @@ export class ResumesearchComponent implements OnInit {
     // });}
 
 
+
+  }
+
+  notfoundAnything() {
+    this.noResultFound = "No Record Found";
+    this.loading = false; 
 
   }
 

@@ -34,6 +34,7 @@ export class ValueServicesComponent implements OnInit {
   companyAddress: string;
   jobcount: number = 0;
 
+
   constructor(public _auth: AuthService, fb: FormBuilder, public udetails: UserdetailsService, private uProfile: UserprofileService, private sEmail: EmailService) {
 
     // this.valueservicesForm = fb.group({
