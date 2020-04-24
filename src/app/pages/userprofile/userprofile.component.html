@@ -21,7 +21,7 @@
                     <div class="col">
                         <input type="text" ngModel name="FirstName" [disabled]="!isUpdateProfile" #FirstName="ngModel" id="FirstName" [ngModel]="uProfile.selectedUserProfile?.FirstName" (ngModelChange)="uProfile.selectedUserProfile.FirstName" class="form-control input-sm" required/>
 
-                        <div style="color: red;" *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.touched)">
+                        <div class="error_Message" *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.touched)">
                             Please Enter First Name
                         </div>
 
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col">
                         <input type="text" ngModel name="LastName" [disabled]="!isUpdateProfile" #LastName="ngModel" id="LastName" [ngModel]="uProfile.selectedUserProfile?.LastName" (ngModelChange)="uProfile.selectedUserProfile.LastName" class="form-control input-sm" required/>
-                        <div style="color: red;" *ngIf="LastName.invalid && (LastName.dirty || LastName.touched)">
+                        <div class="error_Message" *ngIf="LastName.invalid && (LastName.dirty || LastName.touched)">
                           Please Enter Last Name
                         </div>
                      </div>
@@ -54,7 +54,7 @@
                         <label class="radio-inline">
                             <input type="radio" ngModel name="Sex" [disabled]="!isUpdateProfile" #Sex="ngModel" id="Sex" [ngModel]="uProfile.selectedUserProfile?.Sex" (ngModelChange)="uProfile.selectedUserProfile.Sex" value="Female" required>Female
                         </label>
-                        <div style="color: red;" *ngIf="Sex.invalid && (Sex.dirty || Sex.touched)">
+                        <div class="error_Message" *ngIf="Sex.invalid && (Sex.dirty || Sex.touched)">
                           Gendar Required
                         </div>
                     </div>
@@ -63,11 +63,11 @@
                     </div>
                     <div class="col">
                         <input type="email" ngModel name="Email" [disabled]="!isUpdateProfile" #Email="ngModel" id="Email" [ngModel]="uProfile.selectedUserProfile?.Email" (ngModelChange)="uProfile.selectedUserProfile.Email" class="form-control input-sm" required/>
-                        <!--div style="color: red;"*ngIf="Email.errors.required && (Email.dirty  || Email.touched)"-->
-                        <div style="color: red;"*ngIf="Email.invalid && (Email.dirty  || Email.touched)">
+                        <!--div class="error_Message"*ngIf="Email.errors.required && (Email.dirty  || Email.touched)"-->
+                        <div class="error_Message"*ngIf="Email.invalid && (Email.dirty  || Email.touched)">
                             Please enter the valid Email
                         </div>
-                        <!--div style="color: red;" *ngIf="Email.email && (Email.dirty  || Email.touched)">
+                        <!--div class="error_Message" *ngIf="Email.email && (Email.dirty  || Email.touched)">
                             Email must be a valid email address
                         </div-->
                      </div>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="col">
                         <input type="text" ngModel name="CellPhone" [disabled]="!isUpdateProfile" #CellPhone="ngModel" id="CellPhone" [ngModel]="uProfile.selectedUserProfile?.CellPhone" (ngModelChange)="uProfile.selectedUserProfile.CellPhone" class="form-control input-sm" required/>
-                        <div style="color: red;" *ngIf="CellPhone.invalid && (CellPhone.dirty || CellPhone.touched)">
+                        <div class="error_Message" *ngIf="CellPhone.invalid && (CellPhone.dirty || CellPhone.touched)">
                             Please Enter Cell Phone
                         </div>
                      </div>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="col">
                         <input type="text" ngModel name="Address1" [disabled]="!isUpdateProfile" #Address1="ngModel" id="Address1" [ngModel]="uProfile.selectedUserProfile?.Address1" (ngModelChange)="uProfile.selectedUserProfile.Address1" class="form-control input-sm" required/>
-                        <div style="color: red;" *ngIf="Address1.invalid && (Address1.dirty || Address1.touched)">
+                        <div class="error_Message" *ngIf="Address1.invalid && (Address1.dirty || Address1.touched)">
                             Please Enter Address
                         </div>
                     </div>
@@ -144,7 +144,7 @@
                             <option [value]="country.countryID" *ngFor="let country of countries">{{country.CountryName}}</option>
                             <!--option>USA</option-->
                         </select>
-                        <div style="color: red;" *ngIf="Country.invalid && (Country.dirty || Country.touched)">
+                        <div class="error_Message" *ngIf="Country.invalid && (Country.dirty || Country.touched)">
                             Please Enter Country
                         </div>
                     </div>
@@ -211,7 +211,7 @@
                             <option label="WI" value="WI">WI</option>
                             <option label="WY" value="WY">WY</option-->
                         </select>
-                        <div style="color: red;" *ngIf="State.invalid && (State.dirty || State.touched)">
+                        <div class="error_Message" *ngIf="State.invalid && (State.dirty || State.touched)">
                             Please Enter State
                         </div>
                      </div>
@@ -230,7 +230,7 @@
                     </div>
                     <div class="col">
                         <input type="text" ngModel name="City" [disabled]="!isUpdateProfile" #City="ngModel" id="City" [ngModel]="uProfile.selectedUserProfile?.City" (ngModelChange)="uProfile.selectedUserProfile.City" class="form-control input-sm" required/>
-                        <div style="color: red;" *ngIf="City.invalid && (City.dirty || City.touched)">
+                        <div class="error_Message" *ngIf="City.invalid && (City.dirty || City.touched)">
                             Please Enter City
                         </div>
                     </div>
@@ -240,7 +240,7 @@
                     </div>
                     <div class="col">
                         <input type="number" ngModel name="ZipCode" [disabled]="!isUpdateProfile" #ZipCode="ngModel" id="ZipCode" [ngModel]="uProfile.selectedUserProfile?.ZipCode" (ngModelChange)="uProfile.selectedUserProfile.ZipCode" class="form-control input-sm" required/>
-                        <div style="color: red;" *ngIf="ZipCode.invalid && (ZipCode.dirty || ZipCode.touched)">
+                        <div class="error_Message" *ngIf="ZipCode.invalid && (ZipCode.dirty || ZipCode.touched)">
                             Please Enter valid Zip Code
                         </div>
                     </div>

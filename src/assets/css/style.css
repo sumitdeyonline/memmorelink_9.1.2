@@ -41,11 +41,11 @@ body a{
 
 .navbar-default .navbar-nav > li > a {
     color: #fff;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 .username {
     color: #fff;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 .navbar {
    min-height:100%;
@@ -837,6 +837,12 @@ span.m_2{
     font-weight: 400;
     color: rgb(219, 0, 0);
 }
+
+.error_Message {
+    color: red;
+    font-size: small;
+}
+
 .login-btn input[type="submit"]{
     background:#2185C5;
     color: #FFF;

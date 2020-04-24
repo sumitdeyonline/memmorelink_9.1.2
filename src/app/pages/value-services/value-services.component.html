@@ -12,7 +12,7 @@
 
                <signup-confirm [signupSucessMessage] = "valueservicesSucessMessage"></signup-confirm>
                <div id="site_form" [hidden]="valueservicesSucessMessage != null && valueservicesSucessMessage !=''">
-                <p style="color: red;" *ngIf="valueservicesMessage != null && valueservicesMessage !=''">
+                <p class="error_Message" *ngIf="valueservicesMessage != null && valueservicesMessage !=''">
                     {{ valueservicesMessage }}
                 </p>
 
@@ -33,11 +33,11 @@
                     class="form-control input-sm" required/>
 
 
-                    <!-- <div style="color: red;" *ngIf="email.invalid && email.errors?.email && Fieldlength(email.value) < 5 && email.touched"> -->
-                    <!-- <div style="color: red;" *ngIf="email.invalid && Fieldlength(email.value) < 5 && email.touched">                      
+                    <!-- <div class="error_Message" *ngIf="email.invalid && email.errors?.email && Fieldlength(email.value) < 5 && email.touched"> -->
+                    <!-- <div class="error_Message" *ngIf="email.invalid && Fieldlength(email.value) < 5 && email.touched">                      
                       Please enter the valid Email
                     </div> -->
-                    <div style="color: red;" *ngIf="email.errors && email.touched">                      
+                    <div class="error_Message" *ngIf="email.errors && email.touched">                      
                       Please enter the valid Email
                     </div>                    
 
@@ -51,13 +51,13 @@
                         Please Enter a valid Email
                       </div>
                     </div-->
-                    <!--div style="color: red;" *ngIf="auth0Error != null && auth0Error !=''">
+                    <!--div class="error_Message" *ngIf="auth0Error != null && auth0Error !=''">
                       {{ auth0Error }}
                     </div-->
 
 
                     <label for="password">Password:</label> <input type="password" [disabled]="_auth.isAuthenticated()" ngModel name="password" #password="ngModel" id="password" [ngModel]="udetails.selectedValueServices?.password" (ngModelChange)="udetails.selectedValueServices.password" class="form-control input-sm" required/>
-                    <div style="color: red;" *ngIf="Fieldlength(password.value) < 5 && password.touched">
+                    <div class="error_Message" *ngIf="Fieldlength(password.value) < 5 && password.touched">
                       Password must be at least 5 characters long.
                     </div>
                     <!--div *ngIf="password.invalid && (password.dirty || password.touched)"
@@ -72,10 +72,10 @@
 
                     <label for="repassword">Re Enter Password:</label> <input type="password" [disabled]="_auth.isAuthenticated()" ngModel name="repassword" #repassword="ngModel" id="repassword" [ngModel]="udetails.selectedValueServices?.repassword" (ngModelChange)="udetails.selectedValueServices.repassword" class="form-control input-sm" required/>
 
-                    <div style="color: red;" *ngIf="Fieldlength(repassword.value) < 5 && repassword.touched">
+                    <div class="error_Message" *ngIf="Fieldlength(repassword.value) < 5 && repassword.touched">
                       Password must be at least 5 characters long.
                     </div>
-                    <div style="color: red;" *ngIf="password.value!=repassword.value">
+                    <div class="error_Message" *ngIf="password.value!=repassword.value">
                       Re-enter the same password
                     </div>
                     <!--div *ngIf="repassword.invalid && (repassword.dirty || repassword.touched)"
@@ -100,7 +100,7 @@
                   <!-- <label for="company">Company:</label> <input type="text"  [readonly]="_auth.isAuthenticated()" ngModel name="company" #company="ngModel" id="company" [ngModel]="udetails.selectedValueServices?.company" (ngModelChange)="udetails.selectedValueServices.company" class="form-control input-sm" required/> -->
                   <label for="company">Company:</label> <input type="text" ngModel name="company" #company="ngModel" id="company" [ngModel]="udetails.selectedValueServices?.company" (ngModelChange)="udetails.selectedValueServices.company" class="form-control input-sm" required/>
 
-                  <div style="color: red;" *ngIf="Fieldlength(company.value) < 4 && company.touched">
+                  <div class="error_Message" *ngIf="Fieldlength(company.value) < 4 && company.touched">
                     Company must be at least 3 characters long.
                   </div>
 
@@ -122,7 +122,7 @@
                       <tr>
                         <td>
 
-                          <div style="color: red;" *ngIf="!valueservicesForm.valid && valueservicesForm.touched">
+                          <div class="error_Message" *ngIf="!valueservicesForm.valid && valueservicesForm.touched">
                             (Please enter form fields)
                           </div>
                           <button class="btn_common btn-default" type="submit" value=" Submit" [disabled]="!valueservicesForm.valid">

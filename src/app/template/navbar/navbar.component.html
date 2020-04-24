@@ -10,7 +10,7 @@
       <li class="nav-item">
         <!--a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a-->
         <!--a *ngIf="!auth.isAuthenticated()" class="nav-link" routerLink="" routerLinkActive="active"></a-->
-        <a class="nav-link" routerLink="">Home
+        <a class="nav-link" routerLink=""><i class="fa fa-home"></i>&nbsp;Home
           <!--span class="sr-only">(current)</span-->
         </a>
       </li>
@@ -35,7 +35,7 @@
       </li-->
       <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Services
+            <i class="fa fa-clipboard"></i>&nbsp;Services
           </a>
           <div class="dropdown-menu" >
             <a class="dropdown-item" routerLink="/resumeservice" >Resume Services</a>
@@ -45,7 +45,7 @@
       </li>
       <li class="nav-item dropdown" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Recruiters
+            <i class="fa fa-braille"></i>&nbsp;Recruiters
           </a>
           <div class="dropdown-menu" >
 
@@ -65,7 +65,7 @@
 
 
       <li class="nav-item">
-        <a class="nav-link" routerLink="/about" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About Us
+        <a class="nav-link" routerLink="/about" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-address-card"></i>&nbsp;About Us
         </a>
       </li>
       <li class="nav-item" *ngIf="auth.isAuthenticated() && !auth.isUserRole()">
@@ -79,7 +79,7 @@
     </li>
 
       <li class="nav-item">
-        <a class="nav-link" href='{{email}}' target="_top"><i class="fa fa-question-circle" aria-hidden="true"></i>
+        <a class="nav-link" href='{{email}}' target="_top"><i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;Help
         </a>
       </li>
 
@@ -89,16 +89,17 @@
       </li-->
     </ul>
     <ul class="nav navbar-nav">
-      <li><a routerLink="/userprofile" *ngIf="auth.isAuthenticated() && auth.isUserRole()">Upload Resume</a></li>
-      <li class="nav-item"><a routerLink="/login" *ngIf="!auth.isAuthenticated()">Login</a></li>
-      <li><a routerLink="/signup" *ngIf="!auth.isAuthenticated()">Signup</a></li>
+      <li><a routerLink="/userprofile" *ngIf="auth.isAuthenticated() && auth.isUserRole()"><i class="fa fa-upload"></i>&nbsp;Upload Resume</a></li>
+      <li class="nav-item" *ngIf="!auth.isAuthenticated()"><a routerLink="/login" *ngIf="!auth.isAuthenticated()"><i class="fa fa-sign-in"></i>&nbsp;Login</a></li>
+      <li *ngIf="!auth.isAuthenticated()"><a routerLink="/signup" *ngIf="!auth.isAuthenticated()"><i class="fa fa-user-plus"></i>&nbsp;Signup</a></li>
       <!-- <li *ngIf="(auth.isAuthenticated() && auth.userProfile) || !auth.isUserRole()" class="username">| &nbsp;</li> -->
-      <li *ngIf="auth.isAuthenticated() && auth.isUserRole()" class="username">| &nbsp;</li>
+      <li *ngIf="auth.isAuthenticated() && auth.isUserRole()" class="username">|&nbsp;&nbsp;</li>
       <li *ngIf="auth.isAuthenticated() && auth.userProfile" class="username">
-          <img [src]="auth.userProfile?.picture" alt="{{ auth.userProfile.name }}"  height="20px" weidth="35px">&nbsp;{{ auth.userProfile.nickname }}&nbsp;|
+          <!-- <img [src]="auth.userProfile?.picture" alt="{{ auth.userProfile.name }}"  height="20px" weidth="35px">&nbsp;{{ auth.userProfile.nickname }}&nbsp;| -->
+          <i class="fa fa-user"></i>&nbsp;{{ auth.userProfile.nickname }}&nbsp;&nbsp;|
             <!--img src="{{auth.userProfile?.picture}}" class="avatar" alt="avatar" {{ auth.userProfile.name }} -->
       </li>
-      <li><a routerLink="" (click) = "auth.logout()" *ngIf="auth.isAuthenticated()">Logout</a></li>
+      <li><a routerLink="" (click) = "auth.logout()" *ngIf="auth.isAuthenticated()">Logout&nbsp;<i class="fa fa-sign-out"></i></a></li>
 
       <li *ngIf="auth.isAdminRole()"><a routerLink="/postsadminhome" *ngIf="auth.isAdminRole()"><i *ngIf="auth.isAdminRole()" class="fa fa-gear" style="font-size:24px;color:white"></i></a></li>
 

@@ -10,7 +10,7 @@
              <div class="col_3" *ngIf="!_auth.isAuthenticated()">
 
                 <h3>Login</h3>
-                <p style="color: red;">{{ loginError }}</p>
+                <p class="error_Message">{{ loginError }}</p>
                 <div id="login-content">
                     <form #f="ngForm" (ngSubmit)="Login(f.value)">
                         <div class="textbox-wrap">
@@ -25,7 +25,7 @@
  
                             </div>
                         </div>
-                        <div style="color: red;" *ngIf="username.errors && username.touched">                      
+                        <div class="error_Message" *ngIf="username.errors && username.touched">                      
                           Please enter the valid Email
                         </div> 
                         <div class="textbox-wrap">
@@ -40,7 +40,7 @@
                         </div-->
                         <button class="btn_common btn-default" type="submit" value=" Submit" id="submit" [disabled]="!f.valid" name="submit" >
                             <i class="fa fa-user"></i>&nbsp;Login
-                          </button>                        
+                        </button>                        
                         <div class="login-para">
                                 <p><a routerLink="/resetpassword">Forgot Password?</a></p>
                         </div>
