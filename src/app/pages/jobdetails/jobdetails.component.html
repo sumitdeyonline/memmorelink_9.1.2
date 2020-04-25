@@ -26,10 +26,11 @@
               <hr/>
               <div class="jobdetails_public">
                 <span *ngIf="pjob !=null" class="meta"><b><i class="fa fa-briefcase"></i>&nbsp;&nbsp;{{ pjob.EmploymentTypes }}</b></span><br>
-                <span *ngIf="pjob !=null" class="meta"><b><i class="fa fa-money"></i>&nbsp;{{ pjob.Compensation }}</b></span><br>
-                <span *ngIf="pjob !=null" class="meta"><b><i class="fa fa-home"></i>&nbsp; {{ travelReq }},&nbsp;{{ pjob.TravelRequirements }}&nbsp; Required</b> </span><br>            
-              </div>            
-              <hr/>
+                <span *ngIf="pjob !=null" class="meta"><b><i class="fa fa-money"></i>&nbsp;&nbsp;{{ pjob.Compensation }}</b></span><br>
+                <span *ngIf="pjob !=null" class="meta"><b><i class="fa fa-home"></i>&nbsp;&nbsp;{{ travelReq }},&nbsp;{{ pjob.TravelRequirements }}&nbsp; Required</b> </span><br>            
+              </div> 
+              <br>           
+              <!-- <hr/> -->
             </div>
           </td>
           <td>
@@ -74,13 +75,14 @@
 
               <!-- <h3 *ngIf="pjob !=null"> {{ pjob.JobTitle }}&nbsp;({{ pjob.JobCity }},{{ pjob.JobState }})</h3> -->
   
-              <h3 *ngIf="pjob !=null"> Skill Set</h3>
-              <hr/>
-              <div *ngIf="pjob !=null" [innerHTML]=" pjob.Skills"></div>
-              <br>
-              <h3>Job Description</h3>
+
+              <h4>Job Description</h4>
               <hr/>
               <div *ngIf="pjob !=null" [innerHTML]="pjob.JobDesc"></div>
+              <h4 *ngIf="pjob !=null"> Skill Set</h4>
+              <hr/>
+              <div *ngIf="pjob !=null" [innerHTML]=" pjob.Skills"></div>
+              <!-- <br> -->
 
               <hr/>
               <table align="left"> 

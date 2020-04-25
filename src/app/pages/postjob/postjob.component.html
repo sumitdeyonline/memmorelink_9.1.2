@@ -54,7 +54,7 @@
                         <label style="font-weight: bold;" for="JobTitle">Job Title</label>
                     </div>
                     <div class="col">
-                        <input type="text" ngModel name="JobTitle" #JobTitle="ngModel" id="JobTitle" [ngModel]="postjobService.selectedPostJobc?.JobTitle" (ngModelChange)="postjobService.selectedPostJobc.JobTitle" class="form-control input-sm" required/>
+                        <input type="text" ngModel name="JobTitle" autocomplete="off" #JobTitle="ngModel" id="JobTitle" [ngModel]="postjobService.selectedPostJobc?.JobTitle" (ngModelChange)="postjobService.selectedPostJobc.JobTitle" class="form-control input-sm" required/>
                         <div class="error_Message" *ngIf="JobTitle.invalid && (JobTitle.dirty || JobTitle.touched)">
                             Please Enter Job Title
                         </div>
@@ -191,7 +191,7 @@
                         <label style="font-weight: bold;" for="JobCity">City</label>
                     </div>
                     <div class="col">
-                        <input type="text" ngModel name="JobCity" #JobCity="ngModel" id="JobCity" [ngModel]="postjobService.selectedPostJobc?.JobCity" (ngModelChange)="postjobService.selectedPostJobc.JobCity" class="form-control input-sm" required/>
+                        <input type="text" autocomplete="off" ngModel name="JobCity" #JobCity="ngModel" id="JobCity" [ngModel]="postjobService.selectedPostJobc?.JobCity" (ngModelChange)="postjobService.selectedPostJobc.JobCity" class="form-control input-sm" required/>
                         <div class="error_Message" *ngIf="JobCity.invalid && (JobCity.dirty || JobCity.touched)">
                             Please Enter City
                         </div>
@@ -243,7 +243,7 @@
                         <label style="font-weight: bold;"  for="JobZip">Zip</label>
                     </div>
                     <div class="col">
-                        <input type="text" ngModel name="JobZip" #JobZip="ngModel" id="JobZip" [ngModel]="postjobService.selectedPostJobc?.JobZip" (ngModelChange)="postjobService.selectedPostJobc.JobZip" class="form-control input-sm"/>
+                        <input type="text" autocomplete="off" ngModel name="JobZip" #JobZip="ngModel" id="JobZip" [ngModel]="postjobService.selectedPostJobc?.JobZip" (ngModelChange)="postjobService.selectedPostJobc.JobZip" class="form-control input-sm"/>
                         <!--div class="error_Message" *ngIf="JobZip.invalid && (JobZip.dirty || JobZip.touched)">
                             Please Enter Zip
                         </div-->

@@ -8,18 +8,18 @@
     <div class="single">
         <div class="form-container">
             <h2>
-                {{ uprofile?.FirstName }}&nbsp;&nbsp;{{ uprofile?.LastName }}(<a style="text-decoration: none; color:black;" *ngIf="uResumes != null" href="{{uResumes[0].ResumeURL}}" target="_blank">{{uResumes[0].ResumeFileName}}</a>)
+                {{ uprofile?.FirstName }}&nbsp;&nbsp;{{ uprofile?.LastName }}(<a style="text-decoration: none; color:black;" *ngIf="uResumes != null" href="{{uResumes[0].ResumeURL}}" target="_blank">Resume</a>)
 
             </h2>
 
 
             <!--form #userProfile="ngForm" (ngSubmit)="userProfileSubmit(userProfile)"-->
-                <hr/>
 
+            <hr/>
                 <h3 class="title" style="color: red;">Profile</h3>&nbsp;
 
 
-                <div class="jobdetails">
+                <div class="resumedetails">
 
                     <div class="row">
                         <div class="col-sm-2">
@@ -37,10 +37,10 @@
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>                     
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="row">
@@ -60,10 +60,10 @@
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="row">
                         <div class="col-sm-2" >
@@ -81,10 +81,10 @@
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="row">
@@ -96,10 +96,10 @@
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="row">
                         <div class="col-sm-2">
@@ -110,10 +110,10 @@
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
 
 
 
@@ -139,10 +139,10 @@
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
 
 
 
@@ -164,14 +164,14 @@
                         <div class="col" *ngIf="uprofile == null"></div>
 
 
-
-
-
                     </div>
+
+
+                    <!-- </div>
                     <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="row">
@@ -190,10 +190,10 @@
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="row">
@@ -205,15 +205,16 @@
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-                <hr/>
 
-                <h3 class="title" style="color: red;">Job Looking</h3>&nbsp;
-                <div class="jobdetails">
+                <br>
+                <h3 class="title" style="color: red;">Job Looking</h3>
+                <hr/>
+                <div class="resumedetails">
                     
 
 
@@ -233,10 +234,10 @@
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
     
     
                     <div class="row">
@@ -248,10 +249,10 @@
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
     
     
     
@@ -279,10 +280,10 @@
                 </div>
 
 
+                <br>
+                <h3 class="title" style="color: red;">Professional Experience</h3>
                 <hr/>
-                <h3 class="title" style="color: red;">Professional Experience</h3>&nbsp;
-
-                <div class="jobdetails">
+                <div class="resumedetails">
                     <div class="row">
                         <div class="col-sm-2">
                             <label style="font-weight: bold;" for="YearsofExperince">Years of Experience</label>
@@ -299,10 +300,10 @@
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div> -->
 
 
 
@@ -315,10 +316,10 @@
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-2">&nbsp;
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="row">
@@ -330,10 +331,10 @@
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-2">&nbsp;
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row">
                     <div class="col-sm-2">
@@ -344,10 +345,10 @@
                     </div>
                     <div class="col" *ngIf="uResumes == null"></div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-2">&nbsp;
                     </div>
-                </div>
+                </div> -->
                 <!--uploadresume></uploadresume-->
 
 
@@ -361,10 +362,10 @@
             </div>
 
 
-            <hr/>
-            <h3 class="title" style="color: red;">Education</h3>&nbsp;
-
-            <div class="jobdetails">
+            <br>
+            <h3 class="title" style="color: red;">Education</h3>
+            <hr>
+            <div class="resumedetails">
                 <div class="row">
                     <div class="col-sm-2">
                         <label style="font-weight: bold;" for="Education">Education</label>
@@ -374,10 +375,10 @@
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-2">&nbsp;
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row">
                     <div class="col-sm-2">
@@ -396,10 +397,10 @@
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-2">&nbsp;
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="row">
@@ -411,17 +412,17 @@
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-2">&nbsp;
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
+            <br>
+            <h3 class="title" style="color: red;">Skillset</h3>
             <hr/>
-            <h3 class="title" style="color: red;">Skillset</h3>&nbsp;
-
-            <div class="jobdetails">
+            <div class="resumedetails">
                 <div class="row">
                     <div class="col-sm-2">
                         <label style="font-weight: bold;" for="SkillSet">SkillSet</label>
@@ -431,10 +432,10 @@
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-2">&nbsp;
                     </div>
-                </div>
+                </div> -->
                 <div class="row">
 
                 </div>

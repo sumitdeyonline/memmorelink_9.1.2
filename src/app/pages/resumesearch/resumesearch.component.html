@@ -79,7 +79,7 @@
                             <a [routerLink]="['/resumedetails',rp.objectID]"  target="_blank"><img src="assets/images/a2.png" class="img-responsive" alt=""/></a>
                           </div>
                           <div class="jobs_right">
-                            <div class="date">{{rp.City}} <span>{{rp.State}}</span></div>
+                            <div class="date">{{rp.City.substring(0,3)}} <span>{{rp.State}}</span></div>
                             <div class="date_desc">
                               <h6 class="title">
                                 <a [routerLink]="['/resumedetails',rp.objectID]" target="_blank">{{rp.FirstName}}&nbsp;{{rp.LastName}}</a>
@@ -96,7 +96,7 @@
                               <li><a href="#" class="fa fa-star"></a></li>
                               <li><a href="#" class="fa fa-link"></a></li-->
                             </ul>
-                            <br>
+                            <hr class="hr_style">
                             <div class="jobdetails">Skill Set : {{rp.SkillSet.substring(0,length)}}
                               <br>Desired Position :  {{rp.DesiredPosition.substring(0,length)}}
                                <!--a [routerLink]="['/jobdetails',pj.id]" class="read-more">Read More</a-->

@@ -22,7 +22,7 @@
                     (focus)="onFocus($event)"  ngModel name="email" 
                     #email="ngModel" id="email" email 
                     pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                    class="required input_field" required/>
+                    class="form-control input-sm" required/>
 
                   <div class="error_Message" *ngIf="email.errors && email.touched">                      
                     Please enter the valid Email
@@ -41,7 +41,7 @@
                   </div--> 
         
                   
-                  <label for="password">Password:</label> <input type="password" [value]="signup.password" ngModel name="password" #password="ngModel" id="password" class="required input_field" required/>
+                  <label for="password">Password:</label> <input type="password" [value]="signup.password" ngModel name="password" #password="ngModel" id="password" class="form-control input-sm" required/>
                   <div class="error_Message" *ngIf="Fieldlength(password.value) < 5 && password.touched">
                     Password must be at least 5 characters long.
                   </div> 
@@ -57,7 +57,7 @@
                   <div class="error_Message" *ngIf="password.value!=repassword.value">
                     Re-enter the same password
                   </div> 
-                  <label for="repassword">Re Enter Password:</label> <input type="password" [value]="signup.repassword" ngModel name="repassword" #repassword="ngModel" id="repassword" class="required input_field" required/>
+                  <label for="repassword">Re Enter Password:</label> <input type="password" [value]="signup.repassword" ngModel name="repassword" #repassword="ngModel" id="repassword" class="form-control input-sm" required/>
         
                   <div class="error_Message" *ngIf="Fieldlength(repassword.value) < 5 && repassword.touched">
                     Password must be at least 5 characters long.
