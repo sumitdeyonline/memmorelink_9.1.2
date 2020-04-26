@@ -18,8 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // import { DropdownDirective } from './dropdown.directive';
 
-import { NavbarComponent } from './template/navbar/navbar.component';
-import { FooterComponent } from './template/footer/footer.component';
+//import { NavbarComponent } from './template/navbar/navbar.component';
+//import { FooterComponent } from './template/footer/footer.component';
+import { TemplateModule } from './template';
 import { HomeComponent } from './pages/home/home.component';
 import { NotfoundComponent } from './common/notfound/notfound.component';
 import { routing } from './app.routing';
@@ -32,7 +33,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/authentication/auth.service';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SignupConfirmComponent } from './pages/signup/signup-confirm/signup-confirm.component';
-import { SearchheaderComponent } from './template/searchheader/searchheader.component';
+//import { SearchheaderComponent } from './template/searchheader/searchheader.component';
 import { PostjobComponent } from './pages/postjob/postjob.component';
 import { AuthGuardService } from './services/authentication/auth-guard.service';
 import { ScopeGuardService } from './services/authentication/scope-guard.service';
@@ -80,7 +81,7 @@ import { ResumeServiceComponent } from './pages/resume-service/resume-service.co
 import { SalaryPredictorComponent } from './pages/salary-predictor/salary-predictor.component';
 import { ApplyjobComponent } from './pages/jobdetails/applyjob/applyjob.component';
 import { ValueServicesComponent } from './pages/value-services/value-services.component';
-import { MidsearchComponent } from './pages/home/midsearch/midsearch.component';
+//import { MidsearchComponent } from './pages/home/midsearch/midsearch.component';
 import { CommondialogComponent } from './common/commondialog/commondialog.component';
 import { ApplyjobService } from './services/firebase/applyjob/applyjob.service';
 import { AdminModule } from './admin/admin.module';
@@ -91,7 +92,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxTypeaheadModule } from 'ngx-typeahead';
 // import { TypeaheadModule } from 'ngx-bootstrap/typeahead'; 
 // import {NgbTypeaheadConfig} from '@ng-bootstrap/ng-bootstrap';
-import {NgbTypeaheadModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
 import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
 // import { TechNewsModule } from './pages/tech-news/tech-news.module';
 // import { technewsRouting } from './pages/tech-news/tech-news.routing';
@@ -103,9 +104,9 @@ import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/te
   declarations: [
     AppComponent,
     // DropdownDirective,
-    NavbarComponent,
-    MidsearchComponent,
-    FooterComponent,
+    //NavbarComponent,
+    //MidsearchComponent,
+    //FooterComponent,
     HomeComponent,
     NotfoundComponent,
     LoginComponent,
@@ -114,7 +115,7 @@ import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/te
     CallbackComponent,
     SignupComponent,
     SignupConfirmComponent,
-    SearchheaderComponent,
+    //SearchheaderComponent,
     PostjobComponent,
     ListjobComponent,
     JobpoststatusComponent,
@@ -170,6 +171,7 @@ import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/te
     NgbTypeaheadModule,
     //FontAwesomeModule
     //TypeaheadModule
+    TemplateModule
   ],
   providers: [
     AuthService,

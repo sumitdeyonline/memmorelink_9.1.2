@@ -120,14 +120,16 @@ export class SearchheaderComponent implements OnInit {
     if (localtionval.length > SEARCH_CONFIG.MAX_CHARACTER_TYPE_AHEAD) {
       let inputval = localtionval.trim();
       if (isNumeric(inputval)) {
-
-        this.locserv.getCityStateFromZip(inputval).subscribe((data: any[])=>{ 
+        if (localtionval.trim().length == SEARCH_CONFIG.MAX_CHARACTER_TYPE_AHEAD_ZIPCODE){
+          this.locserv.getCityStateFromZip(inputval).subscribe((data: any[])=>{ 
             this.searchvar = [data['city']+","+data['state']];
             //console.log("Get value : "+this.form.controls['location'].getValue());
             this.location = data['city']+","+data['state'];
             //return ['Livermore,CA'];
             //return [data['city']+","+data['state']];
           });
+        }
+
       } else {
         this.locserv.getCityStateSearch(localtionval).subscribe((data: any[]) => {
           // this.http.get(getCityID,{responseType: 'json',headers: headers})

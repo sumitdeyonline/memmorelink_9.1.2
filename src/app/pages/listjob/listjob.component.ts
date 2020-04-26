@@ -470,7 +470,7 @@ export class ListjobComponent implements OnInit {
     window.scroll(0,0);
     // get pager object from service
     this.pager = this.pagerService.getPager(this.PostJobc.length, page);
-    console.log("Page Count...1  ::: "+this.pager.pages.length);
+    //console.log("Page Count...1  ::: "+this.pager.pages.length);
     // get current page of items
     this.pagedItems = this.PostJobc.slice(this.pager.startIndex, this.pager.endIndex + 1);
     //console.log("Page Count...1  ::: "+this.pagedItems.length);
