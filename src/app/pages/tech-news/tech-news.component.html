@@ -15,10 +15,10 @@
     </ul-->
     <div *ngFor="let tnews of techNews">
       <h2>{{tnews.fields.subHeader}}</h2>
-      <img src="{{ tnews.fields.pageImageUrl}}"/>
+      <img class="techNews" src="{{ tnews.fields.pageImageUrl}}"/>
       <br>
       <div [innerHTML]="tnews.fields.pageText | mdToHtml"></div>
-      <a [routerLink]="['/technewsdetails',tnews.sys.id]" class="read-more">More...</a>
+      <a  [routerLink]="['/technewsdetails',tnews.sys.id]" class="read-more">More</a>
       <hr>
     </div>
 

@@ -13,7 +13,7 @@ import { JobdetailsComponent } from './pages/jobdetails/jobdetails.component';
 import { UserProfileComponent } from './pages/userprofile/userprofile.component';
 import { ResumesearchComponent } from './pages/resumesearch/resumesearch.component';
 import { ResumedetailsComponent } from './pages/resumesearch/resumedetails/resumedetails.component';
-import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
+//import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
 import { ResetpasswordComponent } from './pages/login/resetpassword/resetpassword.component';
 import { AboutComponent } from './pages/about/about.component';
 import { RecruitersSolutionComponent } from './pages/recruiters-solution/recruiters-solution.component';
@@ -21,6 +21,7 @@ import { RecruitersFollowingComponent } from './pages/recruiters-following/recru
 import { ResumeServiceComponent } from './pages/resume-service/resume-service.component';
 import { SalaryPredictorComponent } from './pages/salary-predictor/salary-predictor.component';
 import { ValueServicesComponent } from './pages/value-services/value-services.component';
+import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
 
 export const routing = RouterModule.forRoot([
 

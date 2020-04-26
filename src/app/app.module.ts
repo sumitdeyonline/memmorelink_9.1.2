@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+// import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
-import { RouterModule, Routes } from '@angular/router';
+// import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
@@ -57,7 +57,7 @@ import { ContentfulService } from './services/contentful/contentful.service';
 import { MiddleimageComponent } from './pages/home/middleimage/middleimage.component';
 import { MdToHtmlPipe } from './services/contentful/md-to-html.pipe';
 import { TechNewsComponent } from './pages/tech-news/tech-news.component';
-import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
+// import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
 import { AdvertisementComponent } from './pages/advertisement/advertisement.component';
 import { ResetpasswordComponent } from './pages/login/resetpassword/resetpassword.component';
 import { PagerService } from './services/common/pager.service';
@@ -92,6 +92,9 @@ import { NgxTypeaheadModule } from 'ngx-typeahead';
 // import { TypeaheadModule } from 'ngx-bootstrap/typeahead'; 
 // import {NgbTypeaheadConfig} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTypeaheadModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
+// import { TechNewsModule } from './pages/tech-news/tech-news.module';
+// import { technewsRouting } from './pages/tech-news/tech-news.routing';
 //import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
@@ -139,6 +142,8 @@ import {NgbTypeaheadModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
   imports: [
     AdminModule,
     adminRouting,
+    // TechNewsModule,
+    // technewsRouting,
     BrowserModule,
     routing,
     FormsModule,
