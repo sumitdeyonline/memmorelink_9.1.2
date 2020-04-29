@@ -22,9 +22,10 @@ import { ResumeServiceComponent } from './pages/resume-service/resume-service.co
 import { SalaryPredictorComponent } from './pages/salary-predictor/salary-predictor.component';
 import { ValueServicesComponent } from './pages/value-services/value-services.component';
 import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
+import { JobpredictionComponent } from './alphabetnumerology';
+
 
 export const routing = RouterModule.forRoot([
-
 
 
     {
@@ -36,6 +37,7 @@ export const routing = RouterModule.forRoot([
         component: PostjobComponent,
         canActivate: [AuthGuard]
     },  */
+
 
     {
         path: 'postjob',

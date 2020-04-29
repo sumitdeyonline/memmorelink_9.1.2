@@ -43,6 +43,7 @@
     "firebase": "^7.14.1",
     "firebase-admin": "^8.10.0",
     "font-awesome": "^4.7.0",
+    "gzipper": "^3.7.0",
     "jquery": "^3.5.0",
     "marked": "^0.8.2",
     "materialize-css": "^1.0.0",

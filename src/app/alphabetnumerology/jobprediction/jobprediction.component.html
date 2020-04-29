@@ -1,0 +1,92 @@
+<!-- <searchheader></searchheader> -->
+
+<div class="container">
+
+    <div class="single">
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="col_3">
+                    <h3>Job Predection</h3>
+
+                    <!-- <div id="site_form" [hidden]="jobPredectionSucessMessage != null && jobPredectionSucessMessage !=''"> -->
+                      
+                    <div *ngIf="jobPredectionSucessMessage !=''">
+                      <p class="error_Message" *ngIf="jobPredectionSucessMessage !=''">
+                        {{ jobPredectionSucessMessage }}         
+                      </p>                      
+                    </div>
+
+
+                    <form #jobPForm="ngForm" (ngSubmit)="jobPrediction(jobPForm)" >
+
+                        <label for="firstname">First Name:</label> 
+                        <input type="text" 
+                        (focus)="onFocus($event)"  ngModel name="firstname" 
+                        #firstname="ngModel" id="firstname" firstname 
+                        class="form-control input-sm" required/>
+    
+                        <div class="error_Message" *ngIf="Fieldlength(firstname.value) < 3 && firstname.touched">
+                            First Name must be at least 3 characters long.
+                        </div> 
+
+                        <label for="middlename">Middle Name:</label> 
+                        <input type="text" 
+                        (focus)="onFocus($event)"  ngModel name="middlename" 
+                        #middlename="ngModel" id="middlename" middlename 
+                        class="form-control input-sm" />
+
+                        <label for="lastname">Last Name:</label> 
+                        <input type="text" 
+                        (focus)="onFocus($event)"  ngModel name="lastname" 
+                        #lastname="ngModel" id="lastname" lastname 
+                        class="form-control input-sm" required/>
+    
+                        <div class="error_Message" *ngIf="Fieldlength(lastname.value) < 3 && lastname.touched">
+                            Last Name must be at least 3 characters long.
+                        </div>
+
+                        <label for="companyname">Company Name:</label> 
+                        <input type="text" 
+                        (focus)="onFocus($event)"  ngModel name="companyname" 
+                        #companyname="ngModel" id="companyname" companyname 
+                        class="form-control input-sm" required/>
+    
+                        <div class="error_Message" *ngIf="Fieldlength(companyname.value) < 3 && companyname.touched">
+                            Company Name must be at least 3 characters long.
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <table>
+                              <tr>
+                                <td>
+                                  <div class="error_Message" *ngIf="!jobPForm.valid && jobPForm.touched">
+                                    (Please enter form fields)
+                                  </div>   
+        
+                                  <button class="btn_common btn-default" type="submit" value=" Submit" id="submit" name="submit" [disabled]="!jobPForm.valid || Fieldlength(firstname.value) < 3 || Fieldlength(lastname.value) < 3 || Fieldlength(companyname.value) < 3">
+                                    <i class="fa fa-floppy-o"></i>&nbsp;Submit
+                                  </button>
+                                  &nbsp;&nbsp;
+                                  <button class="btn_common btn-default" type="button" value=" reset" id="reset" name="reset" (click)="resetForm(jobPForm)">
+                                      <i class="fa fa-repeat"></i>&nbsp;Reset
+                                  </button>  
+                                </td>                  
+                              </tr>
+                            </table>
+                          </div>    
+
+                    </form>
+
+                   <!-- </div> -->
+            </div>
+
+            <div class="col-md-4">
+                <!-- <advertisement></advertisement> -->
+            </div>
+            <div class="clearfix"> 
+            </div>
+
+        </div>
+    </div>
+</div>

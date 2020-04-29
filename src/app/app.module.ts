@@ -22,12 +22,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { FooterComponent } from './template/footer/footer.component';
 import { TemplateModule } from './template';
 import { HomeComponent } from './pages/home/home.component';
-import { NotfoundComponent } from './common/notfound/notfound.component';
+//import { NotfoundComponent } from './common/notfound/notfound.component';
 import { routing } from './app.routing';
 
 import { LoginComponent } from './pages/login/login.component';
 //import { HttpModule } from '@angular/http';
-import { LogComponent } from './common/logger/log.component';
+//import { LogComponent } from './common/logger/log.component';
 import { CallbackComponent } from './common/callback/callback.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/authentication/auth.service';
@@ -82,7 +82,7 @@ import { SalaryPredictorComponent } from './pages/salary-predictor/salary-predic
 import { ApplyjobComponent } from './pages/jobdetails/applyjob/applyjob.component';
 import { ValueServicesComponent } from './pages/value-services/value-services.component';
 //import { MidsearchComponent } from './pages/home/midsearch/midsearch.component';
-import { CommondialogComponent } from './common/commondialog/commondialog.component';
+//import { CommondialogComponent } from './common/commondialog/commondialog.component';
 import { ApplyjobService } from './services/firebase/applyjob/applyjob.service';
 import { AdminModule } from './admin/admin.module';
 import { adminRouting } from './admin/admin.routing';
@@ -94,6 +94,10 @@ import { NgxTypeaheadModule } from 'ngx-typeahead';
 // import {NgbTypeaheadConfig} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
 import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
+import { CommonProjectModule } from './common';
+//import { alphabetNumerologyRouting  } from './alphabetnumerology/alphabetnumerology.routing';
+import { AlphabetNumerologyModule,alphabetNumerologyRouting } from './alphabetnumerology';
+//import { AlphabetNumerologyModule, alphabetNumerologyRouting } from './alphabetnumerology';
 // import { TechNewsModule } from './pages/tech-news/tech-news.module';
 // import { technewsRouting } from './pages/tech-news/tech-news.routing';
 //import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -108,11 +112,11 @@ import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/te
     //MidsearchComponent,
     //FooterComponent,
     HomeComponent,
-    NotfoundComponent,
+    //NotfoundComponent,
     LoginComponent,
-    LogComponent,
+    //LogComponent,
     MdToHtmlPipe,
-    CallbackComponent,
+    //CallbackComponent,
     SignupComponent,
     SignupConfirmComponent,
     //SearchheaderComponent,
@@ -137,12 +141,15 @@ import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/te
     SalaryPredictorComponent,
     ApplyjobComponent,
     ValueServicesComponent,
-    CommondialogComponent
+    //CommondialogComponent
   ],
-  entryComponents: [DialogComponent, ApplyjobComponent, CommondialogComponent],
+  //entryComponents: [DialogComponent, ApplyjobComponent, CommondialogComponent],
+  entryComponents: [DialogComponent, ApplyjobComponent],
   imports: [
     AdminModule,
     adminRouting,
+    AlphabetNumerologyModule,
+    alphabetNumerologyRouting,
     // TechNewsModule,
     // technewsRouting,
     BrowserModule,
@@ -171,7 +178,8 @@ import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/te
     NgbTypeaheadModule,
     //FontAwesomeModule
     //TypeaheadModule
-    TemplateModule
+    TemplateModule,
+    CommonProjectModule
   ],
   providers: [
     AuthService,
