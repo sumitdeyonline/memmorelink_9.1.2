@@ -1,0 +1,1 @@
+export * from './tech-news-details.component';

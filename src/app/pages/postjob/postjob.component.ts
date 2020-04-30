@@ -44,8 +44,8 @@ export class PostjobComponent implements OnInit {
   isJobLength: boolean = false;
   postJobCount: number = 0;
   //selectedEmpTypes: String;
-  public signupMessage: string;
-  public signupSucessMessage:string;
+  // public signupMessage: string;
+  // public signupSucessMessage:string;
   public Editor = ClassicEditor;
 
 
@@ -67,7 +67,7 @@ export class PostjobComponent implements OnInit {
     // })
 
     //console.log("Date :::::::: "+formatDate(new Date(), 'MM/dd/yyyy', 'en'));
-    this.signupMessage='';
+    //this.signupMessage='';
     this._activeRoute.paramMap.subscribe(params => {
       this.id = params.get("id");
       //console.log("Key Value :::::::: "+this.id);

@@ -9,6 +9,7 @@ import { CommondialogComponent } from './commondialog';
 import { LogComponent } from './logger';
 import { NotfoundComponent } from './notfound';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MdToHtmlCommonPipe } from './pipe';
 
 @NgModule({
     imports: [
@@ -18,7 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
       MatDialogModule
     ],
     entryComponents: [ CommondialogComponent],
-    declarations: [ CallbackComponent,CommondialogComponent,LogComponent,NotfoundComponent ],
+    declarations: [ CallbackComponent,CommondialogComponent,LogComponent,NotfoundComponent, MdToHtmlCommonPipe ],
     exports: [
       CommonModule,
     //   ReactiveFormsModule,
@@ -26,6 +27,7 @@ import { MatDialogModule } from '@angular/material/dialog';
       MatDialogModule,
       CallbackComponent,
       CommondialogComponent,
+      MdToHtmlCommonPipe,
       LogComponent,
       NotfoundComponent
     ],  providers: [

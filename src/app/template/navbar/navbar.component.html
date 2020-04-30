@@ -58,7 +58,7 @@
             <div class="dropdown-divider" *ngIf="auth.isAuthenticated() && (auth.isResumeSearchRole() || auth.isPostJobRole() || auth.isAdminRole())"></div>
 
             <a class="dropdown-item" routerLink="/recruiterssolution" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">Recruiters Solution</a>
-            <a class="dropdown-item" routerLink="/recruitersfollowing" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">Recruiters you are follwoing</a>
+            <!-- <a class="dropdown-item" routerLink="/recruitersfollowing" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">Recruiters you are follwoing</a> -->
 
           </div>
       </li>

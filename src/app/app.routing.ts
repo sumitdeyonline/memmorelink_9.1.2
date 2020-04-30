@@ -3,7 +3,7 @@ import { Router, RouterModule  }     from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { NotfoundComponent } from './common/notfound/notfound.component';
 import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
+//import { SignupComponent } from './pages/signup/signup.component';
 import { PostjobComponent } from './pages/postjob/postjob.component';
 import { AuthGuardService as AuthGuard, AuthGuardService } from './services/authentication/auth-guard.service';
 import { ScopeGuardService as ScopeGuard } from './services/authentication/scope-guard.service';
@@ -21,7 +21,7 @@ import { RecruitersFollowingComponent } from './pages/recruiters-following/recru
 import { ResumeServiceComponent } from './pages/resume-service/resume-service.component';
 import { SalaryPredictorComponent } from './pages/salary-predictor/salary-predictor.component';
 import { ValueServicesComponent } from './pages/value-services/value-services.component';
-import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
+
 import { JobpredictionComponent } from './alphabetnumerology';
 
 
@@ -39,26 +39,26 @@ export const routing = RouterModule.forRoot([
     },  */
 
 
-    {
-        path: 'postjob',
-        component: PostjobComponent,
-        canActivate: [ScopeGuard] ,
-        data: { expectedScopes: ['write:messages']}
+    // {
+    //     path: 'postjob',
+    //     component: PostjobComponent,
+    //     canActivate: [ScopeGuard] ,
+    //     data: { expectedScopes: ['write:messages']}
 
-    },
-    {
-        path: 'postjob/:id',
-        component: PostjobComponent,
-        canActivate: [ScopeGuard] ,
-        data: { expectedScopes: ['write:messages']}
+    // },
+    // {
+    //     path: 'postjob/:id',
+    //     component: PostjobComponent,
+    //     canActivate: [ScopeGuard] ,
+    //     data: { expectedScopes: ['write:messages']}
 
-    },
-    {
-        path: 'jobpoststatus',
-        component: JobpoststatusComponent,
-        canActivate: [ScopeGuard] ,
-        data: { expectedScopes: ['write:messages']}
-    },
+    // },
+    // {
+    //     path: 'jobpoststatus',
+    //     component: JobpoststatusComponent,
+    //     canActivate: [ScopeGuard] ,
+    //     data: { expectedScopes: ['write:messages']}
+    // },
     {
         path: 'resumesearch',
         component: ResumesearchComponent,
@@ -94,10 +94,10 @@ export const routing = RouterModule.forRoot([
         // canActivate: [ScopeGuard] ,
         // data: { expectedScopes: ['write:messages']}
       },
-      {
-        path: 'technewsdetails/:id',
-        component: TechNewsDetailsComponent
-      },
+      // {
+      //   path: 'technewsdetails/:id',
+      //   component: TechNewsDetailsComponent
+      // },
       {
           path: 'listjob',
           component: ListjobComponent
@@ -106,10 +106,10 @@ export const routing = RouterModule.forRoot([
         path: 'resetpassword',
         component: ResetpasswordComponent
       },
-      {
-          path: 'signup',
-          component: SignupComponent
-      },
+      // {
+      //     path: 'signup',
+      //     component: SignupComponent
+      // },
       {
         path: 'about',
         component: AboutComponent
@@ -122,10 +122,10 @@ export const routing = RouterModule.forRoot([
         path: 'salarypredictor',
         component: SalaryPredictorComponent
       }, 
-      {
-        path: 'valueservices',
-        component: ValueServicesComponent
-      },       
+      // {
+      //   path: 'valueservices',
+      //   component: ValueServicesComponent
+      // },       
       {
         path: 'home',
         component: HomeComponent

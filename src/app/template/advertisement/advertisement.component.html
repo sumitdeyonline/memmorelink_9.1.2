@@ -13,11 +13,12 @@
       <li><a href="#">Executive Tracks Associates in Pakistan</a></li>
       <li><a href="#">Pyramid IT Consulting Pvt. Ltd. in Pakistan</a></li>
     </ul-->
-
     <div *ngFor="let adver of advertisement">
       <!-- <b>{{adver.fields.mainHeader}}</b> -->
-      <br>
       <div [innerHTML]="adver.fields.pageText | mdToHtml"></div>
+      <br>
+      <!-- <div [innerHTML]="adver.fields.pageText | mdToHtmlTag"></div> -->
+      <!-- <div [innerHTML]="adver.fields.pageTextc"></div>       -->
     </div>
-
+    
 </div>

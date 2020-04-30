@@ -20,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //import { NavbarComponent } from './template/navbar/navbar.component';
 //import { FooterComponent } from './template/footer/footer.component';
-import { TemplateModule } from './template';
+import { TemplateModule, templateRouting } from './template';
 import { HomeComponent } from './pages/home/home.component';
 //import { NotfoundComponent } from './common/notfound/notfound.component';
 import { routing } from './app.routing';
@@ -31,16 +31,16 @@ import { LoginComponent } from './pages/login/login.component';
 import { CallbackComponent } from './common/callback/callback.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/authentication/auth.service';
-import { SignupComponent } from './pages/signup/signup.component';
-import { SignupConfirmComponent } from './pages/signup/signup-confirm/signup-confirm.component';
+//import { SignupComponent } from './pages/signup/signup.component';
+//import { SignupConfirmComponent } from './pages/signup/signup-confirm/signup-confirm.component';
 //import { SearchheaderComponent } from './template/searchheader/searchheader.component';
-import { PostjobComponent } from './pages/postjob/postjob.component';
+//import { PostjobComponent } from './pages/postjob/postjob.component';
 import { AuthGuardService } from './services/authentication/auth-guard.service';
 import { ScopeGuardService } from './services/authentication/scope-guard.service';
 import { PostjobService } from './services/firebase/postjob/postjob.service';
 import { ListjobComponent } from './pages/listjob/listjob.component';
 import { ToastrService } from 'ngx-toastr';
-import { JobpoststatusComponent } from './pages/postjob/jobpoststatus/jobpoststatus.component';
+//import { JobpoststatusComponent } from './pages/postjob/jobpoststatus/jobpoststatus.component';
 import { DatePipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { JobdetailsComponent } from './pages/jobdetails/jobdetails.component';
@@ -56,10 +56,10 @@ import { ResumesearchComponent } from './pages/resumesearch/resumesearch.compone
 import { ResumedetailsComponent } from './pages/resumesearch/resumedetails/resumedetails.component';
 import { ContentfulService } from './services/contentful/contentful.service';
 import { MiddleimageComponent } from './pages/home/middleimage/middleimage.component';
-import { MdToHtmlPipe } from './services/contentful/md-to-html.pipe';
-import { TechNewsComponent } from './pages/tech-news/tech-news.component';
+//import { MdToHtmlPipe } from './services/contentful/md-to-html.pipe';
+//import { TechNewsComponent } from './pages/tech-news/tech-news.component';
 // import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
-import { AdvertisementComponent } from './pages/advertisement/advertisement.component';
+//import { AdvertisementComponent } from './pages/advertisement/advertisement.component';
 import { ResetpasswordComponent } from './pages/login/resetpassword/resetpassword.component';
 import { PagerService } from './services/common/pager.service';
 
@@ -93,10 +93,13 @@ import { NgxTypeaheadModule } from 'ngx-typeahead';
 // import { TypeaheadModule } from 'ngx-bootstrap/typeahead'; 
 // import {NgbTypeaheadConfig} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
-import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
+//import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
 import { CommonProjectModule } from './common';
 //import { alphabetNumerologyRouting  } from './alphabetnumerology/alphabetnumerology.routing';
 import { AlphabetNumerologyModule,alphabetNumerologyRouting } from './alphabetnumerology';
+import { pagesRouting, PagesModule } from './pages';
+
+//import { AdvertisementModule } from './advertisement';
 //import { AlphabetNumerologyModule, alphabetNumerologyRouting } from './alphabetnumerology';
 // import { TechNewsModule } from './pages/tech-news/tech-news.module';
 // import { technewsRouting } from './pages/tech-news/tech-news.routing';
@@ -115,23 +118,23 @@ import { AlphabetNumerologyModule,alphabetNumerologyRouting } from './alphabetnu
     //NotfoundComponent,
     LoginComponent,
     //LogComponent,
-    MdToHtmlPipe,
+    //MdToHtmlPipe,
     //CallbackComponent,
-    SignupComponent,
-    SignupConfirmComponent,
+    //SignupComponent,
+    //SignupConfirmComponent,
     //SearchheaderComponent,
-    PostjobComponent,
+    //PostjobComponent,
     ListjobComponent,
-    JobpoststatusComponent,
+    //JobpoststatusComponent,
     JobdetailsComponent,
     UserProfileComponent,
     UploadresumeComponent,
     ResumesearchComponent,
     ResumedetailsComponent,
     MiddleimageComponent,
-    TechNewsComponent,
-    TechNewsDetailsComponent,
-    AdvertisementComponent,
+    // TechNewsComponent,
+    // TechNewsDetailsComponent,
+    //AdvertisementComponent,
     ResetpasswordComponent,
     DialogComponent,
     AboutComponent,
@@ -140,16 +143,22 @@ import { AlphabetNumerologyModule,alphabetNumerologyRouting } from './alphabetnu
     ResumeServiceComponent,
     SalaryPredictorComponent,
     ApplyjobComponent,
-    ValueServicesComponent,
+    //ValueServicesComponent
     //CommondialogComponent
   ],
   //entryComponents: [DialogComponent, ApplyjobComponent, CommondialogComponent],
   entryComponents: [DialogComponent, ApplyjobComponent],
   imports: [
+    //AdvertisementModule,
     AdminModule,
     adminRouting,
     AlphabetNumerologyModule,
     alphabetNumerologyRouting,
+    TemplateModule,
+    templateRouting,
+
+    pagesRouting,
+    PagesModule,
     // TechNewsModule,
     // technewsRouting,
     BrowserModule,
@@ -178,7 +187,6 @@ import { AlphabetNumerologyModule,alphabetNumerologyRouting } from './alphabetnu
     NgbTypeaheadModule,
     //FontAwesomeModule
     //TypeaheadModule
-    TemplateModule,
     CommonProjectModule
   ],
   providers: [

@@ -1,11 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ContentfulService } from './contentful.service';
 import * as marked from 'marked';
 
 @Pipe({
   name: 'mdToHtml'
 })
-export class MdToHtmlPipe implements PipeTransform {
+export class MdToHtmlCommonPipe implements PipeTransform {
 
 
   //constructor(private contentful: ContentfulService){}

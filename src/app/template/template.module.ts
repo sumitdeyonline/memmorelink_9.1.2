@@ -9,6 +9,11 @@ import { AuthService } from '../services/authentication/auth.service';
 import { LocationService } from '../services/location/location.service';
 import { SearchheaderComponent } from './searchheader';
 import {NgbTypeaheadModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AdvertisementComponent } from './advertisement';
+import { CommonProjectModule } from '../common';
+import { TechNewsComponent } from './tech-news';
+import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
+import { ContentfulService } from '../services/contentful/contentful.service';
 
 @NgModule({
     imports: [
@@ -16,9 +21,10 @@ import {NgbTypeaheadModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
       ReactiveFormsModule,
       RouterModule,
       FormsModule,
-      NgbTypeaheadModule
+      NgbTypeaheadModule,
+      CommonProjectModule
     ],
-    declarations: [ FooterComponent,NavbarComponent,SearchheaderComponent ],
+    declarations: [ FooterComponent,NavbarComponent,SearchheaderComponent, AdvertisementComponent, TechNewsComponent, TechNewsDetailsComponent ],
     exports: [
       CommonModule,
       ReactiveFormsModule,
@@ -27,10 +33,15 @@ import {NgbTypeaheadModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
       NgbTypeaheadModule,
       FooterComponent,
       NavbarComponent,
-      SearchheaderComponent
+      TechNewsComponent,
+      TechNewsDetailsComponent,
+      SearchheaderComponent,
+      AdvertisementComponent,
+      CommonProjectModule
     ],  providers: [
         AuthService,
-        LocationService
+        LocationService,
+        ContentfulService
     ]
   })
   export class TemplateModule {

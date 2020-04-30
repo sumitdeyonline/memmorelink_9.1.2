@@ -15,7 +15,7 @@ export class UserrolesComponent implements OnInit {
   constructor(private uProfile: UserprofileService, public auth: AuthService) {
     this.uProfile.getUserAllRoles().subscribe(urole => {
       this.UserRole = urole;
-      console.log("User Role :::::::: => "+this.UserRole.length);
+      //console.log("User Role :::::::: => "+this.UserRole.length);
     });
 
   }
