@@ -4,3 +4,4 @@ export * from './logger';
 export * from './notfound';
 export * from './commondialog';
 export * from './pipe';
+export * from './angular-utility';

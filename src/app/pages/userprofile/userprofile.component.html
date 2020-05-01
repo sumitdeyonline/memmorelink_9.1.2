@@ -9,10 +9,45 @@
             <h2>User Profile</h2>
 
 
-            <form #userProfile="ngForm" (ngSubmit)="userProfileSubmit(userProfile)">
+            <form #userProfileForm="ngForm" (ngSubmit)="userProfileSubmit(userProfileForm)">
+
+                <div class="row">
 
 
-                <h3 class="title" style="color: red;">Profile</h3>&nbsp;
+                    
+
+    
+
+
+
+                    <div class="col-sm-2">
+                        <h3 class="title" style="color: red;">Profile</h3>&nbsp;
+                    </div>
+                    <div class="col">
+                            &nbsp;
+
+                    </div>
+                    <div class="col-sm-2">
+
+  
+                        <div class="form-actions floatRight">
+                            <input type="submit" value="Submit" class="btn btn-primary btn-sm" [disabled]="!userProfileForm.valid || !isUpdateProfile">
+                        </div>
+                        <div class="error_Message" *ngIf="!userProfileForm.valid && userProfileForm.touched">
+                            (Please enter form fields)
+                        </div>
+                    </div>
+                    <div class="col" align="left">
+                        <div class="form-actions floatRight">
+                            <input type="button" value="{{editProfileText}}" class="btn btn-primary btn-sm" [disabled]="!isUpdate" (click)="EnableEdit()">
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+
+                </div>
+
+                <hr>
+
 
                 <div class="row">
                     <div class="col-sm-2">
@@ -34,7 +69,7 @@
                         <div class="error_Message" *ngIf="LastName.invalid && (LastName.dirty || LastName.touched)">
                           Please Enter Last Name
                         </div>
-                     </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-2">&nbsp;
@@ -62,7 +97,7 @@
                         <label style="font-weight: bold;" for="Email">Email</label>
                     </div>
                     <div class="col">
-                        <input type="email" ngModel name="Email" [disabled]="!isUpdateProfile" #Email="ngModel" id="Email" [ngModel]="uProfile.selectedUserProfile?.Email" (ngModelChange)="uProfile.selectedUserProfile.Email" class="form-control input-sm" required/>
+                        <input type="email" ngModel name="Email" [disabled]="!isUpdateProfile" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #Email="ngModel" id="Email" [ngModel]="uProfile.selectedUserProfile?.Email" (ngModelChange)="uProfile.selectedUserProfile.Email" class="form-control input-sm" required/>
                         <!--div class="error_Message"*ngIf="Email.errors.required && (Email.dirty  || Email.touched)"-->
                         <div class="error_Message"*ngIf="Email.invalid && (Email.dirty  || Email.touched)">
                             Please enter the valid Email
@@ -80,12 +115,6 @@
 
                 <div class="row">
                     <div class="col-sm-2">
-                        <label style="font-weight: bold;"  for="HomePhone">Home Phone</label>
-                    </div>
-                    <div class="col">
-                        <input type="text" ngModel name="HomePhone" [disabled]="!isUpdateProfile" #HomePhone="ngModel" id="HomePhone" [ngModel]="uProfile.selectedUserProfile?.HomePhone" (ngModelChange)="uProfile.selectedUserProfile.HomePhone" class="form-control input-sm"/>
-                    </div>
-                    <div class="col-sm-2">
                         <label style="font-weight: bold;" for="CellPhone">Cell Phone</label>
                     </div>
                     <div class="col">
@@ -93,7 +122,14 @@
                         <div class="error_Message" *ngIf="CellPhone.invalid && (CellPhone.dirty || CellPhone.touched)">
                             Please Enter Cell Phone
                         </div>
-                     </div>
+                     </div>                    
+                    <div class="col-sm-2">
+                        <label style="font-weight: bold;"  for="HomePhone">Home Phone</label>
+                    </div>
+                    <div class="col">
+                        <input type="text" ngModel name="HomePhone" [disabled]="!isUpdateProfile" #HomePhone="ngModel" id="HomePhone" [ngModel]="uProfile.selectedUserProfile?.HomePhone" (ngModelChange)="uProfile.selectedUserProfile.HomePhone" class="form-control input-sm"/>
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-sm-2">&nbsp;
@@ -518,12 +554,17 @@
                 </div>
             </div>
             <div class="row">
+
+                <div class="error_Message" *ngIf="!userProfileForm.valid && userProfileForm.touched">
+                    (Please enter form fields)
+                </div>  
+
                 <div class="form-actions floatRight">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" class="btn btn-primary btn-sm" [disabled]="!userProfile.valid || !isUpdateProfile">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" class="btn btn-primary btn-sm" [disabled]="!userProfileForm.valid || !isUpdateProfile">
                 </div>&nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="form-actions floatRight">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="{{editProfileText}}" class="btn btn-primary btn-sm" [disabled]="!isUpdate" (click)="EnableEdit()">
-              </div>
+                </div>
             </div>
             </form>
         </div>

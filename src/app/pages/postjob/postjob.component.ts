@@ -14,12 +14,13 @@ import { Country } from 'src/app/services/firebase/userprofile/country.model';
 import { State } from 'src/app/services/firebase/userprofile/state.model';
 import { PostJobc } from 'src/app/services/firebase/postjob/postjob.model';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { CommondialogComponent } from 'src/app/common/commondialog/commondialog.component';
+//import { CommondialogComponent } from 'src/app/common/commondialog/commondialog.component';
 import { UserdetailsService } from 'src/app/services/firebase/userdetails/userdetails.service';
 import { UserDetails } from 'src/app/services/firebase/userdetails/userdetails.model';
 import { EmailService } from 'src/app/services/email/email.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEDITOR_CONF } from 'src/app/global-config';
+import { CommondialogComponent } from 'src/app/common';
 // import * as ClassicEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 
@@ -315,6 +316,8 @@ export class PostjobComponent implements OnInit {
         // category: '',
         // details: ''
       }
+      this.postjobService.selectedPostJobc.isTeleComute=false;
+      this.postjobService.selectedPostJobc.TravelRequirements='No Travel';
 
   }
 

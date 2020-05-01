@@ -1776,7 +1776,7 @@ input.btn.btn-primary.btn-sm {
     border-color:#f15f43;
 }
 .form-actions.floatRight {
-    text-align: center;
+    text-align: unset;
 }
 input.btn.btn-primary.btn-sm:hover{
 	background: #2185C5;

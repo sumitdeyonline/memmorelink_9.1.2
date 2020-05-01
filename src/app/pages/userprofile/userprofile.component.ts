@@ -13,6 +13,9 @@ import { FIREBASE_CONFIG } from 'src/app/global-config';
 import { UserProfile } from 'src/app/services/firebase/userprofile/userprofile.model';
 import { Observable } from 'rxjs';
 import { EmailService } from 'src/app/services/email/email.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CommondialogComponent, AngularUtilityComponent } from 'src/app/common';
+//import { CommondialogComponent } from 'src/app/common/commondialog';
 
 
 @Component({
@@ -34,9 +37,10 @@ export class UserProfileComponent implements OnInit {
   editProfileText: string ="Edit Profile";
   countries: Country[];
   state: State[];
+  utility = new AngularUtilityComponent();
 
 
-  constructor(private rUploadService: UploadResumeService, public uProfile: UserprofileService, public auth: AuthService, private sEmail: EmailService) {
+  constructor(private rUploadService: UploadResumeService, public uProfile: UserprofileService, public auth: AuthService, private sEmail: EmailService, private dialog: MatDialog,) {
 
 
     this.uProfile.getUserDetails(this.auth.userProfile.name,'U').subscribe(uprop=> {
@@ -50,6 +54,7 @@ export class UserProfileComponent implements OnInit {
         //console.log("NEW FORM ....");
         this.isUpdate = false;
         this.isUpdateProfile = true;
+        //console.log("NEW FORM ....");
       } else {
         //console.log("Edit FORM .... FOR "+this.userProfile.length+" ::::: ID :::::: => "+this.userProfile[0].id);
         //this.fileUploadEnabled = true;
@@ -117,12 +122,14 @@ export class UserProfileComponent implements OnInit {
 
   userProfileSubmit(uprofileForm: NgForm) {
     //console.log("Start Saveing ");
-
+    let type='';
     if (this.isUpdate) {
+      type = "Updated";
       this.userProfileAddUpdate(uprofileForm, this.uProfile.selectedUserProfile.id);
       this.EnableEdit();
     } else {
       // New Entry
+      type = "Created";
        this.userProfileAddUpdate(uprofileForm, null);
        this.EnableEdit();
        //window.scroll(0,0);
@@ -162,10 +169,17 @@ export class UserProfileComponent implements OnInit {
     window.scroll(0,0);
     //this.getFilesWithDownloadURL(this.rUploadService.downloadURL);
 
+    window.scroll(0,0);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = type+"||userprofile";
+    this.dialog.open(CommondialogComponent, dialogConfig);
 
     //this.uProfile.addUpdateUserProfile(uprofileForm.value,null);
   }
 
+  formatPhoneNumvber(phone) {
+    return this.utility.formatUSNumber(phone);
+  }
 
   userProfileAddUpdate(uprofileForm: NgForm, userid: string) {
 

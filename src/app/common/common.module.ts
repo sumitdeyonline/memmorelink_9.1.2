@@ -4,12 +4,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
 
-import { CallbackComponent } from './callback';
+// import { CallbackComponent } from './callback';
+// import { CommondialogComponent } from './commondialog';
+// import { LogComponent } from './logger';
+// import { NotfoundComponent } from './notfound';
+import { MatDialogModule } from '@angular/material/dialog';
+//import { MdToHtmlCommonPipe } from './pipe';
+import { AngularUtilityComponent } from './angular-utility';
 import { CommondialogComponent } from './commondialog';
+import { CallbackComponent } from './callback';
 import { LogComponent } from './logger';
 import { NotfoundComponent } from './notfound';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MdToHtmlCommonPipe } from './pipe';
+//import { CommondialogComponent, CallbackComponent, LogComponent, NotfoundComponent, MdToHtmlCommonPipe } from '.';
 
 @NgModule({
     imports: [
@@ -19,7 +26,7 @@ import { MdToHtmlCommonPipe } from './pipe';
       MatDialogModule
     ],
     entryComponents: [ CommondialogComponent],
-    declarations: [ CallbackComponent,CommondialogComponent,LogComponent,NotfoundComponent, MdToHtmlCommonPipe ],
+    declarations: [ CallbackComponent,CommondialogComponent,LogComponent,NotfoundComponent, MdToHtmlCommonPipe, AngularUtilityComponent, AngularUtilityComponent ],
     exports: [
       CommonModule,
     //   ReactiveFormsModule,
@@ -29,7 +36,8 @@ import { MdToHtmlCommonPipe } from './pipe';
       CommondialogComponent,
       MdToHtmlCommonPipe,
       LogComponent,
-      NotfoundComponent
+      NotfoundComponent,
+      AngularUtilityComponent
     ],  providers: [
 
     ]

@@ -21,11 +21,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { NavbarComponent } from './template/navbar/navbar.component';
 //import { FooterComponent } from './template/footer/footer.component';
 import { TemplateModule, templateRouting } from './template';
-import { HomeComponent } from './pages/home/home.component';
+//import { HomeComponent } from './pages/home/home.component';
 //import { NotfoundComponent } from './common/notfound/notfound.component';
 import { routing } from './app.routing';
 
-import { LoginComponent } from './pages/login/login.component';
+//import { LoginComponent } from './pages/login/login.component';
 //import { HttpModule } from '@angular/http';
 //import { LogComponent } from './common/logger/log.component';
 import { CallbackComponent } from './common/callback/callback.component';
@@ -38,29 +38,29 @@ import { AuthService } from './services/authentication/auth.service';
 import { AuthGuardService } from './services/authentication/auth-guard.service';
 import { ScopeGuardService } from './services/authentication/scope-guard.service';
 import { PostjobService } from './services/firebase/postjob/postjob.service';
-import { ListjobComponent } from './pages/listjob/listjob.component';
+//import { ListjobComponent } from './pages/listjob/listjob.component';
 import { ToastrService } from 'ngx-toastr';
 //import { JobpoststatusComponent } from './pages/postjob/jobpoststatus/jobpoststatus.component';
 import { DatePipe } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
-import { JobdetailsComponent } from './pages/jobdetails/jobdetails.component';
+//import { JobdetailsComponent } from './pages/jobdetails/jobdetails.component';
 import { DateformatService } from './services/dateformat/dateformat.service';
 
-import { UserProfileComponent } from './pages/userprofile/userprofile.component';
+//import { UserProfileComponent } from './pages/userprofile/userprofile.component';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { UploadResumeService } from './services/firebase/uploadresume/upload-resume.service';
 import { UserdetailsService } from './services/firebase/userdetails/userdetails.service';
 import { UserprofileService } from './services/firebase/userprofile/userprofile.service';
-import { UploadresumeComponent } from './pages/uploadresume/uploadresume.component';
-import { ResumesearchComponent } from './pages/resumesearch/resumesearch.component';
-import { ResumedetailsComponent } from './pages/resumesearch/resumedetails/resumedetails.component';
+//import { UploadresumeComponent } from './pages/uploadresume/uploadresume.component';
+//import { ResumesearchComponent } from './pages/resumesearch/resumesearch.component';
+//import { ResumedetailsComponent } from './pages/resumesearch/resumedetails/resumedetails.component';
 import { ContentfulService } from './services/contentful/contentful.service';
-import { MiddleimageComponent } from './pages/home/middleimage/middleimage.component';
+//import { MiddleimageComponent } from './pages/home/middleimage/middleimage.component';
 //import { MdToHtmlPipe } from './services/contentful/md-to-html.pipe';
 //import { TechNewsComponent } from './pages/tech-news/tech-news.component';
 // import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
 //import { AdvertisementComponent } from './pages/advertisement/advertisement.component';
-import { ResetpasswordComponent } from './pages/login/resetpassword/resetpassword.component';
+//import { ResetpasswordComponent } from './pages/login/resetpassword/resetpassword.component';
 import { PagerService } from './services/common/pager.service';
 
 import { MatDialogModule } from '@angular/material/dialog';
@@ -70,16 +70,16 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { DialogComponent } from './pages/jobdetails/dialog/dialog.component';
+//import { DialogComponent } from './pages/jobdetails/dialog/dialog.component';
 //import { NgxEditorModule } from 'ngx-editor';
 //import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { AboutComponent } from './pages/about/about.component';
-import { RecruitersSolutionComponent } from './pages/recruiters-solution/recruiters-solution.component';
-import { RecruitersFollowingComponent } from './pages/recruiters-following/recruiters-following.component';
-import { ResumeServiceComponent } from './pages/resume-service/resume-service.component';
-import { SalaryPredictorComponent } from './pages/salary-predictor/salary-predictor.component';
-import { ApplyjobComponent } from './pages/jobdetails/applyjob/applyjob.component';
+//import { AboutComponent } from './pages/about/about.component';
+//import { RecruitersSolutionComponent } from './pages/recruiters-solution/recruiters-solution.component';
+//import { RecruitersFollowingComponent } from './pages/recruiters-following/recruiters-following.component';
+//import { ResumeServiceComponent } from './pages/resume-service/resume-service.component';
+//import { SalaryPredictorComponent } from './pages/salary-predictor/salary-predictor.component';
+//import { ApplyjobComponent } from './pages/jobdetails/applyjob/applyjob.component';
 import { ValueServicesComponent } from './pages/value-services/value-services.component';
 //import { MidsearchComponent } from './pages/home/midsearch/midsearch.component';
 //import { CommondialogComponent } from './common/commondialog/commondialog.component';
@@ -98,6 +98,13 @@ import { CommonProjectModule } from './common';
 //import { alphabetNumerologyRouting  } from './alphabetnumerology/alphabetnumerology.routing';
 import { AlphabetNumerologyModule,alphabetNumerologyRouting } from './alphabetnumerology';
 import { pagesRouting, PagesModule } from './pages';
+import { HomeComponent } from './home/home.component';
+import { MiddleimageComponent } from './home/middleimage/middleimage.component';
+// import { HomeComponent } from './homepage/home/home.component';
+// import { MiddleimageComponent } from './homepage/home/middleimage/middleimage.component';
+// import { AdvertisementComponent } from './homepage/advertisement';
+// import { TechNewsComponent } from './homepage/tech-news';
+// import { TechNewsDetailsComponent } from './homepage/tech-news/tech-news-details';
 
 //import { AdvertisementModule } from './advertisement';
 //import { AlphabetNumerologyModule, alphabetNumerologyRouting } from './alphabetnumerology';
@@ -116,7 +123,7 @@ import { pagesRouting, PagesModule } from './pages';
     //FooterComponent,
     HomeComponent,
     //NotfoundComponent,
-    LoginComponent,
+    //LoginComponent,
     //LogComponent,
     //MdToHtmlPipe,
     //CallbackComponent,
@@ -124,30 +131,30 @@ import { pagesRouting, PagesModule } from './pages';
     //SignupConfirmComponent,
     //SearchheaderComponent,
     //PostjobComponent,
-    ListjobComponent,
+    //ListjobComponent,
     //JobpoststatusComponent,
-    JobdetailsComponent,
-    UserProfileComponent,
-    UploadresumeComponent,
-    ResumesearchComponent,
-    ResumedetailsComponent,
+    //JobdetailsComponent,
+    //UserProfileComponent,
+    //UploadresumeComponent,
+    //ResumesearchComponent,
+    //ResumedetailsComponent,
     MiddleimageComponent,
     // TechNewsComponent,
     // TechNewsDetailsComponent,
-    //AdvertisementComponent,
-    ResetpasswordComponent,
-    DialogComponent,
-    AboutComponent,
-    RecruitersSolutionComponent,
-    RecruitersFollowingComponent,
-    ResumeServiceComponent,
-    SalaryPredictorComponent,
-    ApplyjobComponent,
+    // AdvertisementComponent,
+    //ResetpasswordComponent,
+    //DialogComponent,
+    //AboutComponent,
+    //RecruitersSolutionComponent,
+    //RecruitersFollowingComponent,
+    //ResumeServiceComponent,
+    //SalaryPredictorComponent,
+    //ApplyjobComponent,
     //ValueServicesComponent
     //CommondialogComponent
   ],
   //entryComponents: [DialogComponent, ApplyjobComponent, CommondialogComponent],
-  entryComponents: [DialogComponent, ApplyjobComponent],
+  //entryComponents: [DialogComponent, ApplyjobComponent],
   imports: [
     //AdvertisementModule,
     AdminModule,
@@ -163,51 +170,53 @@ import { pagesRouting, PagesModule } from './pages';
     // technewsRouting,
     BrowserModule,
     routing,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    MatDialogModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    //NgxEditorModule,
-    CKEditorModule,
-    //AngularFontAwesomeModule,
-    HttpClientModule,
-    ToastrModule.forRoot(),
-    BrowserAnimationsModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
-    NgxSpinnerModule,
-    NgxTypeaheadModule,
-    NgbTypeaheadModule,
+    // FormsModule,
+    // ReactiveFormsModule,
+    // HttpClientModule,
+    // AngularFireDatabaseModule,
+    // AngularFireModule.initializeApp(environment.firebase),
+    // AngularFirestoreModule,
+    // MatDialogModule,
+    // MatInputModule,
+    // MatTableModule,
+    // MatPaginatorModule,
+    // MatSortModule,
+
+    // CKEditorModule,
+
+    // HttpClientModule,
+    // ToastrModule.forRoot(),
+    // BrowserAnimationsModule,
+    // MatProgressSpinnerModule,
+    // MatProgressBarModule,
+    // NgxSpinnerModule,
+    // NgxTypeaheadModule,
+    // NgbTypeaheadModule,
     //FontAwesomeModule
     //TypeaheadModule
+    //AngularFontAwesomeModule,
+    //NgxEditorModule,
     CommonProjectModule
   ],
   providers: [
     AuthService,
-    AuthGuardService,
-    ScopeGuardService,
-    PostjobService,
-    UploadResumeService,
-    AngularFirestore,
-    UserdetailsService,
-    UserprofileService,
-    ApplyjobService,
-    ToastrService,
-    DatePipe,
-    DateformatService,
-    AngularFireDatabase,
-    ContentfulService,
-    PagerService,
-    EmailService,
-    HttpClient,
-    LocationService
+    // AuthGuardService,
+    // ScopeGuardService,
+    // PostjobService,
+    // UploadResumeService,
+    // AngularFirestore,
+    // UserdetailsService,
+    // UserprofileService,
+    // ApplyjobService,
+    // ToastrService,
+    // DatePipe,
+    // DateformatService,
+    // AngularFireDatabase,
+    // ContentfulService,
+    // PagerService,
+    // EmailService,
+    // HttpClient,
+    // LocationService
   ],
   bootstrap: [AppComponent]
 })

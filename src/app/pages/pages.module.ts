@@ -37,15 +37,29 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { PostjobComponent } from './postjob';
-import { JobpoststatusComponent } from './postjob/jobpoststatus';
+import { PostjobComponent, JobpoststatusComponent } from './postjob';
+//import { JobpoststatusComponent } from './postjob/jobpoststatus';
 import { ScopeGuardService } from '../services/authentication/scope-guard.service';
-import { DialogComponent } from './jobdetails/dialog/dialog.component';
+//import { DialogComponent } from './jobdetails/dialog/dialog.component';
 import { TemplateModule } from '../template';
 import { SignupConfirmComponent } from './signup/signup-confirm/signup-confirm.component';
 import { SignupComponent } from './signup';
 import { CommonProjectModule } from '../common';
 import { ValueServicesComponent } from './value-services';
+import { ContentfulrapperService } from '../services/contentful/contentfulrapper.service';
+import { AboutComponent } from './about';
+import { JobdetailsComponent, ApplyjobComponent, DialogComponent } from './jobdetails';
+import { ListjobComponent } from './listjob';
+import { LoginComponent, ResetpasswordComponent } from './login';
+import { RecruitersFollowingComponent } from './recruiters-following';
+import { RecruitersSolutionComponent } from './recruiters-solution';
+import { ResumeServiceComponent } from './resume-service';
+import { ResumesearchComponent, ResumedetailsComponent } from './resumesearch';
+import { SalaryPredictorComponent } from './salary-predictor';
+import { UploadresumeComponent } from './uploadresume';
+import { UserProfileComponent } from './userprofile';
+import { AuthGuardService } from '../services/authentication/auth-guard.service';
+
 // import { TechNewsComponent } from './tech-news';
 // import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
 //import { AdvertisementComponent } from './advertisement/advertisement.component';
@@ -100,7 +114,21 @@ import { ValueServicesComponent } from './value-services';
         SignupComponent,
         SignupConfirmComponent,
         ValueServicesComponent,
-
+        AboutComponent,
+        JobdetailsComponent,
+        ApplyjobComponent,
+        DialogComponent,
+        ListjobComponent,
+        LoginComponent,
+        ResetpasswordComponent,
+        RecruitersFollowingComponent,
+        RecruitersSolutionComponent,
+        ResumeServiceComponent,
+        ResumesearchComponent,
+        ResumedetailsComponent,
+        SalaryPredictorComponent,
+        UploadresumeComponent,
+        UserProfileComponent
         // SignupConfirmComponent
       // AdminhomeComponent,
       // UserrolesComponent,
@@ -119,7 +147,8 @@ import { ValueServicesComponent } from './value-services';
     //   JobpredictionComponent
     ],
      //entryComponents: [JobpredictionComponent],
-     entryComponents: [],  
+     //entryComponents: [],  
+     entryComponents: [DialogComponent, ApplyjobComponent],
      //entryComponents: [DialogComponent],         
       exports: [
 
@@ -130,7 +159,9 @@ import { ValueServicesComponent } from './value-services';
       PostjobService,
       UserdetailsService,
       DatePipe,
-      ScopeGuardService  
+      ScopeGuardService,
+      ContentfulrapperService,
+      AuthGuardService
 
       //AlphabetNumerologyService
       //AdminGuardService

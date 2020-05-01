@@ -9,11 +9,14 @@ import { AuthService } from '../services/authentication/auth.service';
 import { LocationService } from '../services/location/location.service';
 import { SearchheaderComponent } from './searchheader';
 import {NgbTypeaheadModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { AdvertisementComponent } from './advertisement';
+// import { AdvertisementComponent } from './advertisement';
 import { CommonProjectModule } from '../common';
+// import { TechNewsComponent } from './tech-news';
+// import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
+import { ContentfulService } from '../services/contentful/contentful.service';
+import { AdvertisementComponent } from './advertisement';
 import { TechNewsComponent } from './tech-news';
 import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
-import { ContentfulService } from '../services/contentful/contentful.service';
 
 @NgModule({
     imports: [
@@ -25,6 +28,7 @@ import { ContentfulService } from '../services/contentful/contentful.service';
       CommonProjectModule
     ],
     declarations: [ FooterComponent,NavbarComponent,SearchheaderComponent, AdvertisementComponent, TechNewsComponent, TechNewsDetailsComponent ],
+    // declarations: [ FooterComponent,NavbarComponent,SearchheaderComponent ],
     exports: [
       CommonModule,
       ReactiveFormsModule,
