@@ -9,6 +9,8 @@ import { UserDetails } from 'src/app/services/firebase/userdetails/UserDetails.m
 import { UserprofileService } from 'src/app/services/firebase/userprofile/userprofile.service';
 import { UserRole } from 'src/app/services/firebase/userprofile/userrole.model';
 import { EmailService } from 'src/app/services/email/email.service';
+import { AngularUtilityComponent } from 'src/app/common';
+import {isNumeric} from 'rxjs/util/isNumeric';
 
 @Component({
   selector: 'valueservices',
@@ -33,6 +35,7 @@ export class ValueServicesComponent implements OnInit {
   companyName: string;
   companyAddress: string;
   jobcount: number = 0;
+  utility = new AngularUtilityComponent();
 
 
   constructor(public _auth: AuthService, fb: FormBuilder, public udetails: UserdetailsService, private uProfile: UserprofileService, private sEmail: EmailService) {
@@ -186,5 +189,23 @@ export class ValueServicesComponent implements OnInit {
       this.valueservicesMessage = '';
     }
 
+    checkSecureImageURL(urlVal: string) {
+
+      if ((urlVal == null) || (urlVal == 'undefined')) {
+        // console.log("urlVal 1 : "+urlVal);
+        return true;
+      }
+      else {
+        if (urlVal.trim() == '') {  return true;}
+        else if (urlVal.trim().startsWith('https://'))  { return true;}
+        else { return false;} 
+      }
+      return true;
+    }
+
+    phoneNumberFormat(phone) {
+
+      this.udetails.selectedValueServices.phone = this.utility.formatUSNumber(phone);
+    }
 
 }

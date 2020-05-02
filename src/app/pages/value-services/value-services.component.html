@@ -105,9 +105,20 @@
                   </div>
 
                   <label for="companyAddress">Company Address:</label> <input type="text" ngModel name="companyAddress" #companyAddress="ngModel" id="companyAddress" [ngModel]="udetails.selectedValueServices?.companyAddress" (ngModelChange)="udetails.selectedValueServices.companyAddress" class="form-control input-sm"/>
-                  <label for="CompanyLogoURL">Company Logo URL(100 x 100px):</label> <input type="text" ngModel name="CompanyLogoURL" #CompanyLogoURL="ngModel" id="CompanyLogoURL" [ngModel]="udetails.selectedValueServices?.CompanyLogoURL" (ngModelChange)="udetails.selectedValueServices.CompanyLogoURL" class="form-control input-sm"/>
-
-                  <label for="phone">Company Phone:</label> <input type="text" ngModel name="phone" #phone="ngModel" id="phone" [ngModel]="udetails.selectedValueServices?.phone" (ngModelChange)="udetails.selectedValueServices.phone"  ng-pattern="/^[7-9][0-9]{9}$/" class="form-control input-sm"/>
+                  <label for="CompanyLogoURL">Company Logo URL(100 x 100px):</label> 
+                  <input type="text" ngModel name="CompanyLogoURL" #CompanyLogoURL="ngModel" 
+                        id="CompanyLogoURL" [ngModel]="udetails.selectedValueServices?.CompanyLogoURL" 
+                        (ngModelChange)="udetails.selectedValueServices.CompanyLogoURL" 
+                        class="form-control input-sm"/>
+                  <div class="error_Message" *ngIf="!checkSecureImageURL(CompanyLogoURL.value) && CompanyLogoURL.touched">
+                    Company URL accept secure link(https://) only.
+                  </div>
+                  <label for="phone">Company Phone:</label> 
+                  <input type="text" ngModel name="phone" #phone="ngModel" id="phone" 
+                    [ngModel]="udetails.selectedValueServices?.phone" 
+                    (ngModelChange)="udetails.selectedValueServices.phone" autocomplete="off" 
+                    (keyup)="phoneNumberFormat(phone.value);"
+                    class="form-control input-sm"/>
 
                   <label *ngFor="let ur of UserRole">
                       
@@ -122,10 +133,15 @@
                       <tr>
                         <td>
 
-                          <div class="error_Message" *ngIf="!valueservicesForm.valid && valueservicesForm.touched">
+                          <div class="error_Message" *ngIf="(!valueservicesForm.valid 
+                                                          || Fieldlength(company.value) < 4
+                                                          || !checkSecureImageURL(CompanyLogoURL.value))
+                                                          && valueservicesForm.touched">
                             (Please enter form fields)
                           </div>
-                          <button class="btn_common btn-default" type="submit" value=" Submit" [disabled]="!valueservicesForm.valid">
+                          <button class="btn_common btn-default" type="submit" value=" Submit" [disabled]="(!valueservicesForm.valid 
+                                                                                                || Fieldlength(company.value) < 4
+                                                                                                || !checkSecureImageURL(CompanyLogoURL.value))">
                             <i class="fa fa-floppy-o"></i>&nbsp;Submit
                           </button>
 

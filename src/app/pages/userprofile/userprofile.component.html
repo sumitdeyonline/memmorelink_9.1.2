@@ -118,7 +118,7 @@
                         <label style="font-weight: bold;" for="CellPhone">Cell Phone</label>
                     </div>
                     <div class="col">
-                        <input type="text" ngModel name="CellPhone" [disabled]="!isUpdateProfile" #CellPhone="ngModel" id="CellPhone" [ngModel]="uProfile.selectedUserProfile?.CellPhone" (ngModelChange)="uProfile.selectedUserProfile.CellPhone" class="form-control input-sm" required/>
+                        <input type="text" ngModel name="CellPhone" [disabled]="!isUpdateProfile" #CellPhone="ngModel" id="CellPhone" [ngModel]="uProfile.selectedUserProfile?.CellPhone" (ngModelChange)="uProfile.selectedUserProfile.CellPhone" class="form-control input-sm" (keyup)="phoneNumberFormatCell(CellPhone.value);" required/>
                         <div class="error_Message" *ngIf="CellPhone.invalid && (CellPhone.dirty || CellPhone.touched)">
                             Please Enter Cell Phone
                         </div>
@@ -127,7 +127,7 @@
                         <label style="font-weight: bold;"  for="HomePhone">Home Phone</label>
                     </div>
                     <div class="col">
-                        <input type="text" ngModel name="HomePhone" [disabled]="!isUpdateProfile" #HomePhone="ngModel" id="HomePhone" [ngModel]="uProfile.selectedUserProfile?.HomePhone" (ngModelChange)="uProfile.selectedUserProfile.HomePhone" class="form-control input-sm"/>
+                        <input type="text" ngModel name="HomePhone" [disabled]="!isUpdateProfile" #HomePhone="ngModel" id="HomePhone" [ngModel]="uProfile.selectedUserProfile?.HomePhone" (ngModelChange)="uProfile.selectedUserProfile.HomePhone" (keyup)="phoneNumberFormatHome(HomePhone.value);" class="form-control input-sm"/>
                     </div>
 
                 </div>

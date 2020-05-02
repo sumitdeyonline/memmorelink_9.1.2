@@ -99,7 +99,7 @@ import { CommonProjectModule } from './common';
 import { AlphabetNumerologyModule,alphabetNumerologyRouting } from './alphabetnumerology';
 import { pagesRouting, PagesModule } from './pages';
 import { HomeComponent } from './home/home.component';
-import { MiddleimageComponent } from './home/middleimage/middleimage.component';
+//import { MiddleimageComponent } from './home/middleimage/middleimage.component';
 // import { HomeComponent } from './homepage/home/home.component';
 // import { MiddleimageComponent } from './homepage/home/middleimage/middleimage.component';
 // import { AdvertisementComponent } from './homepage/advertisement';
@@ -138,7 +138,7 @@ import { MiddleimageComponent } from './home/middleimage/middleimage.component';
     //UploadresumeComponent,
     //ResumesearchComponent,
     //ResumedetailsComponent,
-    MiddleimageComponent,
+    //MiddleimageComponent,
     // TechNewsComponent,
     // TechNewsDetailsComponent,
     // AdvertisementComponent,

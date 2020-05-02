@@ -42,7 +42,7 @@
                     <div class="col">
 	
                         <div class="form-actions floatRight">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid" class="btn btn-primary btn-sm">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
                         </div>
                         <br>
                     </div>
@@ -87,6 +87,9 @@
                     <div class="col">
                         <input type="text" ngModel name="CompanyLogoURL" #CompanyLogoURL="ngModel" id="CompanyLogoURL" [ngModel]="postjobService.selectedPostJobc?.CompanyLogoURL" (ngModelChange)="postjobService.selectedPostJobc.CompanyLogoURL" class="form-control input-sm"/>
                         <a *ngIf="postjobService.selectedPostJobc.CompanyLogoURL !=null && postjobService.selectedPostJobc.CompanyLogoURL !=''" href="{{postjobService.selectedPostJobc.CompanyLogoURL}}" target="_blank">Logo Link</a>
+                        <div class="error_Message" *ngIf="!checkSecureImageURL(CompanyLogoURL.value) && (CompanyLogoURL.dirty || CompanyLogoURL.touched)">
+                            Company URL accept secure link(https://) only.
+                        </div>                        
                     </div>
                 </div>
                 <div class="row">
@@ -379,7 +382,7 @@
 
                 <div class="row">
                   <div class="form-actions floatRight">
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid" class="btn btn-primary btn-sm">
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
                   </div>
                 </div>
               </form>

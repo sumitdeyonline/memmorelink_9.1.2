@@ -12,6 +12,8 @@ import { UploadResume } from 'src/app/services/firebase/uploadresume/uploadresum
 //import { SnotifyService } from 'ng-snotify';
 import './../../../../assets/js/smtp.js'; 
 import { EmailService } from 'src/app/services/email/email.service.js';
+import { AngularUtilityComponent } from 'src/app/common';
+
 //import './smtp.js'; 
 //declare let Email: any;
 //var Email = { send: function (a) { return new Promise(function (n, e) { a.nocache = Math.floor(1e6 * Math.random() + 1), a.Action = "Send"; var t = JSON.stringify(a); Email.ajaxPost("https://smtpjs.com/v3/smtpjs.aspx?", t, function (e) { n(e) }) }) }, ajaxPost: function (e, n, t) { var a = Email.createCORSRequest("POST", e); a.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), a.onload = function () { var e = a.responseText; null != t && t(e) }, a.send(n) }, ajax: function (e, n) { var t = Email.createCORSRequest("GET", e); t.onload = function () { var e = t.responseText; null != n && n(e) }, t.send() }, createCORSRequest: function (e, n) { var t = new XMLHttpRequest; return "withCredentials" in t ? t.open(e, n, !0) : "undefined" != typeof (XDomainRequest ? (t = new XDomainRequest).open(e, n) : t = null, t } };
@@ -36,6 +38,7 @@ export class ApplyjobComponent implements OnInit {
   uResume: UploadResume[];
   numberOfResume: Number = 0;
   showUpload: boolean = true;
+  utility = new AngularUtilityComponent();
 
   //email   = require("emailjs/email");
 
@@ -50,7 +53,9 @@ export class ApplyjobComponent implements OnInit {
         LastName: [null, Validators.required],
         Email: [null, [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
         //PhoneNumber: [null, [Validators.required, Validators.pattern('[0-9]{10}')]],
-        PhoneNumber: [null, [Validators.required, Validators.pattern('[0-9]{3}?[-. ]?[0-9]{3}?[-. ]?[0-9]{4}')]],
+        //PhoneNumber: [null, [Validators.required, Validators.pattern('[0-9]{3}?[-. ]?[0-9]{3}?[-. ]?[0-9]{4}')]],
+        PhoneNumber: [null, [Validators.required, Validators.pattern('[(. ]?[0-9]{3}?[). ]?[ . ]?[0-9]{3}?[-. ]?[0-9]{4}')]],
+        //PhoneNumber: [null, [Validators.required]],
         CoverLetter:[null],
         fileUpload: [Validators.required],
         fileUploadExist: [null]
@@ -252,6 +257,12 @@ export class ApplyjobComponent implements OnInit {
       this.showUpload = false;
     }
 
+  }
+
+  phoneNumberFormat(phone) {
+    //console.log("Phone : "+phone);
+    //this.applyJobForm.setValue(this.utility.formatUSNumber(phone):'PhoneNumber').value = this.utility.formatUSNumber(phone);
+    this.applyJobForm.controls['PhoneNumber'].setValue(this.utility.formatUSNumber(phone));
   }
 
 }

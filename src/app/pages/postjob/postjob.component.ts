@@ -322,6 +322,19 @@ export class PostjobComponent implements OnInit {
   }
 
 
+  checkSecureImageURL(urlVal: string) {
+
+    if ((urlVal == null) || (urlVal == 'undefined')) {
+      // console.log("urlVal 1 : "+urlVal);
+      return true;
+    }
+    else {
+      if (urlVal.trim() == '') {  return true;}
+      else if (urlVal.trim().startsWith('https://'))  { return true;}
+      else { return false;} 
+    }
+    return true;
+  }
 
 
 

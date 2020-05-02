@@ -35,7 +35,10 @@
         <mat-form-field>
           <input matInput
                 placeholder="Phone Number"
-              formControlName="PhoneNumber">
+              formControlName="PhoneNumber"
+              #PhoneNumber
+              (keyup)="phoneNumberFormat($event.target.value);">
+              
         </mat-form-field>
         <!--button mat-raised-button color="accent">Submit</button-->
         <mat-form-field>

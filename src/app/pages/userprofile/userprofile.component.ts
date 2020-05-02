@@ -456,4 +456,11 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+  phoneNumberFormatCell(phone) {
+    this.uProfile.selectedUserProfile.CellPhone =  this.utility.formatUSNumber(phone)
+  }
+  phoneNumberFormatHome(phone) {
+    this.uProfile.selectedUserProfile.HomePhone =  this.utility.formatUSNumber(phone)
+  }
+
 }

@@ -6,14 +6,18 @@
     
 
       <table width="95%">
-        <tr>
+        <tr rowspan="3">
           <td>
             <h3 *ngIf="pjob !=null" class="title" style="color: red;">{{ pjob.JobTitle }}</h3>
           </td>
-          <td align="left">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <!-- <button (click)="jobList()" class="btn btn-primary btn-sm">Back to search</button>&nbsp;&nbsp; -->
+          <td align="left">&nbsp;&nbsp;&nbsp; 
             <button type="button" value="Apply Now" (click)="onApply()" class="btn btn-primary btn-sm">Apply Now</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- <button (click)="jobList()" class="btn btn-primary btn-sm">Back to search</button>&nbsp;&nbsp; -->
+            
+           
+
+            
           </td>
         </tr>
         <tr>
@@ -33,7 +37,10 @@
               <!-- <hr/> -->
             </div>
           </td>
-          <td>
+          <td align="right" >
+            <img src="{{pjob?.CompanyLogoURL}}" class="img-responsive" style="max-width: 200px; max-height: 100px;" alt="" *ngIf="pjob?.CompanyLogoURL != null && pjob?.CompanyLogoURL !='' && pjob?.CompanyLogoURL != undefined"/>
+            <img src="assets/images/a2.png" class="img-responsive" style="max-width: 100px; max-height: 100px;" alt="" *ngIf="pjob?.CompanyLogoURL == null || pjob?.CompanyLogoURL =='' || pjob?.CompanyLogoURL == undefined"/>
+ 
             &nbsp;
           </td>
         </tr>
