@@ -4,6 +4,7 @@ import { PostJobc } from 'src/app/services/firebase/postjob/postjob.model';
 import { PostjobService } from 'src/app/services/firebase/postjob/postjob.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { ApplyjobComponent } from './applyjob/applyjob.component';
+import { JobpredictionComponent } from 'src/app/alphabetnumerology';
 //import { PostJobc } from '../../services/firebase/postjob.model';
 //import { PostjobService } from '../../services/firebase/postjob.service';
 
@@ -71,6 +72,23 @@ export class JobdetailsComponent implements OnInit {
        dialogConfig.height = "4";
        dialogConfig.width ="3";
       this.dialog.open(ApplyjobComponent, dialogConfig);
+    //  dialogConfig.disableClose = false;
+    //  dialogConfig.autoFocus = true;
+
+    //this.fileNameDialogRef = this.dialog.open(DialogComponent);
+    //this.fileNameDialogRef = this.dialog.open(DialogComponent, dialogConfig);
+    //this.postservice.deletePostJob(pjob);
+  }
+
+  onPredict() {
+    //console.log("Pst Job ID :::: "+this.pjob.ApplyToEmail);
+      const dialogConfig = new MatDialogConfig();
+      // dialogConfig.data = this.pjob.ApplyToEmail;
+      this.pjob.id = this.id;
+      dialogConfig.data = this.pjob;
+       dialogConfig.height = "87%";
+       dialogConfig.width ="40%";
+      this.dialog.open(JobpredictionComponent, dialogConfig);
     //  dialogConfig.disableClose = false;
     //  dialogConfig.autoFocus = true;
 

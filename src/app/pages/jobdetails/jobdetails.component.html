@@ -2,20 +2,19 @@
 <searchheader [keyword]="keyword" [location]= "location"></searchheader>
 <div class="container">
   <div class="single">
-
-    
+   
 
       <table width="95%">
-        <tr rowspan="3">
+        <tr>
           <td>
             <h3 *ngIf="pjob !=null" class="title" style="color: red;">{{ pjob.JobTitle }}</h3>
           </td>
-          <td align="left">&nbsp;&nbsp;&nbsp; 
-            <button type="button" value="Apply Now" (click)="onApply()" class="btn btn-primary btn-sm">Apply Now</button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <td align="left">
+            <button type="button" value="Predict the Job" (click)="onPredict()" class="btn btn-primary btn-sm">Numerology Prediction</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <!-- <button (click)="jobList()" class="btn btn-primary btn-sm">Back to search</button>&nbsp;&nbsp; -->
             
-           
+            <button type="button" value="Apply Now" (click)="onApply()" class="btn btn-primary btn-sm">Apply Now</button>
 
             
           </td>
@@ -38,8 +37,10 @@
             </div>
           </td>
           <td align="right" >
-            <img src="{{pjob?.CompanyLogoURL}}" class="img-responsive" style="max-width: 200px; max-height: 100px;" alt="" *ngIf="pjob?.CompanyLogoURL != null && pjob?.CompanyLogoURL !='' && pjob?.CompanyLogoURL != undefined"/>
-            <img src="assets/images/a2.png" class="img-responsive" style="max-width: 100px; max-height: 100px;" alt="" *ngIf="pjob?.CompanyLogoURL == null || pjob?.CompanyLogoURL =='' || pjob?.CompanyLogoURL == undefined"/>
+            <img src="{{pjob?.CompanyLogoURL}}" onerror="this.onerror=null;this.src='assets/images/a2.png';" class="img-responsive" style="max-width: 200px; max-height: 100px;" alt=""/>
+
+            <!-- <img src="{{pjob?.CompanyLogoURL}}" onerror="this.onerror=null;this.src='assets/images/a2.png';" class="img-responsive" style="max-width: 200px; max-height: 100px;" alt="" *ngIf="pjob?.CompanyLogoURL != null && pjob?.CompanyLogoURL !='' && pjob?.CompanyLogoURL != undefined"/>
+            <img src="assets/images/a2.png" class="img-responsive" style="max-width: 100px; max-height: 100px;" alt="" *ngIf="pjob?.CompanyLogoURL == null || pjob?.CompanyLogoURL =='' || pjob?.CompanyLogoURL == undefined"/> -->
  
             &nbsp;
           </td>
@@ -48,7 +49,9 @@
           <td colspan="2">&nbsp;</td>
         </tr> -->
       </table>
-      
+
+
+
 
       <div class="row">
 
@@ -98,10 +101,15 @@
                   <td align="left">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <!-- <button (click)="jobList()" class="btn btn-primary btn-sm">Back to search</button>&nbsp;&nbsp; -->
+                    <button type="button" value="Predict the Job" (click)="onPredict()" class="btn btn-primary btn-sm">Numerology Prediction</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;        
                     <button type="button" value="Apply Now" (click)="onApply()" class="btn btn-primary btn-sm">Apply Now</button>
                   </td>
-                  <td>&nbsp;</td>
-                </tr>                
+                  <td>&nbsp;
+
+                  </td>
+                </tr>  
+                <tr rowspan="2"><td>&nbsp;</td></tr>              
               </table>
 
           </div>

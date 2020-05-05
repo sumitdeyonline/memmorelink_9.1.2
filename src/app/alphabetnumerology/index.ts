@@ -2,6 +2,7 @@ export * from './alphabetnumerology.module';
 export * from './alphabetnumerology.routing';
 export * from './jobprediction';
 
+
 //export * from './../template';
 // export * from './footer';
 

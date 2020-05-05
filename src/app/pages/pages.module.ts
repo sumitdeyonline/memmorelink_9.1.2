@@ -59,6 +59,8 @@ import { SalaryPredictorComponent } from './salary-predictor';
 import { UploadresumeComponent } from './uploadresume';
 import { UserProfileComponent } from './userprofile';
 import { AuthGuardService } from '../services/authentication/auth-guard.service';
+import { AlphabetNumerologyModule } from '../alphabetnumerology';
+import { TechNewsComponent, TechNewsDetailsComponent, TechNewsPageComponent } from './tech-news';
 
 // import { TechNewsComponent } from './tech-news';
 // import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
@@ -75,6 +77,7 @@ import { AuthGuardService } from '../services/authentication/auth-guard.service'
         RouterModule,
         FormsModule,
         CommonProjectModule,
+        AlphabetNumerologyModule,
         // ReactiveFormsModule,
         // MatDialogModule,
         // MatInputModule,
@@ -128,7 +131,10 @@ import { AuthGuardService } from '../services/authentication/auth-guard.service'
         ResumedetailsComponent,
         SalaryPredictorComponent,
         UploadresumeComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        TechNewsComponent,
+        TechNewsDetailsComponent,
+        TechNewsPageComponent
         // SignupConfirmComponent
       // AdminhomeComponent,
       // UserrolesComponent,

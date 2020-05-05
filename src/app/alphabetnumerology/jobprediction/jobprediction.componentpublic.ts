@@ -6,7 +6,6 @@ import { AlphabetNumerologyService } from 'src/app/services/firebase/alphabetnum
 import { AlphabetNumerology } from 'src/app/services/firebase/alphabetnumerology/alphabetnumerology.model';
 import { AlphabetJobPrediction } from 'src/app/services/firebase/alphabetnumerology/alphabetjobprediction.model';
 import { JOBPREDICTION_CONFIG } from 'src/app/global-config';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PostJobc } from 'src/app/services/firebase/postjob/postjob.model';
 
 @Component({
@@ -14,7 +13,7 @@ import { PostJobc } from 'src/app/services/firebase/postjob/postjob.model';
   templateUrl: './jobprediction.component.html',
   styleUrls: ['./jobprediction.component.css']
 })
-export class JobpredictionComponent implements OnInit {
+export class JobpredictionComponentPublic implements OnInit {
   jobPForm: any;
   jobPredection = new JobPrediction();
   jobPredectionMessage: string='';
@@ -28,24 +27,24 @@ export class JobpredictionComponent implements OnInit {
   companyTemp:string='';
   progress: { percentage: number } = { percentage: 0 };
   progressPercentage:any;
-  
+  dialogRef:any=null;
 
   EXECELLENT_MATCH_PERCENTAGE: number = JOBPREDICTION_CONFIG.EXECELLENT_MATCH_PERCENTAGE;
   GOOD_MATCH_PERCENTAGE:number= JOBPREDICTION_CONFIG.GOOD_MATCH_PERCENTAGE;
   AVERAGE_MATCH_PERCENTAGE:number= JOBPREDICTION_CONFIG.AVERAGE_MATCH_PERCENTAGE;
-  BAD_MATCH_PERCENTAGE:number= JOBPREDICTION_CONFIG.BAD_MATCH_PERCENTAGE;
+  BAD_MATCH_PERCENTAGE:number= JOBPREDICTION_CONFIG.BAD_MATCH_PERCENTAGE; 
 
-  constructor(public dialogRef: MatDialogRef<JobpredictionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, fb: FormBuilder, private sEmail: EmailService,
+
+  constructor(fb: FormBuilder, private sEmail: EmailService,
     private apredection: AlphabetNumerologyService) {
     window.scroll(0,0);
 
-    if (data !=null) {
-      this.pjob = data;
-      this.companyTemp = this.pjob.Company;
-      //console.log("Company :::: "+this.pjob.Company);
+    // if (data !=null) {
+    //   this.pjob = data;
+    //   this.companyTemp = this.pjob.Company;
+    //   console.log("Company :::: "+this.pjob.Company);
 
-    }
+    // }
 
     this.jobPForm = fb.group({
       firstname: ['', Validators.required,Validators.minLength(3)],
@@ -53,6 +52,9 @@ export class JobpredictionComponent implements OnInit {
       lastname: ['', Validators.required,Validators.minLength(3)],
       companyname: ['' ,Validators.required,Validators.minLength(3)]
     })
+
+
+
 
 
   }
@@ -78,11 +80,9 @@ export class JobpredictionComponent implements OnInit {
     }
     //console.log("First Name :: "+JobPForm.value.firstname);
     primaryName = JobPForm.value.firstname.trim().toUpperCase()+JobPForm.value.middlename.trim().toUpperCase()+JobPForm.value.lastname.trim().toUpperCase();
-    
     primaryName = primaryName.toUpperCase().replace(/\s/g, "");
     //console.log("Final Name : "+primaryName.toUpperCase());
-    //console.log("JobPForm.value.companyname ::: "+JobPForm.value.companyname);
-    secondaryName = this.companyTemp.trim().toUpperCase().replace(/\s/g, "");
+    secondaryName = JobPForm.value.companyname.trim().toUpperCase().replace(/\s/g, "");
     // console.log("Middle Name : "+JobPForm.value.middlename);
     // console.log("Last Name : "+JobPForm.value.lastname);
     //console.log("Company Name : "+secondaryName);            
@@ -104,7 +104,7 @@ export class JobpredictionComponent implements OnInit {
         // console.log("nameCnt : 2 "+primaryCnt);
         // console.log("companyCnt : 2 "+secondaryCnt);
         this.predection = JOBPREDICTION_CONFIG.EXECELLENT_MATCH;
-        this.progressPercentage = this.EXECELLENT_MATCH_PERCENTAGE;
+        this.progressPercentage = JOBPREDICTION_CONFIG.EXECELLENT_MATCH_PERCENTAGE;
         this.progress.percentage=this.progressPercentage;
         this.jobPredectionSucessMessage = this.predection+" ("+this.progressPercentage+plusminus+")";
       } else {
@@ -136,20 +136,21 @@ export class JobpredictionComponent implements OnInit {
           if (this.CharCount(this.ajobprediction.GoodNum,secondaryCnt.toString()) > 0) {
             // console.log("Good");
             this.predection = JOBPREDICTION_CONFIG.GOOD_MATCH;
-            this.progressPercentage =this.GOOD_MATCH_PERCENTAGE;
-           // this.jobPredectionSucessMessage = this.predection+" ("+this.progressPercentage+"+)";
+            this.progressPercentage =JOBPREDICTION_CONFIG.GOOD_MATCH_PERCENTAGE;
+            //this.jobPredectionSucessMessage = this.predection+" ("+this.progressPercentage+"+)";
     
           } else if (this.CharCount(this.ajobprediction.AvgNum,secondaryCnt.toString()) > 0) {
             // console.log("Avg");
             this.predection = JOBPREDICTION_CONFIG.AVERAGE_MATCH;
-            this.progressPercentage =this.AVERAGE_MATCH_PERCENTAGE;
+            this.progressPercentage =JOBPREDICTION_CONFIG.AVERAGE_MATCH_PERCENTAGE;
             //this.jobPredectionSucessMessage = this.predection+" ("+this.progressPercentage+"+)";
           } else if (this.CharCount(this.ajobprediction.BadNum,secondaryCnt.toString())>0) {
+            plusminus = "-";
             this.predection = JOBPREDICTION_CONFIG.BAD_MATCH;
-            this.progressPercentage=this.BAD_MATCH_PERCENTAGE;
+            this.progressPercentage=JOBPREDICTION_CONFIG.BAD_MATCH_PERCENTAGE;
             //this.jobPredectionSucessMessage = this.predection+" ("+this.progressPercentage+"-)";
             // console.log("Bad");
-          } else {
+          } else {this.progressPercentage
             this.predection = '';
           }
           this.progress.percentage=this.progressPercentage;
@@ -224,9 +225,7 @@ export class JobpredictionComponent implements OnInit {
   }
 
   close() {
-    this.jobPForm.setValue['firstname'] = 'temp';// .setValue('temp');
-    //this.jobPForm.controls['lasttname'].setValue('temp');
-    this.dialogRef.close();
+    //this.dialogRef.close();
   }
  
 }

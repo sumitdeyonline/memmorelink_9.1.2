@@ -1,92 +1,113 @@
-<!-- <searchheader></searchheader> -->
-
 <div class="container">
+  <div class="single">
+      <div class="form-container">
 
-    <div class="single">
-        <div class="row">
+          
+                  <h3>Job Predection</h3>
+                  <h6>(According to Numerology)</h6>
 
-            <div class="col-md-8">
-                <div class="col_3">
-                    <h3>Job Predection</h3>
+                  <!-- <div id="site_form" [hidden]="jobPredectionSucessMessage != null && jobPredectionSucessMessage !=''"> -->
+                    
+                  <div *ngIf="jobPredectionSucessMessage !=''">
+                    <!-- <p class="error_Message" *ngIf="jobPredectionSucessMessage !=''">
+                      {{ jobPredectionSucessMessage }}         
+                    </p>   -->
+                    
+                    <div *ngIf="jobPredectionSucessMessage !=''" class="progress">
+                      <div class="progress-bar progress-bar-info progress-bar-striped"
 
-                    <!-- <div id="site_form" [hidden]="jobPredectionSucessMessage != null && jobPredectionSucessMessage !=''"> -->
-                      
-                    <div *ngIf="jobPredectionSucessMessage !=''">
-                      <p class="error_Message" *ngIf="jobPredectionSucessMessage !=''">
-                        {{ jobPredectionSucessMessage }}         
-                      </p>                      
-                    </div>
+                                  role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                                  aria-valuemin="0" aria-valuemax="100"
+                                  [style.background-color]="progress.percentage==EXECELLENT_MATCH_PERCENTAGE?'#1D4200':progress.percentage==GOOD_MATCH_PERCENTAGE?'#649d66':progress.percentage==AVERAGE_MATCH_PERCENTAGE?'#FEB72B':progress.percentage==BAD_MATCH_PERCENTAGE?'red':'blue'"
+                                  [ngStyle]="{width:progress.percentage+'%'}">
+                                  {{jobPredectionSucessMessage}}%</div>
+                    </div>                    
 
 
-                    <form #jobPForm="ngForm" (ngSubmit)="jobPrediction(jobPForm)" >
 
-                        <label for="firstname">First Name:</label> 
-                        <input type="text" 
-                        (focus)="onFocus($event)"  ngModel name="firstname" 
-                        #firstname="ngModel" id="firstname" firstname 
-                        class="form-control input-sm" required/>
-    
-                        <div class="error_Message" *ngIf="Fieldlength(firstname.value) < 3 && firstname.touched">
-                            First Name must be at least 3 characters long.
-                        </div> 
+                  </div>
 
-                        <label for="middlename">Middle Name:</label> 
-                        <input type="text" 
-                        (focus)="onFocus($event)"  ngModel name="middlename" 
-                        #middlename="ngModel" id="middlename" middlename 
-                        class="form-control input-sm" />
 
-                        <label for="lastname">Last Name:</label> 
-                        <input type="text" 
-                        (focus)="onFocus($event)"  ngModel name="lastname" 
-                        #lastname="ngModel" id="lastname" lastname 
-                        class="form-control input-sm" required/>
-    
-                        <div class="error_Message" *ngIf="Fieldlength(lastname.value) < 3 && lastname.touched">
-                            Last Name must be at least 3 characters long.
-                        </div>
+                  <form #jobPForm="ngForm" (ngSubmit)="jobPrediction(jobPForm)" >
 
-                        <label for="companyname">Company Name:</label> 
-                        <input type="text" 
-                        (focus)="onFocus($event)"  ngModel name="companyname" 
-                        #companyname="ngModel" id="companyname" companyname 
-                        class="form-control input-sm" required/>
-    
-                        <div class="error_Message" *ngIf="Fieldlength(companyname.value) < 3 && companyname.touched">
-                            Company Name must be at least 3 characters long.
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <table>
-                              <tr>
-                                <td>
-                                  <div class="error_Message" *ngIf="!jobPForm.valid && jobPForm.touched">
-                                    (Please enter form fields)
-                                  </div>   
-        
-                                  <button class="btn_common btn-default" type="submit" value=" Submit" id="submit" name="submit" [disabled]="!jobPForm.valid || Fieldlength(firstname.value) < 3 || Fieldlength(lastname.value) < 3 || Fieldlength(companyname.value) < 3">
-                                    <i class="fa fa-floppy-o"></i>&nbsp;Submit
-                                  </button>
-                                  &nbsp;&nbsp;
-                                  <button class="btn_common btn-default" type="button" value=" reset" id="reset" name="reset" (click)="resetForm(jobPForm)">
-                                      <i class="fa fa-repeat"></i>&nbsp;Reset
-                                  </button>  
-                                </td>                  
-                              </tr>
-                            </table>
-                          </div>    
+                      <label for="firstname">First Name:</label> 
+                      <input type="text" 
+                      (focus)="onFocus($event)"  ngModel name="firstname" 
+                      #firstname="ngModel" id="firstname" firstname 
+                      class="form-control input-sm" required/>
+  
+                      <div class="error_Message" *ngIf="Fieldlength(firstname.value) < 3 && firstname.touched">
+                          First Name must be at least 3 characters long.
+                      </div> 
 
-                    </form>
+                      <label for="middlename">Middle Name:</label> 
+                      <input type="text" 
+                      (focus)="onFocus($event)"  ngModel name="middlename" 
+                      #middlename="ngModel" id="middlename" middlename 
+                      class="form-control input-sm" />
 
-                   <!-- </div> -->
-            </div>
+                      <label for="lastname">Last Name:</label> 
+                      <input type="text" 
+                      (focus)="onFocus($event)"  ngModel name="lastname" 
+                      #lastname="ngModel" id="lastname" lastname 
+                      class="form-control input-sm" required/>
+  
+                      <div class="error_Message" *ngIf="Fieldlength(lastname.value) < 3 && lastname.touched">
+                          Last Name must be at least 3 characters long.
+                      </div>
 
-            <div class="col-md-4">
-                <!-- <advertisement></advertisement> -->
-            </div>
-            <div class="clearfix"> 
-            </div>
+                      <label for="companyname">Company Name:</label> 
+                      <input type="text" 
+                      (focus)="onFocus($event)"  ngModel name="companyname" 
+                      #companyname="ngModel" id="companyname" companyname [ngModel]="companyTemp"
+                      [disabled]="companyTemp !=''"
+                      class="form-control input-sm" required/>
+  
+                      <div class="error_Message" *ngIf="Fieldlength(companyname.value) < 3 && companyname.touched">
+                          Company Name must be at least 3 characters long.
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <table>
+                            <tr>
+                              <td>
+                                <div class="error_Message" *ngIf="!jobPForm.valid && jobPForm.touched">
+                                  (Please enter form fields)
+                                </div>   
 
-        </div>
-    </div>
+                                <div class="row">
+                                  &nbsp;&nbsp;&nbsp;
+                                  <div class="form-actions floatRight">
+                                     <input type="submit" value="Submit" [disabled]="!jobPForm.valid || Fieldlength(firstname.value) < 3 || Fieldlength(lastname.value) < 3 || Fieldlength(companyname.value) < 3" class="btn btn-primary btn-sm">
+                                  </div>&nbsp;&nbsp;&nbsp;
+                                  <div class="form-actions floatRight" *ngIf="dialogRef ==null">
+                                    &nbsp;<input type="button" value="Reset" (click)="resetForm(jobPForm);" class="btn btn-primary btn-sm">
+                                  </div> &nbsp;&nbsp;&nbsp;
+                                  <div class="form-actions floatRight" *ngIf="dialogRef !=null">
+                                    &nbsp;<input type="button" value="Cancel" (click)="close();" class="btn btn-primary btn-sm">
+                                  </div>                                                                    
+                                </div>                                
+
+                                <!-- <button class="btn_common btn-default" type="submit" value=" Submit" id="submit" name="submit" [disabled]="!jobPForm.valid || Fieldlength(firstname.value) < 3 || Fieldlength(lastname.value) < 3 || Fieldlength(companyname.value) < 3">
+                                  <i class="fa fa-floppy-o"></i>&nbsp;Submit
+                                </button> -->
+                                &nbsp;&nbsp;
+                                <!-- <button class="btn_common btn-default" type="button" value=" reset" id="reset" name="reset" (click)="resetForm(jobPForm)">
+                                    <i class="fa fa-repeat"></i>&nbsp;Reset
+                                </button>   -->
+                              </td>                  
+                            </tr>
+                          </table>
+                        </div>    
+
+                  </form>
+
+                  <p class="disclaimer"><b>Disclaimer</b>: Numerology is an old and respected system of divination. It is often but not always accurate.
+                    The readings and interpretations are always subordinate to individuals' beliefs and their power to choose who and what they are now and will become.
+                    Enjoy this web site. Take with you what insights you find, but please remember that no information received from any method of divination is infallible. Your life is always your choice.
+                  </p>
+
+
+      </div>
+  </div>
 </div>

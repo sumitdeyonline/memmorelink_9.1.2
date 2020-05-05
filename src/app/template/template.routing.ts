@@ -1,5 +1,5 @@
 import { Router, RouterModule  }     from '@angular/router';
-import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
+// import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -18,9 +18,9 @@ export const templateRouting = RouterModule.forChild([
     //     path: 'jobprediction',
     //     component: JobpredictionComponent
     //  }
-    {
-        path: 'technewsdetails/:id',
-        component: TechNewsDetailsComponent
-    } 
+    // {
+    //     path: 'technewsdetails/:id',
+    //     component: TechNewsDetailsComponent
+    // } 
     
 ]);

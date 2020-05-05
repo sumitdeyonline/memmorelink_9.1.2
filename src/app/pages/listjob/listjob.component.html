@@ -30,7 +30,7 @@
 
               <div id="myTabContent" class="tab-content">
 
-                    <h2>Search Result</h2><br>
+                    <h2>Search Result</h2>
                     <h4 *ngIf="noResultFound !=''">{{noResultFound}}</h4>
 
                     <!-- loader.component.html -->
@@ -55,18 +55,23 @@
                             <!-- <div class="thumb"><a [routerLink]="['/jobdetails',pj.objectID]" target="_blank"><img src="assets/images/a2.png" class="img-responsive" alt=""/></a></div> -->
 
 
+                            <div class="thumb" >
+                                <a [routerLink]="['/jobdetails',pj.objectID]">
+                                    <img src="{{pj.CompanyLogoURL}}" class="img-responsive" alt="" onerror="this.onerror=null;this.src='assets/images/a2.png';"/>
+                                </a>
+                            </div>
 
 
-                                <div class="thumb" *ngIf="pj.CompanyLogoURL != null && pj.CompanyLogoURL !='' && pj.CompanyLogoURL != undefined" >
+                                <!-- <div class="thumb" *ngIf="pj.CompanyLogoURL != null && pj.CompanyLogoURL !='' && pj.CompanyLogoURL != undefined" >
                                     <a [routerLink]="['/jobdetails',pj.objectID]">
-                                        <img src="{{pj.CompanyLogoURL}}" class="img-responsive" alt=""/>
+                                        <img src="{{pj.CompanyLogoURL}}" class="img-responsive" alt="" onerror="this.onerror=null;this.src='assets/images/a2.png';"/>
                                     </a>
                                 </div>
                                 <div class="thumb" *ngIf="pj.CompanyLogoURL == null || pj.CompanyLogoURL =='' || pj.CompanyLogoURL == undefined">
                                     <a [routerLink]="['/jobdetails',pj.objectID]">
                                         <img src="assets/images/a2.png" class="img-responsive" alt=""/>
                                     </a>
-                                </div>                                
+                                </div>                                 -->
 
 
 
@@ -124,7 +129,6 @@
                             </li>
                         </ul>
                       <!--/div-->
-
 
 
 

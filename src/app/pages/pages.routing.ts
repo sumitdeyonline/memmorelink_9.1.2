@@ -15,6 +15,7 @@ import { ResumesearchComponent, ResumedetailsComponent } from './resumesearch';
 import { SalaryPredictorComponent } from './salary-predictor';
 import { UserProfileComponent } from './userprofile';
 import { AuthGuardService } from '../services/authentication/auth-guard.service';
+import { TechNewsDetailsComponent, TechNewsPageComponent } from './tech-news';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -36,6 +37,14 @@ export const pagesRouting = RouterModule.forChild([
     {
         path: 'about',
         component: AboutComponent
+    },
+    {
+        path: 'technewspage',
+        component: TechNewsPageComponent
+    },    
+    {
+        path: 'technewsdetails/:id',
+        component: TechNewsDetailsComponent
     },
     {
         path: 'login',

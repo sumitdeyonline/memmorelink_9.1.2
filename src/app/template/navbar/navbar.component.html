@@ -1,115 +1,146 @@
-<nav class="navbar navbar-expand-lg navbar-light navbar-default">
-  <a class="navbar-brand" href="#"><img src="assets/images/logo.png" alt=""/></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <!--li class="nav-item active"-->
-      <li class="nav-item">
-        <!--a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a-->
-        <!--a *ngIf="!auth.isAuthenticated()" class="nav-link" routerLink="" routerLinkActive="active"></a-->
-        <a class="nav-link" routerLink=""><i class="fa fa-home"></i>&nbsp;Home
-          <!--span class="sr-only">(current)</span-->
-        </a>
-      </li>
-      <!--li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li-->
-      <!--li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Jobs
-        </a>
-        <div class="dropdown-menu" >
-
-          <a class="dropdown-item" href="location.html">Contract Jobs</a>
-          <a class="dropdown-item" href="location.html">Walkin Jobs</a>
-          <a class="dropdown-item" href="location.html">Jobs by Location</a>
-          <a class="dropdown-item" href="location.html">Jobs by Function</a>
-          <a class="dropdown-item" href="location.html">Jobs by Industry</a>
-
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="location.html">Walkin Jobs</a>
-        </div>
-      </li-->
-      <li class="nav-item dropdown">
+  <nav class="navbar navbar-expand-lg navbar-light navbar-default">
+    <a class="navbar-brand" href="#"><img src="assets/images/logo.png" alt=""/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+   
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+  
+    
+      <ul class="navbar-nav mr-auto">
+        <!--li class="nav-item active"-->
+        <li class="nav-item">
+          <!--a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a-->
+          <!--a *ngIf="!auth.isAuthenticated()" class="nav-link" routerLink="" routerLinkActive="active"></a-->
+          <a class="nav-link" routerLink=""><i class="fa fa-home"></i>&nbsp;Home
+            <!--span class="sr-only">(current)</span-->
+          </a>
+        </li>
+        <!--li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li-->
+        <!--li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-clipboard"></i>&nbsp;Services
+            Jobs
           </a>
           <div class="dropdown-menu" >
-            <a class="dropdown-item" routerLink="/resumeservice" >Resume Services</a>
+  
+            <a class="dropdown-item" href="location.html">Contract Jobs</a>
+            <a class="dropdown-item" href="location.html">Walkin Jobs</a>
+            <a class="dropdown-item" href="location.html">Jobs by Location</a>
+            <a class="dropdown-item" href="location.html">Jobs by Function</a>
+            <a class="dropdown-item" href="location.html">Jobs by Industry</a>
+  
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" routerLink="/salarypredictor" >Salary Predictor</a>
+            <a class="dropdown-item" href="location.html">Walkin Jobs</a>
           </div>
-      </li>
-      <li class="nav-item dropdown" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-braille"></i>&nbsp;Recruiters
+        </li-->
+  
+  
+  
+  
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-clipboard"></i>&nbsp;Services
+            </a>
+            <div class="dropdown-menu" >
+              <a class="dropdown-item" routerLink="/resumeservice" >Resume Services</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="/salarypredictor" >Salary Predictor</a>
+            </div>
+
+
+            <!-- <div class="navbar">
+              <a href="#home">Home</a>
+              <a href="#news">News</a>
+              <div class="dropdown">
+                <button class="dropbtn">Dropdown 
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                  <a href="#">Link 1</a>
+                  <a href="#">Link 2</a>
+                  <a href="#">Link 3</a>
+                </div>
+              </div> 
+            </div> -->
+
+        </li>
+        <li class="nav-item dropdown" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-braille"></i>&nbsp;Recruiters
+            </a>
+            <div class="dropdown-menu" >
+  
+              <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
+              <a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isAdminRole())">Post Job</a>
+              <a class="dropdown-item" routerLink="/jobpoststatus" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isAdminRole())">My Post Jobs</a>
+              <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
+              <a class="dropdown-item" routerLink="/resumesearch" *ngIf="auth.isAuthenticated() && (auth.isResumeSearchRole() || auth.isAdminRole())">Resume Search</a>
+              <!--a class="dropdown-item" href="recruiters.html">Post Job</a-->
+              <div class="dropdown-divider" *ngIf="auth.isAuthenticated() && (auth.isResumeSearchRole() || auth.isPostJobRole() || auth.isAdminRole())"></div>
+  
+              <a class="dropdown-item" routerLink="/recruiterssolution" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">Recruiters Solution</a>
+              <!-- <a class="dropdown-item" routerLink="/recruitersfollowing" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">Recruiters you are follwoing</a> -->
+  
+            </div>
+        </li>
+  
+  
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/technewspage" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file"></i>&nbsp;News
           </a>
-          <div class="dropdown-menu" >
-
-            <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
-            <a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isAdminRole())">Post Job</a>
-            <a class="dropdown-item" routerLink="/jobpoststatus" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isAdminRole())">My Post Jobs</a>
-            <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
-            <a class="dropdown-item" routerLink="/resumesearch" *ngIf="auth.isAuthenticated() && (auth.isResumeSearchRole() || auth.isAdminRole())">Resume Search</a>
-            <!--a class="dropdown-item" href="recruiters.html">Post Job</a-->
-            <div class="dropdown-divider" *ngIf="auth.isAuthenticated() && (auth.isResumeSearchRole() || auth.isPostJobRole() || auth.isAdminRole())"></div>
-
-            <a class="dropdown-item" routerLink="/recruiterssolution" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">Recruiters Solution</a>
-            <!-- <a class="dropdown-item" routerLink="/recruitersfollowing" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">Recruiters you are follwoing</a> -->
-
-          </div>
-      </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-address-card"></i>&nbsp;About Us
+          </a>
+        </li>
 
 
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/about" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-address-card"></i>&nbsp;About Us
-        </a>
-      </li>
-      <li class="nav-item" *ngIf="auth.isAuthenticated() && !auth.isUserRole()">
+        <li class="nav-item" *ngIf="auth.isAuthenticated() && !auth.isUserRole()">
+            <a class="nav-link" routerLink="/valueservices" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;Post Job or Search Resume
+            </a>
+        </li>
+  
+        <li class="nav-item" *ngIf="!auth.isAuthenticated()">
           <a class="nav-link" routerLink="/valueservices" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;Post Job or Search Resume
           </a>
       </li>
-
-      <li class="nav-item" *ngIf="!auth.isAuthenticated()">
-        <a class="nav-link" routerLink="/valueservices" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;Post Job or Search Resume
-        </a>
-    </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href='{{email}}' target="_top"><i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;Help
-        </a>
-      </li>
-
-
-      <!--li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li-->
-    </ul>
-    <ul class="nav navbar-nav">
-      <li><a routerLink="/userprofile" *ngIf="auth.isAuthenticated() && auth.isUserRole()"><i class="fa fa-upload"></i>&nbsp;Upload Resume</a></li>
-      <li class="nav-item" *ngIf="!auth.isAuthenticated()"><a routerLink="/login" *ngIf="!auth.isAuthenticated()"><i class="fa fa-sign-in"></i>&nbsp;Login</a></li>
-      <li *ngIf="!auth.isAuthenticated()"><a routerLink="/signup" *ngIf="!auth.isAuthenticated()"><i class="fa fa-user-plus"></i>&nbsp;Signup</a></li>
-      <!-- <li *ngIf="(auth.isAuthenticated() && auth.userProfile) || !auth.isUserRole()" class="username">| &nbsp;</li> -->
-      <li *ngIf="auth.isAuthenticated() && auth.isUserRole()" class="username">|&nbsp;&nbsp;</li>
-      <li *ngIf="auth.isAuthenticated() && auth.userProfile" class="username">
-          <!-- <img [src]="auth.userProfile?.picture" alt="{{ auth.userProfile.name }}"  height="20px" weidth="35px">&nbsp;{{ auth.userProfile.nickname }}&nbsp;| -->
-          <i class="fa fa-user"></i>&nbsp;{{ auth.userProfile.nickname }}&nbsp;&nbsp;|
-            <!--img src="{{auth.userProfile?.picture}}" class="avatar" alt="avatar" {{ auth.userProfile.name }} -->
-      </li>
-      <li><a routerLink="" (click) = "auth.logout()" *ngIf="auth.isAuthenticated()">Logout&nbsp;<i class="fa fa-sign-out"></i></a></li>
-
-      <li *ngIf="auth.isAdminRole()">
-        <a routerLink="/postsadminhome" *ngIf="auth.isAdminRole()"><i *ngIf="auth.isAdminRole()" class="fa fa-gear" style="font-size:24px;color:white"></i></a>
-      </li>
-
-    </ul>
-
-    <!--form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form-->
-  </div>
-</nav>
+  
+        <li class="nav-item">
+          <a class="nav-link" href='{{email}}' target="_top"><i class="fa fa-question-circle" alt="Need Help" aria-hidden="true"></i>
+          </a>
+        </li>
+  
+  
+        <!--li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li-->
+      </ul>
+      <ul class="nav navbar-nav">
+        <li><a routerLink="/userprofile" *ngIf="auth.isAuthenticated() && auth.isUserRole()"><i class="fa fa-upload"></i>&nbsp;Upload Resume</a></li>
+        <li class="nav-item" *ngIf="!auth.isAuthenticated()"><a routerLink="/login" *ngIf="!auth.isAuthenticated()"><i class="fa fa-sign-in"></i>&nbsp;Login</a></li>
+        <li *ngIf="!auth.isAuthenticated()"><a routerLink="/signup" *ngIf="!auth.isAuthenticated()"><i class="fa fa-user-plus"></i>&nbsp;Signup</a></li>
+        <!-- <li *ngIf="(auth.isAuthenticated() && auth.userProfile) || !auth.isUserRole()" class="username">| &nbsp;</li> -->
+        <li *ngIf="auth.isAuthenticated() && auth.isUserRole()" class="username">|&nbsp;&nbsp;</li>
+        <li *ngIf="auth.isAuthenticated() && auth.userProfile" class="username">
+            <!-- <img [src]="auth.userProfile?.picture" alt="{{ auth.userProfile.name }}"  height="20px" weidth="35px">&nbsp;{{ auth.userProfile.nickname }}&nbsp;| -->
+            <i class="fa fa-user"></i>&nbsp;{{ auth.userProfile.nickname }}&nbsp;&nbsp;|
+              <!--img src="{{auth.userProfile?.picture}}" class="avatar" alt="avatar" {{ auth.userProfile.name }} -->
+        </li>
+        <li><a routerLink="" (click) = "auth.logout()" *ngIf="auth.isAuthenticated()">Logout&nbsp;<i class="fa fa-sign-out"></i></a></li>
+  
+        <li *ngIf="auth.isAdminRole()">
+          <a routerLink="/postsadminhome" *ngIf="auth.isAdminRole()"><i *ngIf="auth.isAdminRole()" class="fa fa-gear" style="font-size:24px;color:white"></i></a>
+        </li>
+  
+      </ul>
+  
+      <!--form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form-->
+    </div>
+  </nav>

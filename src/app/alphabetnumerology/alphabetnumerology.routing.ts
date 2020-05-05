@@ -1,5 +1,6 @@
 import { Router, RouterModule  }     from '@angular/router';
-import { JobpredictionComponent } from './jobprediction/jobprediction.component';
+//import { JobpredictionComponent } from './jobprediction/jobprediction.component';
+import { JobpredictionComponentPublic } from './jobprediction';
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
 // import { UserrolesComponent } from './userroles/userroles.component';
@@ -15,7 +16,7 @@ import { JobpredictionComponent } from './jobprediction/jobprediction.component'
 export const alphabetNumerologyRouting = RouterModule.forChild([
     {
         path: 'jobprediction',
-        component: JobpredictionComponent
+        component: JobpredictionComponentPublic
      }
     
 ]);

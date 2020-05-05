@@ -1,1 +1,1 @@
-ng build --prod && gzipper --verbose ./dist
+ng build --prod 

@@ -21,6 +21,10 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { JobpredictionComponent } from './jobprediction/jobprediction.component';
 import { EmailService } from '../services/email/email.service';
 import { AlphabetNumerologyService } from '../services/firebase/alphabetnumerology/alphabet-numerology.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { JobpredictionComponentPublic } from './jobprediction/jobprediction.componentpublic';
+
 //import { SearchheaderComponent } from '../template';
 
 
@@ -30,6 +34,8 @@ import { AlphabetNumerologyService } from '../services/firebase/alphabetnumerolo
         // HttpClientModule,
         RouterModule,
         FormsModule,
+        // MatDialogModule,
+        // MatInputModule,
         // ReactiveFormsModule,
         // MatDialogModule,
         // MatInputModule,
@@ -55,7 +61,8 @@ import { AlphabetNumerologyService } from '../services/firebase/alphabetnumerolo
       // ApplyjobAdminComponent,
       // UploadbulkprofileComponent
       // SearchheaderComponent,
-      JobpredictionComponent],
+      JobpredictionComponent,
+      JobpredictionComponentPublic],
      entryComponents: [JobpredictionComponent],
       exports: [
 

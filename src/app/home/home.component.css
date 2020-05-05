@@ -1,0 +1,63 @@
+.site-blocks-cover {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top; 
+    border-radius: 5px;
+}
+
+body {
+    line-height: 1.7;
+    color: #4d4d4d;
+    font-weight: 400;
+    font-size: 1rem;
+    font-family: "Roboto Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+
+
+    /* .site-blocks-cover.overlay {
+        position: relative; }
+        .site-blocks-cover.overlay:before {
+          position: absolute;
+          content: "";
+          left: 0;
+          bottom: 0;
+          right: 0;
+          top: 0;
+          background: rgba(0, 0, 0, 0.4); } */
+      .site-blocks-cover, .site-blocks-cover .row-custom {
+        min-height: 500px;
+        height: calc(50vh); }
+      .site-blocks-cover.inner-page, .site-blocks-cover.inner-page .row-custom {
+        min-height: 500px;
+        height: calc(50vh); }
+      .site-blocks-cover .sub-text {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: .2em; }
+      .site-blocks-cover h1 {
+        font-weight: 300;
+        color: #000;
+        font-size: 2.5rem; }
+        .site-blocks-cover h1 strong {
+          font-weight: 900; }
+        @media (min-width: 768px) {
+          .site-blocks-cover h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            line-height: 1.2; } }
+      .site-blocks-cover p {
+        color: #fff;
+        font-size: 1.5rem;
+        line-height: 1.5; }
+      .site-blocks-cover .intro-text {
+        font-size: 16px;
+        line-height: 1.5; }
+
+        .col-md-4, .col-md-8, .col-md-3, .col-sm-2, .col-sm-6, .col-md-9, .col-md-5, .col-md-7, .col-md-6, .col-sm-10, .col-sm-4, .col-sm-8, .col-sm-3{
+          padding:0;
+          padding-right: 2px!important;
+          padding-left: 2px!important;
+      }
+
+    

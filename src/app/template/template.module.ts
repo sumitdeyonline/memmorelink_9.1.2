@@ -15,8 +15,8 @@ import { CommonProjectModule } from '../common';
 // import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
 import { ContentfulService } from '../services/contentful/contentful.service';
 import { AdvertisementComponent } from './advertisement';
-import { TechNewsComponent } from './tech-news';
-import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
+// import { TechNewsComponent } from './tech-news';
+// import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
 
 @NgModule({
     imports: [
@@ -27,7 +27,7 @@ import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
       NgbTypeaheadModule,
       CommonProjectModule
     ],
-    declarations: [ FooterComponent,NavbarComponent,SearchheaderComponent, AdvertisementComponent, TechNewsComponent, TechNewsDetailsComponent ],
+    declarations: [ FooterComponent,NavbarComponent,SearchheaderComponent, AdvertisementComponent ],
     // declarations: [ FooterComponent,NavbarComponent,SearchheaderComponent ],
     exports: [
       CommonModule,
@@ -37,8 +37,6 @@ import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
       NgbTypeaheadModule,
       FooterComponent,
       NavbarComponent,
-      TechNewsComponent,
-      TechNewsDetailsComponent,
       SearchheaderComponent,
       AdvertisementComponent,
       CommonProjectModule
