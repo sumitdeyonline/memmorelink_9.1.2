@@ -134,7 +134,8 @@ import { TechNewsComponent, TechNewsDetailsComponent, TechNewsPageComponent } fr
         UserProfileComponent,
         TechNewsComponent,
         TechNewsDetailsComponent,
-        TechNewsPageComponent
+        TechNewsPageComponent,
+        
         // SignupConfirmComponent
       // AdminhomeComponent,
       // UserrolesComponent,

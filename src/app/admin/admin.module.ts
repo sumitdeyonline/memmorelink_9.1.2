@@ -27,6 +27,7 @@ import { ApplyjobAdminComponent } from './applyjob-admin/applyjob-admin.componen
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { UploadbulkprofileComponent } from './uploadbulkprofile/uploadbulkprofile.component';
+//import { NgDatepickerModule } from 'ng2-datepicker';
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import { UploadbulkprofileComponent } from './uploadbulkprofile/uploadbulkprofil
         MatPaginatorModule,
         MatSortModule, 
         AngularFireDatabaseModule, 
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        //NgDatepickerModule 
 
     ],
       declarations: [

@@ -44,6 +44,9 @@
                         <div class="form-actions floatRight">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
                         </div>
+                        <div class="error_Message" *ngIf="(!f.valid || !checkSecureImageURL(CompanyLogoURL.value)) && f.touched">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Please enter form fields)
+                        </div> 
                         <br>
                     </div>
                 </div>                
@@ -379,12 +382,14 @@
                 </div>
 
 
-
                 <div class="row">
                   <div class="form-actions floatRight">
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
                   </div>
                 </div>
+                <div class="error_Message" *ngIf="(!f.valid || !checkSecureImageURL(CompanyLogoURL.value)) && f.touched">
+                    &nbsp;&nbsp;&nbsp;(Please enter form fields)
+                </div>                 
               </form>
             </div>
             <br>

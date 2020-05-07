@@ -18,7 +18,7 @@ export class TechNewsDetailsComponent implements OnInit {
   ngOnInit() {
     this._activeRoute.paramMap.subscribe(params => {
       this.id = params.get('id');
-      console.log("Key Value :::::::: "+this.id);
+      //console.log("Key Value :::::::: "+this.id);
     });
 
     this.contentfulService.getAllContentByID(CONTENT_CONFIG.PageBlockSectionFieldsDetailsFields,this.id,CONTENT_CONFIG.contentTypeIds.PageBlockSection)

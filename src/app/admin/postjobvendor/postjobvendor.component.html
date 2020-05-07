@@ -22,6 +22,17 @@
                       <!--option>USA</option-->
                     </select>
                   </td>
+                  <td>Start Date :</td>
+                  <td>
+                    <input type="text" class="text" ngModel name="startDate" #startDate="ngModel" id="startDate" placeholder="StartDate">
+                    <!-- <ng-datepicker [(ngModel)]="startDate" /> -->
+                  </td>
+                  <td>End Date :</td>
+                  <td>
+                    <input type="text" class="text" ngModel name="endDate" #endDate="ngModel" id="endDate" placeholder="endDate">
+
+                    <!-- <ng-datepicker [(ngModel)]="endDate" /> -->
+                  </td>                  
                   <td><button type="submit"><i class="fa fa-search"></i></button></td>
                 </tr>
                 </table>

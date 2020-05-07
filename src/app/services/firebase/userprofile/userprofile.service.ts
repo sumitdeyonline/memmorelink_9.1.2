@@ -12,6 +12,7 @@ import { formatDate } from '@angular/common';
 import * as algoliasearch from 'algoliasearch';
 import { UserRole } from './userrole.model';
 import { HttpClient } from '@angular/common/http';
+import { EmailService } from '../../email/email.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,7 @@ export class UserprofileService {
 
   //userProfile = [];
 
-  constructor(private afs : AngularFirestore, private auth: AuthService, private http: HttpClient) {
+  constructor(private afs : AngularFirestore, private auth: AuthService, private http: HttpClient,private sEmail: EmailService) {
     this.upCollection = this.afs.collection(FIREBASE_CONFIG.UserProfile);
     this.countryCollection = this.afs.collection(FIREBASE_CONFIG.Country);
     this.stateCollection = this.afs.collection(FIREBASE_CONFIG.State);
@@ -161,6 +162,10 @@ export class UserprofileService {
         //this.AlgoliaObjectUpdate(null,uprofile,entry.id, createDate);
         this.AlgoliaObjectUpdateBulk(null,uUploadProfile,entry.id, createDate);
 
+        //Email Sent to the users
+        let subject = uprofile.FirstName+' '+uUploadProfile.LastName+', we are excited to be a part of MemoreLink';
+        let body = '<b>'+uprofile.FirstName+' '+uUploadProfile.LastName+', we are excited to be a part of MemoreLink, we are premier Job site where you can search your dream job with the Numerology Predection, please visit our site(https://memorelink.com) . Wish you best of luck for your future</b>  <br /><br /> UserID : '+uUploadProfile.Email+'<br />Temp Password: Memorelink1 <br /><br />Please send us email(support@memorelink.com) if you want to unsubscribe yourself from us.<br/></br> <b>Thank you <br>MemoreLink Team</b> '
+        this.sEmail.sendEmail(uUploadProfile.Email,'',subject,body);
       });
 
   }

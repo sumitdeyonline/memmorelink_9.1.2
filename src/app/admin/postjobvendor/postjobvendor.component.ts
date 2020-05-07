@@ -32,7 +32,9 @@ export class PostjobvendorComponent implements OnInit {
   constructor(private udetails: UserdetailsService, public auth: AuthService, fb: FormBuilder, private pagerService: PagerService, private pJob: PostjobService) { 
     this.pjobForm = fb.group({
       username: ['', Validators.required],
-      company: ['', Validators.required]
+      company: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required]
     })
     this.getCompany();    
   }
@@ -50,6 +52,8 @@ export class PostjobvendorComponent implements OnInit {
   postjobSearch(postjobSearch) {
     // console.log("Username :: "+postjobSearch.username);
     // console.log("Role :: "+postjobSearch.company);
+    console.log("startDate :: "+postjobSearch.startDate);
+    console.log("endDate :: "+postjobSearch.endDate);
     
     if ((postjobSearch.username == null) || (postjobSearch.username == undefined) || (postjobSearch.username.trim() == '')) {
       if (postjobSearch.company == "") {

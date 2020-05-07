@@ -20,7 +20,7 @@ p {margin: 0; margin-bottom: .3rem !important;}
 html, body{
 	font-family: 'Roboto', sans-serif;
 	font-size: 100%;
-    background:#f4f4f4; 
+    background:#ffffff !important; 
 }
 a:hover {
     text-decoration: none;
@@ -2323,6 +2323,8 @@ p.sm_1{
     }
     .col_3 {
         margin-bottom: 0;
+        margin-left: 15px;
+        margin-right: 15px;
     }
     i.tw1 {
     margin: 3px 20px 0 0;
@@ -2367,7 +2369,7 @@ p.sm_1{
         font-size: 1.5em;
     }
     .single {
-        padding: 3em 0;
+        padding: 0em 0;
     }
     .widget {
         margin: 1em 0 3em;
