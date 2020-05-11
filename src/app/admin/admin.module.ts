@@ -27,6 +27,13 @@ import { ApplyjobAdminComponent } from './applyjob-admin/applyjob-admin.componen
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { UploadbulkprofileComponent } from './uploadbulkprofile/uploadbulkprofile.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AdmindialogComponent } from './postjobvendor/admindialog/admindialog.component';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { ApplyjobdeletedialogComponent } from './applyjob-admin/applyjobdeletedialog/applyjobdeletedialog.component';
+import { ApplyjobdeletealldialogComponent } from './applyjob-admin/applyjobdeletealldialog/applyjobdeletealldialog.component';
+import { ApplyjobService } from '../services/firebase/applyjob/applyjob.service';
+//import { AdmindialogComponent } from './admindialog/admindialog.component';
 //import { NgDatepickerModule } from 'ng2-datepicker';
 
 @NgModule({
@@ -43,6 +50,8 @@ import { UploadbulkprofileComponent } from './uploadbulkprofile/uploadbulkprofil
         MatSortModule, 
         AngularFireDatabaseModule, 
         MatProgressSpinnerModule,
+        BsDatepickerModule.forRoot(),
+        NgbTypeaheadModule
         //NgDatepickerModule 
 
     ],
@@ -59,14 +68,18 @@ import { UploadbulkprofileComponent } from './uploadbulkprofile/uploadbulkprofil
       StateaddupdateComponent,
       StatedialogComponent,
       ApplyjobAdminComponent,
-      UploadbulkprofileComponent
+      UploadbulkprofileComponent,
+      AdmindialogComponent,
+      ApplyjobdeletedialogComponent,
+      ApplyjobdeletealldialogComponent
     ],
     entryComponents: [CountryaddupdateComponent, CountrydialogComponent, StatedialogComponent, StateaddupdateComponent],
     exports: [
-
+      NgbTypeaheadModule
     ],
     providers: [
-      AdminGuardService
+      AdminGuardService,
+      ApplyjobService
     ]
 
 

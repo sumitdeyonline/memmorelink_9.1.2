@@ -26,20 +26,62 @@
             <form #aform="ngForm" (ngSubmit)="applyRole(aform.value)">
               <table>
                 <tr>
-                  <td>User Name :</td>
+                  <!-- <td>User Name :</td> -->
                   <td>
+                    Company Apply to Email<br>
                       <input type="text" class="text" ngModel name="username" #username="ngModel" id="username" placeholder="" value={{username}}>
                   </td>
-                  <td>&nbsp;<b>OR</b>&nbsp;</td>
-                  <td>Company :</td>
+                  <!-- <td>&nbsp;<b>OR</b>&nbsp;</td> -->
+                  <!-- <td>Company :</td> -->
                   <td>
-                    <select ngModel name="company" #company="ngModel" id="company">
+                    Company<br>
+                    <!-- <select ngModel name="company" #company="ngModel" id="company">
                       <option value="">Select Company</option>
                       <option [value]="uDet.company" *ngFor="let uDet of userDetails">{{uDet.company}}</option>
-                      <!--option>USA</option-->
-                    </select>
+                    </select> -->
+
+                    <input type="text" class="text" 
+                    value= "company" 
+                    ngModel name="company"
+                    #company="ngModel" 
+                    id="company" 
+                    value="{{ company }}" 
+                    autocomplete="off"
+                    placeholder= "Company Name"
+                    [ngbTypeahead]="search" 
+                    (keyup)="getCompany($event.target.value)"/>	
                   </td>
-                  <td><button type="submit"><i class="fa fa-search"></i></button></td>
+
+                  <td>
+                    Start Date
+                    <input
+                    type="text"
+                    placeholder="Choose start date"
+                    class="form-control"
+                    bsDatepicker
+                    startDate
+                    autocomplete="off"
+                    ngModel name="startDate" #startDate="ngModel" id="startDate"
+                    [bsConfig]="{ isAnimated: true }">                    
+                    <!-- <input type="text" class="text" ngModel name="startDate" #startDate="ngModel" id="startDate" placeholder="StartDate"> -->
+                    <!-- <ng-datepicker [(ngModel)]="startDate" /> -->
+                  </td>
+                  <td>
+                    End Date
+                    <input
+                    type="text"
+                    placeholder="Choose end date"
+                    class="form-control"
+                    autocomplete="off"
+                    bsDatepicker
+                    endDate
+                    ngModel name="endDate" #endDate="ngModel" id="endDate"
+                    [bsConfig]="{ isAnimated: true }"> 
+                  </td>
+                  <td><button type="submit"><i class="fa fa-search"></i></button>
+                  </td>
+                  <td><a (click)="onDeleteAll()" class="fa fa-trash"></a></td>
+
                 </tr>
                 </table>
               </form>
@@ -49,9 +91,10 @@
 
             <table>
                 <tr>
+                  <th windh="5%">ApplyJob ID</th>
                   <th windh="10%">User Name</th>
-                  <th windh="10%">First Name</th>
-                  <th windh="10%">Last Name</th>
+                  <th windh="10%">Name</th>
+
                   <th windh="10%">Apply To Email</th>
                   <th windh="10%">From Email</th>
                   <th windh="10%">JobID</th>
@@ -60,12 +103,14 @@
                   <th windh="10%">Company</th>
                   <th windh="5%">Phone Number</th>
                   <th windh="5%">File</th>
+                  <th windh="5%">&nbsp;</th>
 
                 </tr>
                 <tr *ngFor="let aJob of pagedItems">
+                  <td>{{aJob.id}}</td>
                   <td>{{aJob.username}}</td>
-                  <td>{{aJob.FirstName}}</td>
-                  <td>{{aJob.LastName}}</td>
+                  <td>{{aJob.FirstName}}&nbsp;{{aJob.LastName}}</td>
+
                   <td>{{aJob.ApplyToEmail}}</td>
                   <td>{{aJob.FromEmail}}</td>
                   <td>{{aJob.JobID}}</td>
@@ -74,6 +119,7 @@
                   <td>{{aJob.company}}</td>
                   <td>{{aJob.PhoneNumber}}</td>
                   <td><a href="{{aJob.fileUploadURL}}">Resume</a></td>
+                  <td><a (click)="onDelete(aJob.id)" class="fa fa-trash"></a></td>
                 </tr>
             </table>
           
@@ -96,7 +142,7 @@
             </ul>
 
         </div>          
-
+<br><br>
         </div>
       </div>
   </div>

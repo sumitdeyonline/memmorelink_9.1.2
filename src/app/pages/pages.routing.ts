@@ -5,7 +5,7 @@ import { ScopeGuardService as ScopeGuard } from '../services/authentication/scop
 import { SignupComponent } from './signup';
 import { ValueServicesComponent } from './value-services';
 import { AboutComponent } from './about';
-import { JobdetailsComponent } from './jobdetails';
+import { JobdetailsComponent, MyappliedjobComponent } from './jobdetails';
 import { ListjobComponent } from './listjob';
 import { LoginComponent, ResetpasswordComponent } from './login';
 import { RecruitersFollowingComponent } from './recruiters-following';
@@ -84,6 +84,14 @@ export const pagesRouting = RouterModule.forChild([
         data: { expectedScopes: ['write:messages']}
 
     },
+    {
+        path: 'myappliedjob',
+        component: MyappliedjobComponent,
+        canActivate: [ScopeGuard] ,
+        data: { expectedScopes: ['write:messages']}
+
+    },
+    
     {
         path: 'jobpoststatus',
         component: JobpoststatusComponent,

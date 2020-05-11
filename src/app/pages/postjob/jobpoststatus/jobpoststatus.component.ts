@@ -58,7 +58,7 @@ export class JobpoststatusComponent implements OnInit {
   ngOnInit() {
     
     this.loading = true;
-    this.postservice.getPostJobsByUser(this.auth.userProfile.name, 'U').subscribe(pjob=> {
+    this.postservice.getPostJobsByUser(this.auth.userProfile.name, 'U','').subscribe(pjob=> {
       this.pjob = pjob;
       //console.log("Last Updated ::: "+ Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000));
       // console.log("Last Updated ::: "+ this.getDateDiff(this.pjob[3].LastModifiedDate));
@@ -96,6 +96,7 @@ export class JobpoststatusComponent implements OnInit {
     this.pagedItems = this.pjob.slice(this.pager.startIndex, this.pager.endIndex + 1);
     //console.log("Page Count...1  ::: "+this.pagedItems.length);
   }
+
 
   onDelete(pjob) {
     //console.log("Pst Job ID :::: "+pjob.id);

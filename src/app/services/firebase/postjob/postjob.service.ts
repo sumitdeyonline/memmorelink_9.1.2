@@ -332,8 +332,14 @@ export class PostjobService {
 
 
 
-  getPostJobsByUser(searchParam, type) {
-    //console.log("List Service ..... 3"+this.PostJobc);
+  getPostJobsByUser(searchParam:string, type:string,serachParam2:string,startDT?:Date,endDt?:Date) {
+
+
+    if ((searchParam.trim() == '') && (serachParam2.trim() !=''))
+      searchParam = serachParam2;
+
+      // console.log("List Service ..... 1"+searchParam);
+      // console.log("List Service ..... 3"+serachParam2);
 
     if (type=='U') {
       this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
@@ -341,7 +347,62 @@ export class PostjobService {
     } else if (type=='C') {
       this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
         ref.where('Company','==',searchParam).orderBy('LastModifiedDate','desc'));      
-    } 
+    } else if (type=='UC') {
+      this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
+        ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).orderBy('LastModifiedDate','desc'));      
+    }else if (type=='UD') {
+
+      if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
+        this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
+          ref.where('CreatedBy','==',searchParam).where('LastModifiedDate', '>=', startDT).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));        
+
+      } else if (startDT.toString() == 'Invalid Date') {
+        this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
+          ref.where('CreatedBy','==',searchParam).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));        
+
+      } else if (endDt.toString() == 'Invalid Date') {
+        this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
+          ref.where('CreatedBy','==',searchParam).where('LastModifiedDate', '>=', startDT).orderBy('LastModifiedDate','desc'));      
+      } 
+
+    } else if (type=='CD') {
+      //console.log("Value :::: All clear : "+startDT.toString()+ " End Date ::"+endDt.toString());
+
+      if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
+        //console.log("All clear : "+startDT.getDate()+ " End Date ::"+endDt);
+        this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
+          ref.where('Company','==',searchParam).where('LastModifiedDate', '>=', startDT).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));      
+      } else if (startDT.toString() == 'Invalid Date') {
+        //console.log("Start Date Null");
+        this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
+          ref.where('Company','==',searchParam).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));      
+
+      } else if (endDt.toString() == 'Invalid Date') {
+        //console.log("End Date Null");
+        this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
+          ref.where('Company','==',searchParam).where('LastModifiedDate', '>=', startDT).orderBy('LastModifiedDate','desc'));      
+
+      } 
+
+    } else if (type=='UCD') {
+
+      if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
+        //console.log("All clear : "+startDT.getDate()+ " End Date ::"+endDt);
+        this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
+          ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).where('LastModifiedDate', '>=', startDT).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));      
+      } else if (startDT.toString() == 'Invalid Date') {
+        //console.log("Start Date Null");
+        this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
+          ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));      
+
+      } else if (endDt.toString() == 'Invalid Date') {
+        //console.log("End Date Null");
+        this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
+          ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).where('LastModifiedDate', '>=', startDT).orderBy('LastModifiedDate','desc'));      
+
+      } 
+
+    }
           //console.log("List Service ..... 4");
     this.PostJobc = this.pjCollection.snapshotChanges().pipe(map(changes => {
       //console.log("List Service ..... 5");
@@ -409,10 +470,10 @@ export class PostjobService {
 
   }
 
-  deletePostJob(postc :  PostJobc) {
-    this.pjDoc = this.afs.doc(`${FIREBASE_CONFIG.PostJob}/${postc.id}`);
-    this.pjDoc.delete();
-  }
+  // deletePostJob(postc :  PostJobc) {
+  //   this.pjDoc = this.afs.doc(`${FIREBASE_CONFIG.PostJob}/${postc.id}`);
+  //   this.pjDoc.delete();
+  // }
 
   deletePostJobWithID(id) {
     this.pjDoc = this.afs.doc(`${FIREBASE_CONFIG.PostJob}/${id}`);

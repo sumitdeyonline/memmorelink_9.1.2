@@ -157,9 +157,9 @@ export class UserdetailsService {
 
 
 
-  getUserDetails(userOrRole, fieldType ) {
+  getUserDetails(userOrRole, fieldType,userSeach? ) {
     // console.log("List Service ..... 3 "+userOrRole);
-    // console.log("Field Type .....  "+fieldType);
+     //console.log("Field Type .....  "+userSeach);
 
     if (fieldType == 'U') {
       this.udCollection = this.afs.collection(FIREBASE_CONFIG.UserDetails, ref =>
@@ -169,8 +169,20 @@ export class UserdetailsService {
         ref.where('userRole','==',userOrRole));      
     } else if (fieldType == 'A') {
       this.udCollection = this.afs.collection(FIREBASE_CONFIG.UserDetails, ref =>
-        ref.where('userRole','in',['EmployerResumeSearch','EmployerPostJob','EmployerPowerUser']));       
-    }
+        ref.where('userRole','in',['EmployerResumeSearch','EmployerPostJob','EmployerPowerUser'])
+        .orderBy('company','asc')
+        .startAt(userSeach)
+        .endAt("\uf8ff"));    
+        
+        // ref.where('userRole','in',['EmployerResumeSearch','EmployerPostJob','EmployerPowerUser'])
+        // .orderBy('company','asc')
+        // .startAt(`${userSeach}%`)
+        // .endAt("\uf8ff"));           
+        // ref.where('userRole','in',['EmployerResumeSearch','EmployerPostJob','EmployerPowerUser'])
+        // .where('company','>=',userSeach).where('company','<=',userSeach)
+        // .orderBy('company','asc'));       
+
+      }
            //console.log("List Service ..... 4");
     this.userDetailc = this.udCollection.snapshotChanges().pipe(map(changes => {
       // console.log("List Service ..... 5");

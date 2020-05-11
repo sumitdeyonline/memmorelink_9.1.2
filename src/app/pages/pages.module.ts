@@ -61,6 +61,8 @@ import { UserProfileComponent } from './userprofile';
 import { AuthGuardService } from '../services/authentication/auth-guard.service';
 import { AlphabetNumerologyModule } from '../alphabetnumerology';
 import { TechNewsComponent, TechNewsDetailsComponent, TechNewsPageComponent } from './tech-news';
+import { MyappliedjobComponent } from './jobdetails/myappliedjob/myappliedjob.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // import { TechNewsComponent } from './tech-news';
 // import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
@@ -106,7 +108,7 @@ import { TechNewsComponent, TechNewsDetailsComponent, TechNewsPageComponent } fr
         BrowserAnimationsModule,
         MatProgressSpinnerModule,
         MatProgressBarModule,
-    
+        BsDatepickerModule.forRoot(),
 
 
 
@@ -135,6 +137,7 @@ import { TechNewsComponent, TechNewsDetailsComponent, TechNewsPageComponent } fr
         TechNewsComponent,
         TechNewsDetailsComponent,
         TechNewsPageComponent,
+        MyappliedjobComponent,
         
         // SignupConfirmComponent
       // AdminhomeComponent,

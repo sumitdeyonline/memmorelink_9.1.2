@@ -1,0 +1,157 @@
+<searchheader></searchheader>
+
+<div class="container">
+
+    <div class="single">
+        <div class="row">
+
+
+            <div class="col-md-8">
+
+                <div class="col_3">
+                    <h2>Applied Job</h2>
+                    <br>
+  
+
+                    <form #aform="ngForm" (ngSubmit)="selectApplied(aform.value)">
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label style="font-weight: bold;" for="startDate">Start Date </label>
+                                </div>
+                                <div class="col">
+                                    <input
+                                    type="text"
+                                    placeholder="Choose start date"
+                                    class="form-control"
+                                    bsDatepicker
+                                    startDate
+                                    autocomplete="off"
+                                    ngModel name="startDate" #startDate="ngModel" id="startDate"
+                                    [ngModel]="startDt"
+                                    (ngModelChange)="selectApplied(aform.value)"
+                                    [bsConfig]="{ isAnimated: true }">  
+                                    <!-- <div class="error_Message" *ngIf="JobCountry.invalid && (JobCountry.dirty || JobCountry.touched)">
+                                        Please Enter Country
+                                    </div> -->
+            
+                                </div>
+                                <div class="col-sm-2">
+                                    <label style="font-weight: bold;" for="JobState">End Date</label>
+                                </div>
+                                <div class="col">
+                                    <input
+                                    type="text"
+                                    placeholder="Choose end date"
+                                    class="form-control"
+                                    autocomplete="off"
+                                    bsDatepicker
+                                    endDate
+                                    ngModel name="endDate" #endDate="ngModel" id="endDate"
+                                    [ngModel]="endDt"
+                                    (ngModelChange)="selectApplied(aform.value)"
+                                    [bsConfig]="{ isAnimated: true }"> 
+                                    <!-- <div class="error_Message" *ngIf="JobState.invalid && (JobState.dirty || JobState.touched)">
+                                      Please Enter Job State
+                                    </div> -->
+                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">&nbsp;
+                                </div>
+                            </div>
+                            <h4 *ngIf="noResultFound !=''">{{noResultFound}}</h4>
+                            <!-- loader.component.html -->
+                            <div ali class="progress-loader" [hidden]="!loading" >
+                            
+                                <mat-progress-spinner [mode]="'indeterminate'" [color]="'warn'" style="align-content: center;left:45%;">
+                                </mat-progress-spinner>
+                            
+                            </div> 
+                            <hr class="hr_style">
+                            <div class="tab_grid" *ngFor="let aj of pagedItems">
+
+
+                                <div class="jobs-item with-thumb">
+
+
+                                    <!-- <div class="thumb" >
+                                        <a [routerLink]="['/jobdetails',pj.objectID]">
+                                            <img src="{{pj.CompanyLogoURL}}" class="img-responsive" alt="" onerror="this.onerror=null;this.src='assets/images/a2.png';"/>
+                                        </a>
+                                    </div> -->
+                                    
+                                    <div class="jobs_right">
+                                        <div class="date">{{ aj.CreatedDate.toDate() |  date:'dd'}} <span>{{ dformat.monthNumToSigName(aj.CreatedDate.toDate() |  date:'MM') }}</span></div>
+                                        <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle }}</a></h6>
+                                            <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ aj.company.substring(0,19) }}</span><span class="companyName" *ngIf="aj.company.length>19">...</span>
+                                            &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ aj.joblocation }}</b></span>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">{{ getDateDiff(aj.CreatedDate) }}&nbsp;days ago</span>
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                        <ul class="top-btns">
+                                        <!--li><a href="#" class="fa fa-plus toggle"></a></li>
+                                        <li><a href="#" class="fa fa-star"></a></li>
+                                        <li><a href="#" class="fa fa-link"></a></li-->
+                                      </ul>
+                                      <hr class="hr_style">
+
+                                      <span class="meta">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<a href="mailto:{{aj.FromEmail}}?Subject=Selected your resume" target="_top">{{aj.FirstName}}&nbsp;{{aj.LastName}}</a> &nbsp;&nbsp; 
+                                        <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;{{aj.PhoneNumber}}&nbsp;&nbsp;
+                                        <i class="fa fa-file" aria-hidden="true"></i>&nbsp;<a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>&nbsp;
+                                      </span>
+                                      <br>
+                                      <div class="jobdetails"><p>{{aj.CoverLetter}}</p></div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                            <!-- pager -->
+                            <ul *ngIf="pager.pages && pager.pages.length && aJob.length>pagesize" class="pagination">
+                                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                    <a (click)="setPage(1)">&laquo;</a>
+                                </li>
+                                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                    <a (click)="setPage(pager.currentPage - 1)">&#8249;</a>
+                                </li>
+                                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                    <a (click)="setPage(page)">{{page}}</a>
+                                </li>
+                                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a (click)="setPage(pager.currentPage + 1)">&#8250;</a>
+                                </li>
+                                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a (click)="setPage(pager.totalPages)">&raquo;</a>
+                                </li>
+                            </ul>
+
+
+
+
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="col_3">
+                    <advertisement></advertisement>   
+                </div>
+                
+            </div>
+
+
+            <div class="clearfix"> </div>
+            </div>
+    
+    
+    
+    
+    
+        </div>
+    </div>
+                    

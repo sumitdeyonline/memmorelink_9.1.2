@@ -26,6 +26,78 @@ export class ApplyjobService {
     })
   }
 
+  getApplyJobByAdmin(username,type,company,startDT?:Date,endDt?:Date) {
+
+    // if ((searchParam.trim() == '') && (serachParam2.trim() !=''))
+    // searchParam = serachParam2;
+
+//console.log("Call Type :: "+type);
+
+    if (type=='U') {
+      this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+        ref.where('ApplyToEmail','==',username).orderBy('CreatedDate','desc'));      
+    } else if (type=='C') {
+      this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+        ref.where('company','==',company).orderBy('CreatedDate','desc'));      
+    } else if (type=='UC') {
+      this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+        ref.where('ApplyToEmail','==',username).where('company','==',company).orderBy('CreatedDate','desc'));         
+    }else if (type=='UD') {
+      if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('ApplyToEmail','==',username).where('CreatedDate', '>=', startDT).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));         
+      } else if (startDT.toString() == 'Invalid Date') {
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('ApplyToEmail','==',username).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));         
+
+      } else if (endDt.toString() == 'Invalid Date') {
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('ApplyToEmail','==',username).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc')); 
+      }            
+    } else if (type=='CD') {
+      //console.log("!!!!! Start Date :: "+startDT+" End Date ::: "+endDt);
+      if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
+        //console.log("Start Date :: "+startDT+" End Date ::: "+endDt);
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('company','==',company).where('CreatedDate', '>=', startDT).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));          
+      } else if (startDT.toString() == 'Invalid Date') { 
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('company','==',company).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));            
+      } else if (endDt.toString() == 'Invalid Date') {
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('company','==',company).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc'));          
+      }
+    } else if (type=='UCD') {
+      if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('ApplyToEmail','==',username).where('company','==',company).where('CreatedDate', '>=', startDT).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));         
+
+      } else if (startDT.toString() == 'Invalid Date') {  
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('ApplyToEmail','==',username).where('company','==',company).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));         
+
+      } else if (endDt.toString() == 'Invalid Date') {
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('ApplyToEmail','==',username).where('company','==',company).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc'));         
+
+      }     
+
+    }
+         // console.log("Country Name  ..... 1");
+    this.ApplyJobc = this.ajCollection.snapshotChanges().pipe(map(changes => {
+      // console.log("Country Name  ..... 2");
+      return changes.map(a => {
+        // console.log("Country Name  ..... 3");;
+        const data = a.payload.doc.data() as ApplyJob;
+        data.id = a.payload.doc.id;
+        // console.log("Country Name  ..... 4" +data.id);
+        return data;
+      });
+    }));
+
+    return this.ApplyJobc;
+  }    
+
   getApplyJobByCompany(company) {
 
     this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
@@ -44,7 +116,7 @@ export class ApplyjobService {
     }));
 
     return this.ApplyJobc;
-  }    
+  }  
 
 
   getApplyJobByUser(user) {
@@ -87,5 +159,10 @@ export class ApplyjobService {
     return this.ApplyJobc;
   }
 
+  deleteApplyJobWithID(id) {
+    //console.log("Apply Job ID : "+id);
+    this.aDoc = this.afs.doc(`${FIREBASE_CONFIG.ApplyJob}/${id}`);
+    this.aDoc.delete();
+  }
 
 }

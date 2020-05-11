@@ -107,7 +107,7 @@ export class SearchheaderComponent implements OnInit {
   //   )
   // }
 
-  zipcodeSearch(localtionval) {
+  zipcodeCitySearch(localtionval) {
     let getcity='';
     let array=[];
     let cityD : CityDetails;

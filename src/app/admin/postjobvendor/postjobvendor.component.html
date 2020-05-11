@@ -9,33 +9,72 @@
             <form #pjform="ngForm" (ngSubmit)="postjobSearch(pjform.value)">
               <table>
                 <tr>
-                  <td>User Name :</td>
+                  <!-- <td>User Name :</td> -->
                   <td>
-                      <input type="text" class="text" ngModel name="username" #username="ngModel" id="username" placeholder="" value={{username}}>
+                    User Name<br>
+                      <input type="text" class="text" 
+                      ngModel name="username" #username="ngModel" id="username" placeholder="" value={{username}}>
                   </td>
-                  <td>&nbsp;<b>OR</b>&nbsp;</td>
-                  <td>Company :</td>
+                  <!-- <td>&nbsp;<b>OR</b>&nbsp;</td> -->
+                  <!-- <td>Company :</td> -->
                   <td>
-                    <select ngModel name="company" #company="ngModel" id="company">
+                    Company<br>
+
+                    <input type="text" class="text" 
+                    value= "company" 
+                    ngModel name="company"
+                    #company="ngModel" 
+                    id="company" 
+                    value="{{ company }}" 
+                    autocomplete="off"
+                    placeholder= "Company Name"
+                    [ngbTypeahead]="search" 
+                    (keyup)="getCompany($event.target.value)"/>	
+
+
+                    <!-- <select ngModel name="company" #company="ngModel" id="company">
                       <option value="">Select Company</option>
                       <option [value]="uDet.company" *ngFor="let uDet of userDetails">{{uDet.company}}</option>
-                      <!--option>USA</option-->
-                    </select>
+                    </select> -->
                   </td>
-                  <td>Start Date :</td>
+                  <!-- <td>Start Date :</td> -->
+
                   <td>
-                    <input type="text" class="text" ngModel name="startDate" #startDate="ngModel" id="startDate" placeholder="StartDate">
+                    Start Date
+                    <input
+                    type="text"
+                    placeholder="Choose start date"
+                    class="form-control"
+                    bsDatepicker
+                    startDate
+                    autocomplete="off"
+                    ngModel name="startDate" #startDate="ngModel" id="startDate"
+                    [bsConfig]="{ isAnimated: true }">                    
+                    <!-- <input type="text" class="text" ngModel name="startDate" #startDate="ngModel" id="startDate" placeholder="StartDate"> -->
                     <!-- <ng-datepicker [(ngModel)]="startDate" /> -->
                   </td>
-                  <td>End Date :</td>
                   <td>
-                    <input type="text" class="text" ngModel name="endDate" #endDate="ngModel" id="endDate" placeholder="endDate">
+                    End Date
+                    <input
+                    type="text"
+                    placeholder="Choose end date"
+                    class="form-control"
+                    autocomplete="off"
+                    bsDatepicker
+                    endDate
+                    ngModel name="endDate" #endDate="ngModel" id="endDate"
+                    [bsConfig]="{ isAnimated: true }">                    
+                    <!-- <input type="text" class="text" ngModel name="endDate" #endDate="ngModel" id="endDate" placeholder="endDate"> -->
 
                     <!-- <ng-datepicker [(ngModel)]="endDate" /> -->
                   </td>                  
-                  <td><button type="submit"><i class="fa fa-search"></i></button></td>
+                  <td>
+                    <button type="submit"><i class="fa fa-search"></i></button>
+
+                  </td>
+                  <td><a (click)="onDeleteAll()" class="fa fa-trash"></a></td>
                 </tr>
-                </table>
+              </table>
               </form>
           </div>
 
@@ -63,10 +102,10 @@
                   <td>{{pjob.ApplyToEmail}}</td>
                   <td>{{pjob.JobCity}}</td>
                   <td>{{pjob.JobState}}</td>
-                  <td>{{pjob.LastModifiedDate.toDate()}}</td>
+                  <td>{{pjob.LastModifiedDate.toDate() | date}}</td>
                   <td>{{pjob.EmploymentTypes}}</td>
-                  <td><a [routerLink]="['/']" class="fa fa-edit"></a>&nbsp;
-                    <!-- <a (click)="onDelete(id)" class="fa fa-trash"></a> -->
+                  <td><a [routerLink]="['/postjob',pjob.id]" class="fa fa-edit"></a>&nbsp;
+                    <a (click)="onDelete(pjob.id)" class="fa fa-trash"></a>
                   </td>
                 </tr>
             </table>
@@ -91,7 +130,7 @@
 
           </div>
 
-
+<br><br>
         </div>
       </div>
   </div>          

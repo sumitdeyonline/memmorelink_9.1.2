@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 // import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+//import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 // import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
@@ -92,13 +92,14 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxTypeaheadModule } from 'ngx-typeahead';
 // import { TypeaheadModule } from 'ngx-bootstrap/typeahead'; 
 // import {NgbTypeaheadConfig} from '@ng-bootstrap/ng-bootstrap';
-import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
+//import {NgbTypeaheadModule} from '@ng-bootstrap/ng-bootstrap';
 //import { TechNewsDetailsComponent } from './pages/tech-news/tech-news-details/tech-news-details.component';
 import { CommonProjectModule } from './common';
 //import { alphabetNumerologyRouting  } from './alphabetnumerology/alphabetnumerology.routing';
 import { AlphabetNumerologyModule,alphabetNumerologyRouting } from './alphabetnumerology';
 import { pagesRouting, PagesModule } from './pages';
 import { HomeComponent } from './home/home.component';
+
 //import { MiddleimageComponent } from './home/middleimage/middleimage.component';
 // import { HomeComponent } from './homepage/home/home.component';
 // import { MiddleimageComponent } from './homepage/home/middleimage/middleimage.component';
@@ -122,6 +123,7 @@ import { HomeComponent } from './home/home.component';
     //MidsearchComponent,
     //FooterComponent,
     HomeComponent,
+
     //NotfoundComponent,
     //LoginComponent,
     //LogComponent,
