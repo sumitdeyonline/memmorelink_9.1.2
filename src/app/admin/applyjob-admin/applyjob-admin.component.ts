@@ -96,7 +96,7 @@ export class ApplyjobAdminComponent implements OnInit {
     // });
   }
 
-  applyRole(apjob) {
+  applyJob(apjob) {
 
 
     let callType='';
@@ -111,7 +111,7 @@ export class ApplyjobAdminComponent implements OnInit {
     if (((apjob.startDate !='') && (apjob.startDate !=null)) || ((apjob.endDate !='') && (apjob.endDate !=null)))
       callType = callType + 'D';  
       
-    console.log("callType ::::: "+callType);
+    //console.log("callType ::::: "+callType);
 
     if ((apjob.username.trim() != '') || (apjob.company.trim() != '')) {
 

@@ -29,7 +29,7 @@ export class PostjobvendorComponent implements OnInit {
       distinctUntilChanged(),
       map(term => term.trim().length < SEARCH_CONFIG.MAX_CHARACTER_ADMIN_SEARCH  ? []
         : this.searchvar.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-)
+    )
 
 
 
@@ -80,8 +80,7 @@ export class PostjobvendorComponent implements OnInit {
   }
 
   postjobSearch(postjobSearch) {
-    // console.log("Username :: "+postjobSearch.username);
-    // console.log("Role :: "+postjobSearch.company);
+
     let callType='';
     //this.startenddate='';
     this.postJobc =null;
@@ -132,8 +131,8 @@ export class PostjobvendorComponent implements OnInit {
           if (this.postJobc.length == 0) {
             //console.log("User Role ::: "+this.postJobc[0].Company);
             //this.setPage(1);
-            this.postJobc = null;
-            this.pagedItems = null;
+            this.postJobc = [];
+            this.pagedItems = [];
     
           }
           this.setPage(1);

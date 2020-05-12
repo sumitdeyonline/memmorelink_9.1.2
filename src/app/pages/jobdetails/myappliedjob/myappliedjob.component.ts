@@ -70,7 +70,7 @@ export class MyappliedjobComponent implements OnInit {
             //console.log("Company ::: "+this.aJob[0].company);
             //this.setPage(1);
             this.aJob = [];
-            this.pagedItems = null;
+            this.pagedItems = [];
             this.notfoundAnything();
           } 
           //console.log("Company :::: "+this.aJob[0].company);
@@ -89,7 +89,7 @@ export class MyappliedjobComponent implements OnInit {
       this.noResultFound = '';
       let callType='UD';
       //this.startenddate='';
-      this.aJob =null;
+      //this.aJob =null;
       this.pagedItems =null;    
    
         
@@ -120,9 +120,6 @@ export class MyappliedjobComponent implements OnInit {
           this.loading = false; 
           this.setPage(1);
         });
-  
-  
-
 
   }
 

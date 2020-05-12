@@ -30,15 +30,65 @@
 
               <div id="myTabContent" class="tab-content">
 
-                      <h2>More Jobs Posted</h2>
-                    <!-- loader.component.html -->
+                      <h2>Job Posted</h2>
+                      <br>
+                      <form #postform="ngForm" (ngSubmit)="selectPostedJob(postform.value)">
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label style="font-weight: bold;" for="startDate">Start Date </label>
+                            </div>
+                            <div class="col">
+                                <input
+                                type="text"
+                                placeholder="Choose start date"
+                                class="form-control"
+                                bsDatepicker
+                                startDate
+                                autocomplete="off"
+                                ngModel name="startDate" #startDate="ngModel" id="startDate"
+                                [ngModel]="startDt"
+                                (ngModelChange)="selectPostedJob(postform.value)"
+                                [bsConfig]="{ isAnimated: true }">  
+                                <!-- <div class="error_Message" *ngIf="JobCountry.invalid && (JobCountry.dirty || JobCountry.touched)">
+                                    Please Enter Country
+                                </div> -->
+        
+                            </div>
+                            <div class="col-sm-2">
+                                <label style="font-weight: bold;" for="JobState">End Date</label>
+                            </div>
+                            <div class="col">
+                                <input
+                                type="text"
+                                placeholder="Choose end date"
+                                class="form-control"
+                                autocomplete="off"
+                                bsDatepicker
+                                endDate
+                                ngModel name="endDate" #endDate="ngModel" id="endDate"
+                                [ngModel]="endDt"
+                                (ngModelChange)="selectPostedJob(postform.value)"
+                                [bsConfig]="{ isAnimated: true }"> 
+                                <!-- <div class="error_Message" *ngIf="JobState.invalid && (JobState.dirty || JobState.touched)">
+                                    Please Enter Job State
+                                </div> -->
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">&nbsp;
+                            </div>
+                        </div>
+                    </form>        
+                    <h4 *ngIf="noResultFound !=''">{{noResultFound}}</h4>                      
+                    <!-- loader.component.html --> 
                     <div ali class="progress-loader" [hidden]="!loading" >
                     
                         <mat-progress-spinner [mode]="'indeterminate'" [color]="'warn'" style="align-content: center;left:45%;">
                         </mat-progress-spinner>
                     
                     </div>                
-
+                    <hr class="hr_style">
                     <!-- <div ali class="progress-loader" [hidden]="!loading" style="align-content: center;left:45%;">
                     
                         <mat-progress-bar [mode]="'indeterminate'">
