@@ -99,6 +99,9 @@ import { CommonProjectModule } from './common';
 import { AlphabetNumerologyModule,alphabetNumerologyRouting } from './alphabetnumerology';
 import { pagesRouting, PagesModule } from './pages';
 import { HomeComponent } from './home/home.component';
+import { EmployerpageComponent } from './home/employerpage/employerpage.component';
+import { CdkTableModule } from '@angular/cdk/table';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 //import { MiddleimageComponent } from './home/middleimage/middleimage.component';
 // import { HomeComponent } from './homepage/home/home.component';
@@ -123,6 +126,7 @@ import { HomeComponent } from './home/home.component';
     //MidsearchComponent,
     //FooterComponent,
     HomeComponent,
+    EmployerpageComponent,
 
     //NotfoundComponent,
     //LoginComponent,
@@ -172,6 +176,8 @@ import { HomeComponent } from './home/home.component';
     // technewsRouting,
     BrowserModule,
     routing,
+    MatProgressSpinnerModule,
+    // CdkTableModule, ScrollingModule, MatTableModule,
     // FormsModule,
     // ReactiveFormsModule,
     // HttpClientModule,
@@ -202,6 +208,7 @@ import { HomeComponent } from './home/home.component';
   ],
   providers: [
     AuthService,
+    
     // AuthGuardService,
     // ScopeGuardService,
     // PostjobService,

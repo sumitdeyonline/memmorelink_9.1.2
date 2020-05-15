@@ -391,7 +391,13 @@ export class UploadResumeService {
     uProfile.institute = csvRec[27];
     uProfile.instituteCity = csvRec[28];
     uProfile.instituteCountry = csvRec[29];  
-    
+
+// console.log("uProfile.CurrentCompanySchool  ::: "+csvRec[33]);
+// console.log("uProfile.CurrentCompanySchool  ::: "+csvRec[34]);
+
+    uProfile.CurrentCompanySchool = csvRec[33];  
+    uProfile.CurrentPosition = csvRec[34];  
+      
     // this.uDetails = new UserDetails();
     // this.uDetails.userName = csvRec[18];
     // this.uDetails.userRole = "User";

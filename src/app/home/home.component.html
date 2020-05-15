@@ -10,58 +10,127 @@
 </head>
 <searchheader></searchheader>
 
-<div class="container">
+<div class="container" >
 
     <div class="single">
         <div class="row">
 
-        <div class="col-md-8">
+          <div class="col-md-8" >
+
             <div class="col_3">
 
+              <employerpage *ngIf="auth.isAuthenticated() && (auth.isResumeSearchRole() || auth.isPostJobRole())"></employerpage>
 
-
-                <div class="site-blocks-cover" style="background-image: url(assets/images/banner/{{randNum}}.webp);" data-aos="fade" data-stellar-background-ratio="0.5">
+                <!-- Unauthenticated  User -->
+                <div class="site-blocks-cover" *ngIf="!auth.isAuthenticated()" style="background-image: url(assets/images/banner/{{randNum}}.webp);" data-aos="fade" data-stellar-background-ratio="0.5">
                     <div class="container">
+
+
                       <div class="row row-custom align-items-center">
-<!-- 
-                        <table width="100%">
-                          <tr width="100%">
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td align="right" width="100%">
-
-
-
-                            </td>
-
-                          </tr>
-                        </table> -->
-
+                        
                         <div class="col-md-10" style="text-align: left;">
-                          <h1 class="mb-2 text-black w-100"><span class="font-weight-bold">Find Your Dream Job</span> with the <span class="font-weight-bold">Numerology</span> Prediction</h1>
-                          <br>
-                          <h1 class="mb-2 text-black w-100"><span class="font-weight-bold" >Free</span> Post Job and Resume Search</h1>
-                          <br>
-                          <h2 class="mb-2 text-black w-100">Need More Information</h2>
-                          <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-                            <input type="button" class="btn btn-primary btn-block" routerLink="/about" value="Click Me">
-                          </div>
-                        </div>
+                          <h2 class="mb-2 text-black w-100"><span class="font-weight-bold">Find Your Dream Job</span> with the <span class="font-weight-bold">Numerology</span> Prediction</h2>
 
+                          <div id="buttonHomePage" class="clearfix">
+                            <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/signup" value="Candidate Signup"></label>
+                          </div> 
+
+                          <!-- <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                            <input type="button" class="btn btn-primary btn-block" routerLink="/signup" value="Signup">
+                          </div>                           -->
+
+                          <br><br>
+                          <h2 class="mb-2 text-black w-75"><span class="font-weight-bold" >Free</span> Post Job and Resume Search</h2>
+
+                          <div id="buttonHomePage" class="clearfix">
+                            <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/valueservices" value="Employer Signup"></label>
+                          </div> 
+                          <!-- <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                            <input type="button" class="btn btn-primary btn-block" routerLink="/valueservices" value="Employer Signup">                          
+                          </div>                           -->
+                          <br><br>
+                          <h2 class="mb-2 text-black w-100">Need More Information</h2>
+                          <div id="buttonHomePage" class="clearfix">
+                            <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/about" value="Click Me"></label>
+                          </div> 
+                          <!-- <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                            <input type="button" class="btn btn-primary btn-block" routerLink="/about" value="Click Mefdgfdgdfgdfg fdg">
+                          </div> -->
+                        </div>
+                        
                       </div>
+
                     </div>
                 </div>  
 
+                <!-- Normal Authenticated User -->
+
+                <div class="site-blocks-cover" *ngIf="auth.isAuthenticated() && auth.isUserRole()" style="background-image: url(assets/images/banner/{{randNum}}.webp);" data-aos="fade" data-stellar-background-ratio="0.5">
+                  <div class="container">
+
+                        <div class="row row-custom align-items-center">
+    
+                            <div class="col-md-10" style="text-align: left;">
+                              <div>
+                                <h2 class="mb-2 text-black w-100"><span class="font-weight-bold">Find Your Dream Job</span> with the <span class="font-weight-bold">Numerology</span> Prediction</h2>
+                              </div>   
+    
+                              <div id="buttonHomePage" class="clearfix">
+                                <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/userprofile" value="Upload Resume"></label>
+                                <br><br><br>
+                              </div>                           
+                              <!-- <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                                <input type="button" class="btn btn-primary btn-block" routerLink="/userprofile" value="Upload Resume">
+                                <br><br><br>
+                              </div> -->
+    
+                              <h2 class="mb-2 text-black w-100">Need More Information</h2>
+                              <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                                <input type="button" class="btn btn-primary btn-block" routerLink="/about" value="Click Me">
+                              </div>
+                            </div>
+    
+                            <!-- <div class="col-md-10" style="text-align: left;">
+                                <div *ngIf="auth.isUserRole()">
+                                  <h1 class="mb-2 text-black w-100"><span class="font-weight-bold">Find Your Dream Job</span> with the <span class="font-weight-bold">Numerology</span> Prediction</h1>
+                                </div>
+                                <div *ngIf="auth.isPostJobRole()">
+                                  <h2 class="mb-2 text-black w-75" ><span class="font-weight-bold" >Free</span> Post Job and Resume Search</h2>
+                                  <br>
+                                </div>                          
+                                <div class="col-md-6 col-lg-3 mb-3 mb-lg-0" *ngIf="auth.isUserRole()">
+                                  <input type="button" class="btn btn-primary btn-block" routerLink="/userprofile" value="Upload Resume">
+                                  <br><br><br>
+                                </div>
+    
+                                <div class="col-md-6 col-lg-3 mb-3 mb-lg-0" *ngIf="auth.isPostJobRole()">
+                                  <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"><br><br>
+                                  <input *ngIf="auth.isResumeSearchRole()" type="button" class="btn btn-primary btn-block" routerLink="/resumesearch" value="Resume Search">
+                                </div>
+    
+                                
+                                <h2 class="mb-2 text-black w-100" *ngIf="auth.isUserRole()">Need More Information</h2>
+                                <div class="col-md-6 col-lg-3 mb-3 mb-lg-0" *ngIf="auth.isUserRole()">
+                                  <input type="button" class="btn btn-primary btn-block" routerLink="/about" value="Click Me">
+                                </div>
+                            </div> -->
+                  
+                  
+                  
+                        </div>
+                  </div>
+                </div>             
 
         	    <!-- <technews></technews> -->
 
             </div>
-        </div>
+          </div>
 
-        <div class="col-md-4">
-            <div class="col_3">
-                <advertisement></advertisement>
-            </div>
-        </div>
+          <div class="col-md-4">
+              <div class="col_3">
+                  <advertisement></advertisement>
+              </div>
+          </div>
         <div class="clearfix"> </div>
         </div>
 

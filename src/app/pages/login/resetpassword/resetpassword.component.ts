@@ -31,7 +31,7 @@ export class ResetpasswordComponent implements OnInit {
   ResetPassword(resetComponent) {
     //console.log("Reset Componenet ******* for "+resetComponent.username);
     this._auth.resetPassword(resetComponent.username);
-    this.loginError ='We have just sent you a email to reset your password';
+    this.loginError ='We have just sent you an email to reset your password';
     //this.router.navigate(['/login']);
     //console.log("authResult :::::::: -> !!!!!!!! "+authResult);
     //this._auth.resetPassword(resetComponent.username);

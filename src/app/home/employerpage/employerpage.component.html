@@ -1,0 +1,112 @@
+
+
+    <div class="table-container">
+    
+
+        <div ali class="progress-loader" [hidden]="!loading" >
+                        
+            <mat-progress-spinner [mode]="'indeterminate'" [color]="'warn'" style="align-content: center;left:45%;">
+            </mat-progress-spinner>
+        
+        </div>   
+    
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="3">
+                        Today's Job Post&nbsp;({{pjob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>
+                        <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
+                    </th>
+    
+                </tr>  
+            </thead>      
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Location</th>
+                    <!-- <th>Employment Type</th>                 -->
+                    <th>Date</th>
+    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pj of pjob">
+                    <td>{{ pj.JobTitle?.substring(0,25) }}</td>
+                    <td>{{ pj.JobCity?.substring(0,10) }}, {{ pj.JobState }}</td>
+                    <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
+                    <td>{{pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>
+                </tr>
+
+            </tbody>
+    
+            <thead>
+                <tr>
+                    <th colspan="3" align="right">
+                        <div id="buttonHomePage" class="clearfix">
+                            <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/postjob" value="Post Job"></label>
+                            &nbsp;&nbsp;&nbsp;
+                            <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Resume Search"></label>
+                        </div> 
+                      
+
+                        <!-- <div class="col-md-6 col-lg-3 mb-3 mb-lg-0" *ngIf="auth.isPostJobRole()">
+                            <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job">
+                        </div> -->
+                    </th>
+    
+                </tr>
+            </thead>
+    
+        </table>
+        
+    </div>
+    <br>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="3">
+                        Today's Applied Job&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a>
+                        <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
+                    </th>
+    
+                </tr>  
+            </thead>      
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Candidate</th>
+                    <!-- <th>Employment Type</th>                 -->
+                    <th>Location</th>
+    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let aj of aJob">
+                    <td>{{ aj.JobTitle?.substring(0,25) }}</td>
+                    <td>{{aj.FirstName}}&nbsp;{{aj.LastName}}</td>
+                    <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
+                    <td>{{ aj.joblocation }}</td>
+                </tr>
+            </tbody>
+    
+            <!-- <thead>
+                <tr>
+                    <th colspan="3" align="right">
+                        <div id="buttonHomePage" class="clearfix">
+                            <label class="btn2 btn-2 btn2-1b"><input type="button" value="Find Jobs"></label>
+                        </div>
+
+                    </th>
+    
+                </tr>
+            </thead> -->
+    
+        </table>  
+
+    </div>
+
+
+
+
+

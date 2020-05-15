@@ -24,6 +24,7 @@ import { ValueServicesComponent } from './pages/value-services/value-services.co
 
 import { JobpredictionComponent } from './alphabetnumerology';
 import { HomeComponent } from './home/home.component';
+import { EmployerpageComponent } from './home/employerpage/employerpage.component';
 // import { TechNewsDetailsComponent } from './homepage/tech-news/tech-news-details';
 // import { HomeComponent } from './homepage/home/home.component';
 
@@ -125,7 +126,14 @@ export const routing = RouterModule.forRoot([
       // {
       //   path: 'valueservices',
       //   component: ValueServicesComponent
-      // },       
+      // }, 
+        
+      {
+          path: 'employerhomepage',
+          component: EmployerpageComponent,
+          canActivate: [ScopeGuard] ,
+          data: { expectedScopes: ['write:messages']}
+      },          
       {
         path: 'home',
         component: HomeComponent

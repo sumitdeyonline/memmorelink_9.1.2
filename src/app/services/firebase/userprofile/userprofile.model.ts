@@ -12,6 +12,8 @@ export class UserProfile {
 	State? : string;
 	ZipCode? : string;
 	Country? : string;
+	CurrentCompanySchool? : string;
+	CurrentPosition?: string;
 	FaceBookURL? : string;
 	LinkedinURL? : string;
 	PersonalWebsite? : string;

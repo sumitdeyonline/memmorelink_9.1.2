@@ -195,57 +195,6 @@
                         <select ngModel name="State" [disabled]="!isUpdateProfile" #State="ngModel" id="State" [ngModel]="uProfile.selectedUserProfile?.State" (ngModelChange)="uProfile.selectedUserProfile.State" class="form-control input-sm" required>
                             <option>Select State</option>
                             <option [value]="st.StateName" *ngFor="let st of state">{{st.StateDisplayName}}({{st.StateName}})</option>
-                            <!--option label="AL" value="AL">AL</option>
-                            <option label="AK" value="AK">AK</option>
-                            <option label="AZ" value="AZ">AZ</option>
-                            <option label="AR" value="AR">AR</option>
-                            <option label="CA" value="CA">CA</option>
-                            <option label="CO" value="CO">CO</option>
-                            <option label="CT" value="CT">CT</option>
-                            <option label="DE" value="DE">DE</option>
-                            <option label="DC" value="DC">DC</option>
-                            <option label="FL" value="FL">FL</option>
-                            <option label="GA" value="GA">GA</option>
-                            <option label="HI" value="HI">HI</option>
-                            <option label="ID" value="ID">ID</option>
-                            <option label="IL" value="IL">IL</option>
-                            <option label="IN" value="IN">IN</option>
-                            <option label="IA" value="IA">IA</option>
-                            <option label="KS" value="KS">KS</option>
-                            <option label="KY" value="KY">KY</option>
-                            <option label="LA" value="LA">LA</option>
-                            <option label="ME" value="ME">ME</option>
-                            <option label="MD" value="MD">MD</option>
-                            <option label="MA" value="MA">MA</option>
-                            <option label="MI" value="MI">MI</option>
-                            <option label="MN" value="MN">MN</option>
-                            <option label="MS" value="MS">MS</option>
-                            <option label="MO" value="MO">MO</option>
-                            <option label="MT" value="MT">MT</option>
-                            <option label="NE" value="NE">NE</option>
-                            <option label="NV" value="NV">NV</option>
-                            <option label="NH" value="NH">NH</option>
-                            <option label="NJ" value="NJ">NJ</option>
-                            <option label="NM" value="NM">NM</option>
-                            <option label="NY" value="NY">NY</option>
-                            <option label="NC" value="NC">NC</option>
-                            <option label="ND" value="ND">ND</option>
-                            <option label="OH" value="OH">OH</option>
-                            <option label="OK" value="OK">OK</option>
-                            <option label="OR" value="OR">OR</option>
-                            <option label="PA" value="PA">PA</option>
-                            <option label="RI" value="RI">RI</option>
-                            <option label="SC" value="SC">SC</option>
-                            <option label="SD" value="SD">SD</option>
-                            <option label="TN" value="TN">TN</option>
-                            <option label="TX" value="TX">TX</option>
-                            <option label="UT" value="UT">UT</option>
-                            <option label="VT" value="VT">VT</option>
-                            <option label="VA" value="VA">VA</option>
-                            <option label="WA" value="WA">WA</option>
-                            <option label="WV" value="WV">WV</option>
-                            <option label="WI" value="WI">WI</option>
-                            <option label="WY" value="WY">WY</option-->
                         </select>
                         <div class="error_Message" *ngIf="State.invalid && (State.dirty || State.touched)">
                             Please Enter State
@@ -260,7 +209,6 @@
 
 
                 <div class="row">
-
                     <div class="col-sm-2">
                         <label style="font-weight: bold;" for="City">City</label>
                     </div>
@@ -280,12 +228,30 @@
                             Please Enter valid Zip Code
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">&nbsp;
+                    </div>
+                </div>
 
 
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label style="font-weight: bold;" for="CurrentCompanySchool">Current Company/School</label>
+                    </div>
+                    <div class="col">
+                        <input type="text" ngModel name="CurrentCompanySchool" [disabled]="!isUpdateProfile" #CurrentCompanySchool="ngModel" id="CurrentCompanySchool" [ngModel]="uProfile.selectedUserProfile?.CurrentCompanySchool" (ngModelChange)="uProfile.selectedUserProfile.CurrentCompanySchool" class="form-control input-sm" required/>
+                        <div class="error_Message" *ngIf="CurrentCompanySchool.invalid && (CurrentCompanySchool.dirty || CurrentCompanySchool.touched)">
+                            Please Enter Current Company/School
+                        </div>
+                    </div>
 
-
-
-
+                    <div class="col-sm-2">
+                        <label style="font-weight: bold;" for="CurrentPosition">Current Position</label>
+                    </div>
+                    <div class="col">
+                        <input type="text" ngModel name="CurrentPosition" [disabled]="!isUpdateProfile" #CurrentPosition="ngModel" id="CurrentPosition" [ngModel]="uProfile.selectedUserProfile?.CurrentPosition" (ngModelChange)="uProfile.selectedUserProfile.CurrentPosition" class="form-control input-sm"/>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-2">&nbsp;

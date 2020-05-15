@@ -155,6 +155,8 @@ export class UploadbulkprofileComponent implements OnInit {
     this.signup.password = "Memorelink1";
     this.signup.repassword = "Memorelink1";
 
+    // console.log("CurrentCompanySchool  ::: "+csvRecords[33]);
+    // console.log("CurrentPosition  ::: "+csvRecords[34]);
     //model.username = "Sumit Dey";
     this.auth.signUp(this.signup).subscribe(
       modelSignup => {

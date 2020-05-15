@@ -87,7 +87,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
         // MatPaginatorModule,
         // MatSortModule, 
         AngularFireDatabaseModule, 
-        // MatProgressSpinnerModule
+
 
         FormsModule,
         ReactiveFormsModule,

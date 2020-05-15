@@ -106,6 +106,14 @@ export class UserprofileService {
     uUploadProfile.State = uprofile.State;
     uUploadProfile.ZipCode = uprofile.ZipCode;
     uUploadProfile.Country = uprofile.Country;
+
+
+    uUploadProfile.CurrentCompanySchool = uprofile.CurrentCompanySchool;
+    uUploadProfile.CurrentPosition = uprofile.CurrentPosition;
+
+// console.log("uUploadProfile.CurrentCompanySchool :::: "+uUploadProfile.CurrentCompanySchool);
+// console.log("uUploadProfile.CurrentPosition :::: "+uUploadProfile.CurrentPosition);
+
     uUploadProfile.CellPhone = uprofile.CellPhone;
     uUploadProfile.HomePhone = uprofile.HomePhone;
     uUploadProfile.Email = uprofile.Email;
@@ -374,6 +382,8 @@ export class UserprofileService {
         State:uprofile.State,
         ZipCode:uprofile.ZipCode,
         Country:uprofile.Country,
+        CurrentCompanySchool:uprofile.CurrentCompanySchool,
+        CurrentPosition:uprofile.CurrentPosition,        
         Email:uprofile.Email,
         HomePhone:uprofile.HomePhone,
         CellPhone:uprofile.CellPhone,
@@ -405,6 +415,8 @@ export class UserprofileService {
         State:uprofile.State,
         ZipCode:uprofile.ZipCode,
         Country:uprofile.Country,
+        CurrentCompanySchool:uprofile.CurrentCompanySchool,
+        CurrentPosition:uprofile.CurrentPosition,        
         Email:uprofile.Email,
         HomePhone:uprofile.HomePhone,
         CellPhone:uprofile.CellPhone,
@@ -461,6 +473,8 @@ export class UserprofileService {
         State:uprofile.State,
         ZipCode:uprofile.ZipCode,
         Country:uprofile.Country,
+        CurrentCompanySchool:uprofile.CurrentCompanySchool,
+        CurrentPosition:uprofile.CurrentPosition,        
         Email:uprofile.Email,
         HomePhone:uprofile.HomePhone,
         CellPhone:uprofile.CellPhone,

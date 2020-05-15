@@ -85,7 +85,7 @@ export const pagesRouting = RouterModule.forChild([
 
     },
     {
-        path: 'myappliedjob',
+        path: 'appliedjob',
         component: MyappliedjobComponent,
         canActivate: [ScopeGuard] ,
         data: { expectedScopes: ['write:messages']}

@@ -82,13 +82,18 @@
                             <div class="date">{{rp.City.substring(0,3)}} <span>{{rp.State}}</span></div>
                             <div class="date_desc">
                               <h6 class="title">
-                                <a [routerLink]="['/resumedetails',rp.objectID]" target="_blank">{{rp.FirstName}}&nbsp;{{rp.LastName}}</a>
+                                <a [routerLink]="['/resumedetails',rp.objectID]" target="_blank">
+                                  {{rp.FirstName}}&nbsp;{{rp.LastName}}- {{rp.CurrentPosition}}@{{rp.CurrentCompanySchool}}
+                                </a>
+                                
                               </h6>
+                               
                               <span class="meta">
-                                  <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<a href="mailto:{{rp.Email}}?Subject=Selected your resume" target="_top">{{rp.Email}}</a> &nbsp;&nbsp; 
+                                  <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<a href="mailto:{{rp.Email}}?Subject=Selected Your Resume" target="_top">{{rp.Email}}</a> &nbsp;&nbsp; 
+                                  <i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;{{rp.City}},{{rp.State}}&nbsp;&nbsp;
                                   <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;{{rp.CellPhone}}&nbsp;&nbsp;
                                   <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{ getDateDiff(rp.LastModifiedDate) }}&nbsp;days ago
-                              </span>
+                              </span><br>
                             </div>
                             <div class="clearfix"> </div>
                             <ul class="top-btns">
@@ -97,8 +102,8 @@
                               <li><a href="#" class="fa fa-link"></a></li-->
                             </ul>
                             <hr class="hr_style">
-                            <div class="jobdetails">Skill Set : {{rp.SkillSet.substring(0,length)}}
-                              <br>Desired Position :  {{rp.DesiredPosition.substring(0,length)}}
+                            <div class="jobdetails">Desired Position :  {{rp.DesiredPosition.substring(0,length)}} &nbsp;
+                              <br>Skill Set : {{rp.SkillSet.substring(0,length)}}
                                <!--a [routerLink]="['/jobdetails',pj.id]" class="read-more">Read More</a-->
                             </div>
                           </div>

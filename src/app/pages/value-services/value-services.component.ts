@@ -73,14 +73,25 @@ export class ValueServicesComponent implements OnInit {
 
            this.udetails.selectedValueServices.phone = this.userDetails[0].phone;
 
+            // console.log("userDetailsID : "+this.userDetailsID);
+            // console.log("this.udetails.selectedValueServices.userRole :: "+this.udetails.selectedValueServices.userRole);
+
         } else {
           this.userDetailsID = null;
+
         }
+
 
       })
 
     } else {
 
+      //this.userDetailsID = "OWtPAfTTlpNM6o6U1F4o";
+      //this.userActualRole = "EmployerPowerUser";
+      this.udetails.selectedValueServices.userRole = "EmployerPowerUser";
+
+      // console.log("userDetailsID : U "+this.userDetailsID);
+      // console.log("this.udetails.selectedValueServices.userRole :: U "+this.udetails.selectedValueServices.userRole);
 
 
     }
@@ -143,15 +154,15 @@ export class ValueServicesComponent implements OnInit {
             //this.signupMessage = error; //   "This user already exists."
             this.valueservicesSucessMessage = "User already exists or password not satisfy minimum requrements"; //   "This user already exists."
           });
+       }
+
       }
-
     }
-  }
 
-  changeRoleValue(role) {
-    //console.log("Role Value ::: "+role.value);
-    this.udetails.selectedValueServices.userRole = role.value;
-  }
+    changeRoleValue(role) {
+      //console.log("Role Value ::: "+role.value);
+      this.udetails.selectedValueServices.userRole = role.value;
+    }
     resetForm(valueservicesForm? : NgForm) {
       //this.signupError='';
       if (valueservicesForm !=null)

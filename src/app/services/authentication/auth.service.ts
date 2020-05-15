@@ -145,7 +145,7 @@ export class AuthService {
     // }
 
     this.auth0.parseHash((err, authResult) => {
-     // console.log("HanleAuth :::::: => Home Page"+authResult);
+      //console.log("HanleAuth :::::: => Home Page"+authResult);
       //if (authResult && authResult.accessToken && authResult.idToken) {
       if (authResult) {
         //console.log("HanleAuth :::::: => Home Page1");
@@ -157,8 +157,24 @@ export class AuthService {
           this.userProfile = profile;
           this.setSession(authResult);
           //console.log("Profile "+profile);
+          //this.router.navigate(['/employerhomepage']); 
+          // if (this.isResumeSearchRole() || this.isPostJobRole()) {
+          //   console.log("This is a test");
+          //   this.router.navigate(['/employerhomepage']); 
+          // } else {
+          //   this.router.navigate(['/home']);
+          // }
+
         });
-        this.router.navigate(['/home']);
+        //this.router.navigate(['/home']);
+        // if (this.isResumeSearchRole() || this.isPostJobRole()) {
+        //   console.log("This is a test");
+        //   this.router.navigate(['/employerhomepage']); 
+        // } else {
+        //   this.router.navigate(['/home']);
+        // }
+
+ 
       } else if (err) {
         //alert("Login Error 22222" +err);
         //console.log("HanleAuth :::::: => Home Page2");

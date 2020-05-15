@@ -193,6 +193,14 @@ export class UserProfileComponent implements OnInit {
     if (uprofileForm.value.Address2 == undefined) {
       uprofileForm.value.Address2 = "";
     }
+
+    if (uprofileForm.value.CurrentCompanySchool == undefined) {
+      uprofileForm.value.CurrentCompanySchool = "";
+    }
+    
+    if (uprofileForm.value.CurrentPosition == undefined) {
+      uprofileForm.value.CurrentPosition = "";
+    }    
     // console.log ('Address2  ::: '+ uprofileForm.value.Address2);
     // console.log ('City  ::: '+ uprofileForm.value.City);
     // console.log ('State  ::: '+ uprofileForm.value.State);
