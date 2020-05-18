@@ -1,5 +1,5 @@
 
-<h2 mat-dialog-title>Apply Job</h2>
+<h2 mat-dialog-title>Apply for {{pjob.JobTitle}}</h2>
 
 <!--mat-dialog-content>
 
@@ -18,23 +18,23 @@
 
         <mat-form-field>
           <input matInput
-                    placeholder="First Name"
+                    placeholder="First Name *"
                   formControlName="FirstName">
         </mat-form-field>
 
         <mat-form-field>
           <input matInput
-                  placeholder="Last Name"
+                  placeholder="Last Name *"
                 formControlName="LastName">
         </mat-form-field>
         <mat-form-field>
           <input matInput
-                placeholder="Enter your Email"
+              placeholder="Enter your Email *"
               formControlName="Email">
         </mat-form-field>
         <mat-form-field>
           <input matInput
-                placeholder="Phone Number"
+                placeholder="Phone Number *"
               formControlName="PhoneNumber"
               #PhoneNumber
               (keyup)="phoneNumberFormat($event.target.value);">
@@ -51,7 +51,7 @@
 
 
         <mat-form-field *ngIf="numberOfResume > 0">
-          <select matNativeControl placeholder="Select Resume"
+          <select matNativeControl placeholder="Select Resume *"
           formControlName="fileUploadExist" (change)="onChange($event.target.value)">
             <option value=''>Select Resume</option>
             <option [value]="rname.ResumeURL" *ngFor="let rname of uResume">{{rname.ResumeFileName}}</option>
@@ -66,7 +66,7 @@
 
 
     <div [hidden]="!showUpload">
-      Upload Resume :&nbsp;<label class="btn btn-default">  <input type="file" name="fileUpload" (change)="selectFile($event)">
+      Upload Resume * :&nbsp;<label class="btn btn-default">  <input type="file" name="fileUpload" (change)="selectFile($event)">
 
       </label>&nbsp;&nbsp;
       <!--i class="fa fa-upload fa-2x" aria-hidden="true" (click)="upload()"></i-->
@@ -95,10 +95,10 @@
 
     <div class="row">
       <div class="form-actions floatRight" [hidden]="!showUpload">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Apply Job" class="btn btn-primary btn-sm" [disabled]="!applyJobForm.valid || !currentFileUpload || progress.percentage != 100" (click)="applyNow()">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Apply" class="btn btn-primary btn-sm" [disabled]="!applyJobForm.valid || !currentFileUpload || progress.percentage != 100" (click)="applyNow()">
       </div>
       <div class="form-actions floatRight" [hidden]="showUpload">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Apply Job" class="btn btn-primary btn-sm" [disabled]="!applyJobForm.valid" (click)="applyNow()">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Apply" class="btn btn-primary btn-sm" [disabled]="!applyJobForm.valid" (click)="applyNow()">
     </div>
       &nbsp;&nbsp;&nbsp;&nbsp;
       <div class="form-actions floatRight">

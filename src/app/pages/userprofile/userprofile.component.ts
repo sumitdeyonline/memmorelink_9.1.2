@@ -15,6 +15,8 @@ import { Observable } from 'rxjs';
 import { EmailService } from 'src/app/services/email/email.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CommondialogComponent, AngularUtilityComponent } from 'src/app/common';
+import { EmploymenttypesService } from 'src/app/services/firebase/employmenttypes/employmenttypes.service';
+import { EmploymentTypes } from 'src/app/services/firebase/employmenttypes/employmenttypes.model';
 //import { CommondialogComponent } from 'src/app/common/commondialog';
 
 
@@ -32,6 +34,7 @@ export class UserProfileComponent implements OnInit {
   uPloadFileKey: String;
   uProfileMessage: String ='';
   userProfile: UserProfile[];
+  EmpTypes: EmploymentTypes[];
   isUpdate: boolean = false;
   isUpdateProfile: boolean = false;
   editProfileText: string ="Edit Profile";
@@ -40,7 +43,7 @@ export class UserProfileComponent implements OnInit {
   utility = new AngularUtilityComponent();
 
 
-  constructor(private rUploadService: UploadResumeService, public uProfile: UserprofileService, public auth: AuthService, private sEmail: EmailService, private dialog: MatDialog,) {
+  constructor(private rUploadService: UploadResumeService, public uProfile: UserprofileService, public auth: AuthService, private sEmail: EmailService, private dialog: MatDialog,private etypeserv: EmploymenttypesService) {
 
 
     this.uProfile.getUserDetails(this.auth.userProfile.name,'U').subscribe(uprop=> {
@@ -48,6 +51,7 @@ export class UserProfileComponent implements OnInit {
       this.resetForm();
       //this.countries = ['USA', 'Canada', 'Uk'];
       this.getCountry();
+      this.getEmpTypes();
       //console.log("TEEESSSTTTTTTTTTT ===>>>>>>>>> "+this.userProfile.length);
       if (this.userProfile.length == 0) {
 
@@ -96,6 +100,13 @@ export class UserProfileComponent implements OnInit {
       this.state = sprop;
       //console.log("Country :::::::: => "+this.state.length);
     })
+  }
+
+  getEmpTypes() {
+    this.etypeserv.getEmploymentTypesByUse("").subscribe(etype => {
+      this.EmpTypes = etype;
+    })
+
   }
 
   EnableEdit() {
@@ -187,9 +198,14 @@ export class UserProfileComponent implements OnInit {
     // console.log ('LastName  ::: '+ uprofileForm.value.LastName);
     // console.log ('Sex  ::: '+ uprofileForm.value.Sex);
     // console.log ('Email  ::: '+ uprofileForm.value.Email);
-    // console.log ('HomePhone  ::: '+ uprofileForm.value.HomePhone);
+     console.log ('HomePhone  ::: '+ uprofileForm.value.HomePhone);
     // console.log ('CellPhone  ::: '+ uprofileForm.value.CellPhone);
     // console.log ('Address1  ::: '+ uprofileForm.value.Address1);
+
+    if (uprofileForm.value.HomePhone == undefined) {
+      uprofileForm.value.HomePhone = "";
+    }
+
     if (uprofileForm.value.Address2 == undefined) {
       uprofileForm.value.Address2 = "";
     }
@@ -431,6 +447,9 @@ export class UserProfileComponent implements OnInit {
     this.uProfile.selectedUserProfile.City = this.userProfile[0].City;
     this.uProfile.selectedUserProfile.State = this.userProfile[0].State;
     this.uProfile.selectedUserProfile.ZipCode = this.userProfile[0].ZipCode;
+    this.uProfile.selectedUserProfile.CurrentCompanySchool = this.userProfile[0].CurrentCompanySchool;
+    this.uProfile.selectedUserProfile.CurrentPosition = this.userProfile[0].CurrentPosition;
+
     this.uProfile.selectedUserProfile.Country = this.userProfile[0].Country;
     this.uProfile.selectedUserProfile.FaceBookURL = this.userProfile[0].FaceBookURL;
     this.uProfile.selectedUserProfile.LinkedinURL = this.userProfile[0].LinkedinURL;

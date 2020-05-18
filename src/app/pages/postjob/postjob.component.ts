@@ -21,6 +21,8 @@ import { EmailService } from 'src/app/services/email/email.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEDITOR_CONF } from 'src/app/global-config';
 import { CommondialogComponent } from 'src/app/common';
+import { EmploymentTypes } from 'src/app/services/firebase/employmenttypes/employmenttypes.model';
+import { EmploymenttypesService } from 'src/app/services/firebase/employmenttypes/employmenttypes.service';
 // import * as ClassicEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 
@@ -40,6 +42,7 @@ export class PostjobComponent implements OnInit {
   id: any;
   postJobList: [any];
   countries: Country[];
+  EmpTypes: EmploymentTypes[];
   state: State[];
   userDetails: UserDetails[];
   isJobLength: boolean = false;
@@ -58,9 +61,11 @@ export class PostjobComponent implements OnInit {
               private dialog: MatDialog,
               private datePipe: DatePipe,
               private udetails: UserdetailsService,
-              private sEmail: EmailService) {
+              private sEmail: EmailService,
+              private etypeserv: EmploymenttypesService) {
         window.scroll(0,0);
         this.getCountry();
+        this.getEmpTypes();
     // this.PostJobForm = fb.group({
     //   // email: ['', Validators.required,Validators.email],
     //   // password: ['', Validators.required,Validators.minLength(5)],
@@ -202,7 +207,7 @@ export class PostjobComponent implements OnInit {
     } 
 
     if (postJobForm.value.isTeleComute === undefined) {
-      postJobForm.value.isTeleComute = '';
+      postJobForm.value.isTeleComute = false;
     }     
 
     if ((this.id == null) || (this.id == '')) {
@@ -246,7 +251,7 @@ export class PostjobComponent implements OnInit {
 
       /* Email Start */
 
-    let subject = 'Your job has been posted('+postJobForm.value.JobTitle+')';
+    let subject = 'Your job has been posted ('+postJobForm.value.JobTitle+')';
     let body = '<i>Your job has been posted</i> <br/><br/> <b>Job Title: </b>'+postJobForm.value.JobTitle+'  <br/> <b>Job Location: </b>'+postJobForm.value.JobCity+', '+postJobForm.value.JobState+', '+postJobForm.value.JobCountry+'<br /> <b>Job Description : </b>'+postJobForm.value.JobDesc+' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
     this.sEmail.sendEmail(postJobForm.value.ApplyToEmail,'',subject,body);
 
@@ -286,6 +291,15 @@ export class PostjobComponent implements OnInit {
       //console.log("Country :::::::: => "+this.countries.length);
     })
   }
+
+
+  getEmpTypes() {
+    this.etypeserv.getEmploymentTypesByUse("P").subscribe(etype => {
+      this.EmpTypes = etype;
+    })
+
+  }
+
 
   getState(country) {
     this.uProfile.getStateDetails(country).subscribe(sprop => {

@@ -63,6 +63,8 @@ import { AlphabetNumerologyModule } from '../alphabetnumerology';
 import { TechNewsComponent, TechNewsDetailsComponent, TechNewsPageComponent } from './tech-news';
 import { MyappliedjobComponent } from './jobdetails/myappliedjob/myappliedjob.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { EmploymenttypesService } from '../services/firebase/employmenttypes/employmenttypes.service';
+import { UploadresumepageComponent } from './uploadresumepage/uploadresumepage.component';
 
 // import { TechNewsComponent } from './tech-news';
 // import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
@@ -138,6 +140,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
         TechNewsDetailsComponent,
         TechNewsPageComponent,
         MyappliedjobComponent,
+        UploadresumepageComponent,
         
         // SignupConfirmComponent
       // AdminhomeComponent,
@@ -171,7 +174,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       DatePipe,
       ScopeGuardService,
       ContentfulrapperService,
-      AuthGuardService
+      AuthGuardService,
+      EmploymenttypesService
 
       //AlphabetNumerologyService
       //AdminGuardService

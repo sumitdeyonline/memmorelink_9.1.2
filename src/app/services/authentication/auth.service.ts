@@ -305,14 +305,21 @@ export class AuthService {
             this.isGeneralUserRole = true;
           } else { this.isGeneralUserRole = false}
 
-          localStorage.setItem(SESSION_CONFIG.PostJobRole,JSON.stringify(this.isEmployerPostJobRole));
-          localStorage.setItem(SESSION_CONFIG.ResumeSearchRole,JSON.stringify(this.isEmployerResumeSearchRole));
-          localStorage.setItem(SESSION_CONFIG.AdminRole,JSON.stringify(this.isAdminUserRole));
-          localStorage.setItem(SESSION_CONFIG.UserRole,JSON.stringify(this.isGeneralUserRole));
+          if (this.isEmployerPostJobRole == true)
+            //sessionStorage.setItem(SESSION_CONFIG.PostJobRole,JSON.stringify(this.isEmployerPostJobRole));
+            localStorage.setItem(SESSION_CONFIG.PostJobRole,JSON.stringify(this.isEmployerPostJobRole));
+            //sessionStorage.setItem(SESSION_CONFIG.PostJobRole,JSON.stringify(this.isEmployerPostJobRole));
+          if (this.isEmployerResumeSearchRole == true)
+            //sessionStorage.setItem(SESSION_CONFIG.PostJobRole,JSON.stringify(this.isEmployerPostJobRole));
+            localStorage.setItem(SESSION_CONFIG.ResumeSearchRole,JSON.stringify(this.isEmployerResumeSearchRole));
+          if (this.isAdminUserRole)
+            localStorage.setItem(SESSION_CONFIG.PostJobRole,JSON.stringify(this.isAdminUserRole));
+          if (this.isGeneralUserRole)
+            localStorage.setItem(SESSION_CONFIG.UserRole,JSON.stringify(this.isGeneralUserRole));
           // console.log("Variable 1 "+this.isEmployerPostJobRole+ "  Session 1 :::::====>>> "+localStorage.getItem(SESSION_CONFIG.PostJobRole));
           // console.log("Variable 2  :::::====>>> "+this.isEmployerResumeSearchRole + " Session 2  :::::====>>>"+localStorage.getItem(SESSION_CONFIG.ResumeSearchRole));
           // console.log("Variable 3  :::::====>>> "+this.isAdminUserRole + "Session 3  :::::====>>> "+localStorage.getItem(SESSION_CONFIG.AdminRole));
-
+          // sessionStorage.setItem(SESSION_CONFIG.UserRole,JSON.stringify(this.isGeneralUserRole));
 
         })
 

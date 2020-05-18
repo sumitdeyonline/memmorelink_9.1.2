@@ -24,13 +24,14 @@ export class EmployerpageComponent implements OnInit {
 
     this.loading = true;
     let sdate = new Date();
-    let startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()));
-    let edate = new Date();
-    let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
+    //let startDt = new Date(sdate.getTime() - (24*60*60*1000));
+    //console.log("newDate :::: "+newDate);
 
-          // console.log(" startDt :::: "+this.startDt);
-      // console.log(" endDt :::: "+endDt);
-      // console.log(" this.auth.userProfile.name :::: "+this.auth.userProfile.name);
+    let startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-1));
+    //console.log("Start Date ::: "+startDt);
+    let endDt = new Date();
+    //let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
+    // console.log(" this.auth.userProfile.name :::: "+this.auth.userProfile.name);
 
     this.postservice.getPostJobsByUser(this.auth.userProfile.name, 'UD','',startDt, endDt).subscribe(pjob=> {
       this.pjob = pjob;
@@ -49,7 +50,7 @@ export class EmployerpageComponent implements OnInit {
       //console.log("List Service ..... 33333 ::::: "+this.pjob[1].id);
     }); 
     
-    this.appjob.getApplyJobByAdmin(this.auth.userProfile.name,'UD','', startDt, endDt).subscribe(udtl=> {
+    this.appjob.getApplyJobByAdmin(this.auth.userProfile.name,'CUD','', startDt, endDt).subscribe(udtl=> {
   
       this.aJob = udtl;
       //console.log(" Length :::: "+this.aJob.length);

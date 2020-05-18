@@ -80,9 +80,27 @@ export class ApplyjobService {
         this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
           ref.where('ApplyToEmail','==',username).where('company','==',company).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc'));         
 
-      }     
+      }
+    } else if (type=='CUD') {  // This is for the candidate
+      //console.log("Username CUD : "+username);
+      if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
+        //console.log("Username : "+username);
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('username','==',username).where('CreatedDate', '>=', startDT).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));         
+      } else if (startDT.toString() == 'Invalid Date') {
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('username','==',username).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));         
 
-    }
+      } else if (endDt.toString() == 'Invalid Date') {
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('username','==',username).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc')); 
+      }
+
+    }  
+
+
+
+
          // console.log("Country Name  ..... 1");
     this.ApplyJobc = this.ajCollection.snapshotChanges().pipe(map(changes => {
       // console.log("Country Name  ..... 2");

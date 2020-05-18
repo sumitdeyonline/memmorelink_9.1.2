@@ -175,7 +175,7 @@ export class UploadbulkprofileComponent implements OnInit {
         //console.log("Message 1 "+error[1].name);
         console.log("Message 2 "+error.description);
         //this.signupMessage = error; //   "This user already exists."
-        this.signupMessage = "User already exists or password not satisfy minimum requrements"; //   "This user already exists."
+        this.signupMessage = "User already exists or password does not satisfy minimum requrements"; //   "This user already exists."
       });
 
   }

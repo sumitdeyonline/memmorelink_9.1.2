@@ -16,6 +16,7 @@ import { SalaryPredictorComponent } from './salary-predictor';
 import { UserProfileComponent } from './userprofile';
 import { AuthGuardService } from '../services/authentication/auth-guard.service';
 import { TechNewsDetailsComponent, TechNewsPageComponent } from './tech-news';
+import { UploadresumepageComponent } from './uploadresumepage/uploadresumepage.component';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -54,12 +55,19 @@ export const pagesRouting = RouterModule.forChild([
         path: 'resetpassword',
         component: ResetpasswordComponent
     },
-
     {
         path: 'userprofile',
         component: UserProfileComponent,
         canActivate: [AuthGuardService]
     },      
+    {
+        path: 'uploadresumepage',
+        component: UploadresumepageComponent,
+        canActivate: [AuthGuardService]
+    }, 
+
+
+    
     {
         path: 'jobdetails/:id',
         component: JobdetailsComponent

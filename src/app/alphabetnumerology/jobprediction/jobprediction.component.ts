@@ -224,8 +224,12 @@ export class JobpredictionComponent implements OnInit {
   }
 
   close() {
-    this.jobPForm.setValue['firstname'] = 'temp';// .setValue('temp');
+    //this.jobPForm.setValue['firstname'] = 'temp';// .setValue('temp');
     //this.jobPForm.controls['lasttname'].setValue('temp');
+
+    // this.jobPForm.controls['firstname'].setValue("aaa");
+    // this.jobPForm.controls['lastname'].setValue("aa");
+
     this.dialogRef.close();
   }
  

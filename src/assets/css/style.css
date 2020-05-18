@@ -26,6 +26,16 @@ a:hover {
     text-decoration: none;
 }
 
+.dropdown-item {
+    /* display: unset !important; */
+    padding: .1rem .5rem !important;
+}
+
+.dropdown-menu {
+    padding: .4rem 0 !important;
+    margin: .0rem 0 0 !important; 
+    min-width: 8rem !important;
+}
 
 
 body a{
@@ -301,7 +311,7 @@ body a{
     border: none;
     outline: none;
     background: none;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-weight: 400;
     color:#ffff;
 }

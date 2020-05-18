@@ -124,8 +124,8 @@ export class ValueServicesComponent implements OnInit {
         // console.log("Resume Search ::::: "+model.resumesearch);
         this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, model.userRole, model.company, model.CompanyLogoURL, model.companyAddress, model.phone,this.jobcount);
         this.valueservicesSucessMessage = model.email+" has been Sucessfully Updated."
-        let subject = 'Thank you '+model.email+' for the service('+ this.userActualRole+')';
-        let body = 'Thank you <b>'+model.email+'</b> for the service('+ this.userActualRole+'). Best of luck <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
+        let subject = 'Thank you '+model.email+' for the service ('+ this.userActualRole+')';
+        let body = 'Thank you <b>'+model.email+'</b> for the service ('+ this.userActualRole+'). Best of luck <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
         this.sEmail.sendEmail(model.email,'',subject,body);
         window.scroll(0,0);
         return true;
@@ -152,7 +152,7 @@ export class ValueServicesComponent implements OnInit {
             //console.log("Message 1 "+error[1].name);
             //console.log("Message 2 "+error.description);
             //this.signupMessage = error; //   "This user already exists."
-            this.valueservicesSucessMessage = "User already exists or password not satisfy minimum requrements"; //   "This user already exists."
+            this.valueservicesSucessMessage = "User already exists or password does not satisfy minimum requrements"; //   "This user already exists."
           });
        }
 

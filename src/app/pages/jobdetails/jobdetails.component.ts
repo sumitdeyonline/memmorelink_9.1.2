@@ -5,6 +5,7 @@ import { PostjobService } from 'src/app/services/firebase/postjob/postjob.servic
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { ApplyjobComponent } from './applyjob/applyjob.component';
 import { JobpredictionComponent } from 'src/app/alphabetnumerology';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 //import { PostJobc } from '../../services/firebase/postjob.model';
 //import { PostjobService } from '../../services/firebase/postjob.service';
 
@@ -22,7 +23,7 @@ export class JobdetailsComponent implements OnInit {
   travelReq: string;
   //fileNameDialogRef: MatDialogRef<ApplyjobComponent>;
 
-  constructor(private _activeRoute:ActivatedRoute, private postservice: PostjobService, private dialog: MatDialog) {
+  constructor(private _activeRoute:ActivatedRoute, private postservice: PostjobService, private dialog: MatDialog, public auth: AuthService) {
     window.scroll(0,0);
     this._activeRoute.queryParams.subscribe(params => {
       //console.log(params);
@@ -46,7 +47,15 @@ export class JobdetailsComponent implements OnInit {
     this.postservice.getPostJobsById(this.id).subscribe(pjob=> {
       this.pjob = pjob;
       //alert(this.pjob.isTeleComute);
-      if (this.pjob.isTeleComute == true) {
+
+      if (""+this.pjob?.isTeleComute == 'true') {
+        this.pjob.isTeleComute = true;
+      } else if (""+this.pjob?.isTeleComute == 'false'){
+        this.pjob.isTeleComute = false;
+      }
+      //console.log("this.pjob?.isTeleComute "+this.pjob?.isTeleComute);
+      //console.log("Boolean(this.pjob?.isTeleComute) : "+Boolean(this.pjob?.isTeleComute));
+      if (this.pjob?.isTeleComute == true) {
         this.travelReq = "Work from home available";
       } else {
         this.travelReq = "Work from home not available";

@@ -3,7 +3,7 @@
       <div class="form-container">
 
           
-                  <h3>Job Predection</h3>
+                  <h3>Job Prediction</h3>
                   <h6>(According to Numerology)</h6>
 
                   <!-- <div id="site_form" [hidden]="jobPredectionSucessMessage != null && jobPredectionSucessMessage !=''"> -->
@@ -52,8 +52,8 @@
                       #lastname="ngModel" id="lastname" lastname 
                       class="form-control input-sm" required/>
   
-                      <div class="error_Message" *ngIf="Fieldlength(lastname.value) < 3 && lastname.touched">
-                          Last Name must be at least 3 characters long.
+                      <div class="error_Message" *ngIf="Fieldlength(lastname.value) < 2 && lastname.touched">
+                          Last Name must be at least 2 characters long.
                       </div>
 
                       <label for="companyname">Company Name:</label> 
@@ -63,8 +63,8 @@
                       [disabled]="companyTemp !=''"
                       class="form-control input-sm" required/>
   
-                      <div class="error_Message" *ngIf="Fieldlength(companyname.value) < 3 && companyname.touched">
-                          Company Name must be at least 3 characters long.
+                      <div class="error_Message" *ngIf="Fieldlength(companyname.value) < 2 && companyname.touched">
+                          Company Name must be at least 2 characters long.
                       </div>
                       <br>
                       <div class="form-group">
@@ -72,13 +72,13 @@
                             <tr>
                               <td>
                                 <div class="error_Message" *ngIf="!jobPForm.valid && jobPForm.touched">
-                                  (Please enter form fields)
+                                  (Please enter required fields)
                                 </div>   
 
                                 <div class="row">
                                   &nbsp;&nbsp;&nbsp;
                                   <div class="form-actions floatRight">
-                                     <input type="submit" value="Submit" [disabled]="!jobPForm.valid || Fieldlength(firstname.value) < 3 || Fieldlength(lastname.value) < 3 || Fieldlength(companyname.value) < 3" class="btn btn-primary btn-sm">
+                                     <input type="submit" value="Submit" [disabled]="!jobPForm.valid || Fieldlength(firstname.value) < 3 || Fieldlength(lastname.value) < 2 || Fieldlength(companyname.value) < 2" class="btn btn-primary btn-sm">
                                   </div>&nbsp;&nbsp;&nbsp;
                                   <div class="form-actions floatRight" *ngIf="dialogRef ==null">
                                     &nbsp;<input type="button" value="Reset" (click)="resetForm(jobPForm);" class="btn btn-primary btn-sm">

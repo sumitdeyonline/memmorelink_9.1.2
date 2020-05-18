@@ -4,12 +4,15 @@
 		   <form #f="ngForm" (ngSubmit)="searchjob(f.value)">
 				<div id="search_form" class="clearfix">
 						&nbsp;
-					<h1>Start tech job search</h1>
+					<h1>Start Job Search</h1>
 					<!-- <p> -->
 					<table>
 						<tr>
 							<td>
-								<input type="text" class="text" autocomplete="off" required="required" ngModel name="keyword" #username="ngModel" id="keyword" placeholder="" value="{{ keyword }}" [ngModel]="keyword" placeholder="Skills,Job Desc. or Job title">
+								<input type="text" class="text" autocomplete="off" 
+								required="required" ngModel name="keyword" #username="ngModel" id="keyword" 
+								placeholder="" value="{{ keyword }}" [ngModel]="keyword" 
+								placeholder="Skills, Job Desc. or Job title">
 							</td>
 							<td>
 								<!-- <input type="text" class="text" required="required" 
@@ -33,7 +36,7 @@
 								value="{{ location }}" 
 								autocomplete="off"
 								[(ngModel)]="location" 
-								placeholder= "City, State or Zipcode"
+								placeholder= "City or Zipcode"
 								[ngbTypeahead]="search" 
 								(keyup)="zipcodeCitySearch($event.target.value)"/>	
 

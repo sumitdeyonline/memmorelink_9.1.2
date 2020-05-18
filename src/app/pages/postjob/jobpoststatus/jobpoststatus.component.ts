@@ -69,23 +69,25 @@ export class JobpoststatusComponent implements OnInit {
         
     
         let sdate = new Date();
+        //this.startDt = new Date(sdate.getTime() - (2*24*60*60*1000));
         this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-1));
-        let edate = new Date();
-        this.endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+edate.getDate()); 
+        //let edate = new Date();
+        this.endDt = new Date();
+        //this.endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+edate.getDate()); 
 
       }
 
   ngOnInit() {
     
     this.loading = true;
-    let edate = new Date();
-    let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
+    // let edate = new Date();
+    // let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
 
           // console.log(" startDt :::: "+this.startDt);
       // console.log(" endDt :::: "+endDt);
       // console.log(" this.auth.userProfile.name :::: "+this.auth.userProfile.name);
 
-    this.postservice.getPostJobsByUser(this.auth.userProfile.name, 'UD','',this.startDt, endDt).subscribe(pjob=> {
+    this.postservice.getPostJobsByUser(this.auth.userProfile.name, 'UD','',this.startDt, this.endDt).subscribe(pjob=> {
       this.pjob = pjob;
       //console.log("Last Updated ::: "+ Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000));
       // console.log("Last Updated ::: "+ this.getDateDiff(this.pjob[3].LastModifiedDate));
@@ -121,16 +123,16 @@ export class JobpoststatusComponent implements OnInit {
     this.loading = true;
     let sdate = new Date(appliedJpb.startDate);
     this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+sdate.getDate());
-    let edate = new Date(appliedJpb.endDate);
-    let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
+    this.endDt = new Date(appliedJpb.endDate);
+    //let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
 
-      // console.log(" Current startDt :::: "+this.startDt);
-      // console.log(" Current endDt :::: "+this.endDt);
+      //console.log(" Current startDt :::: "+this.startDt);
+      //console.log(" Current endDt :::: "+this.endDt);
 
-      this.postservice.getPostJobsByUser(this.auth.userProfile.name,callType,'', this.startDt, endDt).subscribe(udtl=> {
+      this.postservice.getPostJobsByUser(this.auth.userProfile.name,callType,'', this.startDt, this.endDt).subscribe(udtl=> {
 
         this.pjob = udtl;
-        console.log(" Length :::: "+this.pjob.length);
+        //console.log(" Length :::: "+this.pjob.length);
 
         if (this.pjob.length == 0) {
           

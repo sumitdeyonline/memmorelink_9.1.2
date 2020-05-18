@@ -7,7 +7,7 @@
         <div class="row">
          <div class="col-md-4">
              <div class="col_3">
-               <h3>Post Job and Resume Search</h3>
+               <h3>Post Job and Search Resume</h3>
 
 
                <signup-confirm [signupSucessMessage] = "valueservicesSucessMessage"></signup-confirm>
@@ -22,7 +22,7 @@
 
                   <div *ngIf ="!_auth.isAuthenticated()">
                     <!--label for="username">User Email:</label> <input type="text" [value]="signup.username"  ngModel name="username" #username="ngModel" id="username" email class="required input_field" required/-->
-                    <label for="email">Email</label>
+                    <label for="email">Email<span style="color: red;">&nbsp;*</span>:</label>
                     <input type="text" 
                     ngModel name="email" 
                     #email="ngModel" 
@@ -56,7 +56,7 @@
                     </div-->
 
 
-                    <label for="password">Password:</label> <input type="password" [disabled]="_auth.isAuthenticated()" ngModel name="password" #password="ngModel" id="password" [ngModel]="udetails.selectedValueServices?.password" (ngModelChange)="udetails.selectedValueServices.password" class="form-control input-sm" required/>
+                    <label for="password">Password<span style="color: red;">&nbsp;*</span>:</label> <input type="password" [disabled]="_auth.isAuthenticated()" ngModel name="password" #password="ngModel" id="password" [ngModel]="udetails.selectedValueServices?.password" (ngModelChange)="udetails.selectedValueServices.password" class="form-control input-sm" required/>
                     <div class="error_Message" *ngIf="Fieldlength(password.value) < 5 && password.touched">
                       Password must be at least 5 characters long.
                     </div>
@@ -70,7 +70,7 @@
                       </div>
                     </div-->
 
-                    <label for="repassword">Re Enter Password:</label> <input type="password" [disabled]="_auth.isAuthenticated()" ngModel name="repassword" #repassword="ngModel" id="repassword" [ngModel]="udetails.selectedValueServices?.repassword" (ngModelChange)="udetails.selectedValueServices.repassword" class="form-control input-sm" required/>
+                    <label for="repassword">Re Enter Password<span style="color: red;">&nbsp;*</span>:</label> <input type="password" [disabled]="_auth.isAuthenticated()" ngModel name="repassword" #repassword="ngModel" id="repassword" [ngModel]="udetails.selectedValueServices?.repassword" (ngModelChange)="udetails.selectedValueServices.repassword" class="form-control input-sm" required/>
 
                     <div class="error_Message" *ngIf="Fieldlength(repassword.value) < 5 && repassword.touched">
                       Password must be at least 5 characters long.
@@ -98,7 +98,7 @@
                   
                   
                   <!-- <label for="company">Company:</label> <input type="text"  [readonly]="_auth.isAuthenticated()" ngModel name="company" #company="ngModel" id="company" [ngModel]="udetails.selectedValueServices?.company" (ngModelChange)="udetails.selectedValueServices.company" class="form-control input-sm" required/> -->
-                  <label for="company">Company:</label> <input type="text" ngModel name="company" #company="ngModel" id="company" [ngModel]="udetails.selectedValueServices?.company" (ngModelChange)="udetails.selectedValueServices.company" class="form-control input-sm" required/>
+                  <label for="company">Company<span style="color: red;">&nbsp;*</span>:</label> <input type="text" ngModel name="company" #company="ngModel" id="company" [ngModel]="udetails.selectedValueServices?.company" (ngModelChange)="udetails.selectedValueServices.company" class="form-control input-sm" required/>
 
                   <div class="error_Message" *ngIf="Fieldlength(company.value) < 4 && company.touched">
                     Company must be at least 3 characters long.
@@ -137,7 +137,7 @@
                                                           || Fieldlength(company.value) < 4
                                                           || !checkSecureImageURL(CompanyLogoURL.value))
                                                           && valueservicesForm.touched">
-                            (Please enter form fields)
+                            (Please enter required fields)
                           </div>
                           <button class="btn_common btn-default" type="submit" value=" Submit" [disabled]="(!valueservicesForm.valid 
                                                                                                 || Fieldlength(company.value) < 4

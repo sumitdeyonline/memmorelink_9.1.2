@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         //this.login.username = '';
 
           this.login.password = '';
-          this.loginError ='Wrong Username or password';
+          this.loginError ='Wrong Username or Password';
 
         //console.log("ERROR ::::::::: --->>>>>"+this._auth.getLoginErrorMsg());
         //console.log("ERROR ::::::::: --->>>>>"+this.loginError);
