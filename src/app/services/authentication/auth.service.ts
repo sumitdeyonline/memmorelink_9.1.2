@@ -15,7 +15,7 @@ import { HttpErrorResponse, HttpClient, HttpResponse, HttpRequest, HttpHeaders }
 import { UserDetails } from '../firebase/userdetails/userdetails.model';
 import { UserprofileService } from '../firebase/userprofile/userprofile.service';
 import { UserRole } from '../firebase/userprofile/userrole.model';
-import { analytics } from 'firebase';
+//import { analytics } from 'firebase';
 
 //import { UserDetails } from '../firebase/userdetails.model';
 
@@ -47,12 +47,13 @@ export class AuthService {
     domain: AUTH_CONFIG.domain,
     responseType: AUTH_CONFIG.responseType,
     //audience: AUTH_CONFIG.audience,
-    redirectUri: AUTH_CONFIG.redirectUri,
+    //redirectUri: AUTH_CONFIG.redirectUri,
+    redirectUri: AUTH_CONFIG.redirectUriAuth,
     callbackURL: AUTH_CONFIG.callbackURL,
     scope: AUTH_CONFIG.scope,
     //audience: `https://${AUTH_CONFIG.domain}/userinfo`,
     //redirectUri: 'http://localhost:4200/callback',
-  });
+  }); 
 
   constructor(private router: Router, private _http: HttpClient, private afs : AngularFirestore) {
     this.userProfile = JSON.parse(localStorage.getItem(SESSION_CONFIG.profile));
@@ -313,7 +314,7 @@ export class AuthService {
             //sessionStorage.setItem(SESSION_CONFIG.PostJobRole,JSON.stringify(this.isEmployerPostJobRole));
             localStorage.setItem(SESSION_CONFIG.ResumeSearchRole,JSON.stringify(this.isEmployerResumeSearchRole));
           if (this.isAdminUserRole)
-            localStorage.setItem(SESSION_CONFIG.PostJobRole,JSON.stringify(this.isAdminUserRole));
+            localStorage.setItem(SESSION_CONFIG.AdminRole,JSON.stringify(this.isAdminUserRole));
           if (this.isGeneralUserRole)
             localStorage.setItem(SESSION_CONFIG.UserRole,JSON.stringify(this.isGeneralUserRole));
           // console.log("Variable 1 "+this.isEmployerPostJobRole+ "  Session 1 :::::====>>> "+localStorage.getItem(SESSION_CONFIG.PostJobRole));
@@ -520,6 +521,53 @@ export class AuthService {
   private _clearExpiration() {
     // Remove token expiration from localStorage
     localStorage.removeItem('expires_at');
+  }
+
+  removeUser(username,id) {
+
+
+    //console.log("Removing User ::: "+username+ " get id token :: "+ localStorage.getItem(SESSION_CONFIG.idToken));
+    //let idToekn= 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik4wSkVSRVU0UmpreE16RXpRVEJFTWtaQlFrSkdSakUxTVRVNE9FTTNRVGhDT0VZME1UVkJPUSJ9.eyJpc3MiOiJodHRwczovL21lbW9yZWxpbmsuYXV0aDAuY29tLyIsInN1YiI6Ik5WYVNKTWpUSkZpNzA3VVMxVzFBNTVuZjY0WGg2OE1DQGNsaWVudHMiLCJhdWQiOiJodHRwczovL21lbW9yZWxpbmsuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE1OTAwNDMzODIsImV4cCI6MTU5MDEyOTc4MiwiYXpwIjoiTlZhU0pNalRKRmk3MDdVUzFXMUE1NW5mNjRYaDY4TUMiLCJzY29wZSI6InJlYWQ6Y2xpZW50X2dyYW50cyBjcmVhdGU6Y2xpZW50X2dyYW50cyBkZWxldGU6Y2xpZW50X2dyYW50cyB1cGRhdGU6Y2xpZW50X2dyYW50cyByZWFkOnVzZXJzIHVwZGF0ZTp1c2VycyBkZWxldGU6dXNlcnMgY3JlYXRlOnVzZXJzIHJlYWQ6dXNlcnNfYXBwX21ldGFkYXRhIHVwZGF0ZTp1c2Vyc19hcHBfbWV0YWRhdGEgZGVsZXRlOnVzZXJzX2FwcF9tZXRhZGF0YSBjcmVhdGU6dXNlcnNfYXBwX21ldGFkYXRhIHJlYWQ6dXNlcl9jdXN0b21fYmxvY2tzIGNyZWF0ZTp1c2VyX2N1c3RvbV9ibG9ja3MgZGVsZXRlOnVzZXJfY3VzdG9tX2Jsb2NrcyBjcmVhdGU6dXNlcl90aWNrZXRzIHJlYWQ6Y2xpZW50cyB1cGRhdGU6Y2xpZW50cyBkZWxldGU6Y2xpZW50cyBjcmVhdGU6Y2xpZW50cyByZWFkOmNsaWVudF9rZXlzIHVwZGF0ZTpjbGllbnRfa2V5cyBkZWxldGU6Y2xpZW50X2tleXMgY3JlYXRlOmNsaWVudF9rZXlzIHJlYWQ6Y29ubmVjdGlvbnMgdXBkYXRlOmNvbm5lY3Rpb25zIGRlbGV0ZTpjb25uZWN0aW9ucyBjcmVhdGU6Y29ubmVjdGlvbnMgcmVhZDpyZXNvdXJjZV9zZXJ2ZXJzIHVwZGF0ZTpyZXNvdXJjZV9zZXJ2ZXJzIGRlbGV0ZTpyZXNvdXJjZV9zZXJ2ZXJzIGNyZWF0ZTpyZXNvdXJjZV9zZXJ2ZXJzIHJlYWQ6ZGV2aWNlX2NyZWRlbnRpYWxzIHVwZGF0ZTpkZXZpY2VfY3JlZGVudGlhbHMgZGVsZXRlOmRldmljZV9jcmVkZW50aWFscyBjcmVhdGU6ZGV2aWNlX2NyZWRlbnRpYWxzIHJlYWQ6cnVsZXMgdXBkYXRlOnJ1bGVzIGRlbGV0ZTpydWxlcyBjcmVhdGU6cnVsZXMgcmVhZDpydWxlc19jb25maWdzIHVwZGF0ZTpydWxlc19jb25maWdzIGRlbGV0ZTpydWxlc19jb25maWdzIHJlYWQ6aG9va3MgdXBkYXRlOmhvb2tzIGRlbGV0ZTpob29rcyBjcmVhdGU6aG9va3MgcmVhZDplbWFpbF9wcm92aWRlciB1cGRhdGU6ZW1haWxfcHJvdmlkZXIgZGVsZXRlOmVtYWlsX3Byb3ZpZGVyIGNyZWF0ZTplbWFpbF9wcm92aWRlciBibGFja2xpc3Q6dG9rZW5zIHJlYWQ6c3RhdHMgcmVhZDp0ZW5hbnRfc2V0dGluZ3MgdXBkYXRlOnRlbmFudF9zZXR0aW5ncyByZWFkOmxvZ3MgcmVhZDpzaGllbGRzIGNyZWF0ZTpzaGllbGRzIHVwZGF0ZTpzaGllbGRzIGRlbGV0ZTpzaGllbGRzIHJlYWQ6YW5vbWFseV9ibG9ja3MgZGVsZXRlOmFub21hbHlfYmxvY2tzIHVwZGF0ZTp0cmlnZ2VycyByZWFkOnRyaWdnZXJzIHJlYWQ6Z3JhbnRzIGRlbGV0ZTpncmFudHMgcmVhZDpndWFyZGlhbl9mYWN0b3JzIHVwZGF0ZTpndWFyZGlhbl9mYWN0b3JzIHJlYWQ6Z3VhcmRpYW5fZW5yb2xsbWVudHMgZGVsZXRlOmd1YXJkaWFuX2Vucm9sbG1lbnRzIGNyZWF0ZTpndWFyZGlhbl9lbnJvbGxtZW50X3RpY2tldHMgcmVhZDp1c2VyX2lkcF90b2tlbnMgY3JlYXRlOnBhc3N3b3Jkc19jaGVja2luZ19qb2IgZGVsZXRlOnBhc3N3b3Jkc19jaGVja2luZ19qb2IgcmVhZDpjdXN0b21fZG9tYWlucyBkZWxldGU6Y3VzdG9tX2RvbWFpbnMgY3JlYXRlOmN1c3RvbV9kb21haW5zIHVwZGF0ZTpjdXN0b21fZG9tYWlucyByZWFkOmVtYWlsX3RlbXBsYXRlcyBjcmVhdGU6ZW1haWxfdGVtcGxhdGVzIHVwZGF0ZTplbWFpbF90ZW1wbGF0ZXMgcmVhZDptZmFfcG9saWNpZXMgdXBkYXRlOm1mYV9wb2xpY2llcyByZWFkOnJvbGVzIGNyZWF0ZTpyb2xlcyBkZWxldGU6cm9sZXMgdXBkYXRlOnJvbGVzIHJlYWQ6cHJvbXB0cyB1cGRhdGU6cHJvbXB0cyByZWFkOmJyYW5kaW5nIHVwZGF0ZTpicmFuZGluZyByZWFkOmxvZ19zdHJlYW1zIGNyZWF0ZTpsb2dfc3RyZWFtcyBkZWxldGU6bG9nX3N0cmVhbXMgdXBkYXRlOmxvZ19zdHJlYW1zIGNyZWF0ZTpzaWduaW5nX2tleXMgcmVhZDpzaWduaW5nX2tleXMgdXBkYXRlOnNpZ25pbmdfa2V5cyByZWFkOmxpbWl0cyB1cGRhdGU6bGltaXRzIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.rnwVJLGMUnixcw_1dcFkM9LWINnJwbKU2Ma2ABUieYWogywFefcSmm5ZG3OR6iMV4UfZ6XMPqLCT2qh8729JGGiZkthrvnfqeVfOyA9FiYYzZKdco27NW9dVFezIJ42MRnottN61DDuiLQGHWFV_aXmrn1Qzo8Wunhf6UcYS9tQICv375B4crdC48vD4qyR2zaIH9TxpjL78WliUR7W4DDNtAQF8tYdjG-UroBNOzI0iYv6ViZ_5dyfKVDp6LF-TprDxdP01_UD7c9Pk96JWvXUsWlOTHOtrxeXR7K_zX30QYlduW8JFfBN8qOLyPiuSeguKR0u1w3imtykC6LIrTA';
+
+    //let headers = new Headers();
+    //let header = new HttpHeaders({ 'Access-Control-Allow-Origin': '*', 'Authorization': idToekn });
+    // let header = new HttpHeaders();
+    // header.set('authorization', 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik4wSkVSRVU0UmpreE16RXpRVEJFTWtaQlFrSkdSakUxTVRVNE9FTTNRVGhDT0VZME1UVkJPUSJ9.eyJpc3MiOiJodHRwczovL21lbW9yZWxpbmsuYXV0aDAuY29tLyIsInN1YiI6Ik5WYVNKTWpUSkZpNzA3VVMxVzFBNTVuZjY0WGg2OE1DQGNsaWVudHMiLCJhdWQiOiJodHRwczovL21lbW9yZWxpbmsuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE1OTAwNDMzODIsImV4cCI6MTU5MDEyOTc4MiwiYXpwIjoiTlZhU0pNalRKRmk3MDdVUzFXMUE1NW5mNjRYaDY4TUMiLCJzY29wZSI6InJlYWQ6Y2xpZW50X2dyYW50cyBjcmVhdGU6Y2xpZW50X2dyYW50cyBkZWxldGU6Y2xpZW50X2dyYW50cyB1cGRhdGU6Y2xpZW50X2dyYW50cyByZWFkOnVzZXJzIHVwZGF0ZTp1c2VycyBkZWxldGU6dXNlcnMgY3JlYXRlOnVzZXJzIHJlYWQ6dXNlcnNfYXBwX21ldGFkYXRhIHVwZGF0ZTp1c2Vyc19hcHBfbWV0YWRhdGEgZGVsZXRlOnVzZXJzX2FwcF9tZXRhZGF0YSBjcmVhdGU6dXNlcnNfYXBwX21ldGFkYXRhIHJlYWQ6dXNlcl9jdXN0b21fYmxvY2tzIGNyZWF0ZTp1c2VyX2N1c3RvbV9ibG9ja3MgZGVsZXRlOnVzZXJfY3VzdG9tX2Jsb2NrcyBjcmVhdGU6dXNlcl90aWNrZXRzIHJlYWQ6Y2xpZW50cyB1cGRhdGU6Y2xpZW50cyBkZWxldGU6Y2xpZW50cyBjcmVhdGU6Y2xpZW50cyByZWFkOmNsaWVudF9rZXlzIHVwZGF0ZTpjbGllbnRfa2V5cyBkZWxldGU6Y2xpZW50X2tleXMgY3JlYXRlOmNsaWVudF9rZXlzIHJlYWQ6Y29ubmVjdGlvbnMgdXBkYXRlOmNvbm5lY3Rpb25zIGRlbGV0ZTpjb25uZWN0aW9ucyBjcmVhdGU6Y29ubmVjdGlvbnMgcmVhZDpyZXNvdXJjZV9zZXJ2ZXJzIHVwZGF0ZTpyZXNvdXJjZV9zZXJ2ZXJzIGRlbGV0ZTpyZXNvdXJjZV9zZXJ2ZXJzIGNyZWF0ZTpyZXNvdXJjZV9zZXJ2ZXJzIHJlYWQ6ZGV2aWNlX2NyZWRlbnRpYWxzIHVwZGF0ZTpkZXZpY2VfY3JlZGVudGlhbHMgZGVsZXRlOmRldmljZV9jcmVkZW50aWFscyBjcmVhdGU6ZGV2aWNlX2NyZWRlbnRpYWxzIHJlYWQ6cnVsZXMgdXBkYXRlOnJ1bGVzIGRlbGV0ZTpydWxlcyBjcmVhdGU6cnVsZXMgcmVhZDpydWxlc19jb25maWdzIHVwZGF0ZTpydWxlc19jb25maWdzIGRlbGV0ZTpydWxlc19jb25maWdzIHJlYWQ6aG9va3MgdXBkYXRlOmhvb2tzIGRlbGV0ZTpob29rcyBjcmVhdGU6aG9va3MgcmVhZDplbWFpbF9wcm92aWRlciB1cGRhdGU6ZW1haWxfcHJvdmlkZXIgZGVsZXRlOmVtYWlsX3Byb3ZpZGVyIGNyZWF0ZTplbWFpbF9wcm92aWRlciBibGFja2xpc3Q6dG9rZW5zIHJlYWQ6c3RhdHMgcmVhZDp0ZW5hbnRfc2V0dGluZ3MgdXBkYXRlOnRlbmFudF9zZXR0aW5ncyByZWFkOmxvZ3MgcmVhZDpzaGllbGRzIGNyZWF0ZTpzaGllbGRzIHVwZGF0ZTpzaGllbGRzIGRlbGV0ZTpzaGllbGRzIHJlYWQ6YW5vbWFseV9ibG9ja3MgZGVsZXRlOmFub21hbHlfYmxvY2tzIHVwZGF0ZTp0cmlnZ2VycyByZWFkOnRyaWdnZXJzIHJlYWQ6Z3JhbnRzIGRlbGV0ZTpncmFudHMgcmVhZDpndWFyZGlhbl9mYWN0b3JzIHVwZGF0ZTpndWFyZGlhbl9mYWN0b3JzIHJlYWQ6Z3VhcmRpYW5fZW5yb2xsbWVudHMgZGVsZXRlOmd1YXJkaWFuX2Vucm9sbG1lbnRzIGNyZWF0ZTpndWFyZGlhbl9lbnJvbGxtZW50X3RpY2tldHMgcmVhZDp1c2VyX2lkcF90b2tlbnMgY3JlYXRlOnBhc3N3b3Jkc19jaGVja2luZ19qb2IgZGVsZXRlOnBhc3N3b3Jkc19jaGVja2luZ19qb2IgcmVhZDpjdXN0b21fZG9tYWlucyBkZWxldGU6Y3VzdG9tX2RvbWFpbnMgY3JlYXRlOmN1c3RvbV9kb21haW5zIHVwZGF0ZTpjdXN0b21fZG9tYWlucyByZWFkOmVtYWlsX3RlbXBsYXRlcyBjcmVhdGU6ZW1haWxfdGVtcGxhdGVzIHVwZGF0ZTplbWFpbF90ZW1wbGF0ZXMgcmVhZDptZmFfcG9saWNpZXMgdXBkYXRlOm1mYV9wb2xpY2llcyByZWFkOnJvbGVzIGNyZWF0ZTpyb2xlcyBkZWxldGU6cm9sZXMgdXBkYXRlOnJvbGVzIHJlYWQ6cHJvbXB0cyB1cGRhdGU6cHJvbXB0cyByZWFkOmJyYW5kaW5nIHVwZGF0ZTpicmFuZGluZyByZWFkOmxvZ19zdHJlYW1zIGNyZWF0ZTpsb2dfc3RyZWFtcyBkZWxldGU6bG9nX3N0cmVhbXMgdXBkYXRlOmxvZ19zdHJlYW1zIGNyZWF0ZTpzaWduaW5nX2tleXMgcmVhZDpzaWduaW5nX2tleXMgdXBkYXRlOnNpZ25pbmdfa2V5cyByZWFkOmxpbWl0cyB1cGRhdGU6bGltaXRzIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.rnwVJLGMUnixcw_1dcFkM9LWINnJwbKU2Ma2ABUieYWogywFefcSmm5ZG3OR6iMV4UfZ6XMPqLCT2qh8729JGGiZkthrvnfqeVfOyA9FiYYzZKdco27NW9dVFezIJ42MRnottN61DDuiLQGHWFV_aXmrn1Qzo8Wunhf6UcYS9tQICv375B4crdC48vD4qyR2zaIH9TxpjL78WliUR7W4DDNtAQF8tYdjG-UroBNOzI0iYv6ViZ_5dyfKVDp6LF-TprDxdP01_UD7c9Pk96JWvXUsWlOTHOtrxeXR7K_zX30QYlduW8JFfBN8qOLyPiuSeguKR0u1w3imtykC6LIrTA');
+    // header.set( 'Access-Control-Allow-Origin', '*');
+
+   
+
+    let header = { authorization: AUTH_CONFIG.idToekn };
+    //let header = { client_id:'NVaSJMjTJFi707US1W1A55nf64Xh68MC',client_secret:'9N0M0ao77gwE9xcO3UpEV7eL9o0DGFdeECGHDDZD7raunugOQs8UHWlHHbwUwsds', 'Access-Control-Allow-Origin': '*'};
+
+    let optionsHeader = {  headers: header  }
+    //headers.append('Authorization', idToekn);
+    //console.log("Test : "+header);
+    //return this._http.delete('https://memorelink.auth0.com/api/v2/' + id, optionsHeader).map(response =>{
+      return this._http.delete(AUTH_CONFIG.userURL + id, optionsHeader).map(response =>{
+      console.log(response);
+      this.logout();
+    });
+    
+    
+
+    //const array = JSON.parse(JSON.stringify(localStorage.getItem(SESSION_CONFIG.profile))) as any[];
+    //console.log(array['sub']);
+    
+
+    // this.auth0.redirect.removeUser
+    // ({
+    //   connection: AUTH_CONFIG.connection,
+    //   responseType: AUTH_CONFIG.responseType, // 'token'
+    //   username: username,
+    //   //audience: '{MeMoreLink}',
+    //   scope: AUTH_CONFIG.scope, //'openid profile',
+    // }, function(err, authResult) {
+      //this.logout();
+
+    // });
+
+
   }
 
 }

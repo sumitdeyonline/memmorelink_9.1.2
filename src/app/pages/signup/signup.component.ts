@@ -4,6 +4,7 @@ import { Signup } from '../../services/authentication/signup';
 import { AuthService } from '../../services/authentication/auth.service';
 import { AUTH_CONFIG, FIREBASE_CONFIG } from '../../global-config';
 import { UserdetailsService } from 'src/app/services/firebase/userdetails/userdetails.service';
+import { EmailService } from 'src/app/services/email/email.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class SignupComponent implements OnInit {
 
   error: any[]; // {"name":"BadRequestError","code":"user_exists","description":"The user already exists.","statusCode":400}
 
-  constructor(public _auth: AuthService, fb: FormBuilder, private udetails: UserdetailsService) {
+  constructor(public _auth: AuthService, fb: FormBuilder, private udetails: UserdetailsService, private sEmail: EmailService) {
 
     this.signupForm = fb.group({
       email: ['', Validators.required,Validators.email],
@@ -44,10 +45,14 @@ export class SignupComponent implements OnInit {
       modelSignup => {
           // refresh the list
           //alert("User Addred");
-          this.signupSucessMessage = model.email+" has been Sucessfully Registered"
+          this.signupSucessMessage = model.email+" has been sucessfully registered"
           //console.log(this.signupSucessMessage);
           this.udetails.addUpdateUserDetails(null, model.email,FIREBASE_CONFIG.UserRole, model.company, null,model.companyAddress,model.phone,0);
           //this.router.navigate(['/signupconfirm']);
+          let subject = 'Welcome to MeMoreLink!';
+          let body = 'Thank you <b>'+model.email+'</b> for registering.<br/><br/>Best of luck <br /><br /> <b>Thank you <br>MeMoreLink Team</b> '
+          this.sEmail.sendEmail(model.email,'',subject,body);
+          window.scroll(0,0);
           return true;
       },
       error => {
@@ -56,7 +61,7 @@ export class SignupComponent implements OnInit {
         //console.log("Message 1 "+error[1].name);
         //console.log("Message 2 "+error.description);
         //this.signupMessage = error; //   "This user already exists."
-        this.signupMessage = "User already exists or password not satisfy minimum requrements"; //   "This user already exists."
+        this.signupMessage = "User already exists or password does not satisfy minimum requrements"; //   "This user already exists."
       });
 
 

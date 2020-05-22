@@ -17,7 +17,7 @@
                 </p>
                 <form #signupForm="ngForm" (ngSubmit)="signUp(signupForm.value)" >
                   <!--label for="username">User Email:</label> <input type="text" [value]="signup.username"  ngModel name="username" #username="ngModel" id="username" email class="required input_field" required/-->
-                  <label for="email">User Email<span style="color: red;">&nbsp;*</span>:</label> 
+                  <label for="email">User Email<span style="color: red;">&nbsp;*</span></label> 
                     <input type="text" [value]="signup.email" 
                     (focus)="onFocus($event)"  ngModel name="email" 
                     #email="ngModel" id="email" email 
@@ -41,7 +41,7 @@
                   </div--> 
         
                   
-                  <label for="password">Password<span style="color: red;">&nbsp;*</span>:</label> <input type="password" [value]="signup.password" ngModel name="password" #password="ngModel" id="password" class="form-control input-sm" required/>
+                  <label for="password">Password<span style="color: red;">&nbsp;*</span></label> <input type="password" [value]="signup.password" ngModel name="password" #password="ngModel" id="password" class="form-control input-sm" required/>
                   <div class="error_Message" *ngIf="Fieldlength(password.value) < 5 && password.touched">
                     Password must be at least 5 characters long.
                   </div> 
@@ -57,7 +57,7 @@
                   <div class="error_Message" *ngIf="password.value!=repassword.value">
                     Re-enter the same password
                   </div> 
-                  <label for="repassword">Re Enter Password<span style="color: red;">&nbsp;*</span>:</label> <input type="password" [value]="signup.repassword" ngModel name="repassword" #repassword="ngModel" id="repassword" class="form-control input-sm" required/>
+                  <label for="repassword">Re Enter Password<span style="color: red;">&nbsp;*</span></label> <input type="password" [value]="signup.repassword" ngModel name="repassword" #repassword="ngModel" id="repassword" class="form-control input-sm" required/>
         
                   <div class="error_Message" *ngIf="Fieldlength(repassword.value) < 5 && repassword.touched">
                     Password must be at least 5 characters long.

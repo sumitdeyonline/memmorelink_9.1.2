@@ -38,6 +38,7 @@ export class UserprofileService {
   userRoleCollection: AngularFirestoreCollection <UserRole>;
   userRoleProfilec: Observable<UserRole[]>;
 
+  userProfile: UserProfile[];
   //userProfile = [];
 
   constructor(private afs : AngularFirestore, private auth: AuthService, private http: HttpClient,private sEmail: EmailService) {
@@ -511,5 +512,36 @@ export class UserprofileService {
       });
 
   }
+
+  deleteUserProfileByName(username) {
+
+    this.getUserDetails(username,'U').subscribe(uprofile=> {
+      this.userProfile = uprofile;
+      console.log("Profile :::: "+this.userProfile[0].id);
+      this.deleteUserProfileById(this.userProfile[0].id);
+
+      this.client = algoliasearch(SEARCH_CONFIG.ALGOLIA_APP_ID, SEARCH_CONFIG.ALGOLIA_API_KEY,
+        { protocol: SEARCH_CONFIG.PROTOCOLS });
+  
+        this.index = this.client.initIndex(SEARCH_CONFIG.INDEX_NAME_PROFILE);
+  
+  
+        this.index.deleteObject(this.userProfile[0].id, function(err, content) {
+          if (err) throw err;
+         // console.log("Delete Content :::::: "+content);
+        });
+      
+
+    })
+
+
+  }
+
+  deleteUserProfileById(id) {
+    //console.log("List Service ..... 3 ::::::=> "+id);
+    this.upDoc = this.afs.doc(`${FIREBASE_CONFIG.UserProfile}/${id}`);
+    this.upDoc.delete();
+
+  }  
 
 }

@@ -70,7 +70,7 @@ export class JobpoststatusComponent implements OnInit {
     
         let sdate = new Date();
         //this.startDt = new Date(sdate.getTime() - (2*24*60*60*1000));
-        this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-1));
+        this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-SEARCH_CONFIG.NO_OF_DAYS_RESULT));
         //let edate = new Date();
         this.endDt = new Date();
         //this.endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+edate.getDate()); 

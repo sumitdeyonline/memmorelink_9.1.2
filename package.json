@@ -32,6 +32,7 @@
     "@ckeditor/ckeditor5-image": "^18.0.0",
     "@ng-bootstrap/ng-bootstrap": "^6.0.3",
     "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
+    "@syncfusion/ej2-angular-dropdowns": "^18.1.52",
     "algoliasearch": "^3.35.1",
     "angular2-jwt": "^0.2.3",
     "angularfire2": "^5.4.2",

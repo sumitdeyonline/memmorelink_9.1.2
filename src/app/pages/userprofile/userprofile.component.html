@@ -425,7 +425,7 @@
                 </div>
             </div>
 
-            <uploadresume></uploadresume>
+            <!-- <uploadresume></uploadresume> -->
             <!--div class="row">
                 <div class="col-sm-2">
                     <label style="font-weight: bold;">Resume Upload</label>
@@ -537,9 +537,13 @@
                 <div class="form-actions floatRight">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="{{editProfileText}}" class="btn btn-primary btn-sm" [disabled]="!isUpdate" (click)="EnableEdit()">
                 </div>
+                <div class="form-actions floatRight">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" routerLink="/uploadresumepage" value="Upload Resume" class="btn btn-primary btn-sm">
+                </div>
             </div>
             </form>
             <br>
+
         </div>
     </div>
 </div>

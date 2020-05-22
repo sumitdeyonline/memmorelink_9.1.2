@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   randNum: number=1;
-  constructor(public auth: AuthService,  private router: Router,) {
+  constructor(private router: Router) {
     window.scroll(0,0);
     //this.router.navigate(['/employerhomepage']); 
     //console.log("App Component .... !!!!!");
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     //   console.log("This is a test");
     //   this.router.navigate(['/employerhomepage']); 
     // }
-    auth.handleAuthentication();
+    // auth.handleAuthentication();
     // if ((auth.isAuthenticated()) && (auth.isResumeSearchRole() || auth.isPostJobRole())) {
     //   console.log("This is a test");
     //   this.router.navigate(['/employerhomepage']); 

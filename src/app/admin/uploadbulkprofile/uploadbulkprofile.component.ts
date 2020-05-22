@@ -162,7 +162,7 @@ export class UploadbulkprofileComponent implements OnInit {
       modelSignup => {
           // refresh the list
           //alert("User Addred");
-          signupSucessMessage = this.signup.email+" has been Sucessfully Registered";
+          signupSucessMessage = this.signup.email+" has been sucessfully registered";
           //console.log(signupSucessMessage);
           //this.udetails.addUpdateUserDetailsBulk(null, username,FIREBASE_CONFIG.UserRole, this.signup.company, this.signup.companyAddress,this.signup.phone,0,ResumeURL,ResumeFileName,contenttype,csvRecords);
           this.udetails.addUpdateUserDetailsBulk(null, username,FIREBASE_CONFIG.UserRole, this.signup.company, this.signup.companyAddress,this.signup.phone,0,ResumeURL,ResumeFileName,contenttype,csvRecords);

@@ -197,7 +197,9 @@
                         <label style="font-weight: bold;" for="JobCity">City<span style="color: red;">&nbsp;*</span></label>
                     </div>
                     <div class="col">
-                        <input type="text" autocomplete="off" ngModel name="JobCity" #JobCity="ngModel" id="JobCity" [ngModel]="postjobService.selectedPostJobc?.JobCity" (ngModelChange)="postjobService.selectedPostJobc.JobCity" class="form-control input-sm" required/>
+                        <input type="text" autocomplete="off" ngModel name="JobCity" #JobCity="ngModel" id="JobCity" [ngModel]="postjobService.selectedPostJobc?.JobCity" (ngModelChange)="postjobService.selectedPostJobc.JobCity" class="form-control input-sm" autocomplete="off" [ngbTypeahead]="search" (keyup)="zipcodeCitySearch($event.target.value)" (selectItem)="setCountryState($event)" required/>
+                        <!-- <input type="text" autocomplete="off" ngModel name="JobCity" #JobCity="ngModel" id="JobCity" [ngModel]="postjobService.selectedPostJobc?.JobCity" (ngModelChange)="postjobService.selectedPostJobc.JobCity" class="form-control input-sm" autocomplete="off" required/> -->
+
                         <div class="error_Message" *ngIf="JobCity.invalid && (JobCity.dirty || JobCity.touched)">
                             Please Enter City
                         </div>
@@ -216,7 +218,7 @@
                     <div class="col">
                         <select ngModel name="JobCountry" #JobCountry="ngModel" id="JobCountry" [ngModel]="postjobService.selectedPostJobc?.JobCountry" class="form-control input-sm" (ngModelChange)="postjobService.selectedPostJobc.JobCountry" (change)="getState($event.target.value)" required>
                           <option>Select Country</option>
-                          <option [value]="country.countryID" *ngFor="let country of countries">{{country.CountryName}}</option>
+                          <option [value]="country.CountryName" *ngFor="let country of countries">{{country.CountryName}}</option>
 
                         </select>
                         <div class="error_Message" *ngIf="JobCountry.invalid && (JobCountry.dirty || JobCountry.touched)">
@@ -267,24 +269,22 @@
 
                 <div class="row">
                     <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="EmploymentTypes">Employment Type<span style="color: red;">&nbsp;*</span></label>
+                        <label style="font-weight: bold;" for="EmploymentTypes">Employment Type</label>
                     </div>
                     <div class="col">
-                      <select ngModel name="EmploymentTypes" multiple="multiple" #EmploymentTypes="ngModel" id="EmploymentTypes" [ngModel]="postjobService.selectedPostJobc?.EmploymentTypes"  (ngModelChange)="postjobService.selectedPostJobc.EmploymentTypes" class="form-control input-sm" required>
-                        <!-- <option *ngFor="let empType of selectedEmpTypes" ng-if="empType!=','" value = "empType" selected>{{empType}}</option> -->
-                        <option value="">Select Single/Multiple Employment Type</option>
-                        <option [value]="emptype.emptypeName" *ngFor="let emptype of EmpTypes">{{emptype.emptypeName}}</option>
-                        <!-- <option value="Part Time">Part Time</option>
-                        <option value="Full Time">Full Time</option>
-                        <option value="Contract W2">Contract W2</option>
-                        <option value="Contract Corp-to-Corp">Contract Corp-to-Corp</option>
-                        <option value="Contract Independent">Contract Independent</option>
-                        <option value="Contract Independent">Contract to Hire</option> 
-                        <option value="Contract Independent">Contract to Hire W2</option>                                                -->
-                      </select>
+                        <ejs-multiselect id='EmploymentTypes' #formField [dataSource]='EmpTypeDropDown' [fields]='localFields' [value]='EmpTypeDropDownTmp' required></ejs-multiselect> 
+                        <!-- <div class="error_Message" *ngIf="mulObj.Length < 1 && (EmploymentTypes.dirty || EmploymentTypes.touched)">
+                            Please Enter Employee Type
+                        </div> -->
+                        <!-- <select ngModel name="EmploymentTypes" multiple="multiple" #EmploymentTypes="ngModel" id="EmploymentTypes" [ngModel]="postjobService.selectedPostJobc?.EmploymentTypes"  (ngModelChange)="postjobService.selectedPostJobc.EmploymentTypes" class="form-control input-sm" required>
+                            <option value="">Select Single/Multiple Employment Type</option>
+                            <option [value]="emptype.emptypeName" *ngFor="let emptype of EmpTypes">{{emptype.emptypeName}}</option>
+                        </select
                         <div class="error_Message" *ngIf="EmploymentTypes.invalid && (EmploymentTypes.dirty || EmploymentTypes.touched)">
-                          Please Enter Employee Type
-                        </div>                      
+                            Please Enter Employee Type
+                        </div> -->
+
+                    
                     </div>
                 </div>
                 <div class="row">

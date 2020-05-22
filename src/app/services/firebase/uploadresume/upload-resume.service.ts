@@ -36,6 +36,7 @@ export class UploadResumeService {
   upDoc: AngularFirestoreDocument<UploadResume>;
 
   uploadResume: Array<UploadResume> = [];
+  uResume: UploadResume[];
 
   private basePath = FIREBASE_CONFIG.UploadPath; //'/uploads';
   private tempResumePath = FIREBASE_CONFIG.TempResume; //'/uploads';
@@ -409,5 +410,27 @@ export class UploadResumeService {
 
   }
 
+
+  deleteUloadResumeByUsername(username) {
+    let id;
+    this.getResumeDetails(username).subscribe(ures=>{
+      this.uResume = ures;
+      for(let i=0;i<this.uResume.length;i++) {
+        id = this.uResume[i].id;
+        //console.log("ID  :: "+id);
+        this.deleteUloadResumeByid(id);
+        
+      }
+    })
+
+  }
+
+  deleteUloadResumeByid(id) {
+        //console.log("Apply Job ID : "+id);
+    this.upDoc = this.afs.doc(`${FIREBASE_CONFIG.UploadResume}/${id}`);
+    this.upDoc.delete();
+  }
+
+  
 
 }

@@ -164,12 +164,23 @@ export class ApplyjobComponent implements OnInit {
     // } else {
     //   uploadResume = 
     // }
-    let subject = 'Your job has been applyed ('+this.pjob.JobTitle+')';
-    let body = '<i>Your job has been applied</i> <br/></br> <b>Job Title: </b> '+this.pjob.JobTitle+' <br /> <b>Job Location: </b>'+this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry+'<br /> <b>Job Description : </b>'+this.pjob.JobDesc+' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
+
+    // Candidate Job Email 
+    let subject = 'You have applied for: '+this.pjob.JobTitle;
+    let body = 'Thank you <b>'+this.applyJobForm.get('Email').value+'</b>  for applying for the job.<br/></br> <b>Job Title: </b> '+this.pjob.JobTitle+' <br /> <b>Job Location: </b>'+this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry+'<br /> <b>Job Description : </b>'+this.pjob.JobDesc+' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
     this.sEmail.sendEmail(this.applyJobForm.get('Email').value,'',subject,body);
     
-    let vJobSublect =this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+' has applied to job ('+this.pjob.JobTitle+')';
-    let vBody ='<i>'+this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+ ' has applied to job</i> <br/> <br/> <b>Candidate Email: </b>'+this.applyJobForm.get('Email').value+'  <br/> <b>Candidate Phone: </b>'+this.applyJobForm.get('PhoneNumber').value+'  <br /> <b>Job Title: </b>'+this.pjob.JobTitle+'  <br /> <b>Job Location: </b>'+this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry+'<br /> <b>Cover Letter : </b>'+this.applyJobForm.get('CoverLetter').value+' <br /> <b>Resume  : </b><a href="'+this.applyJob.fileUploadURL+'">Resume Link</a> <br /><b>Job Description : </b>'+this.pjob.JobDesc+' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
+    // Recruiter Job Email 
+
+    let vJobSublect =this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+' has applied for the job '+this.pjob.JobTitle;
+    let vBody ='<i>'+this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+ ' has applied for the job</i> <br/> <br/> <b>Candidate Email: </b>'+this.applyJobForm.get('Email').value+
+              '  <br/> <b>Candidate Phone: </b>'+this.applyJobForm.get('PhoneNumber').value+
+              '  <br/> <b>Cover Letter : </b>'+this.applyJobForm.get('CoverLetter').value+
+              ' <br /> <b>Resume  : </b><a href="'+this.applyJob.fileUploadURL+'">Resume Link</a><br>'+
+              '  <br /> <b>Job Title: </b>'+this.pjob.JobTitle+
+              '  <br /> <b>Job Location: </b>'+this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry+
+              ' <br /><b>Job Description : </b>'+this.pjob.JobDesc+
+              ' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
     this.sEmail.sendEmail(this.pjob.ApplyToEmail,'',vJobSublect,vBody);
 
     if ((this.pjob.CCToEmail != null) && (this.pjob.CCToEmail != undefined)) {

@@ -104,6 +104,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AdminpageComponent } from './home/adminpage/adminpage.component';
 import { EmployeepageComponent } from './home/employeepage/employeepage.component';
+import { AuthlandingpageComponent } from './home/authlandingpage/authlandingpage.component';
 
 //import { MiddleimageComponent } from './home/middleimage/middleimage.component';
 // import { HomeComponent } from './homepage/home/home.component';
@@ -131,6 +132,7 @@ import { EmployeepageComponent } from './home/employeepage/employeepage.componen
     EmployerpageComponent,
     AdminpageComponent,
     EmployeepageComponent,
+    AuthlandingpageComponent,
 
     //NotfoundComponent,
     //LoginComponent,

@@ -10,9 +10,9 @@
     <table>
         <thead>
             <tr>
-                <th colspan="3">
+                <th colspan="4">
                     <!-- Today's Applied Job&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a> -->
-                    Last 5 day's Applied Job&nbsp;({{aJob?.length}})
+                    Applied Job&nbsp;({{aJob?.length}})
 
                     <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                 </th>
@@ -21,21 +21,64 @@
         </thead>      
         <thead>
             <tr>
+                <th>Company</th>
                 <th>Job Title</th>
                 <th>Location</th>
                 <!-- <th>Employment Type</th>                 -->
-                <th>Date</th>
-                <th>Resume</th>
+                <th>Date Applied</th>
+                <th>Resume File</th>
 
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let aj of aJob">
+                <td>{{aj.company}}</td>
                 <td>{{ aj.JobTitle?.substring(0,20) }}</td>
                 <td>{{aj.joblocation}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
                 <td>{{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>
                 <td><a href="{{aj.fileUploadURL}}" target="_blank">Download</a></td>
+            </tr>
+        </tbody>
+
+
+
+    </table>  
+
+</div>
+
+<br>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <!-- Today's Applied Job&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a> -->
+                    Uploaded Resume(s)
+
+                    <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
+                </th>
+
+            </tr>  
+        </thead>      
+        <thead>
+            <tr>
+                <th>Resume Filename</th>
+                <th>Date Created</th>
+                <th>Date Modified</th>
+                <!-- <th>Employment Type</th>                 -->
+                <th>URL</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let rm of uresume">
+                <td>{{ rm.ResumeFileName?.substring(0,20) }}</td>
+                <td>{{ rm.CreatedDate}}</td>
+                <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
+                <td>{{rm.ModifiedDate}}</td>
+                <td><a href="{{rm.ResumeURL}}" target="_blank">Download</a></td>
             </tr>
         </tbody>
 
@@ -56,45 +99,6 @@
 
             </tr>
         </thead>
-
-    </table>  
-
-</div>
-
-<br>
-
-<div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th colspan="3">
-                    <!-- Today's Applied Job&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a> -->
-                    Uploaded Resume
-
-                    <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
-                </th>
-
-            </tr>  
-        </thead>      
-        <thead>
-            <tr>
-                <th>Resume Filename</th>
-                <th>Create Date</th>
-                <!-- <th>Employment Type</th>                 -->
-                <th>Modified Date</th>
-                <th>URL</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let rm of uresume">
-                <td>{{ rm.ResumeFileName?.substring(0,20) }}</td>
-                <td>{{ rm.CreatedDate}}</td>
-                <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
-                <td>{{rm.ModifiedDate}}</td>
-                <td><a href="{{rm.ResumeURL}}" target="_blank">Download</a></td>
-            </tr>
-        </tbody>
 
         <!-- <thead>
             <tr>

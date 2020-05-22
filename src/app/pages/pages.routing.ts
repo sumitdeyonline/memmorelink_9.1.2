@@ -17,6 +17,7 @@ import { UserProfileComponent } from './userprofile';
 import { AuthGuardService } from '../services/authentication/auth-guard.service';
 import { TechNewsDetailsComponent, TechNewsPageComponent } from './tech-news';
 import { UploadresumepageComponent } from './uploadresumepage/uploadresumepage.component';
+import { RemoreuserComponent } from './remoreuser/remoreuser.component';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -66,7 +67,11 @@ export const pagesRouting = RouterModule.forChild([
         canActivate: [AuthGuardService]
     }, 
 
-
+    {
+        path: 'removeuser',
+        component: RemoreuserComponent,
+        canActivate: [AuthGuardService]
+    }, 
     
     {
         path: 'jobdetails/:id',

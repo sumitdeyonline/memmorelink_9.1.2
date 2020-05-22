@@ -123,7 +123,7 @@ export class ValueServicesComponent implements OnInit {
          //console.log("Company URL ::::: "+model.CompanyLogoURL);
         // console.log("Resume Search ::::: "+model.resumesearch);
         this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, model.userRole, model.company, model.CompanyLogoURL, model.companyAddress, model.phone,this.jobcount);
-        this.valueservicesSucessMessage = model.email+" has been Sucessfully Updated."
+        this.valueservicesSucessMessage = model.email+" has been sucessfully updated."
         let subject = 'Thank you '+model.email+' for the service ('+ this.userActualRole+')';
         let body = 'Thank you <b>'+model.email+'</b> for the service ('+ this.userActualRole+'). Best of luck <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
         this.sEmail.sendEmail(model.email,'',subject,body);
@@ -134,14 +134,14 @@ export class ValueServicesComponent implements OnInit {
           modelsignup => {
               // refresh the list
               //alert("User Addred");
-              this.valueservicesSucessMessage = model.email+" has been Sucessfully Registered"
+              this.valueservicesSucessMessage = model.email+" has been sucessfully registered"
               //console.log(this.valueservicesSucessMessage);
               //console.log("Value Radio Burron ::::===>>>>>>> "+this.userActualRole);
               this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, this.userActualRole, model.company, model.CompanyLogoURL, model.companyAddress,  model.phone,this.jobcount);
               //this.router.navigate(['/signupconfirm']);
               /* Email Start */
-              let subject = 'Thank you '+model.email+' for the service('+ this.userActualRole+')';
-              let body = 'Thank you <b>'+model.email+'</b> for the service('+ this.userActualRole+'). Best of luck <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
+              let subject = 'Welcome to MeMoreLink!';
+              let body = 'Thank you <b>'+model.email+'</b> Company: '+model.company+'<br>Company Address: '+model.companyAddress+'<br>Company Phone: '+model.phone+' <br><br>  Best of luck! <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
               this.sEmail.sendEmail(model.email,'',subject,body);
               window.scroll(0,0);
               return true;

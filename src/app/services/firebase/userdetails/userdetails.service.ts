@@ -33,7 +33,7 @@ export class UserdetailsService {
   udCollection: AngularFirestoreCollection<UserDetails>;
   userDetailc: Observable<UserDetails[]>;
   udDoc: AngularFirestoreDocument<UserDetails>;
-
+  userDetails: UserDetails[];
 
   client: any;
   index: any;
@@ -197,6 +197,24 @@ export class UserdetailsService {
     
     return this.userDetailc;
   }
+
+  deleteUserDetailsByName(username) {
+
+    this.getUserDetails(username,'U').subscribe(updetails=> {
+      this.userDetails = updetails;
+      console.log("User Details :::: "+this.userDetails[0].id);
+      this.deleteUserDetailsById(this.userDetails[0].id);
+
+    })
+
+
+  }
+
+  deleteUserDetailsById(id) {
+    //console.log("List Service ..... 3 ::::::=> "+id);
+    this.udDoc = this.afs.doc(`${FIREBASE_CONFIG.UserDetails}/${id}`);
+    this.udDoc.delete();
+  }  
 
 
 }

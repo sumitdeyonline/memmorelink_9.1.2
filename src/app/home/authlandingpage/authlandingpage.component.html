@@ -1,0 +1,30 @@
+<searchheader></searchheader>
+
+<div class="container" >
+
+    <div class="single">
+        <div class="row">
+
+          <div class="col-md-8" >
+
+            <div class="col_3">
+
+
+                <adminpage *ngIf="auth.isAuthenticated() && (auth.isAdminRole())"></adminpage>
+                <employeepage *ngIf="auth.isAuthenticated() && auth.isUserRole()"></employeepage>
+                <employerpage *ngIf="auth.isAuthenticated() && (auth.isResumeSearchRole() || auth.isPostJobRole())"></employerpage>
+  
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="col_3">
+                <advertisement></advertisement>
+            </div>
+        </div>
+      <div class="clearfix"> </div>
+      </div>
+
+  </div>
+</div>                

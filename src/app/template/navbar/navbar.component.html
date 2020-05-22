@@ -14,9 +14,12 @@
         <li class="nav-item">
           <!--a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a-->
           <!--a *ngIf="!auth.isAuthenticated()" class="nav-link" routerLink="" routerLinkActive="active"></a-->
-          <a class="nav-link" routerLink=""><i class="fa fa-home"></i>&nbsp;Home
+          <a class="nav-link" routerLink="" *ngIf="!auth.isAuthenticated()"><i class="fa fa-home"></i>&nbsp;Home
             <!--span class="sr-only">(current)</span-->
           </a>
+          <a class="nav-link" routerLink="/authlandingpage" *ngIf="auth.isAuthenticated()"><i class="fa fa-home"></i>&nbsp;Home
+            <!--span class="sr-only">(current)</span-->
+          </a>          
         </li>
         <!--li class="nav-item">
           <a class="nav-link" href="#">Link</a>
@@ -80,14 +83,14 @@
               <a class="dropdown-item" routerLink="/appliedjob">Jobs Applied</a>
 
               <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
-              <a class="dropdown-item" routerLink="/resumesearch">Resume Search</a>
+              <a class="dropdown-item" routerLink="/resumesearch">Search Resume</a>
               <!--a class="dropdown-item" href="recruiters.html">Post Job</a-->
               <div class="dropdown-divider"></div>
   
               <a class="dropdown-item" routerLink="/recruiterssolution" >Recruiters Solution</a>
               <!-- <a class="dropdown-item" routerLink="/recruitersfollowing" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">Recruiters you are follwoing</a> -->
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/valueservices">Edit Profile</a>
+              <!-- <div class="dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="/valueservices">Edit Profile</a> -->
             </div>
         </li>
   

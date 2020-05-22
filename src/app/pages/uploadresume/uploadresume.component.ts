@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/authentication/auth.service';
 import { UserprofileService } from 'src/app/services/firebase/userprofile/userprofile.service';
 import { UploadResumeService } from 'src/app/services/firebase/uploadresume/upload-resume.service';
 import { UploadResume } from 'src/app/services/firebase/uploadresume/uploadresume.model';
+import { EmailService } from 'src/app/services/email/email.service';
 
 @Component({
   selector: 'uploadresume',
@@ -24,7 +25,7 @@ export class UploadresumeComponent implements OnInit {
 
 
 
-  constructor(public rUploadService: UploadResumeService, private uProfile: UserprofileService, private auth: AuthService) {
+  constructor(public rUploadService: UploadResumeService, private uProfile: UserprofileService, private auth: AuthService,private sEmail: EmailService,) {
 
     this.rUploadService.getResumeDetails(this.auth.userProfile.name).subscribe(uprop=> {
       this.uResume = uprop;
@@ -90,6 +91,11 @@ export class UploadresumeComponent implements OnInit {
       this.resumeUploadEnabled = false;
     }
 
+
+    /* Email Start */
+    let subject = 'You have uploaded your resume';
+    let body = '<b>Thank you '+this.auth.userProfile.name+'  for uploading your resume.</b>  <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
+    this.sEmail.sendEmail(this.auth.userProfile.name,'',subject,body);
 
   }
 

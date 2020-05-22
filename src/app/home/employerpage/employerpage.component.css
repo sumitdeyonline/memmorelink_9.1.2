@@ -36,9 +36,11 @@ tr:nth-child(even) {
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+    padding: 3px;
   }
-
+td {
+    font-size: .8rem;
+}
   /* ::-webkit-scrollbar {
     width: 10px;
     background: transparent; /* make scrollbar transparent */

@@ -36,8 +36,8 @@
                       #firstname="ngModel" id="firstname" firstname 
                       class="form-control input-sm" required/>
   
-                      <div class="error_Message" *ngIf="Fieldlength(firstname.value) < 3 && firstname.touched">
-                          First Name must be at least 3 characters long.
+                      <div class="error_Message" *ngIf="Fieldlength(firstname.value) < 2 && firstname.touched">
+                          First Name must be at least 2 characters long.
                       </div> 
 
                       <label for="middlename">Middle Name:</label> 
@@ -78,7 +78,7 @@
                                 <div class="row">
                                   &nbsp;&nbsp;&nbsp;
                                   <div class="form-actions floatRight">
-                                     <input type="submit" value="Submit" [disabled]="!jobPForm.valid || Fieldlength(firstname.value) < 3 || Fieldlength(lastname.value) < 2 || Fieldlength(companyname.value) < 2" class="btn btn-primary btn-sm">
+                                     <input type="submit" value="Submit" [disabled]="!jobPForm.valid || Fieldlength(firstname.value) < 2 || Fieldlength(lastname.value) < 2 || Fieldlength(companyname.value) < 2" class="btn btn-primary btn-sm">
                                   </div>&nbsp;&nbsp;&nbsp;
                                   <div class="form-actions floatRight" *ngIf="dialogRef ==null">
                                     &nbsp;<input type="button" value="Reset" (click)="resetForm(jobPForm);" class="btn btn-primary btn-sm">

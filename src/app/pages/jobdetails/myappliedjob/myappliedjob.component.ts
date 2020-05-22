@@ -40,7 +40,7 @@ export class MyappliedjobComponent implements OnInit {
 
     let sdate = new Date();
     //let startDt = new Date(sdate.getTime() - (2*24*60*60*1000));
-    this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-1));
+    this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-SEARCH_CONFIG.NO_OF_DAYS_RESULT));
     //this.startDt = new Date(sdate.getTime() - (2*24*60*60*1000));
 
     //let edate = new Date();

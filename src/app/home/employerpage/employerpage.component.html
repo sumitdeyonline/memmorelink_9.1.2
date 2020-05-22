@@ -14,7 +14,7 @@
             <thead>
                 <tr>
                     <th colspan="3">
-                        Current Job Post&nbsp;({{pjob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>
+                        Posted Jobs&nbsp;({{pjob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>
                         <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                     </th>
     
@@ -24,8 +24,8 @@
                 <tr>
                     <th>Job Title</th>
                     <th>Location</th>
-                    <!-- <th>Employment Type</th>                 -->
-                    <th>Date</th>
+                    <th>Date Created</th>                
+                    <th>Date Modified</th>
     
                 </tr>
             </thead>
@@ -33,7 +33,7 @@
                 <tr *ngFor="let pj of pjob">
                     <td>{{ pj.JobTitle?.substring(0,25) }}</td>
                     <td>{{ pj.JobCity?.substring(0,15) }}, {{ pj.JobState }}</td>
-                    <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
+                    <td>{{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>                    
                     <td>{{pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>
                 </tr>
 
@@ -45,7 +45,7 @@
                         <div id="buttonHomePage" class="clearfix">
                             <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/postjob" value="Post Job"></label>
                             &nbsp;&nbsp;&nbsp;
-                            <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Resume Search"></label>
+                            <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Search Resume"></label>
                         </div> 
                       
 
@@ -66,7 +66,7 @@
             <thead>
                 <tr>
                     <th colspan="3">
-                        Current Applied Job&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a>
+                        Jobs Applied&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a>
                         <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                     </th>
     
@@ -75,18 +75,21 @@
             <thead>
                 <tr>
                     <th>Job Title</th>
-                    <th>Candidate</th>
+                    <th>Location</th>                    
+                    <th>Candidate Name</th>
+                    <th>Candidate Email</th>
                     <!-- <th>Employment Type</th>                 -->
-                    <th>Location</th>
+
     
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let aj of aJob">
                     <td>{{ aj.JobTitle?.substring(0,25) }}</td>
-                    <td>{{aj.FirstName}}&nbsp;{{aj.LastName}}</td>
-                    <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
                     <td>{{ aj.joblocation }}</td>
+                    <td>{{aj.FirstName}}&nbsp;{{aj.LastName}}</td>
+                    <td>{{aj.FromEmail}}</td>
+                    <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
                 </tr>
             </tbody>
     
