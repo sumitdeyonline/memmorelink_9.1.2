@@ -6,6 +6,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 */
 
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 [class*="list-group"] {
     text-align-last: left !important;
@@ -37,6 +38,9 @@ a:hover {
     min-width: 8rem !important;
 }
 
+.ng5-slider .ng5-slider-bubble {
+    bottom: 6px !important;
+}
 
 body a{
 	transition:0.5s all;
@@ -1660,6 +1664,10 @@ input.form-control.jb_2 {
     padding: 6px 12px;
     margin: 1em 0;
 }
+.form-control {
+    height: calc(2.0em + .75rem + 2px) !important;
+}
+
 .jobs_pagination{
 	margin:0;
 }

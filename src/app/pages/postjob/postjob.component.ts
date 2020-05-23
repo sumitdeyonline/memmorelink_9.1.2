@@ -30,6 +30,7 @@ import { isNumeric } from 'rxjs/util/isNumeric';
 import { LocationService } from 'src/app/services/location/location.service';
 import { stringify } from 'querystring';
 import { MultiSelectComponent } from '@syncfusion/ej2-angular-dropdowns';
+import { Options } from 'ng5-slider';
 // import * as ClassicEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
   
@@ -39,7 +40,7 @@ import { MultiSelectComponent } from '@syncfusion/ej2-angular-dropdowns';
   styleUrls: ['./postjob.component.css']
 })
 export class PostjobComponent implements OnInit {
-  @ViewChild('formField')   
+  //@ViewChild('formField')   
   public mulObj: MultiSelectComponent; 
 
   searchvar =[];
@@ -52,7 +53,13 @@ export class PostjobComponent implements OnInit {
         : this.searchvar.filter(v => v.toLowerCase().indexOf(term.trim().toLowerCase()) > -1).slice(0, 10))
     )
 
-
+    value: number = 0;
+    options: Options = {
+      floor: 0,
+      ceil: 100,
+      step: 5,
+      showTicks: true
+    };
 
   PostJobForm: any;
   // postjob = new PostJobc();
@@ -138,6 +145,8 @@ export class PostjobComponent implements OnInit {
 
       if ((this.id == null) || (this.id == '')) {
         //console.log("NEW FORM ....");
+        this.value = 0;
+        this.postjobService.selectedPostJobc.TravelRequirements = ""+this.value;
         this.userDetails = udtl;
         if (this.userDetails.length > 0) {
           this.postjobService.selectedPostJobc.Company = this.userDetails[0].company;
@@ -236,7 +245,14 @@ export class PostjobComponent implements OnInit {
     if (postJobForm.value.isTeleComute === undefined) {
       postJobForm.value.isTeleComute = false;
     }     
-    postJobForm.value.EmploymentTypes = this.mulObj.value;
+    
+    // postJobForm.value.EmploymentTypes = this.mulObj.value; // For other drop down
+    if (postJobForm.value.TravelRequirements == 0) {
+      postJobForm.value.TravelRequirements = 'No Travel';
+    } else {
+      postJobForm.value.TravelRequirements = postJobForm.value.TravelRequirements+'% Travel'
+    }
+    //console.log("postJobForm.value.TravelRequirements : "+postJobForm.value.TravelRequirements);
 
     if ((this.id == null) || (this.id == '')) {
 
@@ -244,7 +260,7 @@ export class PostjobComponent implements OnInit {
       this.userDetails[0].postjobCount = this.postJobCount;
       //console.log("Employee type :: "+this.mulObj.value);
 
-      //console.log("postJobForm.value.EmploymentTypes : "+postJobForm.value.EmploymentTypes);
+      //console.log("postJobForm.value.TravelRequirements : "+postJobForm.value.TravelRequirements);
       this.postjobService.addUpdatePostJobs(postJobForm.value,this.id, new Date(), "", this.userDetails[0]);
       //console.log("NEW FORM ....");
       type = "Created";
@@ -446,12 +462,22 @@ export class PostjobComponent implements OnInit {
 
     //console.log("this.postJob.EmploymentTypes :: "+this.postJob.EmploymentTypes.toString().split(','));
     //this.mulObj.value = this.postJob.EmploymentTypes.toString().split(',');
-    this.EmpTypeDropDownTmp = this.postJob.EmploymentTypes.toString().split(',');
+    //this.EmpTypeDropDownTmp = this.postJob.EmploymentTypes.toString().split(',');  // for other drop down 
 
     this.postjobService.selectedPostJobc.JobPayRate = this.postJob.JobPayRate;
     this.postjobService.selectedPostJobc.Compensation = this.postJob.Compensation;
     this.postjobService.selectedPostJobc.JobLength = this.postJob.JobLength;
-    this.postjobService.selectedPostJobc.TravelRequirements = this.postJob.TravelRequirements;
+
+    //console.log("this.postjobService.selectedPostJobc.TravelRequirements ::===> "+this.postJob.TravelRequirements);
+
+    let treq = this.postJob.TravelRequirements.substr(0,this.postJob.TravelRequirements.indexOf('%'));
+    if (treq == "") {
+      this.value = 0;
+    } else {
+      this.value = Number(treq);
+    }
+
+    //this.postjobService.selectedPostJobc.TravelRequirements = this.postJob.TravelRequirements;
     this.postjobService.selectedPostJobc.isTeleComute = this.postJob.isTeleComute;
     this.postjobService.selectedPostJobc.isSearchable = this.postJob.isSearchable;
 

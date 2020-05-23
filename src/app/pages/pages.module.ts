@@ -65,8 +65,10 @@ import { MyappliedjobComponent } from './jobdetails/myappliedjob/myappliedjob.co
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { EmploymenttypesService } from '../services/firebase/employmenttypes/employmenttypes.service';
 import { UploadresumepageComponent } from './uploadresumepage/uploadresumepage.component';
-import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
+//import { MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { RemoreuserComponent } from './remoreuser/remoreuser.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { Ng5SliderModule } from 'ng5-slider';
 
 // import { TechNewsComponent } from './tech-news';
 // import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
@@ -113,7 +115,9 @@ import { RemoreuserComponent } from './remoreuser/remoreuser.component';
         MatProgressSpinnerModule,
         MatProgressBarModule,
         BsDatepickerModule.forRoot(),
-        MultiSelectAllModule
+        // MultiSelectAllModule,
+        NgSelectModule,
+        Ng5SliderModule
 
 
 
