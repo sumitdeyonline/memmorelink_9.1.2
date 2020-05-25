@@ -93,9 +93,11 @@ export class UploadResumeService {
       //const uploadTask = storageRef.child(`${this.basePath}/${fileUpload.file.name}`).put(fileUpload.file);
     }
     else {
-      let filename = this.auth.userProfile.name+"."+fileUpload.file.name.substring(fileUpload.file.name.lastIndexOf(".")+1);
+      let filename = fileUpload.file.name.substring(0,fileUpload.file.name.lastIndexOf("."))+"__"+this.auth.userProfile.name+"."+fileUpload.file.name.substring(fileUpload.file.name.lastIndexOf(".")+1);
+
+      //let fname = fileUpload.file.name.substring(0,fileUpload.file.name.lastIndexOf("."));
       //console.log('Not Null -> File Name ', this.auth.userProfile.name.replace(".","_")+"."+fileUpload.file.name.substring(fileUpload.file.name.lastIndexOf(".")+1));
-     // console.log('Not Null -> File Name '+filename);
+      console.log('Not Null -> File Name '+filename);
 
       //this.task = storageRef.child(`${this.basePath}/${this.auth.userProfile.name+"_"+fileUpload.file.name}`).put(fileUpload.file);
       this.task = storageRef.child(`${this.basePath}/${filename}`).put(fileUpload.file);
@@ -126,6 +128,8 @@ export class UploadResumeService {
           //console.log('File Key::::::::: => ', fileUpload.key);
           fileUpload.url = downloadURL;
           fileUpload.name = fileUpload.file.name;
+
+          //console.log("File Upload ::: "+fileUpload.name);
 
 
           this.downloadURL = downloadURL;
@@ -184,7 +188,9 @@ export class UploadResumeService {
 
     const storageRef = firebase.storage().ref();
 
-      let filename = username+"."+resumefilename.substring(fileUpload.file.name.lastIndexOf(".")+1);
+      //let filename = username+"."+resumefilename.substring(fileUpload.file.name.lastIndexOf(".")+1);
+      let filename = fileUpload.file.name.substring(0,fileUpload.file.name.lastIndexOf("."))+"__"+username+"."+fileUpload.file.name.substring(fileUpload.file.name.lastIndexOf(".")+1);
+
       //let filename = username+"."+fileUpload.file.name.substring(fileUpload.file.name.lastIndexOf(".")+1);
       //console.log('Not Null -> File Name ', this.auth.userProfile.name.replace(".","_")+"."+fileUpload.file.name.substring(fileUpload.file.name.lastIndexOf(".")+1));
      // console.log('Not Null -> File Name '+filename);

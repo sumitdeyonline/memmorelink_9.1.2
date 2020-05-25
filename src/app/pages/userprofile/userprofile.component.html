@@ -162,43 +162,7 @@
 
 
 
-                <div class="row">
 
-
-                    <div class="col-sm-2">
-                            <label style="font-weight: bold;" for="Country">Country<span style="color: red;">&nbsp;*</span></label>
-                    </div>
-                    <div class="col">
-                        <select ngModel name="Country" [disabled]="!isUpdateProfile" #Country="ngModel" id="Country" [ngModel]="uProfile.selectedUserProfile?.Country" (ngModelChange)="uProfile.selectedUserProfile.Country" class="form-control input-sm" (change)="getState($event.target.value)" required>
-                            <option >Select Country</option>
-                            <option [value]="country.countryID" *ngFor="let country of countries">{{country.CountryName}}</option>
-                            <!--option>USA</option-->
-                        </select>
-                        <div class="error_Message" *ngIf="Country.invalid && (Country.dirty || Country.touched)">
-                            Please Select Country
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="State">State<span style="color: red;">&nbsp;*</span></label>
-                    </div>
-                    <div class="col">
-                        <select ngModel name="State" [disabled]="!isUpdateProfile" #State="ngModel" id="State" [ngModel]="uProfile.selectedUserProfile?.State" (ngModelChange)="uProfile.selectedUserProfile.State" class="form-control input-sm" required>
-                            <option>Select State</option>
-                            <option [value]="st.StateName" *ngFor="let st of state">{{st.StateDisplayName}}({{st.StateName}})</option>
-                        </select>
-                        <div class="error_Message" *ngIf="State.invalid && (State.dirty || State.touched)">
-                            Please Select State
-                        </div>
-                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2">&nbsp;
-                    </div>
-                </div>
 
 
 
@@ -227,7 +191,43 @@
                     <div class="col-sm-2">&nbsp;
                     </div>
                 </div>
+                <div class="row">
 
+
+                    <div class="col-sm-2">
+                            <label style="font-weight: bold;" for="Country">Country<span style="color: red;">&nbsp;*</span></label>
+                    </div>
+                    <div class="col">
+                        <select ngModel name="Country" [disabled]="!isUpdateProfile" #Country="ngModel" id="Country" [ngModel]="uProfile.selectedUserProfile?.Country" (ngModelChange)="uProfile.selectedUserProfile.Country" class="form-control input-sm" (change)="getState($event.target.value)" required>
+                            <option >Select Country</option>
+                            <option [value]="country.CountryName" *ngFor="let country of countries">{{country.CountryName}}</option>
+                            <!--option>USA</option-->
+                        </select>
+                        <div class="error_Message" *ngIf="Country.invalid && (Country.dirty || Country.touched)">
+                            Please Select Country
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-sm-2">
+                        <label style="font-weight: bold;" for="State">State<span style="color: red;">&nbsp;*</span></label>
+                    </div>
+                    <div class="col">
+                        <select ngModel name="State" [disabled]="!isUpdateProfile" #State="ngModel" id="State" [ngModel]="uProfile.selectedUserProfile?.State" (ngModelChange)="uProfile.selectedUserProfile.State" class="form-control input-sm" required>
+                            <option>Select State</option>
+                            <option [value]="st.StateName" *ngFor="let st of state">{{st.StateDisplayName}}({{st.StateName}})</option>
+                        </select>
+                        <div class="error_Message" *ngIf="State.invalid && (State.dirty || State.touched)">
+                            Please Select State
+                        </div>
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">&nbsp;
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-2">
@@ -538,7 +538,7 @@
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="{{editProfileText}}" class="btn btn-primary btn-sm" [disabled]="!isUpdate" (click)="EnableEdit()">
                 </div>
                 <div class="form-actions floatRight">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" routerLink="/uploadresumepage" value="Upload Resume" class="btn btn-primary btn-sm">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" routerLink="/uploadresumepage" [disabled]="isUpdateProfile" value="Upload Resume" class="btn btn-primary btn-sm">
                 </div>
             </div>
             </form>

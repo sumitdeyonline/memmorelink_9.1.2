@@ -1,3 +1,34 @@
+<div id="search_wrapper1">
+    <form #searchResume="ngForm" (ngSubmit)="getResumeSearch(searchResume)">
+         <div id="search_form" class="clearfix">
+                 &nbsp;
+             <!-- <h5>Resume Search</h5> -->
+             <!-- <p> -->
+             <!-- <table>
+                 <tr> -->
+                     <!-- <td colspan="4"> -->
+                        <b>Search Resume:</b> &nbsp;<input type="text" class="text" autocomplete="off" 
+                         ngModel name="ResumeSearch" #ResumeSearch="ngModel" id="ResumeSearch" 
+                         placeholder="Skill Set">
+                         &nbsp;&nbsp;<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resume"></label>
+                     <!-- </td> -->
+
+                     <!-- <td>
+                         <label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resume"></label>
+                     </td> -->
+                 <!-- </tr>
+
+             </table> -->
+
+   <!--input type="text" class="text" required="required" value= "location" ngModel name="location" #username="ngModel" id="location" placeholder="{{ location }}" value="Location" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Location';}"-->
+
+             <!-- </p> -->
+
+         </div>
+     </form>
+    </div>
+
+
 
 
     <div class="table-container">
@@ -44,8 +75,8 @@
                     <th colspan="3" align="right">
                         <div id="buttonHomePage" class="clearfix">
                             <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/postjob" value="Post Job"></label>
-                            &nbsp;&nbsp;&nbsp;
-                            <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Search Resume"></label>
+                            <!-- &nbsp;&nbsp;&nbsp;
+                            <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Search Resume"></label> -->
                         </div> 
                       
 

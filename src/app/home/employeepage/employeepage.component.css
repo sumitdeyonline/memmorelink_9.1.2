@@ -1,7 +1,8 @@
-.table-container {
-    height: 23em;
-
-}
+/* .table-container {
+    height: 17em;
+    min-height: 2em;
+    max-height:6em;
+} */
 table {
     display: flex;
     flex-flow: column;
@@ -20,6 +21,7 @@ table tbody {
     flex: 1 1 auto;
     display: block;
     overflow-y: scroll;
+    max-height:17em;
 }
 table tbody tr {
     width: 100%;

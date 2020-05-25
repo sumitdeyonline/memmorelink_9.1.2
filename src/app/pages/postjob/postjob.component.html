@@ -197,7 +197,7 @@
                         <label style="font-weight: bold;" for="JobCity">City<span style="color: red;">&nbsp;*</span></label>
                     </div>
                     <div class="col">
-                        <input type="text" autocomplete="off" ngModel name="JobCity" #JobCity="ngModel" id="JobCity" maxlength="200" [ngModel]="postjobService.selectedPostJobc?.JobCity" (ngModelChange)="postjobService.selectedPostJobc.JobCity" class="form-control input-sm" autocomplete="off" [ngbTypeahead]="search" (keyup)="zipcodeCitySearch($event.target.value)" (selectItem)="setCountryState($event)" required/>
+                        <input type="text" autocomplete="off" ngModel name="JobCity" #JobCity="ngModel" id="JobCity" maxlength="150" [ngModel]="postjobService.selectedPostJobc?.JobCity" (ngModelChange)="postjobService.selectedPostJobc.JobCity" class="form-control input-sm" autocomplete="off" [ngbTypeahead]="search" (keyup)="zipcodeCitySearch($event.target.value)" (selectItem)="setCountryState($event)" required/>
                         <!-- <input type="text" autocomplete="off" ngModel name="JobCity" #JobCity="ngModel" id="JobCity" [ngModel]="postjobService.selectedPostJobc?.JobCity" (ngModelChange)="postjobService.selectedPostJobc.JobCity" class="form-control input-sm" autocomplete="off" required/> -->
 
                         <div class="error_Message" *ngIf="JobCity.invalid && (JobCity.dirty || JobCity.touched)">

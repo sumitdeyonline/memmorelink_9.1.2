@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DateformatService } from '../../services/dateformat/dateformat.service';
 
 import * as algoliasearch from 'algoliasearch';
@@ -6,7 +6,7 @@ import {isNumeric} from 'rxjs/util/isNumeric';
 import { SEARCH_CONFIG } from '../../global-config';
 import { UserProfile } from 'src/app/services/firebase/userprofile/userprofile.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import { PagerService } from 'src/app/services/common/pager.service';
 
 @Component({
@@ -16,6 +16,8 @@ import { PagerService } from 'src/app/services/common/pager.service';
 })
 export class ResumesearchComponent implements OnInit {
 
+  
+  @Input() ResumeSearchVal: string='';
 
   UserProfile: UserProfile[];
   //UserProfileFinal: UserProfile[] = [];
@@ -26,7 +28,7 @@ export class ResumesearchComponent implements OnInit {
 
   // pager object
   pager: any = {};
-
+  form
   // paged items
   pagedItems: any[];
   loading: boolean = false;
@@ -34,17 +36,32 @@ export class ResumesearchComponent implements OnInit {
   noResultFound: string='';
   
 
-  constructor(private route: ActivatedRoute, private pagerService: PagerService, private router: Router, ) { }
+  constructor(private route: ActivatedRoute, private pagerService: PagerService, private router: Router,fb: FormBuilder ) { 
+    this.form = fb.group({
+      ResumeSearch: ['', Validators.required]
+    })
 
-  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      //console.log(params);
+      if ((params['ResumeSearch'] != null) || ( params['ResumeSearch'] != undefined)) {
+        this.ResumeSearchVal = params['ResumeSearch'].toString();
+        this.resumeSearch(this.ResumeSearchVal);
+        //console.log("ResumeSearch " + this.ResumeSearchVal);
+      }
+
+      //console.log("Location " + this.location);
+      //this.getPostJobsAlgolia(this.keyword,this.location);
+
+      // this.listjob.keyword = this.keyword;
+      // this.listjob.location = this.location;
+    })	
+
   }
 
+  ngOnInit() { 
+  }
 
-  getResumeSearchAlgolia(searchResume: NgForm) {
-
-     /****** Need to open Later ********/
-
-    //("Search Parameter ::::: "+searchResume.value.ResumeSearch);
+  resumeSearch(searchStr:string) {
     this.noResultFound = '';
     const filter = 'isSearchable:true';
     this.client = algoliasearch(SEARCH_CONFIG.ALGOLIA_APP_ID, SEARCH_CONFIG.ALGOLIA_API_KEY,
@@ -55,7 +72,7 @@ export class ResumesearchComponent implements OnInit {
 
       this.loading = true;
       this.index.search({
-        query: searchResume.value.ResumeSearch,
+        query: searchStr,
         filters: filter
 
 
@@ -72,6 +89,43 @@ export class ResumesearchComponent implements OnInit {
 
 
       })
+
+  }
+
+  getResumeSearchAlgolia(searchResume: NgForm) {
+
+    this.resumeSearch(searchResume.value.ResumeSearch);
+
+     /****** Need to open Later ********/
+
+    //("Search Parameter ::::: "+searchResume.value.ResumeSearch);
+    // this.noResultFound = '';
+    // const filter = 'isSearchable:true';
+    // this.client = algoliasearch(SEARCH_CONFIG.ALGOLIA_APP_ID, SEARCH_CONFIG.ALGOLIA_API_KEY,
+    //   { protocol: SEARCH_CONFIG.PROTOCOLS });
+
+
+    //   this.index = this.client.initIndex(SEARCH_CONFIG.INDEX_NAME_PROFILE);
+
+    //   this.loading = true;
+    //   this.index.search({
+    //     query: searchResume.value.ResumeSearch,
+    //     filters: filter
+
+
+    //   }).then((data) => {
+    //     //console.log(data);
+    //     //let j=0;
+    //     //this.UserProfileFinal = [];
+    //     this.UserProfile = data.hits;
+    //     if (this.UserProfile.length == 0)  {
+    //       this.notfoundAnything();
+    //     }        
+    //     this.loading = false;
+    //     this.setPage(1);
+
+
+    //   })
 
     /****** End  ********/
 

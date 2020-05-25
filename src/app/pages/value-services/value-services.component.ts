@@ -124,8 +124,8 @@ export class ValueServicesComponent implements OnInit {
         // console.log("Resume Search ::::: "+model.resumesearch);
         this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, model.userRole, model.company, model.CompanyLogoURL, model.companyAddress, model.phone,this.jobcount);
         this.valueservicesSucessMessage = model.email+" has been sucessfully updated."
-        let subject = 'Thank you '+model.email+' for the service ('+ this.userActualRole+')';
-        let body = 'Thank you <b>'+model.email+'</b> for the service ('+ this.userActualRole+'). Best of luck <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
+        let subject = 'You have updated your profile';
+        let body = 'Thank you <b>'+model.email+'</b> for updating your profile.<br /> <b>Thank you <br>MemoreLink Team</b> '
         this.sEmail.sendEmail(model.email,'',subject,body);
         window.scroll(0,0);
         return true;
@@ -141,7 +141,7 @@ export class ValueServicesComponent implements OnInit {
               //this.router.navigate(['/signupconfirm']);
               /* Email Start */
               let subject = 'Welcome to MeMoreLink!';
-              let body = 'Thank you <b>'+model.email+'</b> Company: '+model.company+'<br>Company Address: '+model.companyAddress+'<br>Company Phone: '+model.phone+' <br><br>  Best of luck! <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
+              let body = 'Thank you <b>'+model.email+'</b> for registering <br><br> Company: '+model.company+'<br>Company Address: '+model.companyAddress+'<br>Company Phone: '+model.phone+' <br><br>  Best of luck! <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
               this.sEmail.sendEmail(model.email,'',subject,body);
               window.scroll(0,0);
               return true;

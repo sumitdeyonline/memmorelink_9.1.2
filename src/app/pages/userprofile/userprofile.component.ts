@@ -17,6 +17,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CommondialogComponent, AngularUtilityComponent } from 'src/app/common';
 import { EmploymenttypesService } from 'src/app/services/firebase/employmenttypes/employmenttypes.service';
 import { EmploymentTypes } from 'src/app/services/firebase/employmenttypes/employmenttypes.model';
+import { Router } from '@angular/router';
 //import { CommondialogComponent } from 'src/app/common/commondialog';
 
 
@@ -43,7 +44,7 @@ export class UserProfileComponent implements OnInit {
   utility = new AngularUtilityComponent();
 
 
-  constructor(private rUploadService: UploadResumeService, public uProfile: UserprofileService, public auth: AuthService, private sEmail: EmailService, private dialog: MatDialog,private etypeserv: EmploymenttypesService) {
+  constructor(private rUploadService: UploadResumeService, public uProfile: UserprofileService, private router: Router, public auth: AuthService, private sEmail: EmailService, private dialog: MatDialog,private etypeserv: EmploymenttypesService) {
 
 
     this.uProfile.getUserDetails(this.auth.userProfile.name,'U').subscribe(uprop=> {
@@ -64,8 +65,9 @@ export class UserProfileComponent implements OnInit {
         //this.fileUploadEnabled = true;
         this.isUpdate = true;
         this.isUpdateProfile = false;
+
         this.getFieldForUpdate();
-        this.getState(this.userProfile[0].Country);
+
       }
 
     })
@@ -116,14 +118,15 @@ export class UserProfileComponent implements OnInit {
     }
 
     else {
+      console.log("Edit Profile ... ");
       this.editProfileText ="Edit Profile";
-      this.isUpdateProfile = false;
       //console.log("Befire UserProfile .......*******>>>>>>");
       this.resetForm();
       //this.getFieldForUpdate();
       this.uProfile.getUserDetails(this.auth.userProfile.name,'U').subscribe(uprop=> {
         this.userProfile = uprop;
         this.getFieldForUpdate();
+        this.isUpdateProfile = false;
       })
       //this.router.navigate(["userprofile"]);
     }
@@ -174,7 +177,7 @@ export class UserProfileComponent implements OnInit {
 
     /* Email Start */
     let subject = 'You have updated your profile';
-    let body = '<b>Thank you '+uprofileForm.value.FirstName+' '+uprofileForm.value.LastName+'  for updating your profile.</b>  <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
+    let body = 'Thank you '+uprofileForm.value.email+'  for updating your profile.  <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
     this.sEmail.sendEmail(uprofileForm.value.Email,'',subject,body);
 
     window.scroll(0,0);
@@ -182,8 +185,9 @@ export class UserProfileComponent implements OnInit {
 
     window.scroll(0,0);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = type+"||userprofile";
+    dialogConfig.data = type+"||uploadresumepage||Your profile has been updated";
     this.dialog.open(CommondialogComponent, dialogConfig);
+    this.router.navigate(['/uploadresumepage']);
 
     //this.uProfile.addUpdateUserProfile(uprofileForm.value,null);
   }
@@ -198,7 +202,7 @@ export class UserProfileComponent implements OnInit {
     // console.log ('LastName  ::: '+ uprofileForm.value.LastName);
     // console.log ('Sex  ::: '+ uprofileForm.value.Sex);
     // console.log ('Email  ::: '+ uprofileForm.value.Email);
-     console.log ('HomePhone  ::: '+ uprofileForm.value.HomePhone);
+     //console.log ('HomePhone  ::: '+ uprofileForm.value.HomePhone);
     // console.log ('CellPhone  ::: '+ uprofileForm.value.CellPhone);
     // console.log ('Address1  ::: '+ uprofileForm.value.Address1);
 
@@ -279,7 +283,7 @@ export class UserProfileComponent implements OnInit {
     if (uprofileForm.value.instituteCountry == undefined) {
       uprofileForm.value.instituteCountry = "";
     }
-    //console.log ('instituteCountry  ::: '+ uprofileForm.value.instituteCountry);
+    console.log ('instituteCountry - userProfileAddUpdate ::: '+ uprofileForm.value.instituteCountry);
     if (uprofileForm.value.SkillSet == undefined) {
       uprofileForm.value.SkillSet = "";
     }
@@ -434,6 +438,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getFieldForUpdate() {
+    this.getState(this.userProfile[0].Country);
     this.uProfile.selectedUserProfile.id = this.userProfile[0].id;
     this.uProfile.selectedUserProfile.FirstName = this.userProfile[0].FirstName;
     this.uProfile.selectedUserProfile.LastName = this.userProfile[0].LastName;
@@ -445,12 +450,15 @@ export class UserProfileComponent implements OnInit {
     this.uProfile.selectedUserProfile.Address1 = this.userProfile[0].Address1;
     this.uProfile.selectedUserProfile.Address2 = this.userProfile[0].Address2;
     this.uProfile.selectedUserProfile.City = this.userProfile[0].City;
+    this.uProfile.selectedUserProfile.Country = this.userProfile[0].Country;
+    // console.log("this.uProfile.selectedUserProfile.Country  :: "+this.uProfile.selectedUserProfile.Country);
     this.uProfile.selectedUserProfile.State = this.userProfile[0].State;
+    // console.log("this.uProfile.selectedUserProfile.State  :: "+this.uProfile.selectedUserProfile.State);
     this.uProfile.selectedUserProfile.ZipCode = this.userProfile[0].ZipCode;
     this.uProfile.selectedUserProfile.CurrentCompanySchool = this.userProfile[0].CurrentCompanySchool;
     this.uProfile.selectedUserProfile.CurrentPosition = this.userProfile[0].CurrentPosition;
 
-    this.uProfile.selectedUserProfile.Country = this.userProfile[0].Country;
+
     this.uProfile.selectedUserProfile.FaceBookURL = this.userProfile[0].FaceBookURL;
     this.uProfile.selectedUserProfile.LinkedinURL = this.userProfile[0].LinkedinURL;
     this.uProfile.selectedUserProfile.PersonalWebsite = this.userProfile[0].PersonalWebsite;

@@ -164,16 +164,23 @@ export class ApplyjobComponent implements OnInit {
     // } else {
     //   uploadResume = 
     // }
+    let filename='';
+    for (let i=0;i<this.uResume.length;i++) {
+      if (this.applyJob.fileUploadURL.toLowerCase() == this.uResume[i].ResumeURL) {
+        filename = this.uResume[i].ResumeFileName;
+        break;
+      }
+    }
 
     // Candidate Job Email 
     let subject = 'You have applied for: '+this.pjob.JobTitle;
-    let body = 'Thank you <b>'+this.applyJobForm.get('Email').value+'</b>  for applying for the job.<br/></br> <b>Job Title: </b> '+this.pjob.JobTitle+' <br /> <b>Job Location: </b>'+this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry+'<br /> <b>Job Description : </b>'+this.pjob.JobDesc+' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
+    let body = 'Thank you <b>'+this.applyJobForm.get('Email').value+'</b>  for applying for the job.<br/></br> <b>Job Title: </b> '+this.pjob.JobTitle+' <br /> <b>Job Location: </b>'+this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry+'<br /> <b>Job Description : </b>'+this.pjob.JobDesc+' <br />Resume Filename: '+filename+'  <br><br> <b>Thank you <br>MemoreLink Team</b>'
     this.sEmail.sendEmail(this.applyJobForm.get('Email').value,'',subject,body);
     
     // Recruiter Job Email 
 
     let vJobSublect =this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+' has applied for the job '+this.pjob.JobTitle;
-    let vBody ='<i>'+this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+ ' has applied for the job</i> <br/> <br/> <b>Candidate Email: </b>'+this.applyJobForm.get('Email').value+
+    let vBody =this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+ ' has applied for the job <br/> <br/> <b>Candidate Email: </b>'+this.applyJobForm.get('Email').value+
               '  <br/> <b>Candidate Phone: </b>'+this.applyJobForm.get('PhoneNumber').value+
               '  <br/> <b>Cover Letter : </b>'+this.applyJobForm.get('CoverLetter').value+
               ' <br /> <b>Resume  : </b><a href="'+this.applyJob.fileUploadURL+'">Resume Link</a><br>'+

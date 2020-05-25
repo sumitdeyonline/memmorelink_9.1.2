@@ -4,6 +4,8 @@ import { AuthService } from 'src/app/services/authentication/auth.service';
 import { PostJobc } from 'src/app/services/firebase/postjob/postjob.model';
 import { ApplyjobService } from 'src/app/services/firebase/applyjob/applyjob.service';
 import { ApplyJob } from 'src/app/services/firebase/applyjob/applyjob.model';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 
@@ -18,7 +20,7 @@ export class EmployerpageComponent implements OnInit {
   pjob: PostJobc[];
   aJob: ApplyJob[];
   loading: boolean = false;
-  constructor(private postservice: PostjobService,public auth: AuthService,private appjob: ApplyjobService) { }
+  constructor(private postservice: PostjobService,public auth: AuthService,private appjob: ApplyjobService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -27,7 +29,8 @@ export class EmployerpageComponent implements OnInit {
     //let startDt = new Date(sdate.getTime() - (24*60*60*1000));
     //console.log("newDate :::: "+newDate);
 
-    let startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-1));
+    let startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-1)); 
+
     //console.log("Start Date ::: "+startDt);
     let endDt = new Date();
     //let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
@@ -50,7 +53,7 @@ export class EmployerpageComponent implements OnInit {
       //console.log("List Service ..... 33333 ::::: "+this.pjob[1].id);
     }); 
     
-    this.appjob.getApplyJobByAdmin(this.auth.userProfile.name,'CUD','', startDt, endDt).subscribe(udtl=> {
+    this.appjob.getApplyJobByAdmin(this.auth.userProfile.name,'UD','', startDt, endDt).subscribe(udtl=> {
   
       this.aJob = udtl;
       //console.log(" Length :::: "+this.aJob.length);
@@ -68,5 +71,9 @@ export class EmployerpageComponent implements OnInit {
 
   }
 
+  getResumeSearch(searchResume: NgForm) {
+    console.log("Key Word :: "+searchResume.value.ResumeSearch);
+    this.router.navigate(['/resumesearch'], { queryParams: {  ResumeSearch: searchResume.value.ResumeSearch}, 'queryParamsHandling': 'merge' });
+  }
 
 }

@@ -537,7 +537,7 @@ export class AuthService {
 
    
 
-    let header = { authorization: AUTH_CONFIG.idToekn };
+    let header = { authorization: AUTH_CONFIG.idToekn };  
     //let header = { client_id:'NVaSJMjTJFi707US1W1A55nf64Xh68MC',client_secret:'9N0M0ao77gwE9xcO3UpEV7eL9o0DGFdeECGHDDZD7raunugOQs8UHWlHHbwUwsds', 'Access-Control-Allow-Origin': '*'};
 
     let optionsHeader = {  headers: header  }

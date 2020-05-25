@@ -5,6 +5,7 @@ import { UserprofileService } from 'src/app/services/firebase/userprofile/userpr
 import { UploadResumeService } from 'src/app/services/firebase/uploadresume/upload-resume.service';
 import { UploadResume } from 'src/app/services/firebase/uploadresume/uploadresume.model';
 import { EmailService } from 'src/app/services/email/email.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'uploadresume',
@@ -25,7 +26,7 @@ export class UploadresumeComponent implements OnInit {
 
 
 
-  constructor(public rUploadService: UploadResumeService, private uProfile: UserprofileService, private auth: AuthService,private sEmail: EmailService,) {
+  constructor(public rUploadService: UploadResumeService, private uProfile: UserprofileService,private router: Router, private auth: AuthService,private sEmail: EmailService,) {
 
     this.rUploadService.getResumeDetails(this.auth.userProfile.name).subscribe(uprop=> {
       this.uResume = uprop;
@@ -39,14 +40,19 @@ export class UploadresumeComponent implements OnInit {
       } else {
         //console.log("Edit FORM .... FOR "+this.uResume.length);
         //console.log('IDDDDDDDDDDDDDDDDDDDDD ::: ', this.rUploadService.selectedUploadResume.id);
-        this.isUpdate = true;
-        this.rUploadService.selectedUploadResume = {} as UploadResume;
-        this.rUploadService.selectedUploadResume.Username = this.uResume[0].Username;
-        this.rUploadService.selectedUploadResume.UserID = this.uResume[0].UserID;
-        this.rUploadService.selectedUploadResume.id = this.uResume[0].id;
-        this.rUploadService.selectedUploadResume.ResumeFileName = this.uResume[0].ResumeFileName;
-        this.rUploadService.selectedUploadResume.ResumeURL = this.uResume[0].ResumeURL;
-        this.rUploadService.selectedUploadResume.ResumeExt = this.uResume[0].ResumeExt;
+
+        // for(let i=0;i<this.uResume.length;i++) {
+        //   console.log("File Name ==>>>>>> : "+this.uResume[i].ResumeFileName);
+        // }
+
+        // this.isUpdate = true;
+        // this.rUploadService.selectedUploadResume = {} as UploadResume;
+        // this.rUploadService.selectedUploadResume.Username = this.uResume[0].Username;
+        // this.rUploadService.selectedUploadResume.UserID = this.uResume[0].UserID;
+        // this.rUploadService.selectedUploadResume.id = this.uResume[0].id;
+        // this.rUploadService.selectedUploadResume.ResumeFileName = this.uResume[0].ResumeFileName;
+        // this.rUploadService.selectedUploadResume.ResumeURL = this.uResume[0].ResumeURL;
+        // this.rUploadService.selectedUploadResume.ResumeExt = this.uResume[0].ResumeExt;
         this.isNewUpload = true;
 
         // this.getFieldForUpdate();
@@ -68,21 +74,50 @@ export class UploadresumeComponent implements OnInit {
     }
   }
 
-  upload() {
+  upload() { 
+    let id;
     const file = this.selectedFiles.item(0);
-    console.log("this.selectedFiles.item(0) :::::: => "+this.selectedFiles.item(0));
+    //console.log("this.selectedFiles.item(0) :::::: => "+this.selectedFiles.item(0));
     if (this.validateFile(this.selectedFiles.item(0).name)) {
       this.selectedFiles = undefined;
       this.resumeUploadEnabled = true;
       this.currentFileUpload = new FileUpload(file);
-// console.log('IDDDDDDDDDDDDDDDDDDDDD ::: ', this.rUploadService.selectedUploadResume.id);
+
+      if (this.uResume.length >0) {
+        for(let i=0;i<this.uResume.length;i++) {
+ //console.log('Name :::  ::: ', this.rUploadService.selectedUploadResume.ResumeFileName);
+          if (this.currentFileUpload.file.name.toLowerCase() == this.uResume[i].ResumeFileName.toLowerCase()) {
+            this.isUpdate = true;
+            this.rUploadService.selectedUploadResume = {} as UploadResume;
+            id = this.uResume[i].id;
+            // this.rUploadService.selectedUploadResume.Username = this.uResume[i].Username;
+            // this.rUploadService.selectedUploadResume.UserID = this.uResume[0].UserID;
+            // this.rUploadService.selectedUploadResume.id = this.uResume[0].id;
+            // this.rUploadService.selectedUploadResume.ResumeFileName = this.uResume[0].ResumeFileName;
+            // this.rUploadService.selectedUploadResume.ResumeURL = this.uResume[0].ResumeURL;
+            // this.rUploadService.selectedUploadResume.ResumeExt = this.uResume[0].ResumeExt;
+            this.isNewUpload = true; 
+            // console.log('IDDDDDDDDDDDDDDDDDDDDD ::: ', this.rUploadService.selectedUploadResume.id);
+            // console.log('Name :::  ::: ', this.rUploadService.selectedUploadResume.ResumeFileName);
+            // console.log("File NAMeeeeee ::::: "+this.currentFileUpload.file.name);   
+            break;        
+          }
+          //console.log("File Name ==>>>>>> : "+this.uResume[i].ResumeFileName);
+        }
+      }
+
+
+
       if (!this.isUpdate) {
+        //console.log("New Entry ... ");
         this.rUploadService.pushFileToStorage(this.currentFileUpload, this.progress, null);
       } else {
-        this.rUploadService.pushFileToStorage(this.currentFileUpload, this.progress, this.rUploadService.selectedUploadResume.id);
+        //console.log("Updating ....... ");
+        this.rUploadService.pushFileToStorage(this.currentFileUpload, this.progress, id);
       }
 
       this.isNewUpload = true;
+      //this.currentFileUpload=null;
       //console.log("isNewUpload   ======= > "+this.isNewUpload);
       // this.rUploadService.addUpdateUserResume(this.rUploadService.selectedUploadResume, this.rUploadService.selectedUploadResume.id);
     } else {
@@ -94,8 +129,11 @@ export class UploadresumeComponent implements OnInit {
 
     /* Email Start */
     let subject = 'You have uploaded your resume';
-    let body = '<b>Thank you '+this.auth.userProfile.name+'  for uploading your resume.</b>  <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
+    let body = 'Thank you '+this.auth.userProfile.name+'  for uploading your resume.  <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
     this.sEmail.sendEmail(this.auth.userProfile.name,'',subject,body);
+
+
+    //this.router.navigate(['/userprofile']);
 
   }
 

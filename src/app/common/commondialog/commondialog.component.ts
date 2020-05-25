@@ -12,6 +12,7 @@ export class CommondialogComponent implements OnInit {
   isCreated: boolean = true;
   routePage: string;
   Status: string
+  userMessageTag:string='';
 
   constructor(private dialogRef: MatDialogRef<CommondialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, private router: Router) {
@@ -28,6 +29,8 @@ export class CommondialogComponent implements OnInit {
     let ID = this.data.split("||");
     this.Status = ID[0];
     this.routePage = ID[1];
+    if (ID[2] !=null)
+      this.userMessageTag = ID[2];
     // console.log("This Data ::::::: 2 -> > " +ID[0]);
     // console.log("This Data ::::::: route -> > " +ID[1]);
 

@@ -297,9 +297,18 @@ export class PostjobComponent implements OnInit {
 
 
       /* Email Start */
+      let subject='';
+      let body= '';
+      if ((this.id == null) || (this.id == '')) {
+        subject = 'You have posted your job: '+postJobForm.value.JobTitle;
+        body = 'Thank you <b>'+postJobForm.value.ApplyToEmail+'</b> for posting the job <br/><br/> <b>Job Title: </b>'+postJobForm.value.JobTitle+'  <br/> <b>Job Location: </b>'+postJobForm.value.JobCity+', '+postJobForm.value.JobState+', '+postJobForm.value.JobCountry+'<br /> <b>Job Description : </b>'+postJobForm.value.JobDesc+' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
+    
+      } else {
+        subject = 'You have updated your job: '+postJobForm.value.JobTitle;
+        body = 'Thank you <b>'+postJobForm.value.ApplyToEmail+'</b> for updating the job <br/><br/> <b>Job Title: </b>'+postJobForm.value.JobTitle+'  <br/> <b>Job Location: </b>'+postJobForm.value.JobCity+', '+postJobForm.value.JobState+', '+postJobForm.value.JobCountry+'<br /> <b>Job Description : </b>'+postJobForm.value.JobDesc+' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
 
-    let subject = 'You have posted your job: '+postJobForm.value.JobTitle;
-    let body = '<i>Thank you '+postJobForm.value.ApplyToEmail+' for posting the job</i> <br/><br/> <b>Job Title: </b>'+postJobForm.value.JobTitle+'  <br/> <b>Job Location: </b>'+postJobForm.value.JobCity+', '+postJobForm.value.JobState+', '+postJobForm.value.JobCountry+'<br /> <b>Job Description : </b>'+postJobForm.value.JobDesc+' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
+      }
+
     this.sEmail.sendEmail(postJobForm.value.ApplyToEmail,'',subject,body);
 
     if ((postJobForm.value.CCToEmail != null) && (postJobForm.value.CCToEmail != undefined)) {
@@ -312,7 +321,7 @@ export class PostjobComponent implements OnInit {
  
     window.scroll(0,0);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = type+"||jobpoststatus";
+    dialogConfig.data = type+"||jobpoststatus||You have posted your job";
     this.dialog.open(CommondialogComponent, dialogConfig);
     this.resetForm(postJobForm);
  
