@@ -33,6 +33,7 @@ import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApplyjobdeletedialogComponent } from './applyjob-admin/applyjobdeletedialog/applyjobdeletedialog.component';
 import { ApplyjobdeletealldialogComponent } from './applyjob-admin/applyjobdeletealldialog/applyjobdeletealldialog.component';
 import { ApplyjobService } from '../services/firebase/applyjob/applyjob.service';
+import { AdminDialogComponent } from './userroleassignment/admin-dialog/admin-dialog.component';
 //import { AdmindialogComponent } from './admindialog/admindialog.component';
 //import { NgDatepickerModule } from 'ng2-datepicker';
 
@@ -71,7 +72,8 @@ import { ApplyjobService } from '../services/firebase/applyjob/applyjob.service'
       UploadbulkprofileComponent,
       AdmindialogComponent,
       ApplyjobdeletedialogComponent,
-      ApplyjobdeletealldialogComponent
+      ApplyjobdeletealldialogComponent,
+      AdminDialogComponent
     ],
     entryComponents: [CountryaddupdateComponent, CountrydialogComponent, StatedialogComponent, StateaddupdateComponent],
     exports: [

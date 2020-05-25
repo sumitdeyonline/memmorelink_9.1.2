@@ -1,16 +1,15 @@
 <div id="search_wrapper1">
     <form #searchResume="ngForm" (ngSubmit)="getResumeSearch(searchResume)">
          <div id="search_form" class="clearfix">
-                 &nbsp;
              <!-- <h5>Resume Search</h5> -->
              <!-- <p> -->
              <!-- <table>
                  <tr> -->
                      <!-- <td colspan="4"> -->
-                        <b>Search Resume:</b> &nbsp;<input type="text" class="text" autocomplete="off" 
+                        <input type="text" class="text" autocomplete="off" 
                          ngModel name="ResumeSearch" #ResumeSearch="ngModel" id="ResumeSearch" 
                          placeholder="Skill Set">
-                         &nbsp;&nbsp;<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resume"></label>
+                          &nbsp;<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resumes"></label>
                      <!-- </td> -->
 
                      <!-- <td>
@@ -28,7 +27,7 @@
      </form>
     </div>
 
-
+    <br>
 
 
     <div class="table-container">
@@ -109,7 +108,7 @@
                     <th>Location</th>                    
                     <th>Candidate Name</th>
                     <th>Candidate Email</th>
-                    <!-- <th>Employment Type</th>                 -->
+                    <th>Date Applied</th>                
 
     
                 </tr>
@@ -119,8 +118,8 @@
                     <td>{{ aj.JobTitle?.substring(0,25) }}</td>
                     <td>{{ aj.joblocation }}</td>
                     <td>{{aj.FirstName}}&nbsp;{{aj.LastName}}</td>
-                    <td>{{aj.FromEmail}}</td>
-                    <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
+                    <td>{{aj.FromEmail?.substring(0,28)}}</td>
+                    <td>{{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>
                 </tr>
             </tbody>
     

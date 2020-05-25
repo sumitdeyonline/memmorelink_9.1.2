@@ -47,10 +47,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let rm of uResume">
-                <td>{{ rm.ResumeFileName?.substring(0,20) }}</td>
-                <td>{{ rm.CreatedDate}}</td>
+                <td>{{ rm.ResumeFileName.substring(0,27) }}</td>
+                <td>{{ rm.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
-                <td>{{rm.ModifiedDate}}</td>
+                <td>{{rm.ModifiedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>
                 <td><a href="{{rm.ResumeURL}}" target="_blank">Download</a></td>
             </tr>
         </tbody>

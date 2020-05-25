@@ -8,6 +8,8 @@ import { UserDetails } from 'src/app/services/firebase/userdetails/userdetails.m
 import { UserdetailsService } from 'src/app/services/firebase/userdetails/userdetails.service';
 import { PagerService } from 'src/app/services/common/pager.service';
 import { SEARCH_CONFIG } from 'src/app/global-config';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { AdminDialogComponent } from './admin-dialog/admin-dialog.component';
 
 @Component({
   selector: 'userroleassignment',
@@ -29,7 +31,7 @@ export class UserroleassignmentComponent implements OnInit {
   // paged items
   pagedItems: any[];
 
-  constructor(private uProfile: UserprofileService, private udetails: UserdetailsService, public auth: AuthService, fb: FormBuilder, private pagerService: PagerService) {
+  constructor(private uProfile: UserprofileService,private dialog: MatDialog, private udetails: UserdetailsService, public auth: AuthService, fb: FormBuilder, private pagerService: PagerService) {
     this.uaform = fb.group({
       username: ['', Validators.required],
       role: ['', Validators.required]
@@ -103,6 +105,15 @@ export class UserroleassignmentComponent implements OnInit {
 
     
     }
+  }
+
+  deleteUser(username) {
+    console.log("Delete User :: "+username);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = username;
+    // dialogConfig.height = "4";
+    // dialogConfig.width ="3";
+    this.dialog.open(AdminDialogComponent, dialogConfig);
   }
 
   setPage(page: number) {

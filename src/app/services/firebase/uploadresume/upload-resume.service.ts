@@ -97,7 +97,7 @@ export class UploadResumeService {
 
       //let fname = fileUpload.file.name.substring(0,fileUpload.file.name.lastIndexOf("."));
       //console.log('Not Null -> File Name ', this.auth.userProfile.name.replace(".","_")+"."+fileUpload.file.name.substring(fileUpload.file.name.lastIndexOf(".")+1));
-      console.log('Not Null -> File Name '+filename);
+      //console.log('Not Null -> File Name '+filename);
 
       //this.task = storageRef.child(`${this.basePath}/${this.auth.userProfile.name+"_"+fileUpload.file.name}`).put(fileUpload.file);
       this.task = storageRef.child(`${this.basePath}/${filename}`).put(fileUpload.file);
@@ -145,10 +145,11 @@ export class UploadResumeService {
           uResume.ResumeURL =  this.downloadURL;
           uResume.ResumeID =  "";
           uResume.ResumeExt =  this.fileName.substring(this.fileName.lastIndexOf(".")+1,this.fileName.length);
+          uResume.ModifiedDate = new Date();
           if (id == null) {
             //console.log("It's a new upload");
 
-            uResume.CreatedDate =  formatDate(new Date(), 'MM/dd/yyyy', 'en');
+            uResume.CreatedDate =  new Date();
             //this.selectedUploadResume = new uploadResume[];
             // this.uploadResume.ResumeFileName  =   this.fileName;
             // this.selectedUploadResume.ResumeURL  =   this.downloadURL;
@@ -161,7 +162,7 @@ export class UploadResumeService {
 
           } else {
             //console.log("It's a update >>><<<< "+id);
-            uResume.ModifiedDate =  formatDate(new Date(), 'MM/dd/yyyy', 'en');
+            //uResume.ModifiedDate =  formatDate(new Date(), 'MM/dd/yyyy', 'en');
           }
           this.addUpdateUserResume(uResume, id);
           this.selectedUploadResume = uResume;
@@ -239,16 +240,18 @@ export class UploadResumeService {
           uResume.ResumeURL =  this.downloadURL;
           uResume.ResumeID =  "";
           uResume.ResumeExt =  this.fileName.substring(this.fileName.lastIndexOf(".")+1,this.fileName.length);
+          uResume.ModifiedDate = new Date();
           if (id == null) {
             //console.log("It's a new upload");
 
-            uResume.CreatedDate =  formatDate(new Date(), 'MM/dd/yyyy', 'en');
+            uResume.CreatedDate =   new Date();;
 
 
-          } else {
-            //console.log("It's a update >>><<<< "+id);
-            uResume.ModifiedDate =  formatDate(new Date(), 'MM/dd/yyyy', 'en');
-          }
+          } 
+          // else {
+          //   //console.log("It's a update >>><<<< "+id);
+          //   uResume.ModifiedDate =  formatDate(new Date(), 'MM/dd/yyyy', 'en');
+          // }
           this.addUpdateUserResumeBulk(username,uResume, id,csvRecords);
           //this.selectedUploadResume = uResume;
           //console.log('IDDDDDDDDDDDDDDDDDDDDD ::: ', this.selectedUploadResume.id);
@@ -306,7 +309,7 @@ export class UploadResumeService {
 
 
     this.urCollection = this.afs.collection(FIREBASE_CONFIG.UploadResume, ref =>
-          ref.where('Username','==',user));
+          ref.where('Username','==',user).orderBy('ModifiedDate','desc'));
           //console.log("List Service ..... 4");
     this.UploadResumec = this.urCollection.snapshotChanges().pipe(map(changes => {
       //console.log("List Service ..... 5");
@@ -326,7 +329,7 @@ export class UploadResumeService {
 
     //console.log("New Form ::: ------------->" + id);
     if ((id == null) || (id == '')) {
-      uResume.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
+      uResume.CreatedDate = new Date();
       // uResume.Username = this.auth.userProfile.name;
       // uResume.UserID = this.auth.userProfile.name;
       //pjobc.JobTitle =
@@ -350,7 +353,7 @@ export class UploadResumeService {
   addUpdateUserResumeBulk(username: string,uResume: UploadResume, id: string,csvRecords) {
     let uProfile:UserProfile;
     //console.log("New Form ::: ------------->" + id);
-      uResume.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
+      uResume.CreatedDate = new Date();
       this.urCollection.add(uResume).then(() => {
         uProfile = this.uProfileDataBulk(csvRecords);
         //console.log("User ID ::: "+uProfile.Username);

@@ -15,10 +15,10 @@ export class UploadresumepageComponent implements OnInit {
   travel: any='';
   security: any='';
 
-  constructor(private _uprofile: UserprofileService, public auth: AuthService) { }
+  constructor(private _uprofile: UserprofileService, public auth: AuthService) {    window.scroll(0,0); }
 
   ngOnInit(): void {
-
+    window.scroll(0,0);
     this._uprofile.getUserDetails(this.auth.userProfile.name,'U').subscribe(uprof=> {
       this.uprofile = uprof;
       if ((this.uprofile[0] != null) && (this.uprofile[0] != undefined)) {

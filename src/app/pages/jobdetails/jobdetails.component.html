@@ -23,7 +23,7 @@
           <td>
 
             <div class="date_desc">
-              <span *ngIf="pjob !=null" class="companyName">{{ pjob.Company.substring(0,19).toUpperCase() }}</span><span class="companyName" *ngIf="pjob !=null && pjob.Company.length>19">...</span>
+              <span *ngIf="pjob !=null" class="companyName">{{ pjob.Company.substring(0,19) }}</span><span class="companyName" *ngIf="pjob !=null && pjob.Company.length>19">...</span>
               &nbsp;&nbsp;<span *ngIf="pjob !=null" class="meta"><b>{{ pjob.JobCity }}, {{ pjob.JobState }}</b></span>
               &nbsp;&nbsp;<i class="fa fa-calendar"></i>&nbsp;<span class="meta" *ngIf="pjob !=null"><b>{{ getDateDiff(pjob.LastModifiedDate) }}&nbsp;days ago</b></span>  
               <hr/>

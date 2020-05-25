@@ -10,6 +10,24 @@
     <table>
         <thead>
             <tr>
+                <th colspan="3" align="right">
+                    <div id="buttonHomePage" class="clearfix">
+                        <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/uploadresumepage" value="Resume Upload"></label>
+                        &nbsp;&nbsp;&nbsp;
+                        <!-- <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Resume Search"></label> -->
+                    </div> 
+                  
+
+                    <!-- <div class="col-md-6 col-lg-3 mb-3 mb-lg-0" *ngIf="auth.isPostJobRole()">
+                        <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job">
+                    </div> -->
+                </th>
+
+            </tr>
+        </thead> 
+
+        <thead>
+            <tr>
                 <th colspan="4">
                     <!-- Today's Applied Job&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a> -->
                     Applied Job&nbsp;({{aJob?.length}})
@@ -74,31 +92,27 @@
         </thead>
         <tbody>
             <tr *ngFor="let rm of uresume">
-                <td>{{ rm.ResumeFileName?.substring(0,20) }}</td>
-                <td>{{ rm.CreatedDate}}</td>
+                <td>{{ rm.ResumeFileName.substring(0,27) }}</td>
+                <td>{{ rm.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
-                <td>{{rm.ModifiedDate}}</td>
+                <td>{{rm.ModifiedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>
                 <td><a href="{{rm.ResumeURL}}" target="_blank">Download</a></td>
             </tr>
         </tbody>
 
-        <thead>
+        <!-- <thead>
             <tr>
                 <th colspan="3" align="right">
                     <div id="buttonHomePage" class="clearfix">
-                        <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/uploadresumepage" value="Upload Resume"></label>
+                        <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/uploadresumepage" value="Resume Upload"></label>
                         &nbsp;&nbsp;&nbsp;
-                        <!-- <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Resume Search"></label> -->
-                    </div> 
+                     </div> 
                   
 
-                    <!-- <div class="col-md-6 col-lg-3 mb-3 mb-lg-0" *ngIf="auth.isPostJobRole()">
-                        <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job">
-                    </div> -->
                 </th>
 
             </tr>
-        </thead>
+        </thead> -->
 
         <!-- <thead>
             <tr>

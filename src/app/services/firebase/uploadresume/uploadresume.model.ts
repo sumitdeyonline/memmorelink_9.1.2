@@ -6,6 +6,6 @@ export class UploadResume {
   ResumeFileName? : string;
   ResumeURL? : string;
   ResumeExt? : string;
-	CreatedDate? : string;
-	ModifiedDate? : string;
+	CreatedDate? : Date;
+	ModifiedDate? : Date;
 }
