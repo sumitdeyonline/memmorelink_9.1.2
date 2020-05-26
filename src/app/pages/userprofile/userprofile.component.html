@@ -377,7 +377,7 @@
                         <label style="font-weight: bold;" for="WorkAuthorization">Work Authorization<span style="color: red;">&nbsp;*</span></label>
                     </div>
                     <div class="col">
-                        <input type="text" ngModel name="WorkAuthorization" [disabled]="!isUpdateProfile" #WorkAuthorization="ngModel" id="WorkAuthorization" [ngModel]="uProfile.selectedUserProfile?.WorkAuthorization" (ngModelChange)="uProfile.selectedUserProfile.WorkAuthorization" class="form-control input-sm" required/>
+                        <input type="text" ngModel name="WorkAuthorization" autocomplete="off" placeholder= "Example, H1B, Green Card etc." [disabled]="!isUpdateProfile" #WorkAuthorization="ngModel" id="WorkAuthorization" [ngModel]="uProfile.selectedUserProfile?.WorkAuthorization" (ngModelChange)="uProfile.selectedUserProfile.WorkAuthorization" class="form-control input-sm" required/>
                     </div>                    
                     <div class="col-sm-2">
                         <label style="font-weight: bold;" for="YearsofExperince">Years of Experience</label>

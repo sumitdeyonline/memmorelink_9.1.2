@@ -41,28 +41,25 @@
           </div>
         </li-->
   
-        <li class="nav-item dropdown" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole()) && (!auth.isAdminRole())">
+        <!-- <li class="nav-item dropdown" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole()) && (!auth.isAdminRole())">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-braille"></i>&nbsp;Recruiters
           </a>
           <div class="dropdown-menu" >
 
-            <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
+
             <a class="dropdown-item" routerLink="/postjob">Post Job</a>
             <a class="dropdown-item" routerLink="/jobpoststatus">Jobs Posted</a>
             <a class="dropdown-item" routerLink="/appliedjob">Jobs Applied</a>
 
-            <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
             <a class="dropdown-item" routerLink="/resumesearch">Search Resume</a>
-            <!--a class="dropdown-item" href="recruiters.html">Post Job</a-->
+
             <div class="dropdown-divider"></div>
 
             <a class="dropdown-item" routerLink="/recruiterssolution" >Recruiters Solution</a>
-            <!-- <a class="dropdown-item" routerLink="/recruitersfollowing" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">Recruiters you are follwoing</a> -->
-            <!-- <div class="dropdown-divider"></div>
-            <a class="dropdown-item" routerLink="/valueservices">Edit Profile</a> -->
+
           </div>
-      </li>
+        </li> -->
   
   
         <li class="nav-item dropdown">
@@ -167,6 +164,31 @@
           <a class="nav-link" routerLink="/uploadresumepage" *ngIf="auth.isAuthenticated() && auth.isUserRole()"><i class="fa fa-upload"></i>&nbsp;Upload Resume</a>
           <!-- <a class="nav-link" routerLink="/about" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-address-card"></i>&nbsp;About Us
           </a> -->
+        </li>
+
+
+
+        <li class="nav-item dropdown" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole()) && (!auth.isAdminRole())">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-braille"></i>&nbsp;Recruiters
+          </a>
+          <div class="dropdown-menu" >
+
+            <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
+            <a class="dropdown-item" routerLink="/postjob">Post Job</a>
+            <a class="dropdown-item" routerLink="/jobpoststatus">Jobs Posted</a>
+            <a class="dropdown-item" routerLink="/appliedjob">Jobs Applied</a>
+
+            <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
+            <a class="dropdown-item" routerLink="/resumesearch">Search Resume</a>
+            <!--a class="dropdown-item" href="recruiters.html">Post Job</a-->
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" routerLink="/recruiterssolution" >Recruiters Solution</a>
+            <!-- <a class="dropdown-item" routerLink="/recruitersfollowing" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole() || auth.isAdminRole())">Recruiters you are follwoing</a> -->
+            <!-- <div class="dropdown-divider"></div>
+            <a class="dropdown-item" routerLink="/valueservices">Edit Profile</a> -->
+          </div>
         </li>
 
 
