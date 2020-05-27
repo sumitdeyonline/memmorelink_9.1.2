@@ -72,6 +72,7 @@ export class ValueServicesComponent implements OnInit {
            this.udetails.selectedValueServices.CompanyLogoURL = this.userDetails[0].CompanyLogoURL;
 
            this.udetails.selectedValueServices.phone = this.userDetails[0].phone;
+           this.udetails.selectedValueServices.auth0UserID = this.userDetails[0].auth0UserID.toString();
 
             // console.log("userDetailsID : "+this.userDetailsID);
             // console.log("this.udetails.selectedValueServices.userRole :: "+this.udetails.selectedValueServices.userRole);
@@ -121,8 +122,8 @@ export class ValueServicesComponent implements OnInit {
       if (this._auth.isAuthenticated()) {
         model.email = this._auth.userProfile.name;
          //console.log("Company URL ::::: "+model.CompanyLogoURL);
-        // console.log("Resume Search ::::: "+model.resumesearch);
-        this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, model.userRole, model.company, model.CompanyLogoURL, model.companyAddress, model.phone,this.jobcount);
+         //console.log("this.udetails.selectedValueServices.auth0UserID ::::: "+this.udetails.selectedValueServices.auth0UserID);
+        this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, model.userRole, model.company, model.CompanyLogoURL, model.companyAddress, model.phone,this.jobcount,this.udetails.selectedValueServices.auth0UserID);
         this.valueservicesSucessMessage = model.email+" has been sucessfully updated."
         let subject = 'You have updated your profile';
         let body = 'Thank you <b>'+model.email+'</b> for updating your profile.<br /> <b>Thank you <br>MemoreLink Team</b> '
@@ -137,7 +138,7 @@ export class ValueServicesComponent implements OnInit {
               this.valueservicesSucessMessage = model.email+" has been sucessfully registered"
               //console.log(this.valueservicesSucessMessage);
               //console.log("Value Radio Burron ::::===>>>>>>> "+this.userActualRole);
-              this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, this.userActualRole, model.company, model.CompanyLogoURL, model.companyAddress,  model.phone,this.jobcount);
+              this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, this.userActualRole, model.company, model.CompanyLogoURL, model.companyAddress,  model.phone,this.jobcount,modelsignup['_id']);
               //this.router.navigate(['/signupconfirm']);
               /* Email Start */
               let subject = 'Welcome to MeMoreLink!';

@@ -42,7 +42,7 @@
                     <th windh="10%">Phone</th>
                     <th windh="10%">User Role</th>
                     <th windh="10%">PostJob Cnt</th>
-                    <th windh="5%">Email Sent</th>
+                    <th windh="5%">Auth0 UserID</th>
 
                     <th windh="5%">&nbsp;</th>
                   </tr>
@@ -51,13 +51,13 @@
                     <td>{{uDet.userName}}</td>
                     <td>{{uDet.company}}</td>
                     <td>{{uDet.companyAddress}}</td>
-                    <td>{{uDet.createdDate}}</td>
+                    <td>{{uDet.createdDate?.toDate() | date: 'MM/dd/yyyy h:mm a'}}</td>
                     <td>{{uDet.phone}}</td>
                     <td>{{uDet.userRole}}</td>
                     <td>{{uDet.postjobCount}}</td>
-                    <td>{{uDet.resumeEmailCount}}</td>
+                    <td>{{uDet.auth0UserID}}</td>
                     <!-- <td><a [routerLink]="['/postjob']" class="fa fa-delete"></a>&nbsp; -->
-                      <td><a (click)="deleteUser(uDet.userName)" class="fa fa-trash"></a></td>
+                      <td><a (click)="deleteUser(uDet.userName,uDet.auth0UserID)" class="fa fa-trash"></a></td>
                   </tr>
               </table>
             

@@ -107,10 +107,10 @@ export class UserroleassignmentComponent implements OnInit {
     }
   }
 
-  deleteUser(username) {
-    console.log("Delete User :: "+username);
+  deleteUser(username,auth0id) {
+    //console.log("Delete User :: "+username+" Auth0 ID :: "+auth0id);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = username;
+    dialogConfig.data = username+"||"+auth0id;
     // dialogConfig.height = "4";
     // dialogConfig.width ="3";
     this.dialog.open(AdminDialogComponent, dialogConfig);

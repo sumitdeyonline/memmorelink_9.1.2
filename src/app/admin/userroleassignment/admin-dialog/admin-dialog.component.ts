@@ -30,19 +30,22 @@ export class AdminDialogComponent implements OnInit {
   }
 
   deleteRecord() {
-    console.log("Data ::: "+this.data);
+    let ID = this.data.split("||");
+    let username = ID[0];
+    let auth0id = ID[1];
+    //console.log("Userane :: "+username+" Auth0 ID :: "+auth0id);
     //this.postservice.deletePostJobWithID(this.data);
 
-    this.auth.removeUserAdmin(this.data,"").subscribe(res=>{
+    this.auth.removeUserAdmin(ID[0],"auth0|"+auth0id).subscribe(res=>{
 
-      //       // Delete Resume
-      // this.resume.deleteUloadResumeByUsername(this.data);
-      // // Delete profile 
-      // this.profile.deleteUserProfileByName(this.data);
-      // // Delete Userdetails 
-      // this.udetails.deleteUserDetailsByName(this.data);
+            // Delete Resume
+      this.resume.deleteUloadResumeByUsername(this.data);
+      // Delete profile 
+      this.profile.deleteUserProfileByName(this.data);
+      // Delete Userdetails 
+       this.udetails.deleteUserDetailsByName(username);
 
-      console.log("User Deleted")
+      console.log("User Deleted") 
     });
 
     this.isDeleted = true;

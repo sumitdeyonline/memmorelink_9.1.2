@@ -56,7 +56,7 @@ export class UserdetailsService {
   }
 
 
-  addUpdateUserDetails(id: string, uname: string,uRole: string, company: string, CompanyLogoURL: string, companyAddress: string, phone: string, postjobCount: number) {
+  addUpdateUserDetails(id: string, uname: string,uRole: string, company: string, CompanyLogoURL: string, companyAddress: string, phone: string, postjobCount: number, auth0userid: string) {
 
     //this.userDetail = new UserDetails[];
     // let udetails : UserDetails{
@@ -75,15 +75,15 @@ export class UserdetailsService {
     if ((CompanyLogoURL == undefined) || (CompanyLogoURL == null)) CompanyLogoURL = '';
 
 
-    const  cDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
-    let  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,CompanyLogoURL:CompanyLogoURL,companyAddress:companyAddress,phone:phone,createdDate: cDate, postjobCount: postjobCount };
     //console.log("UDetails  ::::: "+udeatils);
     if ((id == null) || (id == '')) {
       // const id = this.afs.createId();
       //udeatils = { userName: uname, userRole: uRole,company: company,CompanyLogoURL:CompanyLogoURL,companyAddress:companyAddress,phone:phone,createdDate: cDate, postjobCount: postjobCount };
 
       //const  uRole = "User";
-
+      const  cDate = new Date();
+      let  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,CompanyLogoURL:CompanyLogoURL,companyAddress:companyAddress,phone:phone,createdDate: cDate, postjobCount: postjobCount, auth0UserID: auth0userid};
+  
       //console.log(udeatils);
       this.udCollection.add(udeatils);
       // this.adUserDetails( uname);
@@ -98,6 +98,9 @@ export class UserdetailsService {
       // // this.udCollection.add(udetails);
       // this.udCollection.add(uDetails);
     } else {
+      const  mDate = new Date();
+      let  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,CompanyLogoURL:CompanyLogoURL,companyAddress:companyAddress,phone:phone,LastModifiedDate: mDate, postjobCount: postjobCount, auth0UserID: auth0userid};
+  
       //udeatils = { userName: uname, userRole: uRole,company: company,CompanyLogoURL:CompanyLogoURL,companyAddress:companyAddress,phone:phone,createdDate: cDate };
       //console.log("UPDATE FORM ...." + id);
       // //this.faqDoc = this.afs.doc(`faq/${faqc.id}`);
@@ -108,7 +111,7 @@ export class UserdetailsService {
 
   }
 
-  addUpdateUserDetailsBulk(id: string, uname: string,uRole: string, company: string, companyAddress: string, phone: string, postjobCount: number, ResumeURL:string,ResumeFileName:string,contenttype:string,csvRecords) {
+  addUpdateUserDetailsBulk(id: string, uname: string,uRole: string, company: string, companyAddress: string, phone: string, postjobCount: number, ResumeURL:string,ResumeFileName:string,contenttype:string,csvRecords, auth0userid: string) {
 
 
 
@@ -117,8 +120,8 @@ export class UserdetailsService {
     if ((phone == undefined) || (phone == null)) phone = '';
 
 
-    const  cDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
-    const  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,companyAddress:companyAddress,phone:phone,createdDate: cDate, postjobCount: postjobCount };
+    const  cDate = new Date();
+    const  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,companyAddress:companyAddress,phone:phone,createdDate: cDate, postjobCount: postjobCount, auth0UserID: auth0userid };
 
       this.udCollection.add(udeatils).then(() => {
         this.UploadResumeProfileBulk(uname,ResumeURL,ResumeFileName,contenttype,csvRecords); 
@@ -202,7 +205,7 @@ export class UserdetailsService {
 
     this.getUserDetails(username,'U').subscribe(updetails=> {
       this.userDetails = updetails;
-      console.log("User Details :::: "+this.userDetails[0].id);
+   //   console.log("User Details :::: "+this.userDetails[0].id);
       this.deleteUserDetailsById(this.userDetails[0].id);
 
     })

@@ -1,6 +1,7 @@
 export interface ValueServices {
     username?: string;
     email?: string;
+    auth0UserID?: string;
     password?: string;
     repassword?: string;
     client_id?: string;

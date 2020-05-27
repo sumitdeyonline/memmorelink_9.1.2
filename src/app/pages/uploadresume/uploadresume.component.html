@@ -48,9 +48,9 @@
         <tbody>
             <tr *ngFor="let rm of uResume">
                 <td>{{ rm.ResumeFileName.substring(0,27) }}</td>
-                <td>{{ rm.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>
+                <td>{{ rm.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
-                <td>{{rm.ModifiedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>
+                <td>{{rm.ModifiedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
                 <td><a href="{{rm.ResumeURL}}" target="_blank">Download</a></td>
             </tr>
         </tbody>

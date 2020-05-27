@@ -95,6 +95,7 @@ export class AuthService {
       else
         loginErrorMsg1 = err.description.toString();
         //this.setLoginErrorMsg(loginErrorMsg1);
+        localStorage.setItem(AUTH_CONFIG.authErrorMeg, loginErrorMsg1);
         //console.log("err.description :::::"+ loginErrorMsg1);        
       //if (err) alert(loginErrorMsg1);
     });
@@ -545,7 +546,7 @@ export class AuthService {
     //console.log("Test : "+header);
     //return this._http.delete('https://memorelink.auth0.com/api/v2/' + id, optionsHeader).map(response =>{
       return this._http.delete(AUTH_CONFIG.userURL + id, optionsHeader).map(response =>{
-      console.log(response);
+      //console.log(response);
       this.logout();
     });
     
@@ -585,7 +586,8 @@ export class AuthService {
 
    
 
-    let header = { authorization: localStorage.getItem(SESSION_CONFIG.idToken) };  
+    //let header = { authorization: localStorage.getItem(SESSION_CONFIG.idToken) }; 
+    let header = { authorization: AUTH_CONFIG.idToekn };   
     //let header = { client_id:'NVaSJMjTJFi707US1W1A55nf64Xh68MC',client_secret:'9N0M0ao77gwE9xcO3UpEV7eL9o0DGFdeECGHDDZD7raunugOQs8UHWlHHbwUwsds', 'Access-Control-Allow-Origin': '*'};
 
     let optionsHeader = {  headers: header  }
@@ -593,7 +595,7 @@ export class AuthService {
     //console.log("Test : "+header);
     //return this._http.delete('https://memorelink.auth0.com/api/v2/' + id, optionsHeader).map(response =>{
       return this._http.delete(AUTH_CONFIG.userURL + id, optionsHeader).map(response =>{
-      console.log(response);
+      //console.log(response);
       //this.logout();
     });
     

@@ -1,8 +1,9 @@
 export class UserDetails {
   id?: string;
   userName? : string;
+  auth0UserID?: string;
   userRole? : string;
-  createdDate? : string;
+  createdDate? : Date;
   company? : string;
   companyAddress? : string;
   CompanyLogoURL?: string;
@@ -10,5 +11,5 @@ export class UserDetails {
   postjobCount? : number;
   resumeEmailCount? : number;
   LastModifiedBy? : string;
-  LastModifiedDate? : string;
+  LastModifiedDate? : Date;
 }

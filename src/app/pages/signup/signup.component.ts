@@ -47,7 +47,8 @@ export class SignupComponent implements OnInit {
           //alert("User Addred");
           this.signupSucessMessage = model.email+" has been sucessfully registered"
           //console.log(this.signupSucessMessage);
-          this.udetails.addUpdateUserDetails(null, model.email,FIREBASE_CONFIG.UserRole, model.company, null,model.companyAddress,model.phone,0);
+          //console.log("modelSignup :: " +modelSignup['_id']);
+          this.udetails.addUpdateUserDetails(null, model.email,FIREBASE_CONFIG.UserRole, model.company, null,model.companyAddress,model.phone,0,modelSignup['_id']);
           //this.router.navigate(['/signupconfirm']);
           let subject = 'Welcome to MeMoreLink!';
           let body = 'Thank you <b>'+model.email+'</b> for registering.<br/><br/>Best of luck <br /><br /> <b>Thank you <br>MeMoreLink Team</b> '

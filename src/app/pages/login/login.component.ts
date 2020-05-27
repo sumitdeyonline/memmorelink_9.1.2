@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Login } from './Login';
 import { AuthService } from '../../services/authentication/auth.service';
+import { AUTH_CONFIG } from 'src/app/global-config';
 
 @Component({
   selector: 'login',
@@ -36,19 +37,21 @@ export class LoginComponent implements OnInit {
     this._auth.login(loginComponent.username, loginComponent.password);
  
     
-    setTimeout(() =>{
+     setTimeout(() =>{
       if (this._auth.isAuthenticated()) {
         //console.log("Authenticated ....");
       } else {
         //this.login.username = '';
 
-          this.login.password = '';
-          this.loginError ='Wrong Username or Password';
 
+          this.login.password = '';
+          //this.loginError ='Wrong Username or Password';
+          this.loginError = localStorage.getItem(AUTH_CONFIG.authErrorMeg);
+          localStorage.removeItem(AUTH_CONFIG.authErrorMeg);
         //console.log("ERROR ::::::::: --->>>>>"+this._auth.getLoginErrorMsg());
         //console.log("ERROR ::::::::: --->>>>>"+this.loginError);
       }
-    }, 6000);    
+     }, 1000);    
     //this._authService.login();
     //this._authService.getProfile();
   }
