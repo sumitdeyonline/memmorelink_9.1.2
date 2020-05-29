@@ -572,7 +572,7 @@ export class AuthService {
   }
 
 
-  removeUserAdmin(username,id) {
+  getAdmintoken() {
 
 
     //console.log("Removing User ::: "+username+ " get id token :: "+ localStorage.getItem(SESSION_CONFIG.idToken));
@@ -585,19 +585,46 @@ export class AuthService {
     // header.set( 'Access-Control-Allow-Origin', '*');
 
    
+    //console.log("Header :: "+localStorage.getItem(SESSION_CONFIG.idToken));
+   // let idToekn = "Bearer "+localStorage.getItem(SESSION_CONFIG.idToken).toString();
 
-    //let header = { authorization: localStorage.getItem(SESSION_CONFIG.idToken) }; 
-    let header = { authorization: AUTH_CONFIG.idToekn };   
+    //let header = { authorization: idToekn }; 
+    //let header = {  "Access-Control-Allow-Origin": "*","Access-Control-Allow-Methods": "GET, POST, OPTIONS","Content-Type": "application/json" };
+    //let header = { origin:"*"};
+    //let header = { authorization: AUTH_CONFIG.idToekn };   
     //let header = { client_id:'NVaSJMjTJFi707US1W1A55nf64Xh68MC',client_secret:'9N0M0ao77gwE9xcO3UpEV7eL9o0DGFdeECGHDDZD7raunugOQs8UHWlHHbwUwsds', 'Access-Control-Allow-Origin': '*'};
 
-    let optionsHeader = {  headers: header  }
+
+
+  //let body = '{"client_id":"NVaSJMjTJFi707US1W1A55nf64Xh68MC","client_secret":"9N0M0ao77gwE9xcO3UpEV7eL9o0DGFdeECGHDDZD7raunugOQs8UHWlHHbwUwsds","audience":"https://memorelink.auth0.com/api/v2/","grant_type":"client_credentials"}';
+  // let body = AUTH_CONFIG.adminTokenBody;
+  // console.log(body);
+  // console.log(JSON.parse(body));
+
+   return this._http.post(AUTH_CONFIG.adminTokenURL,JSON.parse(AUTH_CONFIG.adminTokenBody)).map(rep=>{
+     
+      //console.log(rep['access_token']);
+      let idToekn = "Bearer "+rep['access_token'];
+      localStorage.setItem(AUTH_CONFIG.idToekn,idToekn);
+      let header = { authorization: idToekn }; 
+      let optionsHeader = {  headers: header  }
+      //this.deleteUser(id,optionsHeader);
+      // this._http.delete(AUTH_CONFIG.userURL + id, optionsHeader).map(response =>{
+      //     console.log("fdsfsdfsd ::::: "+response);
+      //     //this.logout();
+      //   });
+
+
+    });
+
+
     //headers.append('Authorization', idToekn);
     //console.log("Test : "+header);
     //return this._http.delete('https://memorelink.auth0.com/api/v2/' + id, optionsHeader).map(response =>{
-      return this._http.delete(AUTH_CONFIG.userURL + id, optionsHeader).map(response =>{
-      //console.log(response);
-      //this.logout();
-    });
+    //   return this._http.delete(AUTH_CONFIG.userURL + id, optionsHeader).map(response =>{
+    //   //console.log(response);
+    //   //this.logout();
+    // });
     
     
 
@@ -618,6 +645,20 @@ export class AuthService {
     // });
 
 
+  }
+
+  deleteUser(id) {
+    //console.log("TEst remove user");
+    
+    let header = { authorization: localStorage.getItem(AUTH_CONFIG.idToekn).toString() }; 
+    localStorage.removeItem(AUTH_CONFIG.idToekn);
+    //console.log("header::: "+header);
+    let optionsHeader = {  headers: header  }
+    
+     return this._http.delete(AUTH_CONFIG.userURL + id, optionsHeader).map(response =>{
+      //console.log("fdsfsdfsd ::::: "+response);
+      //this.logout();
+    });
   }
 
 

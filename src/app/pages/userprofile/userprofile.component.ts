@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { FileUpload } from 'src/app/services/firebase/uploadresume/FileUpload';
 import { UploadResumeService } from 'src/app/services/firebase/uploadresume/upload-resume.service';
 import { FormBuilder, NgForm } from '@angular/forms';
@@ -42,9 +42,24 @@ export class UserProfileComponent implements OnInit {
   countries: Country[];
   state: State[];
   utility = new AngularUtilityComponent();
+  isWorkAuthHide: boolean =false;
+  //userProfileArray: Array<string> = ["Citizen","Green Card","GC EAD","Other EAD","H1B","L1 Visa","L3 Visa","F1 Student Visa"];
 
 
-  constructor(private rUploadService: UploadResumeService, public uProfile: UserprofileService, private router: Router, public auth: AuthService, private sEmail: EmailService, private dialog: MatDialog,private etypeserv: EmploymenttypesService) {
+  workauthArray = [
+    {name:'Citizen'},
+    {name:'Green Card'},
+    {name:'GC EAD'},
+    {name:'Other EAD'},
+    {name:'H1B'},
+    {name:'L1 Visa'},
+    {name:'L3 Visa'},
+    {name:'F1 Student Visa'},
+    {name:'Other'},
+  ];
+
+
+  constructor(private rUploadService: UploadResumeService, private changeDetector : ChangeDetectorRef, public uProfile: UserprofileService, private router: Router, public auth: AuthService, private sEmail: EmailService, private dialog: MatDialog,private etypeserv: EmploymenttypesService) {
 
 
     this.uProfile.getUserDetails(this.auth.userProfile.name,'U').subscribe(uprop=> {
@@ -59,15 +74,35 @@ export class UserProfileComponent implements OnInit {
         //console.log("NEW FORM ....");
         this.isUpdate = false;
         this.isUpdateProfile = true;
+        this.uProfile.selectedUserProfile.Email = this.auth.userProfile.name;
+
         //console.log("NEW FORM ....");
       } else {
         //console.log("Edit FORM .... FOR "+this.userProfile.length+" ::::: ID :::::: => "+this.userProfile[0].id);
         //this.fileUploadEnabled = true;
-        this.isUpdate = true;
-        this.isUpdateProfile = false;
+        //console.log(" this.userProfile[0].EmploymentType ::: "+ this.userProfile[0].WorkAuthorization);
+        let result = this.workauthArray.find(tree => tree.name == this.userProfile[0].WorkAuthorization);
+
+
+
+        //console.log("Result ::: "+result.name);
+        //this.empTypeArray.find(this.userProfile[0].EmploymentType)
+        // for (let i=0;i < this.empTypeArray.length ;i++){
+        //   // if (this.empTypeArray[i].name == this.userProfile[0].EmploymentType)
+
+        // }
+
 
         this.getFieldForUpdate();
+        if (this.workauthArray.find(tree => tree.name == this.userProfile[0].WorkAuthorization) == undefined) {
+          this.isWorkAuthHide = true;
+          this.isUpdateProfile = false; 
+          //console.log("Work auth ...... "+this.isWorkAuthHide);
 
+        }  
+        this.isUpdate = true;
+        this.isUpdateProfile = false;      
+        this.changeDetector.detectChanges();
       }
 
     })
@@ -106,19 +141,23 @@ export class UserProfileComponent implements OnInit {
 
   getEmpTypes() {
     this.etypeserv.getEmploymentTypesByUse("").subscribe(etype => {
-      this.EmpTypes = etype;
+      this.EmpTypes = etype; 
+      //console.log("Employment Type :: "+this.EmpTypes.length);
     })
 
   }
 
   EnableEdit() {
+    
     if (!this.isUpdateProfile){
+      this.isWorkAuthHide =false;
       this.editProfileText = "Cancel";
       this.isUpdateProfile = true;
+      this.changeDetector.detectChanges();
     }
 
     else {
-      console.log("Edit Profile ... ");
+      //console.log("Edit Profile ... ");
       this.editProfileText ="Edit Profile";
       //console.log("Befire UserProfile .......*******>>>>>>");
       this.resetForm();
@@ -127,6 +166,11 @@ export class UserProfileComponent implements OnInit {
         this.userProfile = uprop;
         this.getFieldForUpdate();
         this.isUpdateProfile = false;
+        if (this.workauthArray.find(tree => tree.name == this.userProfile[0].WorkAuthorization) == undefined) {
+          this.isWorkAuthHide = true;
+          this.changeDetector.detectChanges();
+        }
+
       })
       //this.router.navigate(["userprofile"]);
     }
@@ -196,11 +240,24 @@ export class UserProfileComponent implements OnInit {
     return this.utility.formatUSNumber(phone);
   }
 
+  selectWorkAuthorization(event) {
+    //console.log("work auth :: "+event);
+    if (event == 'Other') {
+      setTimeout(()=> {
+        this.isWorkAuthHide = true;
+        this.uProfile.selectedUserProfile.WorkAuthorization = this.userProfile[0].WorkAuthorization;
+        this.changeDetector.detectChanges();
+    }, 0);
+
+    }
+  }
+
+
   userProfileAddUpdate(uprofileForm: NgForm, userid: string) {
 
     // console.log ('First Name  ::: '+ uprofileForm.value.FirstName);
     // console.log ('LastName  ::: '+ uprofileForm.value.LastName);
-    // console.log ('Sex  ::: '+ uprofileForm.value.Sex);
+     //console.log ('Sex  ::: '+ uprofileForm.value.Sex);
     // console.log ('Email  ::: '+ uprofileForm.value.Email);
      //console.log ('HomePhone  ::: '+ uprofileForm.value.HomePhone);
     // console.log ('CellPhone  ::: '+ uprofileForm.value.CellPhone);
@@ -283,13 +340,17 @@ export class UserProfileComponent implements OnInit {
     if (uprofileForm.value.instituteCountry == undefined) {
       uprofileForm.value.instituteCountry = "";
     }
-    console.log ('instituteCountry - userProfileAddUpdate ::: '+ uprofileForm.value.instituteCountry);
+    //console.log ('instituteCountry - userProfileAddUpdate ::: '+ uprofileForm.value.instituteCountry);
     if (uprofileForm.value.SkillSet == undefined) {
       uprofileForm.value.SkillSet = "";
     }
     //console.log ('SkillSet  ::: '+ uprofileForm.value.SkillSet);
     if (uprofileForm.value.Education == undefined) {
       uprofileForm.value.Education = "";
+    }
+
+    if (uprofileForm.value.WorkAuthorization == 'Other') {
+      uprofileForm.value.WorkAuthorization = this.userProfile[0].WorkAuthorization;
     }
     //console.log ('Education  ::: '+ uprofileForm.value.Education);
     //console.log ('SalaryExpectation  ::: '+ uprofileForm.value.SalaryExpectation);
@@ -319,6 +380,7 @@ export class UserProfileComponent implements OnInit {
       // console.log ('Username  ::: '+ uprofileForm.value.Username);
       this.uProfile.addUpdateUserProfile(uprofileForm.value, this.id, new Date());
     } else {
+      //this.isWorkAuthHide = false;
       //uprofileForm.value.ModifiedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
       // if (this.uPloadFileKey !=null)
       //   uprofileForm.value.ResumeID = this.uPloadFileKey;
@@ -444,7 +506,8 @@ export class UserProfileComponent implements OnInit {
     this.uProfile.selectedUserProfile.LastName = this.userProfile[0].LastName;
     this.uProfile.selectedUserProfile.Sex = this.userProfile[0].Sex;
 
-    this.uProfile.selectedUserProfile.Email = this.userProfile[0].Email;
+    //this.uProfile.selectedUserProfile.Email = this.userProfile[0].Email;
+    this.uProfile.selectedUserProfile.Email = this.auth.userProfile.name;
     this.uProfile.selectedUserProfile.HomePhone = this.userProfile[0].HomePhone;
     this.uProfile.selectedUserProfile.CellPhone = this.userProfile[0].CellPhone;
     this.uProfile.selectedUserProfile.Address1 = this.userProfile[0].Address1;

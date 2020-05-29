@@ -427,7 +427,8 @@ export class UploadResumeService {
       for(let i=0;i<this.uResume.length;i++) {
         id = this.uResume[i].id;
         //console.log("ID  :: "+id);
-        this.deleteUloadResumeByid(id);
+        if ((id !=undefined) && (id !=null))
+          this.deleteUloadResumeByid(id);
         
       }
     })

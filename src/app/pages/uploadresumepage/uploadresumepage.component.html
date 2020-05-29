@@ -236,13 +236,7 @@
                                 {{ uprofile[0]?.EmploymentType }}
                             </div>
                             <div class="col" *ngIf="uprofile == null"></div>
-                            <div class="col-sm-2">
-                                <label style="font-weight: bold;" for="DesiredPosition">Desired Position</label>
-                            </div>
-                            <div class="col" *ngIf="uprofile !=null">
-                                {{ uprofile[0]?.DesiredPosition }}
-                            </div>
-                            <div class="col" *ngIf="uprofile == null"></div>
+
                         </div>
                         <!-- <div class="row">
                             <div class="col-sm-2">&nbsp;
@@ -251,6 +245,13 @@
         
         
                         <div class="row">
+                            <div class="col-sm-2">
+                                <label style="font-weight: bold;" for="DesiredPosition">Desired Position</label>
+                            </div>
+                            <div class="col" *ngIf="uprofile !=null">
+                                {{ uprofile[0]?.DesiredPosition }}
+                            </div>
+                            <div class="col" *ngIf="uprofile == null"></div>                           
                             <div class="col-sm-2">
                                 <label style="font-weight: bold;" for="DesiredSalary">Desired Salary</label>
                             </div>

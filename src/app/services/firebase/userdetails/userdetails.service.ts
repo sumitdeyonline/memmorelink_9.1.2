@@ -74,7 +74,7 @@ export class UserdetailsService {
     if ((phone == undefined) || (phone == null)) phone = '';
     if ((CompanyLogoURL == undefined) || (CompanyLogoURL == null)) CompanyLogoURL = '';
 
-
+    const  mDate = new Date();
     //console.log("UDetails  ::::: "+udeatils);
     if ((id == null) || (id == '')) {
       // const id = this.afs.createId();
@@ -82,7 +82,7 @@ export class UserdetailsService {
 
       //const  uRole = "User";
       const  cDate = new Date();
-      let  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,CompanyLogoURL:CompanyLogoURL,companyAddress:companyAddress,phone:phone,createdDate: cDate, postjobCount: postjobCount, auth0UserID: auth0userid};
+      let  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,CompanyLogoURL:CompanyLogoURL,companyAddress:companyAddress,phone:phone,createdDate: cDate,LastModifiedDate: mDate, postjobCount: postjobCount, auth0UserID: auth0userid};
   
       //console.log(udeatils);
       this.udCollection.add(udeatils);
@@ -98,7 +98,7 @@ export class UserdetailsService {
       // // this.udCollection.add(udetails);
       // this.udCollection.add(uDetails);
     } else {
-      const  mDate = new Date();
+
       let  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,CompanyLogoURL:CompanyLogoURL,companyAddress:companyAddress,phone:phone,LastModifiedDate: mDate, postjobCount: postjobCount, auth0UserID: auth0userid};
   
       //udeatils = { userName: uname, userRole: uRole,company: company,CompanyLogoURL:CompanyLogoURL,companyAddress:companyAddress,phone:phone,createdDate: cDate };
@@ -121,7 +121,7 @@ export class UserdetailsService {
 
 
     const  cDate = new Date();
-    const  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,companyAddress:companyAddress,phone:phone,createdDate: cDate, postjobCount: postjobCount, auth0UserID: auth0userid };
+    const  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,companyAddress:companyAddress,phone:phone,createdDate: cDate,LastModifiedDate: cDate, postjobCount: postjobCount, auth0UserID: auth0userid };
 
       this.udCollection.add(udeatils).then(() => {
         this.UploadResumeProfileBulk(uname,ResumeURL,ResumeFileName,contenttype,csvRecords); 
@@ -163,17 +163,17 @@ export class UserdetailsService {
   getUserDetails(userOrRole, fieldType,userSeach? ) {
     // console.log("List Service ..... 3 "+userOrRole);
      //console.log("Field Type .....  "+userSeach);
-
     if (fieldType == 'U') {
       this.udCollection = this.afs.collection(FIREBASE_CONFIG.UserDetails, ref =>
-        ref.where('userName','==',userOrRole));
+        ref.where('userName','==',userOrRole).orderBy('LastModifiedDate','desc'));
     } else if (fieldType == 'R') {
       this.udCollection = this.afs.collection(FIREBASE_CONFIG.UserDetails, ref =>
-        ref.where('userRole','==',userOrRole));      
+        ref.where('userRole','==',userOrRole).orderBy('LastModifiedDate','desc'));      
     } else if (fieldType == 'A') {
       this.udCollection = this.afs.collection(FIREBASE_CONFIG.UserDetails, ref =>
         ref.where('userRole','in',['EmployerResumeSearch','EmployerPostJob','EmployerPowerUser'])
-        .orderBy('company','asc')
+        //.orderBy('company','asc')
+        .orderBy('LastModifiedDate','desc')
         .startAt(userSeach)
         .endAt("\uf8ff"));    
         
@@ -205,8 +205,10 @@ export class UserdetailsService {
 
     this.getUserDetails(username,'U').subscribe(updetails=> {
       this.userDetails = updetails;
-   //   console.log("User Details :::: "+this.userDetails[0].id);
-      this.deleteUserDetailsById(this.userDetails[0].id);
+      //console.log("User Details :::: "+this.userDetails[0].id);
+      if ((this.userDetails[0] !=undefined) && (this.userDetails[0] !=null))
+        this.deleteUserDetailsById(this.userDetails[0].id);
+      return;
 
     })
 

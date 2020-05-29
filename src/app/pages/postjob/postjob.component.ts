@@ -73,7 +73,7 @@ export class PostjobComponent implements OnInit {
   EmpTypes: EmploymentTypes[];
   //tmpstr:[];
   EmpTypeDropDown: string[];
-  EmpTypeDropDownTmp: string[];
+  //EmpTypeDropDownTmp: string[];
 
   public localFields: Object = { text: 'Name' };
   state: State[];
@@ -194,7 +194,7 @@ export class PostjobComponent implements OnInit {
 
   JobPostSubmit(postJobForm : NgForm) {
     let type;
-    //console.log ("postJobForm.value.EmploymentTypes ::: "+postJobForm.value.EmploymentTypes);
+    console.log ("postJobForm.value.Email ::: "+postJobForm.value.Email);
     // postJobForm.value.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
     // console.log ("Datatat ::: "+postJobForm.value.CreatedDate);
     if (postJobForm.value.JobLength === undefined) {
@@ -483,7 +483,7 @@ export class PostjobComponent implements OnInit {
     if (treq == "") {
       this.value = 0;
     } else {
-      this.value = Number(treq);
+      this.value = Number(treq); 
     }
 
     //this.postjobService.selectedPostJobc.TravelRequirements = this.postJob.TravelRequirements;

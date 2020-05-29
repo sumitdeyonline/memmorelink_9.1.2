@@ -115,7 +115,7 @@
                   </div>
                   <label for="phone">Company Phone:</label> 
                   <input type="text" ngModel name="phone" #phone="ngModel" id="phone" 
-                    [ngModel]="udetails.selectedValueServices?.phone" 
+                    [ngModel]="udetails.selectedValueServices?.phone"  maxlength="14"
                     (ngModelChange)="udetails.selectedValueServices.phone" autocomplete="off" 
                     (keyup)="phoneNumberFormat(phone.value);"
                     class="form-control input-sm"/>

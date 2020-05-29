@@ -41,6 +41,7 @@ export class UserprofileService {
   userProfile: UserProfile[];
   //userProfile = [];
 
+  
   constructor(private afs : AngularFirestore, private auth: AuthService, private http: HttpClient,private sEmail: EmailService) {
     this.upCollection = this.afs.collection(FIREBASE_CONFIG.UserProfile);
     this.countryCollection = this.afs.collection(FIREBASE_CONFIG.Country);
@@ -517,20 +518,21 @@ export class UserprofileService {
 
     this.getUserDetails(username,'U').subscribe(uprofile=> {
       this.userProfile = uprofile;
-      console.log("Profile :::: "+this.userProfile[0].id);
-      this.deleteUserProfileById(this.userProfile[0].id);
+      //console.log("Profile :::: "+this.userProfile[0].id);
+      if ((this.userProfile[0] !=undefined) && (this.userProfile[0] !=null)) {
+        this.deleteUserProfileById(this.userProfile[0].id);
 
-      this.client = algoliasearch(SEARCH_CONFIG.ALGOLIA_APP_ID, SEARCH_CONFIG.ALGOLIA_API_KEY,
-        { protocol: SEARCH_CONFIG.PROTOCOLS });
-  
-        this.index = this.client.initIndex(SEARCH_CONFIG.INDEX_NAME_PROFILE);
-  
-  
-        this.index.deleteObject(this.userProfile[0].id, function(err, content) {
-          if (err) throw err;
-         // console.log("Delete Content :::::: "+content);
-        });
-      
+        this.client = algoliasearch(SEARCH_CONFIG.ALGOLIA_APP_ID, SEARCH_CONFIG.ALGOLIA_API_KEY,
+          { protocol: SEARCH_CONFIG.PROTOCOLS });
+    
+          this.index = this.client.initIndex(SEARCH_CONFIG.INDEX_NAME_PROFILE);
+    
+    
+          this.index.deleteObject(this.userProfile[0].id, function(err, content) {
+            if (err) throw err;
+           // console.log("Delete Content :::::: "+content);
+          });
+      }
 
     })
 
