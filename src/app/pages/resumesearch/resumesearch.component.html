@@ -81,7 +81,7 @@
                     <div class="tab_grid" *ngFor="let rp of pagedItems">
                         <div class="jobs-item with-thumb">
 
-                          <div class="thumb">
+                          <div class="thumb" [hidden]="mobile">
                             <a [routerLink]="['/resumedetails',rp.objectID]"  target="_blank"><img src="assets/images/a2.png" class="img-responsive" alt=""/></a>
                           </div>
                           <div class="jobs_right">

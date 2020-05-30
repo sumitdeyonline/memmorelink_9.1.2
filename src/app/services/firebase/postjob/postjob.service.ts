@@ -166,7 +166,7 @@ export class PostjobService {
         //console.log("Job Count :::: "+uDetails.CompanyLogoURL);
 
       pjobc.CreatedBy = this.auth.userProfile.name;
-      pjobc.isSearchable = true;
+      //pjobc.isSearchable = true;
       //pjobc.CompanyLogoURL = uDetails.CompanyLogoURL;
 
       this.uDetails.addUpdateUserDetails(uDetails.id,uDetails.userName,uDetails.userRole,uDetails.company,uDetails.CompanyLogoURL,uDetails.companyAddress,uDetails.phone,uDetails.postjobCount, uDetails.auth0UserID)
@@ -276,6 +276,7 @@ export class PostjobService {
         Compensation:pjobc.Compensation,
         JobLength:pjobc.JobLength,
         TravelRequirements:pjobc.TravelRequirements,
+        isSearchable:pjobc.isSearchable,
         isTeleComute:pjobc.isTeleComute,
         CreatedDate : pjobc.CreatedDate.getTime(),
         CreatedBy : pjobc.CreatedBy,
@@ -305,6 +306,7 @@ export class PostjobService {
         Compensation:pjobc.Compensation,
         JobLength:pjobc.JobLength,
         TravelRequirements:pjobc.TravelRequirements,
+        isSearchable:pjobc.isSearchable,
         isTeleComute:pjobc.isTeleComute,
         //CreatedDate : createDate.getTime(),
         CreatedDate : createDate.seconds,

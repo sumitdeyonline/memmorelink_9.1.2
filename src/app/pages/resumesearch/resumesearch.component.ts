@@ -34,6 +34,7 @@ export class ResumesearchComponent implements OnInit {
   loading: boolean = false;
   pagesize = SEARCH_CONFIG.PAGE_SIZE;
   noResultFound: string='';
+  mobile: boolean=false;
   
 
   constructor(private route: ActivatedRoute, private pagerService: PagerService, private router: Router,fb: FormBuilder ) { 
@@ -59,6 +60,11 @@ export class ResumesearchComponent implements OnInit {
   }
 
   ngOnInit() { 
+
+    if (window.screen.width <= 735) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
   }
 
   resumeSearch(searchStr:string) {

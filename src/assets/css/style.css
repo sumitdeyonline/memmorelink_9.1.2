@@ -12,6 +12,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     text-align-last: left !important;
 }
 
+.custom-switch {
+    padding-left: 0rem !important;
+}
 
 h4, h5, h6,
 h1, h2, h3 {margin-top: 0;}

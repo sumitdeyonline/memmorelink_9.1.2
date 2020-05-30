@@ -61,7 +61,7 @@
                             <!-- <div class="thumb"><a [routerLink]="['/jobdetails',pj.objectID]" target="_blank"><img src="assets/images/a2.png" class="img-responsive" alt=""/></a></div> -->
 
 
-                            <div class="thumb" >
+                            <div class="thumb" [hidden]="mobile">
                                 <a [routerLink]="['/jobdetails',pj.objectID]">
                                     <img src="{{pj.CompanyLogoURL}}" class="img-responsive" alt="" onerror="this.onerror=null;this.src='assets/images/a2.png';"/>
                                 </a>

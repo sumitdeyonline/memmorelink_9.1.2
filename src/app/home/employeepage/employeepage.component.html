@@ -35,7 +35,7 @@
         <tbody>
             <tr *ngFor="let aj of aJob">
                 <td>{{aj.company}}</td>
-                <td>{{ aj.JobTitle?.substring(0,20) }}</td>
+                <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,20) }}</a></td>
                 <td>{{aj.joblocation}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
                 <td>{{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
@@ -70,17 +70,17 @@
                 <th>Date Created</th>
                 <th>Date Modified</th>
                 <!-- <th>Employment Type</th>                 -->
-                <th>Resume Filename</th>
+                <!-- <th>Resume Filename</th> -->
 
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let rm of uresume">
-                <td>{{ rm.ResumeFileName.substring(0,27) }}</td>
+                <td><a href="{{rm.ResumeURL}}" target="_blank">{{ rm.ResumeFileName.substring(0,27) }}</a></td>
                 <td>{{ rm.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a'}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
                 <td>{{rm.ModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a'}}</td>
-                <td><a href="{{rm.ResumeURL}}" target="_blank">Download</a></td>
+                <!-- <td><a href="{{rm.ResumeURL}}" target="_blank">Download</a></td> -->
             </tr>
         </tbody>
 

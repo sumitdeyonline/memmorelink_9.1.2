@@ -21,6 +21,8 @@ export class JobdetailsComponent implements OnInit {
   keyword: string;
   location: string;
   travelReq: string;
+  mobile: boolean=false;
+  isActive: boolean=true;
   //fileNameDialogRef: MatDialogRef<ApplyjobComponent>;
 
   constructor(private _activeRoute:ActivatedRoute, private postservice: PostjobService, private dialog: MatDialog, public auth: AuthService) {
@@ -40,6 +42,12 @@ export class JobdetailsComponent implements OnInit {
 
   ngOnInit() {
 
+    if (window.screen.width <= 768) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
+
+
     this._activeRoute.paramMap.subscribe(params => {
       this.id = params.get('id');
       //console.log("Key Value :::::::: "+this.id);
@@ -47,6 +55,10 @@ export class JobdetailsComponent implements OnInit {
     this.postservice.getPostJobsById(this.id).subscribe(pjob=> {
       this.pjob = pjob;
       //alert(this.pjob.isTeleComute);
+
+      if (!this.pjob?.isSearchable) {
+        this.isActive = false;
+      }
 
       if (""+this.pjob?.isTeleComute == 'true') {
         this.pjob.isTeleComute = true;
@@ -96,7 +108,10 @@ export class JobdetailsComponent implements OnInit {
       this.pjob.id = this.id;
       dialogConfig.data = this.pjob;
        dialogConfig.height = "87%";
-       dialogConfig.width ="40%";
+       if (this.mobile)
+        dialogConfig.width ="95%";
+       else 
+        dialogConfig.width ="60%";
       this.dialog.open(JobpredictionComponent, dialogConfig);
     //  dialogConfig.disableClose = false;
     //  dialogConfig.autoFocus = true;

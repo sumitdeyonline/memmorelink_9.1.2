@@ -87,7 +87,12 @@
                         <mat-progress-spinner [mode]="'indeterminate'" [color]="'warn'" style="align-content: center;left:45%;">
                         </mat-progress-spinner>
                     
-                    </div>                
+                    </div>   
+                    <div id="buttonHomePage" class="clearfix">
+                        <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/postjob" value="Post Job"></label>
+                        <!-- &nbsp;&nbsp;&nbsp;
+                        <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Search Resume"></label> -->
+                    </div>              
                     <hr class="hr_style">
                     <!-- <div ali class="progress-loader" [hidden]="!loading" style="align-content: center;left:45%;">
                     
@@ -99,7 +104,7 @@
                       <div class="tab_grid" *ngFor="let pj of pagedItems">
                           <div class="jobs-item with-thumb">
 
-                            <div class="thumb">
+                            <div class="thumb" [hidden]="mobile">
                                 <a [routerLink]="['/postjob',pj.id]">
                                     <img src="{{pj.CompanyLogoURL}}" onerror="this.onerror=null;this.src='assets/images/a2.png';" class="img-responsive" alt=""/>
                                 </a>
@@ -124,9 +129,9 @@
                             <div class="date_desc"><h6 class="title"><a [routerLink]="['/postjob',pj.id]">{{ pj.JobTitle }}</a></h6>
                               <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company.substring(0,19) }}</span><span class="companyName" *ngIf="pj.Company.length>19">...</span>
                               &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b></span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">C: {{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}, M: {{ pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }} &nbsp;</span>
+                              &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">Created Date: {{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}, Last Modified: {{ pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
                             </div>
-                            <div class="clearfix"> </div>
+                            <div class="clearfix"> </div> 
                              <ul class="top-btns">
                               <!--li><a href="#" class="fa fa-plus toggle"></a></li>
                               <li><a href="#" class="fa fa-star"></a></li>

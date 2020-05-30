@@ -100,6 +100,8 @@ export class PostjobComponent implements OnInit {
         window.scroll(0,0);
         this.getCountry();
         this.getEmpTypes();
+        this.value = 0;
+
     // this.PostJobForm = fb.group({
     //   // email: ['', Validators.required,Validators.email],
     //   // password: ['', Validators.required,Validators.minLength(5)],
@@ -132,6 +134,7 @@ export class PostjobComponent implements OnInit {
 
 
     this.resetForm();
+
     // this.Editor.editorConfig.removePlugins = ['Image'];
     // console.log("We are in toolbar");
     // this.Editor.editorConfig = function( config ) {
@@ -146,7 +149,9 @@ export class PostjobComponent implements OnInit {
       if ((this.id == null) || (this.id == '')) {
         //console.log("NEW FORM ....");
         this.value = 0;
-        this.postjobService.selectedPostJobc.TravelRequirements = ""+this.value;
+        
+        //console.log("this.value :: "+this.value+ " this.postjobService.selectedPostJobc.TravelRequirements : "+this.postjobService.selectedPostJobc.TravelRequirements);
+        this.postjobService.selectedPostJobc.isSearchable = true;
         this.userDetails = udtl;
         if (this.userDetails.length > 0) {
           this.postjobService.selectedPostJobc.Company = this.userDetails[0].company;
@@ -194,7 +199,7 @@ export class PostjobComponent implements OnInit {
 
   JobPostSubmit(postJobForm : NgForm) {
     let type;
-    console.log ("postJobForm.value.Email ::: "+postJobForm.value.Email);
+    //console.log ("postJobForm.value.Email ::: "+postJobForm.value.Email);
     // postJobForm.value.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
     // console.log ("Datatat ::: "+postJobForm.value.CreatedDate);
     if (postJobForm.value.JobLength === undefined) {
@@ -260,7 +265,7 @@ export class PostjobComponent implements OnInit {
       this.userDetails[0].postjobCount = this.postJobCount;
       //console.log("Employee type :: "+this.mulObj.value);
 
-      //console.log("postJobForm.value.TravelRequirements : "+postJobForm.value.TravelRequirements);
+      //console.log("postJobForm.value.isSearchable : "+postJobForm.value.isSearchable);
       this.postjobService.addUpdatePostJobs(postJobForm.value,this.id, new Date(), "", this.userDetails[0]);
       //console.log("NEW FORM ....");
       type = "Created";
@@ -429,7 +434,10 @@ export class PostjobComponent implements OnInit {
         // details: ''
       }
       this.postjobService.selectedPostJobc.isTeleComute=false;
-      this.postjobService.selectedPostJobc.TravelRequirements='No Travel';
+      //this.postjobService.selectedPostJobc.TravelRequirements='No Travel';
+      if (this.postjobService.selectedPostJobc.TravelRequirements == undefined) {
+        this.postjobService.selectedPostJobc.TravelRequirements = "0";
+      }
       //this.mulObj.value = [];
   }
 

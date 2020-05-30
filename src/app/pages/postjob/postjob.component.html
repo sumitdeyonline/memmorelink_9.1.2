@@ -52,6 +52,23 @@
                 </div>                
 
 
+
+                
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label style="font-weight: bold;" for="isSearchable">Active in Search</label>
+                    </div>
+                    <div class="col">
+                        <div class="custom-control custom-switch">
+                            <label class="switch">
+                                <input type="checkbox" ngModel name="isSearchable" #isSearchable="ngModel" id="isSearchable" [ngModel]="postjobService.selectedPostJobc?.isSearchable" (ngModelChange)="postjobService.selectedPostJobc.isSearchable" class="form-control input-sm" checked>
+                                <span class="slider round"></span>
+                            </label>
+                            
+                            <!-- <label class="custom-control-label" for="isSearchable">Toggle this switch element</label> -->
+                          </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-2">
                         <label style="font-weight: bold;" for="JobTitle">Job Title<span style="color: red;">&nbsp;*</span></label>

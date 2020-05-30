@@ -21,7 +21,7 @@ table tbody {
     flex: 1 1 auto;
     display: block;
     overflow-y: scroll;
-    max-height:17em;
+    max-height:12em;
 }
 table tbody tr {
     width: 100%;

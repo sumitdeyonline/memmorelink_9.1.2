@@ -63,7 +63,7 @@ export class ListjobComponent implements OnInit {
     // paged items
     pagedItems: any[];
     pagesize = SEARCH_CONFIG.PAGE_SIZE;
-
+    mobile: boolean=false;
 
   constructor(private router: Router, 
               private route: ActivatedRoute, 
@@ -156,6 +156,10 @@ export class ListjobComponent implements OnInit {
   ngOnInit() {
 
     window.scroll(0,0);
+    if (window.screen.width <= 735) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
   }
 
 
@@ -170,6 +174,7 @@ export class ListjobComponent implements OnInit {
     this.client = algoliasearch(SEARCH_CONFIG.ALGOLIA_APP_ID, SEARCH_CONFIG.ALGOLIA_API_KEY,
       { protocol: SEARCH_CONFIG.PROTOCOLS });
 
+      // let filter = 'isSearchable:true', state='', city='';
       let filter = '', state='', city='';
       //this.PostJobc = [];
       this.index = this.client.initIndex(SEARCH_CONFIG.INDEX_NAME);
@@ -182,6 +187,7 @@ export class ListjobComponent implements OnInit {
       if ((keywordLocal == "") && (locationLocal == "")) {
         //console.log("Nothing ... ");
         this.index.search({
+          // filters: filter
         }).then((data) => {
           //let j=0;
           //this.PostJobcFinal = [];

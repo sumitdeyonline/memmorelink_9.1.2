@@ -359,7 +359,7 @@ export class UserProfileComponent implements OnInit {
     //console.log ('File URL   ::: '+ this.rUploadService.downloadURL);
 
     // this.fileUploadEnabled = true; // Enabled File Download
-
+    uprofileForm.value.Email = this.auth.userProfile.name;
     if (userid == null){
       //uprofileForm.value.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
       // uprofileForm.value.ResumeID = this.uPloadFileKey;

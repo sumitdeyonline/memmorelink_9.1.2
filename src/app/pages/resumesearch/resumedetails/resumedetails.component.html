@@ -13,7 +13,7 @@
             </h2>
 
             <h6>
-                [{{ uprofile.CurrentPosition }}&nbsp;@{{ uprofile.CurrentCompanySchool }}]
+                [{{ uprofile?.CurrentPosition }}&nbsp;@{{ uprofile?.CurrentCompanySchool }}]
             </h6>
 
 
@@ -30,14 +30,14 @@
                             <label style="font-weight: bold;">First Name : </label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                        {{ uprofile.FirstName }}
+                        {{ uprofile?.FirstName }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                         <div class="col-sm-2" >
                             <label style="font-weight: bold;" for="LastName">Last Name</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                        {{ uprofile.LastName }}
+                        {{ uprofile?.LastName }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>                     
                     </div>
@@ -52,14 +52,14 @@
                             <label style="font-weight: bold;" for="Sex">Sex</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                        {{ uprofile.Sex }}
+                        {{ uprofile?.Sex }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                         <div class="col-sm-2">
                             <label style="font-weight: bold;" for="Email">Email</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                        {{ uprofile.Email }}
+                        {{ uprofile?.Email }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
@@ -74,14 +74,14 @@
                             <label style="font-weight: bold;"  for="HomePhone">Home Phone</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.HomePhone }}
+                            {{ uprofile?.HomePhone }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                         <div class="col-sm-2">
                             <label style="font-weight: bold;" for="CellPhone">Cell Phone</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.CellPhone }}
+                            {{ uprofile?.CellPhone }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
@@ -96,7 +96,7 @@
                             <label style="font-weight: bold;" for="Address1">Address</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.Address1 }}
+                            {{ uprofile?.Address1 }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
@@ -110,7 +110,7 @@
                             <label style="font-weight: bold;" for="Address2"></label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{uprofile.Address2}}
+                            {{uprofile?.Address2}}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
@@ -130,14 +130,14 @@
                             <label style="font-weight: bold;" for="City">City</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.City }}
+                            {{ uprofile?.City }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                         <div class="col-sm-2">
                             <label style="font-weight: bold;" for="ZipCode">Zip</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.ZipCode }}
+                            {{ uprofile?.ZipCode }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
 
@@ -157,7 +157,7 @@
                                 <label style="font-weight: bold;" for="Country">Country</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.Country }}
+                            {{ uprofile?.Country }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
 
@@ -168,7 +168,7 @@
                             <label style="font-weight: bold;" for="State">State</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.State }}
+                            {{ uprofile?.State }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
@@ -182,14 +182,14 @@
                             <label style="font-weight: bold;"  for="FaceBookURL">Facebook URL</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.FaceBookURL }}
+                            {{ uprofile?.FaceBookURL }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                         <div class="col-sm-2">
                             <label style="font-weight: bold;" for="LinkedinURL">Linkedin URL</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.LinkedinURL }}
+                            {{ uprofile?.LinkedinURL }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
@@ -204,7 +204,7 @@
                             <label style="font-weight: bold;" for="PersonalWebsite">Personal Website</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.PersonalWebsite }}
+                            {{ uprofile?.PersonalWebsite }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
@@ -226,7 +226,7 @@
                             <label style="font-weight: bold;" for="EmploymentType">Employment Type</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.EmploymentType }}
+                            {{ uprofile?.EmploymentType }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
 
@@ -242,14 +242,14 @@
                             <label style="font-weight: bold;" for="DesiredPosition">Desired Position</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.DesiredPosition }}
+                            {{ uprofile?.DesiredPosition }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>                        
                         <div class="col-sm-2">
                             <label style="font-weight: bold;" for="DesiredSalary">Desired Salary</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.DesiredSalary }}
+                            {{ uprofile?.DesiredSalary }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
@@ -293,14 +293,14 @@
                             <label style="font-weight: bold;" for="YearsofExperince">Years of Experience</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.YearsofExperince }}
+                            {{ uprofile?.YearsofExperince }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                         <div class="col-sm-2">
                             <label style="font-weight: bold;" for="WorkAuthorization">Work Authorization</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
-                            {{ uprofile.WorkAuthorization }}
+                            {{ uprofile?.WorkAuthorization }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                     </div>
@@ -331,7 +331,7 @@
                         <label style="font-weight: bold;" for="CoverLetter">Cover Letter</label>
                     </div>
                     <div class="col" *ngIf="uprofile !=null">
-                        {{ uprofile.CoverLetter }}
+                        {{ uprofile?.CoverLetter }}
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>
@@ -375,7 +375,7 @@
                         <label style="font-weight: bold;" for="Education">Education</label>
                     </div>
                     <div class="col" *ngIf="uprofile != null">
-                        {{ uprofile.Education }}
+                        {{ uprofile?.Education }}
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>
@@ -390,14 +390,14 @@
                     </div>
                     
                     <div class="col" *ngIf="uprofile != null">
-                        {{ uprofile.institute }}
+                        {{ uprofile?.institute }}
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                     <div class="col-sm-2">
                         <label style="font-weight: bold;" for="instituteCity">Institute City</label>
                     </div>
                     <div class="col" *ngIf="uprofile != null">
-                        {{ uprofile.instituteCity }}
+                        {{ uprofile?.instituteCity }}
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>
@@ -412,7 +412,7 @@
                         <label style="font-weight: bold;" for="instituteCountry">Institute Country</label>
                     </div>
                     <div class="col" *ngIf="uprofile != null">
-                        {{ uprofile.instituteCountry }}
+                        {{ uprofile?.instituteCountry }}
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>
@@ -432,7 +432,7 @@
                         <label style="font-weight: bold;" for="SkillSet">SkillSet</label>
                     </div>
                     <div class="col" *ngIf="uprofile != null">
-                        {{ uprofile.SkillSet }}
+                        {{ uprofile?.SkillSet }}
                     </div>
                     <div class="col" *ngIf="uprofile == null"></div>
                 </div>

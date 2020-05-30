@@ -56,15 +56,17 @@
                     <th>Location</th>
                     <!-- <th>Date Created</th>                 -->
                     <th>Date Modified</th>
+                    <th>Active Job</th>
     
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let pj of pjob">
-                    <td>{{ pj.JobTitle?.substring(0,25) }}</td>
+                    <td><a [routerLink]="['/postjob',pj.id]" target="_blank">{{ pj.JobTitle?.substring(0,25) }}</a></td>
                     <td>{{ pj.JobCity?.substring(0,15) }}, {{ pj.JobState }}</td>
                     <!-- <td>{{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>                     -->
                     <td>{{pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
+                    <td>{{pj.isSearchable==true?'Yes':'No'}}</td>
                 </tr>
 
             </tbody>
@@ -115,7 +117,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let aj of aJob">
-                    <td>{{ aj.JobTitle?.substring(0,25) }}</td>
+                    <td><a [routerLink]="['/postjob',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,25) }}</a></td>
                     <td>{{ aj.joblocation }}</td>
                     <td>{{aj.FirstName}}&nbsp;{{aj.LastName}}</td>
                     <td>{{aj.FromEmail?.substring(0,20)}}</td>

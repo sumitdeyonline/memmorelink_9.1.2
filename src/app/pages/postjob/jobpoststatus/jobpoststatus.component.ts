@@ -46,6 +46,7 @@ export class JobpoststatusComponent implements OnInit {
   startDt: any;
   endDt: any;
   noResultFound: string='';
+  mobile: boolean = false;
 
 
   // paged items
@@ -78,6 +79,11 @@ export class JobpoststatusComponent implements OnInit {
       }
 
   ngOnInit() {
+    window.scroll(0,0);
+    if (window.screen.width <= 735) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
     
     this.loading = true;
     // let edate = new Date();
