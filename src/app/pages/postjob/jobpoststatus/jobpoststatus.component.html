@@ -129,7 +129,7 @@
                             <div class="date_desc"><h6 class="title"><a [routerLink]="['/postjob',pj.id]">{{ pj.JobTitle }}</a></h6>
                               <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company.substring(0,19) }}</span><span class="companyName" *ngIf="pj.Company.length>19">...</span>
                               &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b></span>
-                              &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">Created Date: {{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}, Last Modified: {{ pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
+                              <br><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta"><b>Created:</b> {{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}, &nbsp;<b>Modified:</b> {{ pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
                             </div>
                             <div class="clearfix"> </div> 
                              <ul class="top-btns">

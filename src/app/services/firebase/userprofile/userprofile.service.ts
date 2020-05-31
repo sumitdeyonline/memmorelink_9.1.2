@@ -13,6 +13,7 @@ import * as algoliasearch from 'algoliasearch';
 import { UserRole } from './userrole.model';
 import { HttpClient } from '@angular/common/http';
 import { EmailService } from '../../email/email.service';
+import { WorkAuthorization } from './workauthorization.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,11 @@ export class UserprofileService {
   stateProfilec: Observable<State[]>;
   sDoc: AngularFirestoreDocument<State>;
 
+  workauthCollection: AngularFirestoreCollection <WorkAuthorization>;
+  wauthProfilec: Observable<WorkAuthorization[]>;
+  wDoc: AngularFirestoreDocument<WorkAuthorization>;
+
+
   userRoleCollection: AngularFirestoreCollection <UserRole>;
   userRoleProfilec: Observable<UserRole[]>;
 
@@ -47,6 +53,7 @@ export class UserprofileService {
     this.countryCollection = this.afs.collection(FIREBASE_CONFIG.Country);
     this.stateCollection = this.afs.collection(FIREBASE_CONFIG.State);
     this.userRoleCollection = this.afs.collection(FIREBASE_CONFIG.UserRoles);
+    this.workauthCollection = this.afs.collection(FIREBASE_CONFIG.WorkAuthorization);
   }
 
   addUpdateUserProfile(uprofile :  UserProfile,id: string,createDate: Date) {
@@ -258,6 +265,24 @@ export class UserprofileService {
     return this.countryProfilec;
   }
 
+  getWorkAuthorization(type) {
+
+    this.workauthCollection = this.afs.collection(FIREBASE_CONFIG.WorkAuthorization, ref =>
+      ref.where('Auth_Type','==',type).orderBy('SortBy', 'asc'));
+       //console.log("List Service ..... 4");
+      this.wauthProfilec = this.workauthCollection.snapshotChanges().pipe(map(changes => {
+        //console.log("List Service ..... 5");
+        return changes.map(a => {
+          // console.log("List Service ..... 6");
+          const data = a.payload.doc.data() as WorkAuthorization;
+          data.id = a.payload.doc.id;
+          //console.log("List Service 11111 ..... 2");
+          return data;
+        });
+      }));
+
+    return this.wauthProfilec;
+  }
 
   addUpdateCountry(cnry :  Country, id) {
     if ((id == null) || (id == '')) {

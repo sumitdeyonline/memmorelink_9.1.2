@@ -174,8 +174,8 @@ export class ListjobComponent implements OnInit {
     this.client = algoliasearch(SEARCH_CONFIG.ALGOLIA_APP_ID, SEARCH_CONFIG.ALGOLIA_API_KEY,
       { protocol: SEARCH_CONFIG.PROTOCOLS });
 
-      // let filter = 'isSearchable:true', state='', city='';
-      let filter = '', state='', city='';
+      let filter = 'isSearchable:true', state='', city='';
+      // let filter = '', state='', city='';
       //this.PostJobc = [];
       this.index = this.client.initIndex(SEARCH_CONFIG.INDEX_NAME);
 
@@ -187,7 +187,7 @@ export class ListjobComponent implements OnInit {
       if ((keywordLocal == "") && (locationLocal == "")) {
         //console.log("Nothing ... ");
         this.index.search({
-          // filters: filter
+          filters: filter
         }).then((data) => {
           //let j=0;
           //this.PostJobcFinal = [];
@@ -208,7 +208,7 @@ export class ListjobComponent implements OnInit {
             if (isNumeric(locationLocal)) {
               //console.log("This is number");
               this.getZipCodeSearch(locationLocal,keywordLocal);
-              filter = 'JobZip:'+locationLocal;
+              filter = 'JobZip:'+locationLocal+' AND isSearchable:true';
               /* Zipcode location service */
               // this.locserv.getCityState(location).subscribe((data)=>{
               //   console.log(data);
@@ -431,11 +431,13 @@ export class ListjobComponent implements OnInit {
   }
 
   executeSearchFunction(keywordLocal,filter) {
+
     //console.log("filter ::: "+filter);
     if (filter == '') {
+      //console.log("filter ::: Blank "+filter);
       this.index.search({
-        query: keywordLocal
-
+        query: keywordLocal,
+        filters: 'isSearchable:true'
       }).then((data) => {
         //let j=0;
         //this.PostJobcFinal = [];
@@ -450,7 +452,8 @@ export class ListjobComponent implements OnInit {
         this.setPage(1);
       });
     } else  {
-
+      filter = filter+" AND isSearchable:true"
+     // console.log("filter ::: "+filter);
       this.index.search({
         query: keywordLocal,
         filters: filter
@@ -497,7 +500,9 @@ export class ListjobComponent implements OnInit {
   }
 
   getDateDiff(dateIput) {
+    //console.log("dateIput :: "+dateIput);
     let lastModifyDate = new Date(dateIput);
+    //console.log("lastModifyDate ::: "+lastModifyDate);
     return Math.round(Math.abs(new Date().getTime() - lastModifyDate.getTime())/(24*60*60*1000));
     //return Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000);
   }

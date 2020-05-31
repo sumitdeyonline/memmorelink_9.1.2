@@ -192,6 +192,33 @@ export class PostjobvendorComponent implements OnInit {
   // }
 
 
+  updateAll() {
+    //let dt:any;
+    for (let i=0;i < this.postJobc.length;i++) {
+       console.log("this.postJobc[i].id "+this.postJobc[i].id);
+      // console.log("this.postJobc[i].CreatedBy "+this.postJobc[i].CreatedBy);
+      // console.log("this.postJobc[i].isSearchable "+this.postJobc[i].isSearchable);
+      /* Use for bulp upload
+      dt = this.postJobc[i].LastModifiedDate;
+      let time = dt.toDate().getTime();
+      console.log("Time ::: "+time);
+      */
+      //dateIput.toDate().getTime()
+      // console.log("DAAAA ::: "+dt.toString()+ " KKKKK :: "+dt.toString().indexOf('nanoseconds'));
+      // console.log("Date"+dt.toString().substring(18,dt.toString().indexOf('nanoseconds')-2));
+      //console.log("Company logo URL  "+this.postJobc[i].CompanyLogoURL);
+      // if (this.postJobc[i].CompanyLogoURL == undefined) {
+      //   this.postJobc[i].CompanyLogoURL = "";
+      // }
+
+      //this.postJobc[i].LastModifiedDate = new Date();
+      this.pJob.AlgoliaObjectUpdate('update',this.postJobc[i],this.postJobc[i].id,this.postJobc[i].CreatedDate,this.postJobc[i].CreatedBy);
+
+    }
+    //console.log("this.postJobc.length "+this.postJobc.length);
+
+  }
+
   onDelete(id) {
     //console.log("Pst Job ID :::: "+id);
       const dialogConfig = new MatDialogConfig();

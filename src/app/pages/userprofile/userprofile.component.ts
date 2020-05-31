@@ -18,6 +18,7 @@ import { CommondialogComponent, AngularUtilityComponent } from 'src/app/common';
 import { EmploymenttypesService } from 'src/app/services/firebase/employmenttypes/employmenttypes.service';
 import { EmploymentTypes } from 'src/app/services/firebase/employmenttypes/employmenttypes.model';
 import { Router } from '@angular/router';
+import { WorkAuthorization } from 'src/app/services/firebase/userprofile/workauthorization.model';
 //import { CommondialogComponent } from 'src/app/common/commondialog';
 
 
@@ -46,22 +47,24 @@ export class UserProfileComponent implements OnInit {
   //userProfileArray: Array<string> = ["Citizen","Green Card","GC EAD","Other EAD","H1B","L1 Visa","L3 Visa","F1 Student Visa"];
 
 
-  workauthArray = [
-    {name:'Citizen'},
-    {name:'Green Card'},
-    {name:'GC EAD'},
-    {name:'Other EAD'},
-    {name:'H1B'},
-    {name:'L1 Visa'},
-    {name:'L3 Visa'},
-    {name:'F1 Student Visa'},
-    {name:'Other'},
-  ];
+  workauthArray : WorkAuthorization[];
+
+  // workauthArray = [
+  //   {name:'Citizen'},
+  //   {name:'Green Card'},
+  //   {name:'GC EAD'}, 
+  //   {name:'Other EAD'},
+  //   {name:'H1B Visa'},
+  //   {name:'L1 Visa'},
+  //   {name:'L3 Visa'},
+  //   {name:'F1 Student Visa'},
+  //   {name:'Other'}
+  // ];
 
 
   constructor(private rUploadService: UploadResumeService, private changeDetector : ChangeDetectorRef, public uProfile: UserprofileService, private router: Router, public auth: AuthService, private sEmail: EmailService, private dialog: MatDialog,private etypeserv: EmploymenttypesService) {
 
-
+    this.getWorkAutjorization();
     this.uProfile.getUserDetails(this.auth.userProfile.name,'U').subscribe(uprop=> {
       this.userProfile = uprop;
       this.resetForm();
@@ -81,7 +84,7 @@ export class UserProfileComponent implements OnInit {
         //console.log("Edit FORM .... FOR "+this.userProfile.length+" ::::: ID :::::: => "+this.userProfile[0].id);
         //this.fileUploadEnabled = true;
         //console.log(" this.userProfile[0].EmploymentType ::: "+ this.userProfile[0].WorkAuthorization);
-        let result = this.workauthArray.find(tree => tree.name == this.userProfile[0].WorkAuthorization);
+        //let result = this.workauthArray.find(tree => tree.name == this.userProfile[0].WorkAuthorization);
 
 
 
@@ -124,6 +127,12 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+  getWorkAutjorization() {
+    this.uProfile.getWorkAuthorization("C").subscribe(wauth => {
+      this.workauthArray = wauth;
+      //console.log("workauthArray :::::::: => "+this.workauthArray.length);
+    })
+  }
 
   getCountry() {
     this.uProfile.getCountry().subscribe(cprop => {

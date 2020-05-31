@@ -141,10 +141,10 @@
 
         <li class="nav-item dropdown" *ngIf="!auth.isAuthenticated()">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user-plus"></i>&nbsp;Signup
+            <i class="fa fa-user-plus"></i>&nbsp;Sign Up
           </a>
           <div class="dropdown-menu" >
-            <a class="dropdown-item" routerLink="/signup" >Candidate</a>
+            <a class="dropdown-item" routerLink="/signup" >Applicant</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" routerLink="/valueservices" >Employer</a>
           </div>
@@ -177,7 +177,7 @@
             <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
             <a class="dropdown-item" routerLink="/postjob">Post Job</a>
             <a class="dropdown-item" routerLink="/jobpoststatus">Jobs Posted</a>
-            <a class="dropdown-item" routerLink="/appliedjob">Jobs Applied</a>
+            <a class="dropdown-item" routerLink="/appliedjob">Applicants</a>
 
             <!--a class="dropdown-item" routerLink="/postjob" *ngIf="auth.isAuthenticated() && auth.isAdminRole()">Post Job</a-->
             <a class="dropdown-item" routerLink="/resumesearch">Search Resume</a>
@@ -207,7 +207,7 @@
 
           <div class="dropdown-menu" >
             <a class="dropdown-item" routerLink="/valueservices" *ngIf="((auth.isPostJobRole() || auth.isResumeSearchRole()) && (!auth.isAdminRole()))">Edit Profile</a>
-            <a class="dropdown-item" routerLink="/userprofile" *ngIf="((auth.isUserRole()) && (!auth.isAdminRole()))">Edit Profile</a>
+            <a class="dropdown-item" routerLink="/userprofile" *ngIf="((auth.isUserRole()) && (!auth.isAdminRole()))">Profile</a>
             <a class="dropdown-item" routerLink="/postsadminhome" *ngIf="(auth.isAdminRole())">Admin Jobs</a>
             
           </div>

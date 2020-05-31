@@ -46,7 +46,7 @@
                             placeholder="" value="{{ ResumeSearch }}" [ngModel]="ResumeSearch" 
                             placeholder="Search Resume">       -->
 
-                              <input type="text" autocomplete="off"  ngModel name="ResumeSearch" #ResumeSearch="ngModel" id="ResumeSearch" [ngModel]="ResumeSearchVal" class="form-control input-sm" required/>
+                              <input type="text" autocomplete="off"  ngModel name="ResumeSearch" placeholder="Skills, Java, AWS, GCP, Azure etc." #ResumeSearch="ngModel" id="ResumeSearch" [ngModel]="ResumeSearchVal" class="form-control input-sm" required/>
                           </div>
 
                           <div class="col">
@@ -60,7 +60,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
-                    <h2>Search Result</h2>
+                    <h2>Results</h2>
                     <h4 *ngIf="noResultFound !=''">{{noResultFound}}</h4>
 
                     <!-- loader.component.html -->

@@ -87,7 +87,7 @@
                             <input type="radio" ngModel name="Sex" [disabled]="!isUpdateProfile" #Sex="ngModel" id="Sex" [ngModel]="uProfile.selectedUserProfile?.Sex" (ngModelChange)="uProfile.selectedUserProfile.Sex" value="Other" required>Prefer not to disclose
                         </label>                        
                         <div class="error_Message" *ngIf="Sex.invalid && (Sex.dirty || Sex.touched)">
-                          Gendar Required
+                          Gender Required
                         </div>
                     </div>
                     <div class="col-sm-2">
@@ -376,7 +376,7 @@ emptype
                         </select-->
                     </div>
                     <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="IsTravel">Travell</label>
+                        <label style="font-weight: bold;" for="IsTravel">Travel</label>
                     </div>
                     <div class="col">
                         <input type="checkbox" ngModel name="IsTravel" [disabled]="!isUpdateProfile" #IsTravel="ngModel" id="IsTravel" [ngModel]="uProfile.selectedUserProfile?.IsTravel" (ngModelChange)="uProfile.selectedUserProfile.IsTravel" checked data-toggle="toggle" data-onstyle="primary">
@@ -560,7 +560,7 @@ emptype
 
             <div class="row">
                 <div class="col-sm-2">
-                    <label style="font-weight: bold;" maxlength="1500" for="SkillSet">SkillSet<span style="color: red;">&nbsp;*</span></label>
+                    <label style="font-weight: bold;" maxlength="1500" for="SkillSet">Skillset<span style="color: red;">&nbsp;*</span></label>
                 </div>
                 <div class="col">
                     <textarea cols="77" rows="4" maxlength="1000" placeholder="Example, Java, Oracle, AWS/Azure/Google Cloud etc." ngModel name="SkillSet" [disabled]="!isUpdateProfile" #SkillSet="ngModel" id="SkillSet" [ngModel]="uProfile.selectedUserProfile?.SkillSet" (ngModelChange)="uProfile.selectedUserProfile.SkillSet" class="form-control input-sm" required></textarea>

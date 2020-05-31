@@ -161,8 +161,8 @@ export class UserdetailsService {
 
 
   getUserDetails(userOrRole, fieldType,userSeach? ) {
-    // console.log("List Service ..... 3 "+userOrRole);
-     //console.log("Field Type .....  "+userSeach);
+    //  console.log("List Service ..... 3 "+userSeach);
+    // console.log("Field Type .....  "+fieldType);
     if (fieldType == 'U') {
       this.udCollection = this.afs.collection(FIREBASE_CONFIG.UserDetails, ref =>
         ref.where('userName','==',userOrRole).orderBy('LastModifiedDate','desc'));
@@ -174,8 +174,9 @@ export class UserdetailsService {
         ref.where('userRole','in',['EmployerResumeSearch','EmployerPostJob','EmployerPowerUser'])
         //.orderBy('company','asc')
         .orderBy('LastModifiedDate','desc')
-        .startAt(userSeach)
-        .endAt("\uf8ff"));    
+        // .startAt(userSeach)
+        // .endAt("\uf8ff")
+        );    
         
         // ref.where('userRole','in',['EmployerResumeSearch','EmployerPostJob','EmployerPowerUser'])
         // .orderBy('company','asc')

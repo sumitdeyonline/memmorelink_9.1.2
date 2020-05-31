@@ -49,7 +49,7 @@
 
                     <div class="row">
                         <div class="col-sm-2">
-                            <label style="font-weight: bold;" for="Sex">Sex</label>
+                            <label style="font-weight: bold;" for="Sex">Gender</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
                         {{ uprofile?.Sex }}
@@ -262,14 +262,14 @@
     
                     <div class="row">
                         <div class="col-sm-2">
-                            <label style="font-weight: bold;" for="IsRelocate">Relocate ?</label>
+                            <label style="font-weight: bold;" for="IsRelocate">Relocate</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
                             {{ relocate }}
                         </div>
                         <div class="col" *ngIf="uprofile == null"></div>
                         <div class="col-sm-2">
-                            <label style="font-weight: bold;" for="IsTravel">Travell ?</label>
+                            <label style="font-weight: bold;" for="IsTravel">Travel</label>
                         </div>
                         <div class="col" *ngIf="uprofile !=null">
                             {{ travel }}
@@ -372,7 +372,7 @@
             <div class="resumedetails">
                 <div class="row">
                     <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="Education">Education</label>
+                        <label style="font-weight: bold;" for="Education">Field of study</label>
                     </div>
                     <div class="col" *ngIf="uprofile != null">
                         {{ uprofile?.Education }}
@@ -429,7 +429,7 @@
             <div class="resumedetails">
                 <div class="row">
                     <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="SkillSet">SkillSet</label>
+                        <label style="font-weight: bold;" for="SkillSet">Skillset</label>
                     </div>
                     <div class="col" *ngIf="uprofile != null">
                         {{ uprofile?.SkillSet }}

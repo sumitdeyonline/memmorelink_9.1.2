@@ -23,6 +23,7 @@ import { FIREBASE_CONFIG, SEARCH_CONFIG } from 'src/app/global-config';
 import 'rxjs/add/operator/toPromise';
 import { UserdetailsService } from '../userdetails/userdetails.service';
 import { UserDetails } from '../userdetails/userdetails.model';
+import { analytics } from 'firebase';
 
 
 
@@ -242,7 +243,7 @@ export class PostjobService {
 
   AlgoliaObjectUpdate(tranType, pjobc, id, createDate, createdBy) {
     //console.log("Algolia Update Object..... :::::: "+createDate.seconds);
-
+    //let dt:any;
     // console.log("Job Desc Prev ::: "+pjobc.JobDesc);
     // console.log("Job Skill Prev ::: "+pjobc.Skills);
 
@@ -251,6 +252,18 @@ export class PostjobService {
 
     // console.log("Job Desc ::: "+jobDesc);
     // console.log("Job Skill ::: "+skill);
+    //pjobc.LastModifiedDate = new Date();
+
+    /* Used for bulk update
+    dt = pjobc.LastModifiedDate;
+    let time = dt.toDate().getTime();
+    */
+
+    // let dt = pjobc.LastModifiedDate;
+    // //console.log("DAAAA ::: "+dt.toString()+ " KKKKK :: "+dt.toString().indexOf('nanoseconds'));
+    // //console.log("Date "+dt.toString().substring(18,dt.toString().indexOf('nanoseconds')-2));
+    // let lastModify = dt.toString().substring(18,dt.toString().indexOf('nanoseconds')-2);
+    // console.log("dt : "+lastModify);
 
     let objects;
     if ((tranType == null) || (tranType == '')) {
@@ -312,6 +325,7 @@ export class PostjobService {
         CreatedDate : createDate.seconds,
         CreatedBy : createdBy,
         LastModifiedDate:pjobc.LastModifiedDate.getTime(),
+        //LastModifiedDate:time, //Use for bulp update 
         LastModifiedBy:pjobc.LastModifiedBy
       }];
     }
