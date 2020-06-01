@@ -48,10 +48,10 @@ export class JobpredictionComponent implements OnInit {
     }
 
     this.jobPForm = fb.group({
-      firstname: ['', Validators.required,Validators.minLength(3)],
+      firstname: ['', Validators.required,Validators.minLength(2)],
       middlename: [],
-      lastname: ['', Validators.required,Validators.minLength(3)],
-      companyname: ['' ,Validators.required,Validators.minLength(3)]
+      lastname: ['', Validators.required,Validators.minLength(2)],
+      companyname: ['' ,Validators.required,Validators.minLength(2)]
     })
 
 

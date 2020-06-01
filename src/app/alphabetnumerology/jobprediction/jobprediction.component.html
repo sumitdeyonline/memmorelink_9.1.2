@@ -8,10 +8,7 @@
 
                   <!-- <div id="site_form" [hidden]="jobPredectionSucessMessage != null && jobPredectionSucessMessage !=''"> -->
                     
-                  <div *ngIf="jobPredectionSucessMessage !=''">
-                    <!-- <p class="error_Message" *ngIf="jobPredectionSucessMessage !=''">
-                      {{ jobPredectionSucessMessage }}         
-                    </p>   -->
+                  <!-- <div *ngIf="jobPredectionSucessMessage !=''">
                     
                     <div *ngIf="jobPredectionSucessMessage !=''" class="progress">
                       <div class="progress-bar progress-bar-info progress-bar-striped"
@@ -25,7 +22,7 @@
 
 
 
-                  </div>
+                  </div> -->
 
 
                   <form #jobPForm="ngForm" (ngSubmit)="jobPrediction(jobPForm)" >
@@ -66,6 +63,26 @@
                       <div class="error_Message" *ngIf="Fieldlength(companyname.value) < 2 && companyname.touched">
                           Company Name must be at least 2 characters long.
                       </div>
+                      <div *ngIf="jobPredectionSucessMessage !=''">
+                        <!-- <p class="error_Message" *ngIf="jobPredectionSucessMessage !=''">
+                          {{ jobPredectionSucessMessage }}         
+                        </p>   -->
+                        <br>
+                        <div *ngIf="jobPredectionSucessMessage !=''" class="progress">
+                          <div class="progress-bar progress-bar-info progress-bar-striped"
+    
+                                      role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                                      aria-valuemin="0" aria-valuemax="100"
+                                      [style.background-color]="progress.percentage==EXECELLENT_MATCH_PERCENTAGE?'#1D4200':progress.percentage==GOOD_MATCH_PERCENTAGE?'#649d66':progress.percentage==AVERAGE_MATCH_PERCENTAGE?'#FEB72B':progress.percentage==BAD_MATCH_PERCENTAGE?'red':'blue'"
+                                      [ngStyle]="{width:progress.percentage+'%'}">
+                                      {{jobPredectionSucessMessage}}%</div>
+                        </div>                    
+                          <p class="disclaimer" style="align:center" *ngIf="progressPercentage == EXECELLENT_MATCH_PERCENTAGE"><b>(According to Numerology</b> this is a excellent match with your name and the company <b>{{companyTemp}}</b>)
+                          <p class="disclaimer" *ngIf="progressPercentage == GOOD_MATCH_PERCENTAGE"><b>(According to Numerology</b> this is a good match with your name and the company <b>{{companyTemp}}</b>)
+                          <p class="disclaimer" *ngIf="progressPercentage == AVERAGE_MATCH_PERCENTAGE"><b>(According to Numerology</b> this is a average match with your name and the company <b>{{companyTemp}}</b>)
+                          <p class="disclaimer" *ngIf="progressPercentage == BAD_MATCH_PERCENTAGE"><b>(According to Numerology</b> this is a bad match with your name and the company <b>{{companyTemp}}</b>)
+                          </p>  
+                      </div>                      
                       <br>
                       <div class="form-group">
                           <table>
