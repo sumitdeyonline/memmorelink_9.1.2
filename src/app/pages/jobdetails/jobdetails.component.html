@@ -23,9 +23,9 @@
           <td>
 
             <div class="date_desc">
-              <span *ngIf="pjob !=null" class="companyName">{{ pjob.Company.substring(0,19) }}</span><span class="companyName" *ngIf="pjob !=null && pjob.Company.length>19">...</span>
+              <span *ngIf="pjob !=null" class="companyName">{{ pjob.Company?.substring(0,19) }}</span><span class="companyName" *ngIf="pjob !=null && pjob.Company.length>19">...</span>
               &nbsp;&nbsp;<span *ngIf="pjob !=null" class="meta"><b>{{ pjob.JobCity }}, {{ pjob.JobState }}</b></span>
-              &nbsp;&nbsp;<i class="fa fa-calendar"></i>&nbsp;<span class="meta" *ngIf="pjob !=null"><b>{{ getDateDiff(pjob.LastModifiedDate) }}&nbsp;days ago</b></span>  
+              &nbsp;&nbsp;<i class="fa fa-calendar"></i>&nbsp;<span class="meta" *ngIf="pjob !=null"><b>{{ getDateDiff(pjob.LastModifiedDate) }}&nbsp;days ago [Job ID : {{pjob?.JobID}}]</b></span>  
               <hr/>
               <div class="jobdetails_public">
                 <span *ngIf="pjob !=null" class="meta"><b><i class="fa fa-briefcase"></i>&nbsp;&nbsp;{{ pjob.EmploymentTypes }}</b></span><br>
@@ -47,8 +47,9 @@
           </td>
         </tr>
         <!-- <tr>
-          <td colspan="2">&nbsp;</td>
+          <td *ngIf="pjob !=null && pjob?.JobID !=undefined  && pjob?.JobID !=null" colspan="2">Job ID : {{pjob?.JobID}}</td>
         </tr> -->
+        <!-- <h8 *ngIf="pjob !=null && pjob?.JobID !=undefined  && pjob?.JobID !=null">Job ID : {{pjob?.JobID}}</h8> -->
       </table>
     </div>
 
@@ -99,8 +100,9 @@
             <hr/>
             <div *ngIf="pjob !=null" [innerHTML]=" pjob.Skills"></div>
             <!-- <br> -->
-
             <hr/>
+            <!-- <div *ngIf="pjob !=null && pjob?.JobID !=undefined  && pjob?.JobID !=null">Job ID : {{pjob?.JobID}}</div>
+            <hr *ngIf="pjob !=null && pjob?.JobID !=undefined  && pjob?.JobID !=null"/> -->
             <table align="left"> 
               <tr>
                 <td align="left">

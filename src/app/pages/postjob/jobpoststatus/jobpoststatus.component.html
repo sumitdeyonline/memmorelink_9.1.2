@@ -1,4 +1,4 @@
-<searchheader></searchheader>
+<!-- <searchheader></searchheader> -->
 
 <div class="container">
 
@@ -30,55 +30,117 @@
 
               <div id="myTabContent" class="tab-content">
 
-                      <h2>Jobs Posted</h2>
-                      <br>
-                      <form #postform="ngForm" (ngSubmit)="selectPostedJob(postform.value)">
+                    <h4>Jobs Posted</h4>
+                    <br>
+                    <form #postform="ngForm" (ngSubmit)="selectPostedJob(postform.value)">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            &nbsp;&nbsp;&nbsp;<input type="radio"  
+                            RecordNumber
+                            value="fewRecords"
+                            ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
+                            [ngModel]="fewRecords"
+                            (ngModelChange)="selectPostedJob(postform.value)">&nbsp;
+                            <label style="font-weight: bold;" for="RecordNumber">Last {{noOfRecordFirst}} Records </label>
 
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <label style="font-weight: bold;" for="startDate">Start Date </label>
-                            </div>
-                            <div class="col">
-                                <input
-                                type="text"
-                                placeholder="Choose start date"
-                                class="form-control"
-                                bsDatepicker
-                                startDate
-                                autocomplete="off"
-                                ngModel name="startDate" #startDate="ngModel" id="startDate"
-                                [ngModel]="startDt"
-                                (ngModelChange)="selectPostedJob(postform.value)"
-                                [bsConfig]="{ isAnimated: true }">  
-                                <!-- <div class="error_Message" *ngIf="JobCountry.invalid && (JobCountry.dirty || JobCountry.touched)">
-                                    Please Enter Country
-                                </div> -->
-        
-                            </div>
-                            <div class="col-sm-2">
-                                <label style="font-weight: bold;" for="JobState">End Date</label>
-                            </div>
-                            <div class="col">
-                                <input
-                                type="text"
-                                placeholder="Choose end date"
-                                class="form-control"
-                                autocomplete="off"
-                                bsDatepicker
-                                endDate
-                                ngModel name="endDate" #endDate="ngModel" id="endDate"
-                                [ngModel]="endDt"
-                                (ngModelChange)="selectPostedJob(postform.value)"
-                                [bsConfig]="{ isAnimated: true }"> 
-                                <!-- <div class="error_Message" *ngIf="JobState.invalid && (JobState.dirty || JobState.touched)">
-                                    Please Enter Job State
-                                </div> -->
-                                </div>
+
                         </div>
-                        <div class="row">
-                            <div class="col-sm-2">&nbsp;
-                            </div>
+                        <!-- <div class="col" >
+                            <input type="radio"  
+                            RecordNumber
+                            value="fewRecords"
+                            ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
+                            [ngModel]="fewRecords"
+                            (ngModelChange)="selectPostedJob(postform.value)"> 
+                            
+                        </div> -->
+                        
+                        <div class="col-sm-2">
+                            &nbsp;&nbsp;&nbsp;<input type="radio"  
+                            RecordNumber
+                            value="AllRecords"
+                            ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
+                            [ngModel]="fewRecords"
+                            (ngModelChange)="selectPostedJob(postform.value)">&nbsp;
+                            <label style="font-weight: bold;" for="RecordNumber">All Records </label>
                         </div>
+                        <!-- <div class="col">
+                            <input type="radio"  
+                            RecordNumber
+                            value="AllRecords"
+                            ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
+                            [ngModel]="fewRecords"
+                            (ngModelChange)="selectPostedJob(postform.value)"> 
+                        </div> -->
+
+                        <div class="col-sm-2">
+                            &nbsp;&nbsp;<input type="radio"  
+                            RecordNumber
+                            value="Custom"
+                            ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
+                            [ngModel]="fewRecords"
+                            (ngModelChange)="enableCustomFields(postform.value)">&nbsp;
+                            <label style="font-weight: bold;" for="RecordNumber">Custom Date </label>
+                        </div>
+                        <!-- <div class="col">
+                            <input type="radio"  
+                            RecordNumber
+                            value="Custom"
+                            ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
+                            [ngModel]="fewRecords"
+                            (ngModelChange)="enableCustomFields(postform.value)"> 
+                        </div>  -->
+                                                    
+                    </div>
+                    <div class="row" [hidden] = disabledDate>
+                        <div class="col-sm-2">&nbsp;
+                        </div>
+                    </div>
+                    <div class="row" [hidden] = disabledDate>
+                        <div class="col-sm-2">
+                            <label style="font-weight: bold;" for="startDate">&nbsp;&nbsp;&nbsp;&nbsp;Start Date </label>
+                        </div>
+                        <div class="col">
+                            <input
+                            type="text"
+                            placeholder="Choose start date"
+                            bsDatepicker
+                            startDate
+                            autocomplete="off"
+                            [hidden] = disabledDate
+                            ngModel name="startDate" #startDate="ngModel" id="startDate"
+                            [ngModel]="startDt"
+                            (ngModelChange)="enableCustomFields(postform.value)"
+                            [bsConfig]="{ isAnimated: true }">  
+                            <!-- <div class="error_Message" *ngIf="JobCountry.invalid && (JobCountry.dirty || JobCountry.touched)">
+                                Please Enter Country
+                            </div> -->
+    
+                        </div>
+                        <div class="col-sm-2">
+                            <label style="font-weight: bold;" for="JobState">End Date</label>
+                        </div>
+                        <div class="col">
+                            <input
+                            type="text"
+                            placeholder="Choose end date"
+                            autocomplete="off"
+                            bsDatepicker
+                            endDate
+                            [hidden] = disabledDate
+                            ngModel name="endDate" #endDate="ngModel" id="endDate"
+                            [ngModel]="endDt"
+                            (ngModelChange)="enableCustomFields(postform.value)"
+                            [bsConfig]="{ isAnimated: true }"> 
+                            <!-- <div class="error_Message" *ngIf="JobState.invalid && (JobState.dirty || JobState.touched)">
+                                Please Enter Job State
+                            </div> -->
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">&nbsp;
+                        </div>
+                    </div>
                     </form>        
                     <h4 *ngIf="noResultFound !=''">{{noResultFound}}</h4>                      
                     <!-- loader.component.html --> 
@@ -104,11 +166,11 @@
                       <div class="tab_grid" *ngFor="let pj of pagedItems">
                           <div class="jobs-item with-thumb">
 
-                            <div class="thumb" [hidden]="mobile">
+                            <!-- <div class="thumb" [hidden]="mobile">
                                 <a [routerLink]="['/postjob',pj.id]">
                                     <img src="{{pj.CompanyLogoURL}}" onerror="this.onerror=null;this.src='assets/images/a2.png';" class="img-responsive" alt=""/>
                                 </a>
-                            </div>
+                            </div> -->
                             
                             <!-- <div class="thumb" *ngIf="pj.CompanyLogoURL != null && pj.CompanyLogoURL !='' && pj.CompanyLogoURL != undefined" >
                                 <a [routerLink]="['/postjob',pj.id]">
@@ -123,27 +185,28 @@
                             </div>                             -->
 
                             <div class="jobs_right">
-                            <!--div class="date">{{ pj.CreatedDate.substring(3,5) }} <span>{{ dformat.monthNumToSigName(pj.CreatedDate.substring(0,2)) }}</span></div-->
-                            <!--div class="date">{{ pj.CreatedDate.toDate() | date:'MM-dd-yyyy' }} <span>{{ dformat.monthNumToSigName(pj.CreatedDate.substring(0,2)) }}</span></div-->
-                            <div class="date">{{ pj.LastModifiedDate.toDate() | date:'dd' }} <span>{{ dformat.monthNumToSigName(pj.LastModifiedDate.toDate() | date:'MM') }}</span></div>
-                            <div class="date_desc"><h6 class="title"><a [routerLink]="['/postjob',pj.id]">{{ pj.JobTitle }}</a></h6>
-                              <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company.substring(0,19) }}</span><span class="companyName" *ngIf="pj.Company.length>19">...</span>
-                              &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b></span>
-                              <br><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta"><b>Created:</b> {{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}, &nbsp;<b>Modified:</b> {{ pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
-                            </div>
-                            <div class="clearfix"> </div> 
-                             <ul class="top-btns">
-                              <!--li><a href="#" class="fa fa-plus toggle"></a></li>
-                              <li><a href="#" class="fa fa-star"></a></li>
-                              <li><a href="#" class="fa fa-link"></a></li-->
-                              <li><a [routerLink]="['/postjob',pj.id]" class="fa fa-edit"></a></li>
-                              <li><a (click)="onDelete(pj)" class="fa fa-trash"></a></li>
+                                <!--div class="date">{{ pj.CreatedDate.substring(3,5) }} <span>{{ dformat.monthNumToSigName(pj.CreatedDate.substring(0,2)) }}</span></div-->
+                                <!--div class="date">{{ pj.CreatedDate.toDate() | date:'MM-dd-yyyy' }} <span>{{ dformat.monthNumToSigName(pj.CreatedDate?.substring(0,2)) }}</span></div-->
+                                <div class="date">{{ pj.LastModifiedDate.toDate() | date:'dd' }} <span>{{ dformat.monthNumToSigName(pj.LastModifiedDate.toDate() | date:'MM') }}</span></div>
+                                <div class="date_desc"><h6 class="title"><a [routerLink]="['/postjob',pj.id]">{{ pj.JobTitle }} [JobID: {{pj?.JobID}}]</a></h6>
+                                <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company?.substring(0,19) }}</span><span class="companyName" *ngIf="pj?.Company.length>19">...</span>
+                                &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b>&nbsp;</span><span class="title"><a [routerLink]="['/applicants',pj.id]">{{pj.ApplicantCount}} Applicants</a></span>
+                                <br><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta"><b>Created:</b> {{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}, &nbsp;<b>Modified:</b> {{ pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
+                                </div>
+                                <div class="clearfix"> </div> 
+                                <ul class="top-btns">
+                                <!-- <li>{{pj?.JobID}}</li>  -->
+                                <!--li><a href="#" class="fa fa-plus toggle"></a></li>
+                                <li><a href="#" class="fa fa-star"></a></li>
+                                <li><a href="#" class="fa fa-link"></a></li-->
+                                <li><a [routerLink]="['/postjob',pj.id]" class="fa fa-edit"></a></li>
+                                <li><a (click)="onDelete(pj)" class="fa fa-trash"></a></li>
 
 
-                            </ul>
-                            <hr class="hr_style">
-                            <!--p class="description">{{ pj.JobDesc.substring(0,length) }}... <a [routerLink]="['/postjob',pj.id]" class="read-more">Update..</a></p-->
-                            <div [innerHTML]="pj.JobDesc.substring(0,length)" class="jobdetails"></div><a [routerLink]="['/postjob',pj.id]" class="read-more"></a>
+                                </ul>
+                                <!-- <hr class="hr_style"> -->
+                                <!--p class="description">{{ pj.JobDesc.substring(0,length) }}... <a [routerLink]="['/postjob',pj.id]" class="read-more">Update..</a></p-->
+                                <!-- <div [innerHTML]="pj.JobDesc?.substring(0,length)" class="jobdetails"></div><a [routerLink]="['/postjob',pj.id]" class="read-more"></a> -->
                             </div>
  
                           <div class="clearfix"> </div>

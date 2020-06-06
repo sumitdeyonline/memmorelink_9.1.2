@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { AuthService } from '../../services/authentication/auth.service';
 import {Observable} from 'rxjs';
+import { take } from 'rxjs/operators';
+
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -31,6 +33,9 @@ import { LocationService } from 'src/app/services/location/location.service';
 import { stringify } from 'querystring';
 import { MultiSelectComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { Options } from 'ng5-slider';
+//import { Sequence } from 'src/app/services/firebase/postjob/sequence.model';
+import { SequencenumberService } from 'src/app/services/firebase/sequencenumber/sequencenumber.service';
+import { Sequence } from 'src/app/services/firebase/sequencenumber/sequence.model';
 // import * as ClassicEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
   
@@ -78,6 +83,7 @@ export class PostjobComponent implements OnInit {
   public localFields: Object = { text: 'Name' };
   state: State[];
   userDetails: UserDetails[];
+  public sequence: Sequence[];
   isJobLength: boolean = false;
   postJobCount: number = 0;
   //selectedEmpTypes: String;
@@ -96,7 +102,8 @@ export class PostjobComponent implements OnInit {
               private udetails: UserdetailsService,
               private sEmail: EmailService,
               private etypeserv: EmploymenttypesService,
-              private locserv: LocationService) {
+              private locserv: LocationService,
+              private seqser: SequencenumberService) {
         window.scroll(0,0);
         this.getCountry();
         this.getEmpTypes();
@@ -264,11 +271,83 @@ export class PostjobComponent implements OnInit {
       this.postJobCount = this.postJobCount + 1;
       this.userDetails[0].postjobCount = this.postJobCount;
       //console.log("Employee type :: "+this.mulObj.value);
+      // console.log("Form Value ::: JobTitle"+postJobForm.value.JobTitle);
+      // console.log("Form Value ::: city"+postJobForm.value.city);
+      // console.log("Form Value ::: state"+postJobForm.value.state);
+      // console.log("Form Value ::: country"+postJobForm.value.country);
+      // console.log("Form Value ::: company"+postJobForm.value.company);
+      // console.log("Form Value :::JobDesc "+postJobForm.value.JobDesc);
+      // console.log("Form Value ::: Skills"+postJobForm.value.Skills);
+      // console.log("Form Value ::: employmenttypes"+postJobForm.value.employmenttypes);
+      // console.log("Form Value ::: Compensation"+postJobForm.value.Compensation);
+      // console.log("Form Value :::TravelRequirements "+postJobForm.value.TravelRequirements);
+      // console.log("Form Value ::: isTeleComute"+postJobForm.value.isTeleComute);
 
-      //console.log("postJobForm.value.isSearchable : "+postJobForm.value.isSearchable);
-      this.postjobService.addUpdatePostJobs(postJobForm.value,this.id, new Date(), "", this.userDetails[0]);
-      //console.log("NEW FORM ....");
-      type = "Created";
+
+      let pjob:PostJobc = {JobTitle:postJobForm.value.JobTitle,
+                           JobDesc:postJobForm.value.JobDesc,
+                           Skills:postJobForm.value.Skills,
+                           Company:postJobForm.value.Company,
+                           CompanyLogoURL:postJobForm.value.CompanyLogoURL,
+                           ApplyToEmail:postJobForm.value.ApplyToEmail,
+                           CCToEmail:postJobForm.value.CCToEmail,
+                           ApplyToURL:postJobForm.value.ApplyToURL,
+                           JobCity:postJobForm.value.JobCity,
+                           JobState:postJobForm.value.JobState,
+                           JobCountry:postJobForm.value.JobCountry,
+                           JobZip:postJobForm.value.JobZip,
+                           EmploymentTypes:postJobForm.value.EmploymentTypes,   
+                           JobPayRate:postJobForm.value.JobPayRate,  
+                           Compensation:postJobForm.value.Compensation,  
+                           JobLength:postJobForm.value.JobLength,  
+                           TravelRequirements:postJobForm.value.TravelRequirements,  
+                           isTeleComute:postJobForm.value.isTeleComute,  
+                           isSearchable:postJobForm.value.isSearchable,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                          }
+
+
+      let id = 'O7TvY8yrEsJY0UHonBDr';
+      let number = this.seqser.getUpdateSequenceNumber(id);
+      console.log("Number ::: "+number);
+//       this.seqser.getUpdateSequenceNumber().subscribe(sequence=>{
+//         this.sequence = sequence;
+//         //console.log("Sequence ::: "+this.sequence[0].SeqNum);
+//         //let num = this.sequence[0].SeqNum+1;
+//         //this.postjobService.updateData(id,this.sequence[0].SeqNum+1);
+
+
+// //postJobForm.value.CreatedDate = new Date();
+
+//         pjob.CreatedDate =  new Date();
+
+// //pjobc.CreatedDate = new Date();
+
+// //console.log("Job Count :::: "+uDetails.CompanyLogoURL);
+
+// //postJobForm.value.CreatedBy = this._auth.userProfile.name;
+
+//         pjob.CreatedBy=this._auth.userProfile.name;
+
+// //postJobForm.value.JobID = ""+this.sequence.SeqNum;
+//         pjob.JobID = ""+this.sequence[0].SeqNum;
+
+// // if (uDetails.company.length > 10) {
+// //   pjobc.JobID = uDetails.company.replace(/[^a-zA-Z0-9]/g,'').substring(0,10).toUpperCase()+"-"+uDetails.postjobCount;
+// // } else {
+// //   pjobc.JobID = uDetails.company.replace(/[^a-zA-Z0-9]/g,'').toUpperCase()+"-"+uDetails.postjobCount;
+// // }
+
+
+//         //this.postjobService.addUpdatePostJobs(postJobForm.value,this.id, new Date(), "", this.userDetails[0],1510);
+//         this.postjobService.addUpdatePostJobs(pjob,this.id, new Date(), "", this.userDetails[0]);
+//         type = "Created";
+//         return;
+//       });
+
+//       //console.log("postJobForm.value.isSearchable : "+postJobForm.value.isSearchable);
+//       //this.postjobService.addUpdatePostJobs(postJobForm.value,this.id, new Date(), "", this.userDetails[0]);
+//       //console.log("NEW FORM ....");
+//       type = "Created";
     } else {
       type = "Updated";
       //this.userDetails[0]={};
@@ -324,14 +403,15 @@ export class PostjobComponent implements OnInit {
       }
     }    
  
-    window.scroll(0,0);
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = type+"||jobpoststatus||You have posted your job";
-    this.dialog.open(CommondialogComponent, dialogConfig);
-    this.resetForm(postJobForm);
- 
-    this.router.navigate(['/jobpoststatus']);
- 
+    setTimeout(() => {
+      window.scroll(0,0);
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = type+"||jobpoststatus||You have posted your job";
+      this.dialog.open(CommondialogComponent, dialogConfig);
+      this.resetForm(postJobForm);
+  
+      this.router.navigate(['/jobpoststatus']);
+    }, 500);
 
     /*setTimeout(() => {
 

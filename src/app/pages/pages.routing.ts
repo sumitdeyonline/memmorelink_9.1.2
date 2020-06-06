@@ -18,6 +18,8 @@ import { AuthGuardService } from '../services/authentication/auth-guard.service'
 import { TechNewsDetailsComponent, TechNewsPageComponent } from './tech-news';
 import { UploadresumepageComponent } from './uploadresumepage/uploadresumepage.component';
 import { RemoreuserComponent } from './remoreuser/remoreuser.component';
+import { ApplicantsComponent } from './applicants/applicants.component';
+import { ApplicantappliedComponent } from './applicants/applicantapplied/applicantapplied.component';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -98,6 +100,13 @@ export const pagesRouting = RouterModule.forChild([
 
     },
     {
+        path: 'applicants/:jobid',
+        component: ApplicantsComponent,
+        canActivate: [ScopeGuard] ,
+        data: { expectedScopes: ['write:messages']}
+
+    },
+    {
         path: 'appliedjob',
         component: MyappliedjobComponent,
         canActivate: [ScopeGuard] ,
@@ -132,7 +141,16 @@ export const pagesRouting = RouterModule.forChild([
         component: ResumedetailsComponent,
         canActivate: [ScopeGuard],
         data: { expectedScopes: ['write:messages']}
-    },    
+    },  
+    {
+        path: 'applicantapplied/:emailid',
+        component: ApplicantappliedComponent,
+        canActivate: [ScopeGuard],
+        data: { expectedScopes: ['write:messages']}
+    },
+    
+    
+
     {
         path: 'resumesearch',
         component: ResumesearchComponent,

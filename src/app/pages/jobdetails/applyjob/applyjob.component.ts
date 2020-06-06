@@ -139,6 +139,7 @@ export class ApplyjobComponent implements OnInit {
                        CoverLetter: this.applyJobForm.get('CoverLetter').value,
                        fileUploadURL: this.rUploadService.downloadURLTempResume,
                        JobID: this.pjob.id,
+                       JobIDSerial:this.pjob.JobID,
                        JobTitle: this.pjob.JobTitle,
                        username : username,
                        joblocation: this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry,

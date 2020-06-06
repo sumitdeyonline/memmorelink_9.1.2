@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/services/authentication/auth.service';
 })
 export class JobdetailsComponent implements OnInit {
 
-  id: any;
+  id: any; 
   public pjob: PostJobc;
   keyword: string;
   location: string;
@@ -90,8 +90,13 @@ export class JobdetailsComponent implements OnInit {
       // dialogConfig.data = this.pjob.ApplyToEmail;
       this.pjob.id = this.id;
       dialogConfig.data = this.pjob;
-       dialogConfig.height = "4";
-       dialogConfig.width ="3";
+      // dialogConfig.height = "4";
+      // dialogConfig.width ="3";      
+       dialogConfig.height = "80%";
+       if (this.mobile)
+        dialogConfig.width ="90%";
+       else 
+        dialogConfig.width ="60%";
       this.dialog.open(ApplyjobComponent, dialogConfig);
     //  dialogConfig.disableClose = false;
     //  dialogConfig.autoFocus = true;
@@ -107,11 +112,16 @@ export class JobdetailsComponent implements OnInit {
       // dialogConfig.data = this.pjob.ApplyToEmail;
       this.pjob.id = this.id;
       dialogConfig.data = this.pjob;
-       dialogConfig.height = "87%";
-       if (this.mobile)
+       
+       if (this.mobile) {
         dialogConfig.width ="95%";
-       else 
+        dialogConfig.height = "98%";
+       }
+       else {
         dialogConfig.width ="60%";
+        dialogConfig.height = "87%";
+       }
+
       this.dialog.open(JobpredictionComponent, dialogConfig);
     //  dialogConfig.disableClose = false;
     //  dialogConfig.autoFocus = true;

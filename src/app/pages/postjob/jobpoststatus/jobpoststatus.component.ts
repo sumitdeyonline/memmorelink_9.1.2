@@ -41,12 +41,16 @@ export class JobpoststatusComponent implements OnInit {
 
   length: any = SEARCH_CONFIG.LIST_JOB_DESC_STATUS;
   pagesize = SEARCH_CONFIG.PAGE_SIZE;
+  noOfRecordFirst = SEARCH_CONFIG.MORE_PAGE_RECORD_LIMIT;
   // pager object
   pager: any = {};
-  startDt: any;
+  startDt: any="";
   endDt: any;
+  fewRecords:any;
+  allRecords:any;
   noResultFound: string='';
   mobile: boolean = false;
+  disabledDate : boolean = true;
 
 
   // paged items
@@ -60,20 +64,28 @@ export class JobpoststatusComponent implements OnInit {
       private dialog: MatDialog,
       fb: FormBuilder,
       private pagerService: PagerService) {
-        window.scroll(0,0);
+
         window.scroll(0,0);
         this.postform = fb.group({
-          startDate: ['', Validators.required],
-          endDate: ['', Validators.required]
+          startDate: [''],
+          endDate: [''],
+          RecordNumber: ['fewRecords']
         })
     
         
     
-        let sdate = new Date();
+        //let sdate = new Date();
         //this.startDt = new Date(sdate.getTime() - (2*24*60*60*1000));
-        this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-SEARCH_CONFIG.NO_OF_DAYS_RESULT));
+        //this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-1));
+
+        //this.startDt = new Date(new Date().setDate(new Date().getDate()-SEARCH_CONFIG.NO_OF_DAYS_RESULT));
+
+        //let startDt = new Date(new Date().setDate(new Date().getDate()-3)); 
         //let edate = new Date();
+        //this.startDt = new Date();
         this.endDt = new Date();
+        
+        this.fewRecords = "fewRecords";
         //this.endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+edate.getDate()); 
 
       }
@@ -85,7 +97,7 @@ export class JobpoststatusComponent implements OnInit {
       //console.log("Windows ::: "+this.mobile);
     }
     
-    this.loading = true;
+
     // let edate = new Date();
     // let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
 
@@ -93,8 +105,34 @@ export class JobpoststatusComponent implements OnInit {
       // console.log(" endDt :::: "+endDt);
       // console.log(" this.auth.userProfile.name :::: "+this.auth.userProfile.name);
 
-    this.postservice.getPostJobsByUser(this.auth.userProfile.name, 'UD','',this.startDt, this.endDt).subscribe(pjob=> {
-      this.pjob = pjob;
+    this.CallingData('UDM');
+
+    // this.postservice.getPostJobsByUser(this.auth.userProfile.name, 'UDM','').subscribe(pjob=> {
+    //   this.pjob = pjob; 
+    //   //console.log("Last Updated ::: "+ Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000));
+    //   // console.log("Last Updated ::: "+ this.getDateDiff(this.pjob[3].LastModifiedDate));
+    //   if (this.pjob.length == 0) {
+    //     //console.log("Company ::: "+this.aJob[0].company);
+    //     //this.setPage(1);
+    //     this.pjob = [];
+    //     this.pagedItems = null;
+    //     this.notfoundAnything();
+    //   } 
+
+    //   this.loading = false;
+    //   // Math.round(Math.abs(new Date().getTime() - this.pjob[0].LastModifiedDate.toDate().getTime())/(24*60*60*1000)
+    //   window.scroll(0,0);
+    //   this.setPage(1);
+
+    //   //console.log("List Service ..... 33333 ::::: "+this.pjob[1].id);
+    // });
+  }
+
+  
+  CallingData(type) {
+    this.loading = true;
+    this.postservice.getPostJobsByUser(this.auth.userProfile.name, type,'').subscribe(pjob=> {
+      this.pjob = pjob; 
       //console.log("Last Updated ::: "+ Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000));
       // console.log("Last Updated ::: "+ this.getDateDiff(this.pjob[3].LastModifiedDate));
       if (this.pjob.length == 0) {
@@ -112,8 +150,8 @@ export class JobpoststatusComponent implements OnInit {
 
       //console.log("List Service ..... 33333 ::::: "+this.pjob[1].id);
     });
-  }
 
+  }
 
   selectPostedJob(appliedJpb) {
 
@@ -122,36 +160,104 @@ export class JobpoststatusComponent implements OnInit {
     //this.startenddate='';
     //this.aJob =null;
     this.pagedItems =null;    
- 
+    //this.loading = true;
+    this.disabledDate = true;
+    this.endDt = new Date();
+    this.startDt='';
+
+    //console.log("callType ::::: "+appliedJpb.RecordNumber);
+
+
+    if (appliedJpb.RecordNumber == 'AllRecords') {
+      this.startDt = '';
+      this.CallingData('U');
+    } else if (appliedJpb.RecordNumber == 'fewRecords') {
+      this.CallingData('UDM');
+    } 
+    
+    // else {
       
-    //console.log("callType ::::: "+callType);
+    //   let sdate = new Date(appliedJpb.startDate);
+    //   this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+sdate.getDate());
+    //   this.endDt = new Date(appliedJpb.endDate);
+    //   //let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
 
-    this.loading = true;
-    let sdate = new Date(appliedJpb.startDate);
-    this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+sdate.getDate());
-    this.endDt = new Date(appliedJpb.endDate);
-    //let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
+    //   //console.log(" Current startDt :::: "+this.startDt);
+    //   //console.log(" Current endDt :::: "+this.endDt);
 
-      //console.log(" Current startDt :::: "+this.startDt);
-      //console.log(" Current endDt :::: "+this.endDt);
+    //   this.postservice.getPostJobsByUser(this.auth.userProfile.name,callType,'', this.startDt, this.endDt).subscribe(udtl=> {
 
-      this.postservice.getPostJobsByUser(this.auth.userProfile.name,callType,'', this.startDt, this.endDt).subscribe(udtl=> {
+    //     this.pjob = udtl;
+    //     //console.log(" Length :::: "+this.pjob.length);
 
-        this.pjob = udtl;
-        //console.log(" Length :::: "+this.pjob.length);
-
-        if (this.pjob.length == 0) {
+    //     if (this.pjob.length == 0) {
           
-          //this.setPage(1);
-          this.pjob = [];
-          this.pagedItems = null;
-          this.notfoundAnything();
-        } 
-        //console.log("Company :::==>>>> "+this.aJob[0].company);
-        this.loading = false; 
-        this.setPage(1);
-      });
+    //       //this.setPage(1);
+    //       this.pjob = [];
+    //       this.pagedItems = null;
+    //       this.notfoundAnything();
+    //     } 
+    //     //console.log("Company :::==>>>> "+this.aJob[0].company);
+    //     this.loading = false; 
+    //     this.setPage(1);
+    //   });
+
+    //   }
+
     }
+
+
+    enableCustomFields(appliedJpb) {
+
+      this.disabledDate = false;
+      let callType='UD';
+      //if (appliedJpb.startDate == )
+      //console.log("ppliedJpb.startDate ::::: "+appliedJpb.startDate+ " this.startDt :: "+this.startDt);
+
+      if (this.startDt == '') {
+        let sdate = new Date();
+        this.startDt = new Date(new Date().setDate(new Date().getDate()-SEARCH_CONFIG.NO_OF_DAYS_RESULT));
+        appliedJpb.startDate = this.startDt;
+
+        //console.log("ppliedJpb.startDate :::::====>>>>> "+appliedJpb.startDate);
+      } 
+
+      if ((appliedJpb.startDate !=undefined) && (appliedJpb.endDate !=undefined))
+      {
+        this.loading = true;
+        // console.log("ppliedJpb.startDate ::::: "+appliedJpb.startDate);
+        // console.log("ppliedJpb.endDate ::::: "+appliedJpb.endDate);
+        let sdate = new Date(appliedJpb.startDate);
+        this.startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+sdate.getDate());
+        this.endDt = new Date(appliedJpb.endDate);
+        //let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
+
+        //console.log(" Current startDt :::: "+this.startDt);
+        //console.log(" Current endDt :::: "+this.endDt);
+
+        this.postservice.getPostJobsByUser(this.auth.userProfile.name,callType,'', this.startDt, this.endDt).subscribe(udtl=> {
+
+          this.pjob = udtl;
+          //console.log(" Length :::: "+this.pjob.length);
+
+          if (this.pjob.length == 0) {
+            
+            //this.setPage(1);
+            this.pjob = [];
+            this.pagedItems = null;
+            this.notfoundAnything();
+          } 
+          //console.log("Company :::==>>>> "+this.aJob[0].company);
+          this.loading = false; 
+          this.setPage(1);
+        });
+      }
+
+
+
+
+    }
+
 
     getDateDiff(dateIput) {
       return Math.round(Math.abs(new Date().getTime() - dateIput.toDate().getTime())/(24*60*60*1000));

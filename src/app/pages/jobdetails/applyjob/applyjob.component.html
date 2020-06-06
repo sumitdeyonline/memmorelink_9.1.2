@@ -91,18 +91,18 @@
 
     </div>
 
-
+    <br>
 
     <div class="row">
       <div class="form-actions floatRight" [hidden]="!showUpload">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Apply" class="btn btn-primary btn-sm" [disabled]="!applyJobForm.valid || !currentFileUpload || progress.percentage != 100" (click)="applyNow()">
+           &nbsp;&nbsp;&nbsp;<input type="button" value="Apply" class="btn btn-primary btn-sm" [disabled]="!applyJobForm.valid || !currentFileUpload || progress.percentage != 100" (click)="applyNow()">
       </div>
       <div class="form-actions floatRight" [hidden]="showUpload">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Apply" class="btn btn-primary btn-sm" [disabled]="!applyJobForm.valid" (click)="applyNow()">
+        &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Apply" class="btn btn-primary btn-sm" [disabled]="!applyJobForm.valid" (click)="applyNow()">
     </div>
-      &nbsp;&nbsp;&nbsp;&nbsp;
+      
       <div class="form-actions floatRight">
-        &nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" (click)="close()" class="btn btn-primary btn-sm">
+        &nbsp;&nbsp;<input type="button" value="Cancel" (click)="close()" class="btn btn-primary btn-sm">
       </div>
     </div>
 

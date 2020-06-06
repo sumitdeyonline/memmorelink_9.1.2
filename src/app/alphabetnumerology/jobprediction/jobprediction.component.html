@@ -77,7 +77,7 @@
                                       [ngStyle]="{width:progress.percentage+'%'}">
                                       {{jobPredectionSucessMessage}}%</div>
                         </div>                    
-                          <p class="disclaimer" style="align:center" *ngIf="progressPercentage == EXECELLENT_MATCH_PERCENTAGE"><b>(According to Numerology</b> this is a excellent match with your name and the company <b>{{companyTemp}}</b>)
+                          <p class="disclaimer" *ngIf="progressPercentage == EXECELLENT_MATCH_PERCENTAGE"><b>(According to Numerology</b> this is a excellent match with your name and the company <b>{{companyTemp}}</b>)
                           <p class="disclaimer" *ngIf="progressPercentage == GOOD_MATCH_PERCENTAGE"><b>(According to Numerology</b> this is a good match with your name and the company <b>{{companyTemp}}</b>)
                           <p class="disclaimer" *ngIf="progressPercentage == AVERAGE_MATCH_PERCENTAGE"><b>(According to Numerology</b> this is a average match with your name and the company <b>{{companyTemp}}</b>)
                           <p class="disclaimer" *ngIf="progressPercentage == BAD_MATCH_PERCENTAGE"><b>(According to Numerology</b> this is a bad match with your name and the company <b>{{companyTemp}}</b>)
@@ -93,13 +93,12 @@
                                 </div>   
 
                                 <div class="row">
-                                  &nbsp;&nbsp;&nbsp;
-                                  <div class="form-actions floatRight">
+                                  <div class="form-actions floatRight">&nbsp;&nbsp;
                                      <input type="submit" value="Submit" [disabled]="!jobPForm.valid || Fieldlength(firstname.value) < 2 || Fieldlength(lastname.value) < 2 || Fieldlength(companyname.value) < 2" class="btn btn-primary btn-sm">
-                                  </div>&nbsp;&nbsp;&nbsp;
+                                  </div>
                                   <div class="form-actions floatRight" *ngIf="dialogRef ==null">
-                                    &nbsp;<input type="button" value="Reset" (click)="resetForm(jobPForm);" class="btn btn-primary btn-sm">
-                                  </div> &nbsp;&nbsp;&nbsp;
+                                    <input type="button" value="Reset" (click)="resetForm(jobPForm);" class="btn btn-primary btn-sm">
+                                  </div> &nbsp;
                                   <div class="form-actions floatRight" *ngIf="dialogRef !=null">
                                     &nbsp;<input type="button" value="Cancel" (mousedown)="close();" class="btn btn-primary btn-sm">
                                   </div>                                                                    

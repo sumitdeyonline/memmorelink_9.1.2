@@ -26,6 +26,39 @@ html, body{
 	font-size: 100%;
     background:#ffffff !important; 
 }
+
+
+.tooltip {
+    position: relative;
+    display: contents !important;
+    border-bottom: 1px dotted black;
+    opacity: 1 !important;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width:  220px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 3px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+@media (min-width: 1200px)  {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1240px !important;
+    }
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -40,6 +73,13 @@ a:hover {
     margin: .0rem 0 0 !important; 
     min-width: 8rem !important;
 }
+
+.col-sm-2, .col-sm-3 {
+    padding: 0;
+    padding-right: 2px!important;
+    padding-left: 2px!important;
+}
+
 
 .ng5-slider .ng5-slider-bubble {
     bottom: 6px !important;
@@ -149,7 +189,7 @@ body a{
     -webkit-background-size:cover;
     -moz-background-size:cover;
     -o-background-size:cover;
-    min-height:200px;	
+    min-height:140px;	
 }
 #search_wrapper1{
 	margin-top:0em;
@@ -841,7 +881,7 @@ i.icon_1:hover, span.icon_text:hover{
     color:#f15f43;
 }
 .tab_grid {
-    margin: 2em 0;
+    margin: 0.6em 0;
 }
 .col-md-3.loc_1 {
     padding-left: 0;

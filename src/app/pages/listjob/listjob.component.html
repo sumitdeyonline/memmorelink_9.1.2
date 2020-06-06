@@ -90,19 +90,20 @@
 
 
                             <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',pj.objectID]" (click) = "jobDetails(pj.objectID)">{{ pj.JobTitle }}</a></h6>
-                              <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company.substring(0,19) }}</span><span class="companyName" *ngIf="pj.Company.length>19">...</span>
+                              <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company?.substring(0,19) }}</span><span class="companyName" *ngIf="pj.Company.length>19">...</span>
                               &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b></span>
                               &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">{{ getDateDiff(pj.LastModifiedDate) }}&nbsp;days ago</span>
                             </div>
                             
                             <div class="clearfix"> </div>
                               <ul class="top-btns">
+                                <!-- <li>{{pj?.JobID}}</li>  -->
                               <!--li><a href="#" class="fa fa-plus toggle"></a></li>
                               <li><a href="#" class="fa fa-star"></a></li>
                               <li><a href="#" class="fa fa-link"></a></li-->
                             </ul>
                             <hr class="hr_style">
-                            <div [innerHTML]="pj.JobDesc.substring(0,length)" class="jobdetails"></div>
+                            <div [innerHTML]="pj.JobDesc?.substring(0,length)" class="jobdetails"></div>
                             <!-- <a [routerLink]="['/jobdetails',pj.objectID]" (click) = "jobDetails(pj.objectID)">Read More ..</a> -->
 
                             <!--button (click)="jobDetails(pj.objectID)">Read More</button-->

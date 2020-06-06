@@ -69,6 +69,9 @@ import { UploadresumepageComponent } from './uploadresumepage/uploadresumepage.c
 import { RemoreuserComponent } from './remoreuser/remoreuser.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { Ng5SliderModule } from 'ng5-slider';
+import { SequencenumberService } from '../services/firebase/sequencenumber/sequencenumber.service';
+import { ApplicantsComponent } from './applicants/applicants.component';
+import { ApplicantappliedComponent } from './applicants/applicantapplied/applicantapplied.component';
 
 // import { TechNewsComponent } from './tech-news';
 // import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
@@ -149,6 +152,8 @@ import { Ng5SliderModule } from 'ng5-slider';
         MyappliedjobComponent,
         UploadresumepageComponent,
         RemoreuserComponent,
+        ApplicantsComponent,
+        ApplicantappliedComponent,
         
         // SignupConfirmComponent
       // AdminhomeComponent,
@@ -183,7 +188,8 @@ import { Ng5SliderModule } from 'ng5-slider';
       ScopeGuardService,
       ContentfulrapperService,
       AuthGuardService,
-      EmploymenttypesService
+      EmploymenttypesService,
+      SequencenumberService
 
       //AlphabetNumerologyService
       //AdminGuardService

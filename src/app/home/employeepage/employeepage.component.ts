@@ -22,9 +22,10 @@ export class EmployeepageComponent implements OnInit {
   ngOnInit(): void {
 
     this.loading = true;
-    let sdate = new Date();
+    //let sdate = new Date();
     //let startDt = new Date(sdate.getTime() - (5*24*60*60*1000));
-    let startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-5));
+    //let startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+(sdate.getDate()-5));
+    let startDt = new Date(new Date().setDate(new Date().getDate()-1)); 
     //console.log("5 Days Back ::: "+startDt);
     let endDt = new Date();
     //let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  

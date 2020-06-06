@@ -44,8 +44,8 @@
             <thead>
                 <tr>
                     <th colspan="3">
-                        Job Posted&nbsp;({{pjob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>
-                        <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
+                        <!-- Job Posted&nbsp;({{pjob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a> -->
+                        Job Posted&nbsp;<div class="tooltip">(*)<span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>                        <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                     </th>
     
                 </tr>  
@@ -57,16 +57,17 @@
                     <!-- <th>Date Created</th>                 -->
                     <th>Date Modified</th>
                     <th>Active Job</th>
-    
+                    <th>Applicants</th>   
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let pj of pjob">
-                    <td><a [routerLink]="['/postjob',pj.id]" target="_blank">{{ pj.JobTitle?.substring(0,25) }}</a></td>
+                    <td><a [routerLink]="['/jobdetails',pj.id]" target="_blank">{{ pj.JobTitle?.substring(0,25) }}</a></td>
                     <td>{{ pj.JobCity?.substring(0,15) }}, {{ pj.JobState }}</td>
                     <!-- <td>{{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>                     -->
                     <td>{{pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
                     <td>{{pj.isSearchable==true?'Yes':'No'}}</td>
+                    <td><a [routerLink]="['/applicants',pj.id]">{{pj.ApplicantCount}} Applicants</a></td>
                 </tr>
 
             </tbody>
@@ -98,7 +99,7 @@
             <thead>
                 <tr>
                     <th colspan="3">
-                        Applicants&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a>
+                        Applicants&nbsp;&nbsp;<div class="tooltip">(*)<span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a>
                         <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                     </th>
     
@@ -117,10 +118,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let aj of aJob">
-                    <td><a [routerLink]="['/postjob',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,25) }}</a></td>
+                    <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,25) }}</a></td>
                     <td>{{ aj.joblocation }}</td>
                     <td>{{aj.FirstName}}&nbsp;{{aj.LastName}}</td>
-                    <td>{{aj.FromEmail?.substring(0,20)}}</td>
+                    <td><a [routerLink]="['/applicantapplied',aj.FromEmail]">{{aj.FromEmail?.substring(0,20)}}</a></td>
                     <td>{{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
                 </tr>
             </tbody>
