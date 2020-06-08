@@ -1,3 +1,4 @@
+<br>
 <div id="search_wrapper1">
     <form #searchResume="ngForm" (ngSubmit)="getResumeSearch(searchResume)">
          <div id="search_form" class="clearfix">
@@ -33,7 +34,7 @@
     <div class="table-container">
     
 
-        <div ali class="progress-loader" [hidden]="!loading" >
+        <div ali class="progress-loader" [hidden]="!loading">
                         
             <mat-progress-spinner [mode]="'indeterminate'" [color]="'warn'" style="align-content: center;left:45%;">
             </mat-progress-spinner>
@@ -45,14 +46,15 @@
                 <tr>
                     <th colspan="3">
                         <!-- Job Posted&nbsp;({{pjob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a> -->
-                        Job Posted&nbsp;<div class="tooltip">(*)<span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>                        <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
+                        Job Posted&nbsp;<div class="tooltip"><i class="fa fa-toggle-up"></i><span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>                        <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                     </th>
     
                 </tr>  
             </thead>      
             <thead>
                 <tr>
-                    <th>Job Title</th>
+                    <!-- <th>Job ID</th>           -->
+                    <th>Job Title[JobID] <a (click)="sortValue('asc')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('dsc')"><i class="fa fa-caret-down"></i></a></th>
                     <th>Location</th>
                     <!-- <th>Date Created</th>                 -->
                     <th>Date Modified</th>
@@ -62,7 +64,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let pj of pjob">
-                    <td><a [routerLink]="['/jobdetails',pj.id]" target="_blank">{{ pj.JobTitle?.substring(0,25) }}</a></td>
+                    <!-- <td>{{ pj?.JobID}}</td> -->
+                    <td><a [routerLink]="['/jobdetails',pj.id]" target="_blank">{{ pj.JobTitle?.substring(0,25) }} [{{ pj?.JobID}}]</a></td>
                     <td>{{ pj.JobCity?.substring(0,15) }}, {{ pj.JobState }}</td>
                     <!-- <td>{{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>                     -->
                     <td>{{pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
@@ -99,7 +102,7 @@
             <thead>
                 <tr>
                     <th colspan="3">
-                        Applicants&nbsp;&nbsp;<div class="tooltip">(*)<span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a>
+                        Applicants&nbsp;&nbsp;<div class="tooltip"><i class="fa fa-toggle-up"></i><span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a>
                         <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                     </th>
     
@@ -107,10 +110,10 @@
             </thead>      
             <thead>
                 <tr>
-                    <th>Job Title</th>
-                    <th>Location</th>                    
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Job Title [Job ID]</th>
+                    <th>Location</th>                    
                     <th>Date Applied</th>                
 
     
@@ -118,10 +121,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let aj of aJob">
-                    <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,25) }}</a></td>
-                    <td>{{ aj.joblocation }}</td>
                     <td>{{aj.FirstName}}&nbsp;{{aj.LastName}}</td>
                     <td><a [routerLink]="['/applicantapplied',aj.FromEmail]">{{aj.FromEmail?.substring(0,20)}}</a></td>
+                    <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,25) }} [{{aj.JobIDSerial}}]</a></td>
+                    <td>{{ aj.joblocation }}</td>
                     <td>{{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
                 </tr>
             </tbody>

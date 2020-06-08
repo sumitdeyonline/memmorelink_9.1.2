@@ -37,6 +37,7 @@ export class JobpoststatusComponent implements OnInit {
   fileNameDialogRef: MatDialogRef<DialogComponent>;
 
   pjob: PostJobc[];
+  pjoball: PostJobc[];
   postform;
 
   length: any = SEARCH_CONFIG.LIST_JOB_DESC_STATUS;
@@ -51,6 +52,10 @@ export class JobpoststatusComponent implements OnInit {
   noResultFound: string='';
   mobile: boolean = false;
   disabledDate : boolean = true;
+  recordDetails=[{name:"fewRecords"},{name:"AllRecords"},{name: "Custom"}];
+  activeDetails=[{name:"Active"},{name:"InActive"},{name:"All"}]
+  //recordDetails=["fewRecords","AllRecords","Custom"];
+  //ActiveInActive:any;
 
 
   // paged items
@@ -69,7 +74,8 @@ export class JobpoststatusComponent implements OnInit {
         this.postform = fb.group({
           startDate: [''],
           endDate: [''],
-          RecordNumber: ['fewRecords']
+          RecordNumber: ['fewRecords'],
+          ActiveInActive:['Active']
         })
     
         
@@ -85,7 +91,13 @@ export class JobpoststatusComponent implements OnInit {
         //this.startDt = new Date();
         this.endDt = new Date();
         
-        this.fewRecords = "fewRecords";
+        //this.fewRecords = "fewRecords";
+        
+        //this.recordDetails.name
+      
+        
+
+        //this.ActiveInActive = "All";
         //this.endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+edate.getDate()); 
 
       }
@@ -105,7 +117,7 @@ export class JobpoststatusComponent implements OnInit {
       // console.log(" endDt :::: "+endDt);
       // console.log(" this.auth.userProfile.name :::: "+this.auth.userProfile.name);
 
-    this.CallingData('UDM');
+    this.CallingData('UDM','Active',true);
 
     // this.postservice.getPostJobsByUser(this.auth.userProfile.name, 'UDM','').subscribe(pjob=> {
     //   this.pjob = pjob; 
@@ -129,10 +141,11 @@ export class JobpoststatusComponent implements OnInit {
   }
 
   
-  CallingData(type) {
+  CallingData(type,active,issearch) {
     this.loading = true;
     this.postservice.getPostJobsByUser(this.auth.userProfile.name, type,'').subscribe(pjob=> {
-      this.pjob = pjob; 
+      this.pjob = pjob;
+      this.pjoball = pjob;
       //console.log("Last Updated ::: "+ Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000));
       // console.log("Last Updated ::: "+ this.getDateDiff(this.pjob[3].LastModifiedDate));
       if (this.pjob.length == 0) {
@@ -141,7 +154,9 @@ export class JobpoststatusComponent implements OnInit {
         this.pjob = [];
         this.pagedItems = null;
         this.notfoundAnything();
-      } 
+      } else {
+        this.applyFilter(active,issearch);
+      }
 
       this.loading = false;
       // Math.round(Math.abs(new Date().getTime() - this.pjob[0].LastModifiedDate.toDate().getTime())/(24*60*60*1000)
@@ -155,25 +170,47 @@ export class JobpoststatusComponent implements OnInit {
 
   selectPostedJob(appliedJpb) {
 
-    this.noResultFound = '';
-    let callType='UD';
-    //this.startenddate='';
-    //this.aJob =null;
-    this.pagedItems =null;    
-    //this.loading = true;
-    this.disabledDate = true;
-    this.endDt = new Date();
-    this.startDt='';
+    // console.log("appliedJpb.ActiveInActive  before ::::: "+appliedJpb.ActiveInActive);
+
+
+    // appliedJpb.ActiveInActive = this.activeDetails[0].name;
+    // //this.postform.set('ActiveInActive').
+
+    // this.postform.controls['ActiveInActive'].setValue('Active',{emitEvent:true});
+    // this.activeDetails[0].name = "Active";
+
+    // console.log("appliedJpb.ActiveInActive  after ::::: "+appliedJpb.ActiveInActive);
+    // this.postform.controls.ActiveInActive.patchValue(this.activeDetails[0].name,{emitEvent:true});
+    //console.log("appliedJpb.ActiveInActive  after ::::: "+appliedJpb.ActiveInActive);
+    // this.noResultFound = '';
+    // let callType='UD';
+    // //this.startenddate='';
+    // //this.aJob =null;
+    // this.pagedItems =null;    
+    // //this.loading = true;
+    // this.disabledDate = true;
+    // this.endDt = new Date();
+    // this.startDt='';
 
     //console.log("callType ::::: "+appliedJpb.RecordNumber);
+
+    let isSearch:boolean;
+
+    if (appliedJpb.ActiveInActive == 'Active') {
+      isSearch = true;
+    } else if (appliedJpb.ActiveInActive == 'InActive') {
+      isSearch = false;
+    } 
 
 
     if (appliedJpb.RecordNumber == 'AllRecords') {
       this.startDt = '';
-      this.CallingData('U');
+      this.CallingData('U',appliedJpb.ActiveInActive,isSearch);
     } else if (appliedJpb.RecordNumber == 'fewRecords') {
-      this.CallingData('UDM');
-    } 
+      this.CallingData('UDM',appliedJpb.ActiveInActive,isSearch);
+    } else if (appliedJpb.RecordNumber == 'Custom') {
+      this.enableCustomFields(appliedJpb);
+    }
     
     // else {
       
@@ -209,6 +246,7 @@ export class JobpoststatusComponent implements OnInit {
 
     enableCustomFields(appliedJpb) {
 
+      //appliedJpb.ActiveInActive = "All";
       this.disabledDate = false;
       let callType='UD';
       //if (appliedJpb.startDate == )
@@ -238,6 +276,7 @@ export class JobpoststatusComponent implements OnInit {
         this.postservice.getPostJobsByUser(this.auth.userProfile.name,callType,'', this.startDt, this.endDt).subscribe(udtl=> {
 
           this.pjob = udtl;
+          this.pjoball = udtl;
           //console.log(" Length :::: "+this.pjob.length);
 
           if (this.pjob.length == 0) {
@@ -246,18 +285,45 @@ export class JobpoststatusComponent implements OnInit {
             this.pjob = [];
             this.pagedItems = null;
             this.notfoundAnything();
-          } 
+          } else {
+            this.setFilterValue(appliedJpb);
+          }
           //console.log("Company :::==>>>> "+this.aJob[0].company);
           this.loading = false; 
           this.setPage(1);
         });
       }
 
+    }
 
+    setFilterValue(appliedJpb) {
+      //console.log("ppliedJpb.ActiveInActive ::::: "+appliedJpb.ActiveInActive);
+      let isSearch:boolean;
+
+      if (appliedJpb.ActiveInActive == 'Active') {
+        isSearch = true;
+      } else if (appliedJpb.ActiveInActive == 'InActive') {
+        isSearch = false;
+      } 
+
+      this.applyFilter(appliedJpb.ActiveInActive,isSearch);
 
 
     }
 
+    applyFilter(param,issearch) {
+      this.loading = true;
+      if ((param == 'Active') || (param == 'InActive')) {
+        this.pjob= this.pjoball.filter(function(pjobfilter) {
+          return pjobfilter.isSearchable == issearch;
+        });
+        //console.log("this.pjob ::: "+this.pjob.length);
+      } else {
+        this.pjob= this.pjoball;
+      }
+      this.setPage(1);
+      this.loading = false;
+    }
 
     getDateDiff(dateIput) {
       return Math.round(Math.abs(new Date().getTime() - dateIput.toDate().getTime())/(24*60*60*1000));

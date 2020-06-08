@@ -7,7 +7,9 @@
             <div class="col-md-8">
 
                 <div class="col_3">
-                    <h2>Applicants</h2>
+                    <br>
+                    <!-- <h2>Applicants</h2> -->
+                    <h4 *ngIf="pagedItems !=null && pagedItems.length>0">Job(s) Applied By : {{emailid}}</h4> 
                     <br>
   
 
@@ -15,13 +17,12 @@
 
                         <div class="row">
                             <div class="col-sm-2">
-                                <label style="font-weight: bold;" for="startDate">Start Date </label>
+                                &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="startDate">Start Date </label>
                             </div>
                             <div class="col">
                                 <input
                                 type="text"
                                 placeholder="Choose start date"
-                                class="form-control"
                                 bsDatepicker
                                 startDate
                                 autocomplete="off"
@@ -41,7 +42,6 @@
                                 <input
                                 type="text"
                                 placeholder="Choose end date"
-                                class="form-control"
                                 autocomplete="off"
                                 bsDatepicker
                                 endDate
@@ -54,10 +54,10 @@
                                 </div> -->
                                 </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-sm-2">&nbsp;
                             </div>
-                        </div>
+                        </div> -->
                     </form>        
                     <h4 *ngIf="noResultFound !=''">{{noResultFound}}</h4>
                     <!-- loader.component.html -->
@@ -72,7 +72,8 @@
                     <div id="buttonHomePage" class="clearfix">
                         <!-- <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/authlandingpage" value="Back"></label>
                        <br> -->
-                        <h5 *ngIf="pagedItems !=null && pagedItems.length>0">Applicant Email : {{emailid}}</h5> 
+                       <!-- <h5>Job Applied</h5> -->
+                        <!-- <h5 *ngIf="pagedItems !=null && pagedItems.length>0">Applicant Email : {{emailid}}</h5>  -->
                     </div> 
 
                     <hr class="hr_style">
@@ -91,10 +92,11 @@
                             <div class="jobs_right">
                                 <div class="date">{{ aj.CreatedDate.toDate() |  date:'dd'}} <span>{{ dformat.monthNumToSigName(aj.CreatedDate.toDate() |  date:'MM') }}</span></div>
 
-                                <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle }} [JobID: {{aj?.JobIDSerial}}]</a></h6>
-                                    <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ aj.company?.substring(0,19) }}</span><span class="companyName" *ngIf="aj?.company?.length>19">...</span>
+                                <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle }}</a></h6>
+                                    <i class="fa fa-caret-square-o-right"></i>&nbsp;<span class="companyName">{{ aj?.JobIDSerial}}</span>
                                     &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ aj.joblocation }}</b>&nbsp;</span><span class="title"></span>
                                     &nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta"><b>Applied:</b> {{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
+                                    <br><span class="meta"><i class="fa fa-hand-o-right"></i>&nbsp; {{aj.FirstName}}&nbsp;{{aj.LastName}}&nbsp;&nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{aj.CoverLetter}}</span></div></span>
                                 </div>
 
                                 <!-- <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{aj.JobTitle}}</a></h6>
@@ -109,7 +111,7 @@
                                 <li><a href="#" class="fa fa-star"></a></li>
                                 <li><a href="#" class="fa fa-link"></a></li-->
                                 </ul>
-                                <hr class="hr_style">
+                                <!-- <hr class="hr_style"> -->
 
                                 <!-- <span class="meta">
                                     <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<a href="mailto:{{aj.FromEmail}}?Subject=Selected your resume" target="_top">{{aj.FirstName}}&nbsp;{{aj.LastName}}</a> &nbsp;&nbsp; 
@@ -120,7 +122,7 @@
                                     <b>Job Title : </b>{{aj.JobTitle}}
                                 </div> -->
  
-                                <div class="jobdetails"><b>Name :</b> {{aj.FirstName}}&nbsp;{{aj.LastName}}<br><b>Cover Letter : </b>{{aj?.CoverLetter}}</div>
+ <!--                                <div class="jobdetails"><b>Name :</b> {{aj.FirstName}}&nbsp;{{aj.LastName}}<br><b>Cover Letter : </b>{{aj?.CoverLetter}}</div> -->
                             </div>
 
 

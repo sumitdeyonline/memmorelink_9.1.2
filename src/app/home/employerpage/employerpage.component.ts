@@ -107,6 +107,37 @@ export class EmployerpageComponent implements OnInit {
     return;
   }
 
+  sortValue(type) {
+  //sortValue(field,type) {
+
+    // this.pjob= this.pjoball.filter(function(pjobfilter) {
+    //   return pjobfilter.isSearchable == issearch;
+    // });
+
+    
+
+    this.pjob= this.pjob.sort((a,b) => {
+      if (type=='asc') {
+        var nameA = a.JobTitle.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.JobTitle.toUpperCase(); // ignore upper and lowercase
+      } else {
+        var nameA = b.JobTitle.toUpperCase(); // ignore upper and lowercase
+        var nameB = a.JobTitle.toUpperCase(); // ignore upper and lowercase
+      }
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+    
+      // names must be equal
+      return 0;
+    })
+
+  }
+
   getResumeSearch(searchResume: NgForm) {
     console.log("Key Word :: "+searchResume.value.ResumeSearch);
     this.router.navigate(['/resumesearch'], { queryParams: {  ResumeSearch: searchResume.value.ResumeSearch}, 'queryParamsHandling': 'merge' });

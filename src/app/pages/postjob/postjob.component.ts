@@ -308,7 +308,7 @@ export class PostjobComponent implements OnInit {
 
       let id = 'O7TvY8yrEsJY0UHonBDr';
       let number = this.seqser.getUpdateSequenceNumber(id);
-      console.log("Number ::: "+number);
+      //console.log("Number ::: "+number);
 //       this.seqser.getUpdateSequenceNumber().subscribe(sequence=>{
 //         this.sequence = sequence;
 //         //console.log("Sequence ::: "+this.sequence[0].SeqNum);

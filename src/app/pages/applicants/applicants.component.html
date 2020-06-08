@@ -7,9 +7,9 @@
 
 
             <div class="col-md-8">
-
+                <br>
                 <div class="col_3">
-                    <h2>Applicants</h2>
+                    <h4>Job Applied for {{jobTitle}} [{{jobID}}]</h4>
                     <br>
   
 
@@ -17,13 +17,12 @@
 
                         <div class="row">
                             <div class="col-sm-2">
-                                <label style="font-weight: bold;" for="startDate">Start Date </label>
+                                &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="startDate">Start Date </label>
                             </div>
                             <div class="col">
                                 <input
                                 type="text"
                                 placeholder="Choose start date"
-                                class="form-control"
                                 bsDatepicker
                                 startDate
                                 autocomplete="off"
@@ -43,7 +42,6 @@
                                 <input
                                 type="text"
                                 placeholder="Choose end date"
-                                class="form-control"
                                 autocomplete="off"
                                 bsDatepicker
                                 endDate
@@ -74,7 +72,7 @@
                     <div id="buttonHomePage" class="clearfix">
                         <!-- <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/authlandingpage" value="Back"></label>
                        <br> -->
-                        <h5 *ngIf="pagedItems !=null && pagedItems.length>0">Job Title : {{jobTitle}}</h5> 
+                        <!-- <h5 *ngIf="pagedItems !=null && pagedItems.length>0">Job Title : {{jobTitle}}</h5>  -->
                     </div> 
 
 
@@ -96,8 +94,9 @@
                                 <div class="date_desc"><h6 class="title"><a href="mailto:{{aj.FromEmail}}?Subject=Selected your resume" target="_top">{{aj.FirstName}}&nbsp;{{aj.LastName}}</a></h6>
                                     <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<a href="mailto:{{aj.FromEmail}}?Subject=Selected your resume" target="_top">{{aj.FromEmail}}</a>
                                     &nbsp;&nbsp;<i class="fa fa-phone" aria-hidden="true"></i>&nbsp;{{aj.PhoneNumber}}
-                                    &nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">{{ aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>&nbsp;
-                                    <i class="fa fa-file" aria-hidden="true"></i>&nbsp;<a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>&nbsp;
+                                    &nbsp;&nbsp;<i class="fa fa-file" aria-hidden="true"></i>&nbsp;<a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>&nbsp;
+                                    &nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{aj?.CoverLetter}}</span></div>
+                                    <br><span class="meta"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<b>Date Applied:</b> {{ aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>&nbsp;
                                 </div>
                                 <div class="clearfix"> </div>
                                 <ul class="top-btns">
@@ -105,7 +104,7 @@
                                 <li><a href="#" class="fa fa-star"></a></li>
                                 <li><a href="#" class="fa fa-link"></a></li-->
                                 </ul>
-                                <hr class="hr_style">
+                                <!-- <hr class="hr_style"> -->
 
                                 <!-- <span class="meta">
                                     <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<a href="mailto:{{aj.FromEmail}}?Subject=Selected your resume" target="_top">{{aj.FirstName}}&nbsp;{{aj.LastName}}</a> &nbsp;&nbsp; 
@@ -115,7 +114,7 @@
                                 <!-- <div class="jobdetails">
                                     <b>Job Title : </b>{{aj.JobTitle}}
                                 </div> -->
-                                <div class="jobdetails"><b>Cover Letter : </b>{{aj?.CoverLetter}}</div>
+                                <!-- <div class="jobdetails"><b>Cover Letter : </b>{{aj?.CoverLetter}}</div> -->
                             </div>
 
 

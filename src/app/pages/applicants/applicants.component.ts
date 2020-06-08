@@ -28,6 +28,7 @@ export class ApplicantsComponent implements OnInit {
   startDt: any="";
   endDt: any;
   jobTitle: any;
+  jobID:any;
 
   constructor(private _activeRoute:ActivatedRoute,public dformat: DateformatService, private apply:ApplyjobService,private pagerService: PagerService,fb: FormBuilder ) { 
     window.scroll(0,0);
@@ -68,6 +69,7 @@ export class ApplicantsComponent implements OnInit {
         this.notfoundAnything();
       } else {
         this.jobTitle = this.aJob[0].JobTitle;
+        this.jobID = this.aJob[0].JobIDSerial;
       }
       //console.log("Company :::: "+this.aJob[0].company);
       this.loading = false;

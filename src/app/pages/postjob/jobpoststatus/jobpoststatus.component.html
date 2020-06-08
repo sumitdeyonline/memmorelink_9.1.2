@@ -26,15 +26,43 @@
         <div class="col-md-8">
             <div class="col_3">
 
-
+             <br>
 
               <div id="myTabContent" class="tab-content">
 
                     <h4>Jobs Posted</h4>
-                    <br>
+
                     <form #postform="ngForm" (ngSubmit)="selectPostedJob(postform.value)">
+
+
+
+
+
+
+
+
                     <div class="row">
+
                         <div class="col-sm-2">
+                            &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="RecordNumber">Records</label>
+                        </div>
+                        <div class="col">
+
+                            <select ngModel name="RecordNumber" 
+                                RecordNumber
+                                ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
+                                [ngModel]="recordDetails[0].name"
+                                 (ngModelChange)="selectPostedJob(postform.value)">
+                                <option value="fewRecords" selected>Last {{noOfRecordFirst}} Records</option>
+                                <option value="AllRecords">All Records</option>
+                                <option value="Custom">Custom Date</option>
+                                <!--option>USA</option-->
+                            </select>
+                        </div>
+
+
+
+                        <!-- <div class="col-sm-2">
                             &nbsp;&nbsp;&nbsp;<input type="radio"  
                             RecordNumber
                             value="fewRecords"
@@ -44,7 +72,7 @@
                             <label style="font-weight: bold;" for="RecordNumber">Last {{noOfRecordFirst}} Records </label>
 
 
-                        </div>
+                        </div> -->
                         <!-- <div class="col" >
                             <input type="radio"  
                             RecordNumber
@@ -55,7 +83,7 @@
                             
                         </div> -->
                         
-                        <div class="col-sm-2">
+                        <!-- <div class="col-sm-2">
                             &nbsp;&nbsp;&nbsp;<input type="radio"  
                             RecordNumber
                             value="AllRecords"
@@ -63,7 +91,7 @@
                             [ngModel]="fewRecords"
                             (ngModelChange)="selectPostedJob(postform.value)">&nbsp;
                             <label style="font-weight: bold;" for="RecordNumber">All Records </label>
-                        </div>
+                        </div> -->
                         <!-- <div class="col">
                             <input type="radio"  
                             RecordNumber
@@ -72,16 +100,16 @@
                             [ngModel]="fewRecords"
                             (ngModelChange)="selectPostedJob(postform.value)"> 
                         </div> -->
-
+<!-- 
                         <div class="col-sm-2">
-                            &nbsp;&nbsp;<input type="radio"  
+                            &nbsp;&nbsp;&nbsp;<input type="radio"  
                             RecordNumber
                             value="Custom"
                             ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
                             [ngModel]="fewRecords"
                             (ngModelChange)="enableCustomFields(postform.value)">&nbsp;
                             <label style="font-weight: bold;" for="RecordNumber">Custom Date </label>
-                        </div>
+                        </div> -->
                         <!-- <div class="col">
                             <input type="radio"  
                             RecordNumber
@@ -90,6 +118,23 @@
                             [ngModel]="fewRecords"
                             (ngModelChange)="enableCustomFields(postform.value)"> 
                         </div>  -->
+                        <div class="col-sm-2">
+                            &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="ActiveInActive">Active/InActive</label>
+                        </div>
+                        <div class="col">
+
+                            <select ngModel name="ActiveInActive" 
+                                ActiveInActive
+                                ngModel name="ActiveInActive" #ActiveInActive="ngModel" id="ActiveInActive"
+                                [ngModel]="activeDetails[0].name" (ngModelChange)="setFilterValue(postform.value)">
+                                <option value="Active">Active</option>
+                                <option value="InActive">InActive</option>
+                                <option value="All">All</option>
+
+                                <!--option>USA</option-->
+                            </select>
+
+                        </div>
                                                     
                     </div>
                     <div class="row" [hidden] = disabledDate>
@@ -187,11 +232,11 @@
                             <div class="jobs_right">
                                 <!--div class="date">{{ pj.CreatedDate.substring(3,5) }} <span>{{ dformat.monthNumToSigName(pj.CreatedDate.substring(0,2)) }}</span></div-->
                                 <!--div class="date">{{ pj.CreatedDate.toDate() | date:'MM-dd-yyyy' }} <span>{{ dformat.monthNumToSigName(pj.CreatedDate?.substring(0,2)) }}</span></div-->
-                                <div class="date">{{ pj.LastModifiedDate.toDate() | date:'dd' }} <span>{{ dformat.monthNumToSigName(pj.LastModifiedDate.toDate() | date:'MM') }}</span></div>
-                                <div class="date_desc"><h6 class="title"><a [routerLink]="['/postjob',pj.id]">{{ pj.JobTitle }} [JobID: {{pj?.JobID}}]</a></h6>
-                                <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company?.substring(0,19) }}</span><span class="companyName" *ngIf="pj?.Company.length>19">...</span>
-                                &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b>&nbsp;</span><span class="title"><a [routerLink]="['/applicants',pj.id]">{{pj.ApplicantCount}} Applicants</a></span>
-                                <br><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta"><b>Created:</b> {{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}, &nbsp;<b>Modified:</b> {{ pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
+                                <div class="date">{{ pj?.LastModifiedDate?.toDate() | date:'dd' }} <span>{{ dformat.monthNumToSigName(pj?.LastModifiedDate?.toDate() | date:'MM') }}</span></div>
+                                <div class="date_desc"><h6 class="title"><a [routerLink]="['/postjob',pj.id]">{{ pj?.JobTitle }} [{{(pj?.isSearchable==true?'Active':'Inactive')}}]</a></h6>
+                                <i class="fa fa-caret-square-o-right"></i>&nbsp;<span class="companyName">{{ pj?.JobID}}</span><span class="companyName" *ngIf="pj?.Company.length>19">...</span>
+                                &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b>&nbsp;&nbsp;&nbsp;</span><span class="title"><a [routerLink]="['/applicants',pj.id]"><i class="fa fa-plus-square" style="color:black"></i> Applicants</a></span>
+                                <br><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta"><b>Created:</b> {{pj?.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}, &nbsp;<b>Modified:</b> {{ pj?.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
                                 </div>
                                 <div class="clearfix"> </div> 
                                 <ul class="top-btns">
