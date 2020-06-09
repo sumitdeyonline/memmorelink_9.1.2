@@ -107,39 +107,187 @@ export class EmployerpageComponent implements OnInit {
     return;
   }
 
-  sortValue(type) {
+  sortValue(type,field,datatype) {
   //sortValue(field,type) {
 
     // this.pjob= this.pjoball.filter(function(pjobfilter) {
     //   return pjobfilter.isSearchable == issearch;
     // });
-
+    let afield = "a."+field;
+    let bfield = "b."+field;
     
+    if (datatype == 'PostJob')
+    {
+      this.pjob= this.pjob.sort((a,b) => {
+        if (type=='asc') {
+          switch(field) {
+            case 'JobTitle':
+              var nameA = a.JobTitle.toUpperCase(); // ignore upper and lowercase
+              var nameB = b.JobTitle.toUpperCase(); // ignore upper and lowercase
+              break;
+            case 'JobCity':
+              var nameA = a.JobCity.toUpperCase()+a.JobState.toUpperCase(); // ignore upper and lowercase
+              var nameB = b.JobCity.toUpperCase()+b.JobState.toUpperCase(); // ignore upper and lowercase
+              break;
+            case 'LastModifiedDate':
+              var dateA = a.LastModifiedDate; // ignore upper and lowercase
+              var dateB = b.LastModifiedDate; // ignore upper and lowercase
+              break;
+            case 'isSearchable':
+              if (a.isSearchable)
+                var nameA = 'Yes';
+              else 
+                var nameA = 'No';
 
-    this.pjob= this.pjob.sort((a,b) => {
-      if (type=='asc') {
-        var nameA = a.JobTitle.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.JobTitle.toUpperCase(); // ignore upper and lowercase
-      } else {
-        var nameA = b.JobTitle.toUpperCase(); // ignore upper and lowercase
-        var nameB = a.JobTitle.toUpperCase(); // ignore upper and lowercase
-      }
+              if (b.isSearchable)
+                var nameB = 'Yes';
+              else 
+                var nameB = 'No';                
 
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-    
-      // names must be equal
-      return 0;
-    })
+          }
+          // var nameA = afield.toUpperCase(); // ignore upper and lowercase
+          // var nameB = bfield.toUpperCase(); // ignore upper and lowercase
+  
+  
+        } else {
+          // var nameA = bfield.toUpperCase(); // ignore upper and lowercase
+          // var nameB = afield.toUpperCase(); // ignore upper and lowercase
+          switch(field) {
+          case 'JobTitle':
+            var nameA = b.JobTitle.toUpperCase(); // ignore upper and lowercase
+            var nameB = a.JobTitle.toUpperCase(); // ignore upper and lowercase
+            break;
+          case 'JobCity':
+            var nameA = b.JobCity.toUpperCase()+b.JobState.toUpperCase(); // ignore upper and lowercase
+            var nameB = a.JobCity.toUpperCase()+a.JobState.toUpperCase(); // ignore upper and lowercase
+          case 'LastModifiedDate':
+            var dateA = b.LastModifiedDate; // ignore upper and lowercase
+            var dateB = a.LastModifiedDate; // ignore upper and lowercase
+            break;     
+            
+          case 'isSearchable':
+            if (b.isSearchable)
+              var nameA = 'Yes';
+            else 
+              var nameA = 'No';
+
+            if (a.isSearchable)
+              var nameB = 'Yes';
+            else 
+              var nameB = 'No';               
+  
+          }
+  
+        }
+        if (field=='LastModifiedDate') {
+  
+          if (dateA < dateB) {
+            return -1;
+          }
+          if (dateA > dateB) {
+            return 1;
+          }        
+  
+        } else {
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+        }
+        // names must be equal
+        return 0;
+      })
+    } else if (datatype == 'ApplyJob') {
+      this.aJob= this.aJob.sort((a,b) => {
+        if (type=='asc') {
+          switch(field) {
+            case 'JobTitle':
+              var nameA = a.JobTitle.toUpperCase(); // ignore upper and lowercase
+              var nameB = b.JobTitle.toUpperCase(); // ignore upper and lowercase
+              break;
+            case 'Name':
+              var nameA = a.FirstName.toUpperCase()+a.LastName.toUpperCase(); // ignore upper and lowercase
+              var nameB = b.FirstName.toUpperCase()+b.LastName.toUpperCase(); // ignore upper and lowercase
+              break;              
+            case 'Email':
+              var nameA = a.FromEmail.toUpperCase(); // ignore upper and lowercase
+              var nameB = b.FromEmail.toUpperCase(); // ignore upper and lowercase
+              break;   
+            case 'Location':
+              var nameA = a.joblocation.toUpperCase(); // ignore upper and lowercase
+              var nameB = b.joblocation.toUpperCase(); // ignore upper and lowercase
+              break;    
+            case 'CreatedDate':
+              var dateA = a.CreatedDate; // ignore upper and lowercase
+              var dateB = b.CreatedDate; // ignore upper and lowercase
+              break;                             
+
+          }
+          // var nameA = afield.toUpperCase(); // ignore upper and lowercase
+          // var nameB = bfield.toUpperCase(); // ignore upper and lowercase
+  
+  
+        } else {
+          // var nameA = bfield.toUpperCase(); // ignore upper and lowercase
+          // var nameB = afield.toUpperCase(); // ignore upper and lowercase
+          switch(field) {
+          case 'JobTitle':
+            var nameA = b.JobTitle.toUpperCase(); // ignore upper and lowercase
+            var nameB = a.JobTitle.toUpperCase(); // ignore upper and lowercase
+            break;
+          case 'Name':
+            var nameA = b.FirstName.toUpperCase()+b.LastName.toUpperCase(); // ignore upper and lowercase
+            var nameB = a.FirstName.toUpperCase()+b.LastName.toUpperCase(); // ignore upper and lowercase
+            break;        
+          case 'Email':
+            var nameA = b.FromEmail.toUpperCase(); // ignore upper and lowercase
+            var nameB = a.FromEmail.toUpperCase(); // ignore upper and lowercase
+            break; 
+          case 'Location':
+            var nameA = b.joblocation.toUpperCase(); // ignore upper and lowercase
+            var nameB = a.joblocation.toUpperCase(); // ignore upper and lowercase
+            break;             
+          case 'CreatedDate':
+            var dateA = b.CreatedDate; // ignore upper and lowercase
+            var dateB = a.CreatedDate; // ignore upper and lowercase
+            break;             
+          }
+  
+        }
+
+
+        if (field=='CreatedDate') {
+  
+          if (dateA < dateB) {
+            return -1;
+          }
+          if (dateA > dateB) {
+            return 1;
+          }        
+  
+        } else {
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+        }
+
+
+
+        // names must be equal
+        return 0;
+      })
+    }
+
 
   }
 
   getResumeSearch(searchResume: NgForm) {
-    console.log("Key Word :: "+searchResume.value.ResumeSearch);
+    //console.log("Key Word :: "+searchResume.value.ResumeSearch);
     this.router.navigate(['/resumesearch'], { queryParams: {  ResumeSearch: searchResume.value.ResumeSearch}, 'queryParamsHandling': 'merge' });
   }
 

@@ -35,7 +35,40 @@
 
                             <form #aform="ngForm" (ngSubmit)="selectApplied(aform.value)">
                                 <div class="row">
+
                                     <div class="col-sm-2">
+                                        &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="RecordNumber">Records</label>
+                                    </div>
+                                    <div class="col">
+            
+                                        <select ngModel name="RecordNumber" 
+                                            RecordNumber
+                                            ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
+                                            [ngModel]="recordDetails[0].name"
+                                             (ngModelChange)="selectApplied(aform.value)">
+                                            <option value="fewRecords" selected>Last {{noOfRecordFirst}} Records</option>
+                                            <option value="AllRecords">All Records</option>
+                                            <option value="Custom">Custom Date</option>
+                                            <!--option>USA</option-->
+                                        </select>
+                                    </div>
+
+
+                                    <div class="col-sm-2">
+                                        &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="JobTitle">Job Title/ID </label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text"  
+                                        JobTitle
+                                        placeholder="Job Title/ID & Hit Enter"
+                                        autocomplete="off"
+                                        ngModel name="JobTitle" #JobTitle="ngModel" id="JobTitle"
+                                        (keyup.enter)="setFilterValue(aform.value)">    
+                                    </div>                                    
+            
+
+
+                                    <!-- <div class="col-sm-2">
                                         &nbsp;&nbsp;<input type="radio"  
                                         RecordNumber
                                         value="fewRecords"
@@ -43,12 +76,12 @@
                                         [ngModel]="fewRecords"
                                         (ngModelChange)="selectApplied(aform.value)"> 
                                         &nbsp;<label style="font-weight: bold;" for="RecordNumber">Last {{noOfRecordFirst}} Records </label>
-                                    </div>
+                                    </div> -->
 
                                     <!-- <div class="col">
 
                                     </div> -->
-                                    <div class="col-sm-2">
+                                    <!-- <div class="col-sm-2">
                                         &nbsp;&nbsp;&nbsp;<input type="radio"  
                                         RecordNumber
                                         value="AllRecords"
@@ -56,33 +89,44 @@
                                         [ngModel]="fewRecords"
                                         (ngModelChange)="selectApplied(aform.value)">                                 
                                         &nbsp;<label style="font-weight: bold;" for="RecordNumber">All Records </label>
-                                    </div>
+                                    </div> -->
 
                                     <!-- <div class="col">
 
                                     </div> -->
 
-                                    <div class="col-sm-2">
-                                        &nbsp;&nbsp;<input type="radio"  
+                                    <!-- <div class="col-sm-2">
+                                        &nbsp;<input type="radio"  
                                         RecordNumber
                                         value="Custom"
                                         ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
                                         [ngModel]="fewRecords"
                                         (ngModelChange)="enableCustomFields(aform.value)">                                 
                                         &nbsp;<label style="font-weight: bold;" for="RecordNumber">Custom Date </label>
-                                    </div>
+                                    </div> -->
+
+
 
                                     <!-- <div class="col">
 
                                     </div>                             -->
+
+                                   
                                 </div>
+
+
+
+
+                                    
+
+
                                 <div class="row" [hidden] = disabledDate>
                                     <div class="col-sm-2">&nbsp;
                                     </div>
                                 </div>
                                 <div class="row" [hidden] = disabledDate>
                                     <div class="col-sm-2">
-                                        <label style="font-weight: bold;" for="startDate">Start Date </label>
+                                        &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="startDate">Start Date </label>
                                     </div>
                                     <div class="col">
                                         <input

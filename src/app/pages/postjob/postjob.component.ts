@@ -307,47 +307,47 @@ export class PostjobComponent implements OnInit {
 
 
       let id = 'O7TvY8yrEsJY0UHonBDr';
-      let number = this.seqser.getUpdateSequenceNumber(id);
+      //let number = this.seqser.getUpdateSequenceNumber(id);
       //console.log("Number ::: "+number);
-//       this.seqser.getUpdateSequenceNumber().subscribe(sequence=>{
-//         this.sequence = sequence;
-//         //console.log("Sequence ::: "+this.sequence[0].SeqNum);
-//         //let num = this.sequence[0].SeqNum+1;
-//         //this.postjobService.updateData(id,this.sequence[0].SeqNum+1);
+      this.seqser.getUpdateSequenceNumber(id).subscribe(sequence=>{
+        this.sequence = sequence;
+        //console.log("Sequence ::: "+this.sequence[0].SeqNum);
+        //let num = this.sequence[0].SeqNum+1;
+        //this.postjobService.updateData(id,this.sequence[0].SeqNum+1);
 
 
-// //postJobForm.value.CreatedDate = new Date();
+//postJobForm.value.CreatedDate = new Date();
 
-//         pjob.CreatedDate =  new Date();
+        pjob.CreatedDate =  new Date();
 
-// //pjobc.CreatedDate = new Date();
+//pjobc.CreatedDate = new Date();
 
-// //console.log("Job Count :::: "+uDetails.CompanyLogoURL);
+//console.log("Job Count :::: "+uDetails.CompanyLogoURL);
 
-// //postJobForm.value.CreatedBy = this._auth.userProfile.name;
+//postJobForm.value.CreatedBy = this._auth.userProfile.name;
 
-//         pjob.CreatedBy=this._auth.userProfile.name;
+        pjob.CreatedBy=this._auth.userProfile.name;
 
-// //postJobForm.value.JobID = ""+this.sequence.SeqNum;
-//         pjob.JobID = ""+this.sequence[0].SeqNum;
+//postJobForm.value.JobID = ""+this.sequence.SeqNum;
+        pjob.JobID = ""+this.sequence[0].SeqNum;
 
-// // if (uDetails.company.length > 10) {
-// //   pjobc.JobID = uDetails.company.replace(/[^a-zA-Z0-9]/g,'').substring(0,10).toUpperCase()+"-"+uDetails.postjobCount;
-// // } else {
-// //   pjobc.JobID = uDetails.company.replace(/[^a-zA-Z0-9]/g,'').toUpperCase()+"-"+uDetails.postjobCount;
-// // }
+// if (uDetails.company.length > 10) {
+//   pjobc.JobID = uDetails.company.replace(/[^a-zA-Z0-9]/g,'').substring(0,10).toUpperCase()+"-"+uDetails.postjobCount;
+// } else {
+//   pjobc.JobID = uDetails.company.replace(/[^a-zA-Z0-9]/g,'').toUpperCase()+"-"+uDetails.postjobCount;
+// }
 
 
-//         //this.postjobService.addUpdatePostJobs(postJobForm.value,this.id, new Date(), "", this.userDetails[0],1510);
-//         this.postjobService.addUpdatePostJobs(pjob,this.id, new Date(), "", this.userDetails[0]);
-//         type = "Created";
-//         return;
-//       });
+        //this.postjobService.addUpdatePostJobs(postJobForm.value,this.id, new Date(), "", this.userDetails[0],1510);
+        this.postjobService.addUpdatePostJobs(pjob,this.id, new Date(), "", this.userDetails[0]);
+        type = "Created";
+        return;
+      });
 
-//       //console.log("postJobForm.value.isSearchable : "+postJobForm.value.isSearchable);
-//       //this.postjobService.addUpdatePostJobs(postJobForm.value,this.id, new Date(), "", this.userDetails[0]);
-//       //console.log("NEW FORM ....");
-//       type = "Created";
+      // console.log("postJobForm.value.isSearchable : "+postJobForm.value.isSearchable);
+      // this.postjobService.addUpdatePostJobs(postJobForm.value,this.id, new Date(), "", this.userDetails[0]);
+      // console.log("NEW FORM ....");
+      type = "Created";
     } else {
       type = "Updated";
       //this.userDetails[0]={};

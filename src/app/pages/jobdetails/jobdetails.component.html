@@ -103,6 +103,9 @@
             <div *ngIf="pjob !=null" [innerHTML]=" pjob.Skills"></div>
             <!-- <br> -->
             <hr/>
+            <h4 *ngIf="pjob?.ApplyToURL !='' && pjob?.ApplyToURL !=null && pjob?.ApplyToURL !=undefined"> Apply to this URL</h4>
+            <div *ngIf="pjob?.ApplyToURL !='' && pjob?.ApplyToURL !=null && pjob?.ApplyToURL !=undefined"><a href="{{pjob?.ApplyToURL}}" target="_blank">{{pjob?.ApplyToURL}}</a></div>
+
             <!-- <div *ngIf="pjob !=null && pjob?.JobID !=undefined  && pjob?.JobID !=null">Job ID : {{pjob?.JobID}}</div>
             <hr *ngIf="pjob !=null && pjob?.JobID !=undefined  && pjob?.JobID !=null"/> -->
             <table align="left"> 

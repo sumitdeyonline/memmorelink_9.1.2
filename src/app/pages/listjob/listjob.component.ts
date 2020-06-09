@@ -501,9 +501,29 @@ export class ListjobComponent implements OnInit {
 
   getDateDiff(dateIput) {
     //console.log("dateIput :: "+dateIput);
+    let hleft=0;
     let lastModifyDate = new Date(dateIput);
+    let finalResult='';
     //console.log("lastModifyDate ::: "+lastModifyDate);
-    return Math.round(Math.abs(new Date().getTime() - lastModifyDate.getTime())/(24*60*60*1000));
+    let hour=  Math.round(Math.abs(new Date().getTime() - lastModifyDate.getTime())/(60*60*1000));
+    let day = Math.round(hour/24);
+    if (hour >=24){
+      hleft = hour-day*24;
+    } else {
+      hleft = Math.round(Math.abs(new Date().getTime() - lastModifyDate.getTime())/(60*1000));
+    }
+
+    if (day==0?finalResult=""+hleft+" minutes ago":finalResult= ""+day+" days "+hleft+" hours ago") 
+    // {
+    //   finalResult=""+hleft+" hours ago";
+    // } else {
+    //   finalResult= ""+day+" days "+hleft+" hours ago";
+    // }
+      //let hleft= hour-day*24;
+
+    //console.log("day ::: "+ day+ " Hour left : "+hleft);
+    return finalResult;
+    //return Math.round(Math.abs(new Date().getTime() - lastModifyDate.getTime())/(24*60*60*1000));
     //return Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000);
   }
 

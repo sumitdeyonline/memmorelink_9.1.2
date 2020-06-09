@@ -92,7 +92,7 @@ export class JobdetailsComponent implements OnInit {
       dialogConfig.data = this.pjob;
       // dialogConfig.height = "4";
       // dialogConfig.width ="3";      
-       dialogConfig.height = "80%";
+       dialogConfig.height = "87%";
        if (this.mobile)
         dialogConfig.width ="90%";
        else 

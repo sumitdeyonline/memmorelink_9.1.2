@@ -186,10 +186,10 @@ export class JobpoststatusComponent implements OnInit {
     // let callType='UD';
     // //this.startenddate='';
     // //this.aJob =null;
-    // this.pagedItems =null;    
+     this.pagedItems =null;    
     // //this.loading = true;
-    // this.disabledDate = true;
-    // this.endDt = new Date();
+     this.disabledDate = true;
+     this.endDt = new Date();
     // this.startDt='';
 
     //console.log("callType ::::: "+appliedJpb.RecordNumber);
@@ -209,6 +209,7 @@ export class JobpoststatusComponent implements OnInit {
     } else if (appliedJpb.RecordNumber == 'fewRecords') {
       this.CallingData('UDM',appliedJpb.ActiveInActive,isSearch);
     } else if (appliedJpb.RecordNumber == 'Custom') {
+      this.startDt = '';
       this.enableCustomFields(appliedJpb);
     }
     

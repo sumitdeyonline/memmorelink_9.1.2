@@ -46,7 +46,7 @@
                 <tr>
                     <th colspan="3">
                         <!-- Job Posted&nbsp;({{pjob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a> -->
-                        Job Posted&nbsp;<div class="tooltip"><i class="fa fa-toggle-up"></i><span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>                        <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
+                        Job Posted&nbsp;<div class="tooltip"><i class="fa fa-commenting-o"></i><span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>                        <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                     </th>
     
                 </tr>  
@@ -54,11 +54,11 @@
             <thead>
                 <tr>
                     <!-- <th>Job ID</th>           -->
-                    <th>Job Title[JobID] <a (click)="sortValue('asc')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('dsc')"><i class="fa fa-caret-down"></i></a></th>
-                    <th>Location</th>
+                    <th>Job Title[JobID] <a (click)="sortValue('asc','JobTitle','PostJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','JobTitle','PostJob')"><i class="fa fa-caret-down"></i></a></th>
+                    <th>Location <a (click)="sortValue('asc','JobCity','PostJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','JobCity','PostJob')"><i class="fa fa-caret-down"></i></a></th>
                     <!-- <th>Date Created</th>                 -->
-                    <th>Date Modified</th>
-                    <th>Active Job</th>
+                    <th>Date Modified <a (click)="sortValue('asc','LastModifiedDate','PostJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','LastModifiedDate','PostJob')"><i class="fa fa-caret-down"></i></a></th>
+                    <th>Active Job <a (click)="sortValue('asc','isSearchable','PostJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','isSearchable','PostJob')"><i class="fa fa-caret-down"></i></a></th>
                     <th>Applicants</th>   
                 </tr>
             </thead>
@@ -102,7 +102,7 @@
             <thead>
                 <tr>
                     <th colspan="3">
-                        Applicants&nbsp;&nbsp;<div class="tooltip"><i class="fa fa-toggle-up"></i><span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a>
+                        Applicants&nbsp;&nbsp;<div class="tooltip"><i class="fa fa-commenting-o"></i><span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a>
                         <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                     </th>
     
@@ -110,11 +110,11 @@
             </thead>      
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Job Title [Job ID]</th>
-                    <th>Location</th>                    
-                    <th>Date Applied</th>                
+                    <th>Name <a (click)="sortValue('asc','Name','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Name','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
+                    <th>Email <a (click)="sortValue('asc','Email','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Email','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
+                    <th>Job Title[JobID] <a (click)="sortValue('asc','JobTitle','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','JobTitle','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
+                    <th>Location <a (click)="sortValue('asc','Location','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Location','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>                    
+                    <th>Date Applied <a (click)="sortValue('asc','CreatedDate','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','CreatedDate','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>                
 
     
                 </tr>
