@@ -72,6 +72,8 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { SequencenumberService } from '../services/firebase/sequencenumber/sequencenumber.service';
 import { ApplicantsComponent } from './applicants/applicants.component';
 import { ApplicantappliedComponent } from './applicants/applicantapplied/applicantapplied.component';
+import { MatSelectModule } from '@angular/material/select';
+// import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
 // import { TechNewsComponent } from './tech-news';
 // import { TechNewsDetailsComponent } from './tech-news/tech-news-details';
@@ -96,7 +98,8 @@ import { ApplicantappliedComponent } from './applicants/applicantapplied/applica
         // MatPaginatorModule,
         // MatSortModule, 
         AngularFireDatabaseModule, 
-
+        // SelectAutocompleteModule,
+        MatSelectModule,
 
         FormsModule,
         ReactiveFormsModule,

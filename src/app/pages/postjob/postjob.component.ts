@@ -306,10 +306,10 @@ export class PostjobComponent implements OnInit {
                           }
 
 
-      let id = 'O7TvY8yrEsJY0UHonBDr';
+      //let id = 'O7TvY8yrEsJY0UHonBDr';
       //let number = this.seqser.getUpdateSequenceNumber(id);
       //console.log("Number ::: "+number);
-      this.seqser.getUpdateSequenceNumber(id).subscribe(sequence=>{
+      this.seqser.getUpdateSequenceNumber().subscribe(sequence=>{
         this.sequence = sequence;
         //console.log("Sequence ::: "+this.sequence[0].SeqNum);
         //let num = this.sequence[0].SeqNum+1;

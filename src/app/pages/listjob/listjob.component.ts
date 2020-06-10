@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 //import { PostjobService } from '../../services/firebase/postjob.service';
 //import { PostJobc } from '../../services/firebase/postjob.model';
@@ -17,6 +17,12 @@ import { LocationService } from 'src/app/services/location/location.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CityDetails } from './city.model';
 import { NearestCityDetails } from './nearestcity.model';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+//import { EmploymentTypesList } from './empTypes.model';
+import { EmploymenttypesService } from 'src/app/services/firebase/employmenttypes/employmenttypes.service';
+import { EmploymentTypes } from 'src/app/services/firebase/employmenttypes/employmenttypes.model';
+import { EmploymentTypesList } from './empTypes.model';
+import { MatOption } from '@angular/material/core';
 //import { ZipCityState } from './zipcity.model';
 //import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -27,6 +33,7 @@ import { NearestCityDetails } from './nearestcity.model';
 
 })
 export class ListjobComponent implements OnInit {
+  @ViewChild('allSelected') public allSelected: MatOption;
 
   headers = new HttpHeaders({
     // 'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
@@ -37,8 +44,13 @@ export class ListjobComponent implements OnInit {
     "x-rapidapi-key": SEARCH_CONFIG.GEODB_API_KEY    
     // 'Accept': "application/ms-word"
   });
+  listJobForm: FormGroup;
 
   PostJobc: PostJobc[];
+  PostJobcAll: PostJobc[];
+  EmpTypes: EmploymentTypes[];
+  //EmpTypesList: EmploymentTypesList[];
+
   // PostJobcFinal: PostJobc[] = [];
   // listjob = new ListJob();
   keyword: string;
@@ -51,19 +63,24 @@ export class ListjobComponent implements OnInit {
   cityModel: CityDetails;
   allCityUS = [];
   noResultFound: string='';
+  recordDetails=[{name:SEARCH_CONFIG.ALL_RECORDS},{name:SEARCH_CONFIG.LAST_10_DAYS},{name: SEARCH_CONFIG.LAST_30_DAYS}];
 
   // ALGOLIA_APP_ID = "8I5VGLVBT1";
   // ALGOLIA_API_KEY = "378eba06830cc91d1dad1550dd4a5244";
   //searchQuery: string ="sumitdey@yahoo.com" ;
   //jobs = [];
 
-    // pager object
-    pager: any = {};
+  // pager object
+  pager: any = {};
 
-    // paged items
-    pagedItems: any[];
-    pagesize = SEARCH_CONFIG.PAGE_SIZE;
-    mobile: boolean=false;
+  // paged items
+  pagedItems: any[];
+  pagesize = SEARCH_CONFIG.PAGE_SIZE;
+  mobile: boolean=false;
+  toppings:any;
+
+  //toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  EmpTypesList: string[];
 
   constructor(private router: Router, 
               private route: ActivatedRoute, 
@@ -71,10 +88,23 @@ export class ListjobComponent implements OnInit {
               public dformat: DateformatService, 
               private pagerService: PagerService,
               private http: HttpClient,
-              private locserv: LocationService) {
+              private locserv: LocationService,
+              private etypeserv: EmploymenttypesService,
+              fb: FormBuilder) {
               // private SpinnerService: NgxSpinnerService) {
 
     window.scroll(0,0);
+    this.toppings = new FormControl();
+
+
+
+
+    this.listJobForm =  fb.group({
+      RecordNumber: [SEARCH_CONFIG.ALL_RECORDS],
+      empTypes:[this.EmpTypes]
+  
+    });
+    this.getEmpTypes();
     //this.PostJobc = null;
 
 
@@ -163,6 +193,65 @@ export class ListjobComponent implements OnInit {
   }
 
 
+
+  tosslePerOne(all){ 
+    //console.log("Value ::: "+this.listJobForm.controls.empTypes.value);
+    this.filterValue(this.listJobForm.controls.empTypes.value);
+      if (this.allSelected.selected) {  
+        this.allSelected.deselect();
+        return false;
+      }
+      if(this.listJobForm.controls.empTypes.value.length==this.EmpTypesList.length)
+        this.allSelected.select();
+
+ 
+   }
+   toggleAllSelection() {
+     if (this.allSelected.selected) {
+       this.listJobForm.controls.empTypes
+         .patchValue([...this.EmpTypesList.map(item => item.toString()), 0]);
+     } else {
+       this.listJobForm.controls.empTypes.patchValue([]);
+     }
+   }
+
+   filterValue(filterVal) {
+     //console.log(filterVal.length);
+     let toggle=false;
+     let filterval='';
+     this.loading = true;
+     this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
+        //console.log("pjobfilter.EmploymentTypes.toString().toUpperCase() "+pjobfilter.EmploymentTypes.toString().toUpperCase());
+        for(let i=0;i<filterVal.length-1;i++) {
+          //console.log(filterVal[i].toUpperCase());
+          
+           if (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(filterVal[i].toUpperCase()) > -1 ){
+            filterval= filterVal[i].toUpperCase();
+            toggle=true;
+            break;
+           }
+        }
+        if (toggle) {
+          //console.log("Job Time "+pjobfilter.JobTitle+"   ::: Filter Value : "+filterval);
+          toggle = false;
+          return (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(filterval) > -1);
+        }
+
+      });
+      this.loading = false; 
+      this.setPage(1);
+    // this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
+    //   pjobfilter.EmploymentTypes.toUpperCase().
+    //   return pjobfilter.isSearchable == issearch;
+
+    //   ajobfilter.JobTitle.toUpperCase().indexOf(appliedJpb.JobTitle.toUpperCase()) > -1
+    // });
+   }
+
+  selectListJobRecord(job) {
+    console.log("L Job ::: "+job);
+  }
+
   getPostJobsAlgolia(keyword, location) {
 
  /****** Need to open Later ********/
@@ -192,6 +281,8 @@ export class ListjobComponent implements OnInit {
           //let j=0;
           //this.PostJobcFinal = [];
           this.PostJobc = data.hits;
+          this.PostJobcAll = data.hits;
+          //this.getEmpTypes();
 
           //console.log("All Data" +this.PostJobc[0].CompanyLogoURL);
           if (this.PostJobc.length == 0)  {
@@ -442,6 +533,8 @@ export class ListjobComponent implements OnInit {
         //let j=0;
         //this.PostJobcFinal = [];
         this.PostJobc = data.hits;
+        this.PostJobcAll = data.hits;
+        //this.getEmpTypes();
         //console.log("No City State");
         //this.SpinnerService.hide(); 
         if (this.PostJobc.length == 0)  {
@@ -461,6 +554,8 @@ export class ListjobComponent implements OnInit {
         //let j=0;
         //this.PostJobcFinal = [];
         this.PostJobc = data.hits;
+        this.PostJobcAll = data.hits;
+        // this.getEmpTypes();
         //this.SpinnerService.hide(); 
         //console.log("City or State");
         if (this.PostJobc.length == 0)  {
@@ -474,6 +569,52 @@ export class ListjobComponent implements OnInit {
     }
   }
 
+
+  getEmpTypes() {
+
+    //let tmpstr='([';
+    this.EmpTypesList = new Array();
+    this.etypeserv.getEmploymentTypesByUse("P").subscribe(etype => {
+      this.EmpTypes = etype;
+      
+      for(let i=0;i<this.EmpTypes.length;i++) {
+        //console.log("this.EmpTypeDropDown[i] : "+ this.EmpTypes[i].emptypeName);
+        this.EmpTypesList[i] = this.EmpTypes[i].emptypeName;
+        //console.log("this.EmpTypesList[i] : "+ this.EmpTypesList[i]);
+        //this.EmpTypeDropDown[i].name = this.EmpTypes[i].emptypeName;
+        //this.EmpTypesList[i] = this.EmpTypes[i].emptypeName
+        //tmpstr = tmpstr+'{Name:'+this.EmpTypes[i].emptypeName+'},';
+        
+      }
+      this.listJobForm.controls.empTypes
+      .patchValue([...this.EmpTypesList.map(item => item.toString()), 0]);
+
+      // console.log("this.EmpTypes  ::: "+this.EmpTypes.length);
+      // //let tmpStr = JSON.parse(this.EmpTypes.toString());
+      // for(let i=0;i<this.EmpTypes.length;i++) {
+      //   //this.EmpTypeDropDown[i].name = this.EmpTypes[i].emptypeName;
+      //   this.EmpTypeDropDown[i] = this.EmpTypes[i].emptypeName
+      //   //tmpstr = tmpstr+'{Name:'+this.EmpTypes[i].emptypeName+'},';
+      //   //console.log("this.EmpTypeDropDown[i] : "+ this.EmpTypeDropDown[i]);
+      // }
+      // tmpstr = tmpstr+'])'
+      // //this.EmpTypeDropDown[i]
+      // this.EmpTypeDropDown[i] = tmpstr.;
+      // console.log("tmpStr  ::: "+tmpstr);
+    });
+
+    // for(let i=0;i<this.PostJobc.length;i++) {
+
+    //   this.PostJobc[i].EmploymentTypes.length
+    //   //this.EmpTypes[i].EmploymentType = this.PostJobc[i].EmploymentTypes;
+    //   console.log(this.PostJobc[i].EmploymentTypes+ " Length :::: "+this.PostJobc[i].EmploymentTypes.length);
+    //   for (let j=0;j<this.PostJobc[i].EmploymentTypes.length;j++) {
+    //     console.log(this.PostJobc[i].EmploymentTypes[j]);
+    //   }
+    // }
+  }
+
+  
   setPage(page: number) {
     //console.log("Page Count");
     window.scroll(0,0);
@@ -504,6 +645,8 @@ export class ListjobComponent implements OnInit {
     let hleft=0;
     let lastModifyDate = new Date(dateIput);
     let finalResult='';
+    let resultLessthan24 = '';
+    let hr=0,min=0;
     //console.log("lastModifyDate ::: "+lastModifyDate);
     let hour=  Math.round(Math.abs(new Date().getTime() - lastModifyDate.getTime())/(60*60*1000));
     let day = Math.round(hour/24);
@@ -511,9 +654,17 @@ export class ListjobComponent implements OnInit {
       hleft = hour-day*24;
     } else {
       hleft = Math.round(Math.abs(new Date().getTime() - lastModifyDate.getTime())/(60*1000));
+      if (hleft > 60 ) {
+        let hr =  Math.round(hleft/60);
+        let min = hleft - hr*60;
+        if (min < 0) min=60+min;
+        resultLessthan24 = hr+" hours "+min+ " minutes ago";
+      } else {
+        resultLessthan24 = Math.abs(hleft)+" minutes ago";
+      } 
     }
 
-    if (day==0?finalResult=""+hleft+" minutes ago":finalResult= ""+day+" days "+hleft+" hours ago") 
+    if (hour<24?finalResult=resultLessthan24:finalResult= ""+day+" days "+Math.abs(hleft)+" hours ago") 
     // {
     //   finalResult=""+hleft+" hours ago";
     // } else {

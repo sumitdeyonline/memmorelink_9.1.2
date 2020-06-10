@@ -45,7 +45,7 @@ export class ApplyjobComponent implements OnInit {
   userProfile: UserProfile[];
 
   //email   = require("emailjs/email");
-
+ 
 
   constructor(private dialogRef: MatDialogRef<ApplyjobComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, fb: FormBuilder, private rUploadService: UploadResumeService, 

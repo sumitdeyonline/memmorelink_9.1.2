@@ -27,7 +27,7 @@
               <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span *ngIf="pjob !=null" class="companyName">{{ pjob.Company?.substring(0,19) }}</span><span class="companyName" *ngIf="pjob !=null && pjob.Company.length>19">...</span>
               &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span *ngIf="pjob !=null" class="meta"><b>{{ pjob.JobCity }}, {{ pjob.JobState }}</b></span>
               &nbsp;&nbsp;<i class="fa fa-calendar"></i>&nbsp;<span class="meta" *ngIf="pjob !=null"><b>{{ getDateDiff(pjob.LastModifiedDate) }}&nbsp;days ago</b></span>  
-              &nbsp;&nbsp;<i class="fa fa-caret-square-o-right"></i>&nbsp;<span class="companyName">{{ pjob?.JobID}}</span>
+              &nbsp;&nbsp;<i class="fa fa-hashtag"></i>&nbsp;<span class="companyName">{{ pjob?.JobID}}</span>
               <hr/>
               <div class="jobdetails_public">
                 <span *ngIf="pjob !=null" class="meta"><b><i class="fa fa-briefcase"></i>&nbsp;&nbsp;{{ pjob.EmploymentTypes }}</b></span><br>

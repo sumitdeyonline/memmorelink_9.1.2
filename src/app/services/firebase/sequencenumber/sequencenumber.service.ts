@@ -28,7 +28,7 @@ export class SequencenumberService {
   }
 
 
-  getUpdateSequenceNumber(id) {
+  getUpdateSequenceNumber() {
 
     //return this.afs.doc(`${FIREBASE_CONFIG.SequenceNumber}/${id}`).valueChanges();
 
@@ -46,7 +46,7 @@ export class SequencenumberService {
     //     transaction.update(metaRef, { SeqNum:seqNum });
     //     return metaData.SeqNum;
     //   })
-      this.cqDoc = this.afs.doc(`${FIREBASE_CONFIG.SequenceNumber}/${id}`);
+      this.cqDoc = this.afs.doc(`${FIREBASE_CONFIG.SequenceNumber}/${FIREBASE_CONFIG.SEQUENCENUMBER_ID}`);
       this.seqc =  this.seqCollection.snapshotChanges().pipe(take(1),map(changes => {
       // this.seqc =  this.afs.doc(`${FIREBASE_CONFIG.SequenceNumber}/${id}`).snapshotChanges().pipe(take(1),map(changes => {        
         //this.seqc = this.seqCollection.snapshotChanges().pipe(map(changes => {
@@ -55,6 +55,9 @@ export class SequencenumberService {
           const data = a.payload.doc.data() as Sequence;
           this.cqDoc.update({ SeqNum: data.SeqNum + 1 })
           data.id = a.payload.doc.id;
+
+          let num = ""+data.SeqNum+ Math.round(Math.random()*(999 + 1 - 100));
+          data.SeqNum = Number(num);
           
          //let seqNum = data.SeqNum + 1;
 

@@ -30,7 +30,36 @@
 
               <div id="myTabContent" class="tab-content">
 
-                    <h2>Results</h2>
+
+                <form [formGroup]="listJobForm">
+
+                    <!-- <mat-form-field>
+                        <select matNativeControl placeholder=""
+                        formControlName="RecordNumber" (change)="selectListJobRecord($event.target.value)">
+                          <option [value]="record.name" *ngFor="let record of recordDetails">{{record.name}}</option>
+                        </select>
+                      </mat-form-field> -->
+                    <!-- <mat-select-autocomplete
+                      [placeholder]="'Select Options'"
+                      [options]="EmpTypesList"
+                      [multiple]='true'
+                      name="EmpTypesList"
+                      ngDefaultControl
+                      [formControl]="listJobForm.controls['EmpTypesList']">
+                    </mat-select-autocomplete>                           -->
+
+                    <mat-form-field>
+                        <mat-label>Employment Types</mat-label>
+                        <mat-select formControlName ="empTypes" multiple>
+                          <mat-option *ngFor="let emptype of EmpTypesList" [value]="emptype" (click)="tosslePerOne(allSelected.viewValue)">{{emptype}}</mat-option>
+                          <!-- <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option> -->
+                        </mat-select>
+                      </mat-form-field>
+
+                </form>
+
+                    <!-- <h4>Results</h4> -->
+
                     <h4 *ngIf="noResultFound !=''">{{noResultFound}}</h4>
 
                     <!-- loader.component.html -->

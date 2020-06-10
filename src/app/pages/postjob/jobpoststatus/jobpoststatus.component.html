@@ -234,7 +234,7 @@
                                 <!--div class="date">{{ pj.CreatedDate.toDate() | date:'MM-dd-yyyy' }} <span>{{ dformat.monthNumToSigName(pj.CreatedDate?.substring(0,2)) }}</span></div-->
                                 <div class="date">{{ pj?.LastModifiedDate?.toDate() | date:'dd' }} <span>{{ dformat.monthNumToSigName(pj?.LastModifiedDate?.toDate() | date:'MM') }}</span></div>
                                 <div class="date_desc"><h6 class="title"><a [routerLink]="['/postjob',pj.id]">{{ pj?.JobTitle }} [{{(pj?.isSearchable==true?'Active':'Inactive')}}]</a></h6>
-                                <i class="fa fa-caret-square-o-right"></i>&nbsp;<span class="companyName">{{ pj?.JobID}}</span><span class="companyName" *ngIf="pj?.Company.length>19">...</span>
+                                <i class="fa fa-hashtag"></i>&nbsp;<span class="companyName">{{ pj?.JobID}}</span><span class="companyName" *ngIf="pj?.Company.length>19">...</span>
                                 &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b>&nbsp;&nbsp;&nbsp;</span><span class="title"><a [routerLink]="['/applicants',pj.id]"><i class="fa fa-plus-square" style="color:black"></i> Applicants</a></span>
                                 <br><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta"><b>Created:</b> {{pj?.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}, &nbsp;<b>Modified:</b> {{ pj?.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
                                 </div>
