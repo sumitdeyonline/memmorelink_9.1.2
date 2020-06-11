@@ -26,27 +26,41 @@
         <div class="col-md-8">
             <div class="col_3">
 
-             <br>
 
               <div id="myTabContent" class="tab-content">
 
-                    <h4>Jobs Posted</h4>
+                    
 
+                       
+                        <!-- <h4>Jobs Posted</h4> -->
+                    <div id="buttonHomePage">
+                        <span style="font-size: 1.8em;">Jobs Posted&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        </span>
+
+                        
+                            <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/postjob" value="Post Job"></label>
+                        <!-- &nbsp;&nbsp;&nbsp;
+                        <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Search Resume"></label> -->
+                    </div>
+                    <br>
                     <form #postform="ngForm" (ngSubmit)="selectPostedJob(postform.value)">
-
-
-
-
-
-
-
 
                     <div class="row">
 
-                        <div class="col-sm-2">
+                        <!-- <div class="col-sm-2">
                             &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="RecordNumber">Records</label>
-                        </div>
+                        </div> -->&nbsp;&nbsp;&nbsp;
                         <div class="col">
+                            <select ngModel name="ActiveInActive" 
+                                ActiveInActive
+                                ngModel name="ActiveInActive" #ActiveInActive="ngModel" id="ActiveInActive"
+                                [ngModel]="activeDetails[0].name" (ngModelChange)="setFilterValue(postform.value)">
+                                <option value="Active">Active</option>
+                                <option value="InActive">InActive</option>
+                                <option value="All">All</option>
+
+                            </select> &nbsp;&nbsp;&nbsp;
 
                             <select ngModel name="RecordNumber" 
                                 RecordNumber
@@ -58,7 +72,11 @@
                                 <option value="Custom">Custom Date</option>
                                 <!--option>USA</option-->
                             </select>
+                            
+
+
                         </div>
+                        
 
 
 
@@ -118,12 +136,55 @@
                             [ngModel]="fewRecords"
                             (ngModelChange)="enableCustomFields(postform.value)"> 
                         </div>  -->
-                        <div class="col-sm-2">
-                            &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="ActiveInActive">Active/InActive</label>
-                        </div>
-                        <div class="col">
+                        <!-- <div class="col-sm-2"> -->
+                            <div class="col" [hidden] = disabledDate>
+                                <input
+                                type="text"
+                                placeholder="Choose start date"
+                                bsDatepicker
+                                startDate
+                                autocomplete="off"
+                                size="8"
+                                [hidden] = disabledDate
+                                ngModel name="startDate" #startDate="ngModel" id="startDate"
+                                [ngModel]="startDt"
+                                (ngModelChange)="enableCustomFields(postform.value)"
+                                [bsConfig]="{ isAnimated: true }">  
+                                <!-- <div class="error_Message" *ngIf="JobCountry.invalid && (JobCountry.dirty || JobCountry.touched)">
+                                    Please Enter Country
+                                </div> -->
+                                &nbsp;To&nbsp;
+                                <input
+                                type="text"
+                                placeholder="Choose end date"
+                                autocomplete="off"
+                                size="8"
+                                bsDatepicker
+                                endDate
+                                [hidden] = disabledDate
+                                ngModel name="endDate" #endDate="ngModel" id="endDate"
+                                [ngModel]="endDt"
+                                (ngModelChange)="enableCustomFields(postform.value)"
+                                [bsConfig]="{ isAnimated: true }">                                 
+        
+                            </div>
 
-                            <select ngModel name="ActiveInActive" 
+                            <!-- &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="ActiveInActive">Active/InActive</label> -->
+                        <!-- </div> -->
+                        <!-- <div class="col"> -->
+<!-- 
+                            <input
+                            type="text"
+                            placeholder="Choose end date"
+                            autocomplete="off"
+                            bsDatepicker
+                            endDate
+                            [hidden] = disabledDate
+                            ngModel name="endDate" #endDate="ngModel" id="endDate"
+                            [ngModel]="endDt"
+                            (ngModelChange)="enableCustomFields(postform.value)"
+                            [bsConfig]="{ isAnimated: true }">  -->
+                            <!-- <select ngModel name="ActiveInActive" 
                                 ActiveInActive
                                 ngModel name="ActiveInActive" #ActiveInActive="ngModel" id="ActiveInActive"
                                 [ngModel]="activeDetails[0].name" (ngModelChange)="setFilterValue(postform.value)">
@@ -131,13 +192,12 @@
                                 <option value="InActive">InActive</option>
                                 <option value="All">All</option>
 
-                                <!--option>USA</option-->
-                            </select>
+                            </select> -->
 
-                        </div>
+                        <!-- </div> -->
                                                     
                     </div>
-                    <div class="row" [hidden] = disabledDate>
+                    <!-- <div class="row" [hidden] = disabledDate>
                         <div class="col-sm-2">&nbsp;
                         </div>
                     </div>
@@ -157,9 +217,7 @@
                             [ngModel]="startDt"
                             (ngModelChange)="enableCustomFields(postform.value)"
                             [bsConfig]="{ isAnimated: true }">  
-                            <!-- <div class="error_Message" *ngIf="JobCountry.invalid && (JobCountry.dirty || JobCountry.touched)">
-                                Please Enter Country
-                            </div> -->
+
     
                         </div>
                         <div class="col-sm-2">
@@ -177,15 +235,13 @@
                             [ngModel]="endDt"
                             (ngModelChange)="enableCustomFields(postform.value)"
                             [bsConfig]="{ isAnimated: true }"> 
-                            <!-- <div class="error_Message" *ngIf="JobState.invalid && (JobState.dirty || JobState.touched)">
-                                Please Enter Job State
-                            </div> -->
+
                             </div>
-                    </div>
-                    <div class="row">
+                    </div-->
+                    <!-- <div class="row">
                         <div class="col-sm-2">&nbsp;
                         </div>
-                    </div>
+                    </div>  -->
                     </form>        
                     <h4 *ngIf="noResultFound !=''">{{noResultFound}}</h4>                      
                     <!-- loader.component.html --> 
@@ -195,11 +251,9 @@
                         </mat-progress-spinner>
                     
                     </div>   
-                    <div id="buttonHomePage" class="clearfix">
+                    <!-- <div id="buttonHomePage" class="clearfix">
                         <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/postjob" value="Post Job"></label>
-                        <!-- &nbsp;&nbsp;&nbsp;
-                        <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Search Resume"></label> -->
-                    </div>              
+                     </div>               -->
                     <hr class="hr_style">
                     <!-- <div ali class="progress-loader" [hidden]="!loading" style="align-content: center;left:45%;">
                     

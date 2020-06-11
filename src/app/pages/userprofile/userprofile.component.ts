@@ -97,7 +97,7 @@ export class UserProfileComponent implements OnInit {
 
 
         this.getFieldForUpdate();
-        if (this.workauthArray.find(tree => tree.name == this.userProfile[0].WorkAuthorization) == undefined) {
+        if (this.workauthArray?.find(tree => tree?.name == this.userProfile[0]?.WorkAuthorization) == undefined) {
           this.isWorkAuthHide = true;
           this.isUpdateProfile = false; 
           //console.log("Work auth ...... "+this.isWorkAuthHide);
@@ -107,7 +107,6 @@ export class UserProfileComponent implements OnInit {
         this.isUpdateProfile = false;      
         this.changeDetector.detectChanges();
       }
-
     })
 
     window.scroll(0,0);

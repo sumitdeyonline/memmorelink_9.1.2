@@ -73,6 +73,7 @@ import { SequencenumberService } from '../services/firebase/sequencenumber/seque
 import { ApplicantsComponent } from './applicants/applicants.component';
 import { ApplicantappliedComponent } from './applicants/applicantapplied/applicantapplied.component';
 import { MatSelectModule } from '@angular/material/select';
+import { CandidateComponent } from './applicants/candidate/candidate.component';
 // import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
 // import { TechNewsComponent } from './tech-news';
@@ -157,6 +158,7 @@ import { MatSelectModule } from '@angular/material/select';
         RemoreuserComponent,
         ApplicantsComponent,
         ApplicantappliedComponent,
+        CandidateComponent,
         
         // SignupConfirmComponent
       // AdminhomeComponent,

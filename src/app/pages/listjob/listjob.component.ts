@@ -33,7 +33,8 @@ import { MatOption } from '@angular/material/core';
 
 })
 export class ListjobComponent implements OnInit {
-  @ViewChild('allSelected') public allSelected: MatOption;
+  @ViewChild('allSelectedEmpTypes') public allSelectedEmpTypes: MatOption;
+  @ViewChild('allSelectedWorkFromHome') public allSelectedWorkFromHome: MatOption;
 
   headers = new HttpHeaders({
     // 'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
@@ -49,6 +50,10 @@ export class ListjobComponent implements OnInit {
   PostJobc: PostJobc[];
   PostJobcAll: PostJobc[];
   EmpTypes: EmploymentTypes[];
+  //workFromHome: Array<Object>=[{name:"Yes"},{name:"Yes"}];
+  workFromHome: string[];
+
+
   //EmpTypesList: EmploymentTypesList[];
 
   // PostJobcFinal: PostJobc[] = [];
@@ -63,6 +68,7 @@ export class ListjobComponent implements OnInit {
   cityModel: CityDetails;
   allCityUS = [];
   noResultFound: string='';
+  startFilteroption = false;
   recordDetails=[{name:SEARCH_CONFIG.ALL_RECORDS},{name:SEARCH_CONFIG.LAST_10_DAYS},{name: SEARCH_CONFIG.LAST_30_DAYS}];
 
   // ALGOLIA_APP_ID = "8I5VGLVBT1";
@@ -81,6 +87,7 @@ export class ListjobComponent implements OnInit {
 
   //toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   EmpTypesList: string[];
+  workFromHomeList: string[];
 
   constructor(private router: Router, 
               private route: ActivatedRoute, 
@@ -94,17 +101,24 @@ export class ListjobComponent implements OnInit {
               // private SpinnerService: NgxSpinnerService) {
 
     window.scroll(0,0);
-    this.toppings = new FormControl();
+    //this.toppings = new FormControl();
 
 
 
 
     this.listJobForm =  fb.group({
       RecordNumber: [SEARCH_CONFIG.ALL_RECORDS],
-      empTypes:[this.EmpTypes]
+      empTypes:[this.EmpTypes],
+      workFromHome:[this.workFromHome]
   
     });
     this.getEmpTypes();
+    this.workFromHomeList = ['Yes', 'No'];
+    //console.log("workFromHomeList "+this.workFromHomeList.map(item => item));
+
+    this.listJobForm.controls.workFromHome
+    .patchValue([...this.workFromHomeList.map(item => item), 0]);
+
     //this.PostJobc = null;
 
 
@@ -194,42 +208,92 @@ export class ListjobComponent implements OnInit {
 
 
 
-  tosslePerOne(all){ 
+  tosslePerOne(type,all) { 
     //console.log("Value ::: "+this.listJobForm.controls.empTypes.value);
-    this.filterValue(this.listJobForm.controls.empTypes.value);
-      if (this.allSelected.selected) {  
-        this.allSelected.deselect();
+
+    if (type=='EmpTypes') {
+      this.empTypesfilterValue(this.listJobForm.controls.empTypes.value);
+      if (this.allSelectedEmpTypes.selected) {  
+        this.allSelectedEmpTypes.deselect();
         return false;
       }
       if(this.listJobForm.controls.empTypes.value.length==this.EmpTypesList.length)
-        this.allSelected.select();
+        this.allSelectedEmpTypes.select();
+    }
+    else if (type='WorkFromHome') {
+      this.workFromHomeFilterValue(this.listJobForm.controls.workFromHome.value);
+      if (this.allSelectedWorkFromHome.selected) {  
+        this.allSelectedWorkFromHome.deselect();
+        return false;
+      }
+      if(this.listJobForm.controls.workFromHome.value.length==this.EmpTypesList.length)
+        this.allSelectedWorkFromHome.select();
+    }
 
- 
-   }
-   toggleAllSelection() {
-     if (this.allSelected.selected) {
-       this.listJobForm.controls.empTypes
-         .patchValue([...this.EmpTypesList.map(item => item.toString()), 0]);
-     } else {
-       this.listJobForm.controls.empTypes.patchValue([]);
-     }
    }
 
-   filterValue(filterVal) {
+   toggleAllSelection(type) {
+
+    if (type=='EmpTypes') {
+      if (this.allSelectedEmpTypes.selected) {
+        this.listJobForm.controls.empTypes
+          .patchValue([...this.EmpTypesList.map(item => item.toString()), 0]);
+      } else {
+        this.listJobForm.controls.empTypes.patchValue([]);
+      }
+    } else if (type=='WorkFromHome') {
+      if (this.allSelectedWorkFromHome.selected) {
+        this.listJobForm.controls.workFromHome
+          .patchValue([...this.workFromHomeList.map(item => item.toString()), 0]);
+      } else {
+        this.listJobForm.controls.workFromHome.patchValue([]);
+      }
+    }
+   }
+
+   workFromHomeFilterValue(filterVal) {
+     //console.log("File Value ::: "+filterVal.toString());
+      this.loading = true;
+    // this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
+      //return (pjobfilter.isTeleComute.toUpperCase().indexOf(appliedJpb.JobTitle.toUpperCase()) > -1) || (ajobfilter.JobIDSerial===appliedJpb.JobTitle);
+      this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
+
+        for(let i=0;i<filterVal.length;i++) {
+          if (filterVal[i] == 'Yes') {
+            console.log()
+            return pjobfilter.isTeleComute==true;
+          } else if (filterVal[i] == 'No') {
+            return pjobfilter.isTeleComute==false;
+          } 
+          // else if (filterVal[i] == '0') {
+          //   return ;
+          // }
+        }
+
+    });
+    this.loading = false; 
+    this.setPage(1);
+   }
+
+   empTypesfilterValue(filterVal) {
      //console.log(filterVal.length);
      let toggle=false;
      let filterval='';
      this.loading = true;
      this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
         //console.log("pjobfilter.EmploymentTypes.toString().toUpperCase() "+pjobfilter.EmploymentTypes.toString().toUpperCase());
-        for(let i=0;i<filterVal.length-1;i++) {
+        for(let i=0;i<filterVal.length;i++) {
           //console.log(filterVal[i].toUpperCase());
-          
-           if (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(filterVal[i].toUpperCase()) > -1 ){
-            filterval= filterVal[i].toUpperCase();
-            toggle=true;
-            break;
-           }
+          //console.log("filterVal[i] :: "+filterVal[i]);
+          if (filterVal[i].toString() !='0'){
+            if (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(filterVal[i].toString().toUpperCase()) > -1 ){
+
+              filterval= filterVal[i].toString().toUpperCase();
+              toggle=true;
+              break;
+             }
+          }
+
         }
         if (toggle) {
           //console.log("Job Time "+pjobfilter.JobTitle+"   ::: Filter Value : "+filterval);
@@ -588,6 +652,8 @@ export class ListjobComponent implements OnInit {
       }
       this.listJobForm.controls.empTypes
       .patchValue([...this.EmpTypesList.map(item => item.toString()), 0]);
+
+
 
       // console.log("this.EmpTypes  ::: "+this.EmpTypes.length);
       // //let tmpStr = JSON.parse(this.EmpTypes.toString());

@@ -104,6 +104,17 @@ export class ApplyjobService {
           ref.where('ApplyToEmail','==',username).where('FromEmail','==',company).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc'));         
 
       }
+    
+    } else if (type=='CUF') {  // This is for the candidate
+
+        this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+          ref.where('username','==',username).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.FIRST_PAGE_RECORD_LIMIT));         
+
+    } else if (type=='CUA') {  // This is for the candidate
+
+      this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+        ref.where('username','==',username).orderBy('CreatedDate','desc'));         
+
     } else if (type=='CUD') {  // This is for the candidate
       //console.log("Username CUD : "+username);
       if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {

@@ -130,8 +130,12 @@ export class EmployerpageComponent implements OnInit {
               var nameB = b.JobCity.toUpperCase()+b.JobState.toUpperCase(); // ignore upper and lowercase
               break;
             case 'LastModifiedDate':
-              var dateA = a.LastModifiedDate; // ignore upper and lowercase
-              var dateB = b.LastModifiedDate; // ignore upper and lowercase
+              var dateA = a.LastModifiedDate; 
+              var dateB = b.LastModifiedDate; 
+              break;
+            case 'ApplicantCount':
+              var numA = a.ApplicantCount; 
+              var numB = b.ApplicantCount; 
               break;
             case 'isSearchable':
               if (a.isSearchable)
@@ -164,7 +168,10 @@ export class EmployerpageComponent implements OnInit {
             var dateA = b.LastModifiedDate; // ignore upper and lowercase
             var dateB = a.LastModifiedDate; // ignore upper and lowercase
             break;     
-            
+          case 'ApplicantCount':
+            var numA = b.ApplicantCount; 
+            var numB = a.ApplicantCount; 
+            break;            
           case 'isSearchable':
             if (b.isSearchable)
               var nameA = 'Yes';
@@ -188,7 +195,15 @@ export class EmployerpageComponent implements OnInit {
             return 1;
           }        
   
-        } else {
+        } else if (field == 'ApplicantCount') {
+          if (numA < numB) {
+            return -1;
+          }
+          if (numA > numB) {
+            return 1;
+          }          
+        }
+        else {
           if (nameA < nameB) {
             return -1;
           }

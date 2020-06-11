@@ -14,7 +14,7 @@
             <tr>
                 <th colspan="4">
                     <!-- Today's Applied Job&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a> -->
-                    Applied Job(s)&nbsp;({{aJob?.length}})
+                    Applied Job(s)&nbsp;&nbsp;<div class="tooltip"><i class="fa fa-commenting-o"></i><span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a [routerLink]="['/candidate']" class="read-more">More</a> 
 
                     <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                 </th>
@@ -23,11 +23,11 @@
         </thead>      
         <thead>
             <tr>
-                <th>Company</th>
-                <th>Job Title</th>
-                <th>Location</th>
+                <th>Company <a (click)="sortValue('asc','Company','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Company','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Job Title <a (click)="sortValue('asc','JobTitle','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','JobTitle','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Location <a (click)="sortValue('asc','Location','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Location','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
                 <!-- <th>Employment Type</th>                 -->
-                <th>Date Applied</th>
+                <th>Date Applied <a (click)="sortValue('asc','CreatedDate','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','CreatedDate','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
                 <th>Resume Filename</th>
 
             </tr>
@@ -35,7 +35,7 @@
         <tbody>
             <tr *ngFor="let aj of aJob">
                 <td>{{aj.company}}</td>
-                <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,20) }}</a></td>
+                <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,35) }} <span *ngIf="aj.JobTitle?.length>35">...</span></a></td>
                 <td>{{aj.joblocation}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
                 <td>{{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
@@ -57,7 +57,7 @@
             <tr>
                 <th colspan="3">
                     <!-- Today's Applied Job&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a> -->
-                    Uploaded Resume(s) &nbsp;({{uresume?.length}})
+                    Uploaded Resume(s) &nbsp;&nbsp;<div class="tooltip"><i class="fa fa-commenting-o"></i><span class="tooltiptext">{{uresume?.length}} &nbsp; Resumes.</span></div> 
 
                     <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                 </th>
@@ -66,9 +66,9 @@
         </thead>      
         <thead>
             <tr>
-                <th>Resume Filename</th>
-                <th>Date Created</th>
-                <th>Date Modified</th>
+                <th>Resume Filename <a (click)="sortValue('asc','ResumeFileName','UploadResume')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','ResumeFileName','UploadResume')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Date Created <a (click)="sortValue('asc','CreatedDate','UploadResume')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','CreatedDate','UploadResume')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Date Modified <a (click)="sortValue('asc','ModifiedDate','UploadResume')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','ModifiedDate','UploadResume')"><i class="fa fa-caret-down"></i></a></th>
                 <!-- <th>Employment Type</th>                 -->
                 <!-- <th>Resume Filename</th> -->
 
@@ -76,7 +76,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let rm of uresume">
-                <td><a href="{{rm.ResumeURL}}" target="_blank">{{ rm.ResumeFileName.substring(0,27) }}</a></td>
+                <td><a href="{{rm.ResumeURL}}" target="_blank">{{ rm.ResumeFileName.substring(0,35) }}</a></td>
                 <td>{{ rm.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a'}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
                 <td>{{rm.ModifiedDate?.toDate() | date: 'MM/dd/yyyy h:mm a'}}</td>

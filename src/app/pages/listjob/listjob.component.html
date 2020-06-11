@@ -51,10 +51,27 @@
                     <mat-form-field>
                         <mat-label>Employment Types</mat-label>
                         <mat-select formControlName ="empTypes" multiple>
-                          <mat-option *ngFor="let emptype of EmpTypesList" [value]="emptype" (click)="tosslePerOne(allSelected.viewValue)">{{emptype}}</mat-option>
-                          <!-- <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option> -->
+
+                              <!-- <mat-select-trigger>
+                                {{empTypes.value ? EmpTypesList[0] : ''}}
+                                <span *ngIf="empTypes.value?.length > 1" class="example-additional-selection">
+                                  (+{{EmpTypesList.length - 1}} {{EmpTypesList.value?.length === 2 ? 'other' : 'others'}})
+                                </span>
+                              </mat-select-trigger> -->
+
+
+                          <mat-option *ngFor="let emptype of EmpTypesList" [value]="emptype" (click)="tosslePerOne('EmpTypes',allSelectedEmpTypes.viewValue)">{{emptype}}</mat-option>
+                          <mat-option #allSelectedEmpTypes (click)="toggleAllSelection('EmpTypes')" [value]="0">All</mat-option>
                         </mat-select>
-                      </mat-form-field>
+                    </mat-form-field>
+                    &nbsp;&nbsp;
+                    <!-- <mat-form-field>
+                        <mat-label>Work from Home</mat-label>
+                        <mat-select formControlName ="workFromHome" multiple>
+                          <mat-option *ngFor="let wfromhm of workFromHomeList" [value]="wfromhm" (click)="tosslePerOne('WorkFromHome',allSelectedWorkFromHome.viewValue)">{{wfromhm}}</mat-option>
+                          <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option>
+                        </mat-select>
+                    </mat-form-field>                     -->
 
                 </form>
 
@@ -119,7 +136,7 @@
 
 
                             <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',pj.objectID]" (click) = "jobDetails(pj.objectID)">{{ pj.JobTitle }}</a></h6>
-                              <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company?.substring(0,19) }}</span><span class="companyName" *ngIf="pj.Company.length>19">...</span>
+                              <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company?.substring(0,19) }}</span><span class="companyName" *ngIf="pj.Company?.length>19">...</span>
                               &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b></span>
                               &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">{{ getDateDiff(pj.LastModifiedDate) }}</span>
                             </div>

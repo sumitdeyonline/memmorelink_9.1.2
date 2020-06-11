@@ -59,18 +59,18 @@
                     <!-- <th>Date Created</th>                 -->
                     <th>Date Modified <a (click)="sortValue('asc','LastModifiedDate','PostJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','LastModifiedDate','PostJob')"><i class="fa fa-caret-down"></i></a></th>
                     <th>Active Job <a (click)="sortValue('asc','isSearchable','PostJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','isSearchable','PostJob')"><i class="fa fa-caret-down"></i></a></th>
-                    <th>Applicants</th>   
+                    <th>Applicants <a (click)="sortValue('asc','ApplicantCount','PostJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','ApplicantCount','PostJob')"><i class="fa fa-caret-down"></i></a></th>   
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let pj of pjob">
                     <!-- <td>{{ pj?.JobID}}</td> -->
-                    <td><a [routerLink]="['/jobdetails',pj.id]" target="_blank">{{ pj.JobTitle?.substring(0,25) }} [{{ pj?.JobID}}]</a></td>
+                    <td><a [routerLink]="['/jobdetails',pj.id]" target="_blank">{{ pj.JobTitle?.substring(0,35) }}<span *ngIf="pj.JobTitle?.length>35">...</span> [{{ pj?.JobID}}]</a></td>
                     <td>{{ pj.JobCity?.substring(0,15) }}, {{ pj.JobState }}</td>
                     <!-- <td>{{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>                     -->
                     <td>{{pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
                     <td>{{pj.isSearchable==true?'Yes':'No'}}</td>
-                    <td><a [routerLink]="['/applicants',pj.id]">{{pj.ApplicantCount}} Applicants</a></td>
+                    <td><a [routerLink]="['/applicants',pj.id]">{{pj.ApplicantCount}}</a></td>
                 </tr>
 
             </tbody>
@@ -123,7 +123,7 @@
                 <tr *ngFor="let aj of aJob">
                     <td>{{aj.FirstName}}&nbsp;{{aj.LastName}}</td>
                     <td><a [routerLink]="['/applicantapplied',aj.FromEmail]">{{aj.FromEmail?.substring(0,20)}}</a></td>
-                    <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,25) }} [{{aj.JobIDSerial}}]</a></td>
+                    <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,35) }}<span *ngIf="aj.JobTitle?.length>35">...</span> [{{aj.JobIDSerial}}]</a></td>
                     <td>{{ aj.joblocation }}</td>
                     <td>{{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
                 </tr>

@@ -20,6 +20,7 @@ import { UploadresumepageComponent } from './uploadresumepage/uploadresumepage.c
 import { RemoreuserComponent } from './remoreuser/remoreuser.component';
 import { ApplicantsComponent } from './applicants/applicants.component';
 import { ApplicantappliedComponent } from './applicants/applicantapplied/applicantapplied.component';
+import { CandidateComponent } from './applicants/candidate/candidate.component';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -105,7 +106,7 @@ export const pagesRouting = RouterModule.forChild([
         canActivate: [ScopeGuard] ,
         data: { expectedScopes: ['write:messages']}
 
-    },
+    },  
     {
         path: 'appliedjob',
         component: MyappliedjobComponent,
@@ -148,8 +149,11 @@ export const pagesRouting = RouterModule.forChild([
         canActivate: [ScopeGuard],
         data: { expectedScopes: ['write:messages']}
     },
-    
-    
+    {
+        path: 'candidate',
+        component: CandidateComponent,
+        canActivate: [AuthGuardService]
+    },     
 
     {
         path: 'resumesearch',
