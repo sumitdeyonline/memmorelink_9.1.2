@@ -34,24 +34,25 @@ import { MatOption } from '@angular/material/core';
 })
 export class ListjobComponent implements OnInit {
   @ViewChild('allSelectedEmpTypes') public allSelectedEmpTypes: MatOption;
-  @ViewChild('allSelectedWorkFromHome') public allSelectedWorkFromHome: MatOption;
+  // @ViewChild('allSelectedWorkFromHome') public allSelectedWorkFromHome: MatOption;
 
-  headers = new HttpHeaders({
-    // 'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
-    'Access-Control-Allow-Origin': "*",
-    'Access-Control-Allow-Methods': 'GET',
-    'Content-Type': 'application/json',
-    "x-rapidapi-host": SEARCH_CONFIG.GEODB_API_HOST,
-    "x-rapidapi-key": SEARCH_CONFIG.GEODB_API_KEY    
-    // 'Accept': "application/ms-word"
-  });
+  // headers = new HttpHeaders({
+  //   // 'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
+  //   'Access-Control-Allow-Origin': "*",
+  //   'Access-Control-Allow-Methods': 'GET',
+  //   'Content-Type': 'application/json',
+  //   "x-rapidapi-host": SEARCH_CONFIG.GEODB_API_HOST,
+  //   "x-rapidapi-key": SEARCH_CONFIG.GEODB_API_KEY    
+  //   // 'Accept': "application/ms-word"
+  // });
   listJobForm: FormGroup;
 
   PostJobc: PostJobc[];
   PostJobcAll: PostJobc[];
+  PostJobcTmp: PostJobc[];
   EmpTypes: EmploymentTypes[];
   //workFromHome: Array<Object>=[{name:"Yes"},{name:"Yes"}];
-  workFromHome: string[];
+  //workFromHome: string[];
 
 
   //EmpTypesList: EmploymentTypesList[];
@@ -87,7 +88,7 @@ export class ListjobComponent implements OnInit {
 
   //toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   EmpTypesList: string[];
-  workFromHomeList: string[];
+  workFromHomeTravelReqList: string[];
 
   constructor(private router: Router, 
               private route: ActivatedRoute, 
@@ -109,15 +110,19 @@ export class ListjobComponent implements OnInit {
     this.listJobForm =  fb.group({
       RecordNumber: [SEARCH_CONFIG.ALL_RECORDS],
       empTypes:[this.EmpTypes],
-      workFromHome:[this.workFromHome]
+      workFromHome:[],
+      TravelReq:[]
   
     });
     this.getEmpTypes();
-    this.workFromHomeList = ['Yes', 'No'];
+    this.workFromHomeTravelReqList = ['Any','Yes', 'No'];
     //console.log("workFromHomeList "+this.workFromHomeList.map(item => item));
 
-    this.listJobForm.controls.workFromHome
-    .patchValue([...this.workFromHomeList.map(item => item), 0]);
+    this.listJobForm.controls['workFromHome'].setValue('Any');
+    this.listJobForm.controls['TravelReq'].setValue('Any');
+
+    // this.listJobForm.controls.workFromHome
+    // .patchValue([...this.workFromHomeList.map(item => item), 0]);
 
     //this.PostJobc = null;
 
@@ -206,104 +211,92 @@ export class ListjobComponent implements OnInit {
     }
   }
 
-
-
-  tosslePerOne(type,all) { 
-    //console.log("Value ::: "+this.listJobForm.controls.empTypes.value);
-
-    if (type=='EmpTypes') {
-      this.empTypesfilterValue(this.listJobForm.controls.empTypes.value);
-      if (this.allSelectedEmpTypes.selected) {  
-        this.allSelectedEmpTypes.deselect();
-        return false;
-      }
-      if(this.listJobForm.controls.empTypes.value.length==this.EmpTypesList.length)
-        this.allSelectedEmpTypes.select();
-    }
-    else if (type='WorkFromHome') {
-      this.workFromHomeFilterValue(this.listJobForm.controls.workFromHome.value);
-      if (this.allSelectedWorkFromHome.selected) {  
-        this.allSelectedWorkFromHome.deselect();
-        return false;
-      }
-      if(this.listJobForm.controls.workFromHome.value.length==this.EmpTypesList.length)
-        this.allSelectedWorkFromHome.select();
-    }
-
-   }
-
-   toggleAllSelection(type) {
-
-    if (type=='EmpTypes') {
+  
+  toggleAllSelection() {
+    this.loading = true;
+    // if (type=='EmpTypes') {
       if (this.allSelectedEmpTypes.selected) {
         this.listJobForm.controls.empTypes
           .patchValue([...this.EmpTypesList.map(item => item.toString()), 0]);
       } else {
         this.listJobForm.controls.empTypes.patchValue([]);
       }
-    } else if (type=='WorkFromHome') {
-      if (this.allSelectedWorkFromHome.selected) {
-        this.listJobForm.controls.workFromHome
-          .patchValue([...this.workFromHomeList.map(item => item.toString()), 0]);
-      } else {
-        this.listJobForm.controls.workFromHome.patchValue([]);
-      }
-    }
-   }
-
-   workFromHomeFilterValue(filterVal) {
-     //console.log("File Value ::: "+filterVal.toString());
-      this.loading = true;
-    // this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
-      //return (pjobfilter.isTeleComute.toUpperCase().indexOf(appliedJpb.JobTitle.toUpperCase()) > -1) || (ajobfilter.JobIDSerial===appliedJpb.JobTitle);
-      this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
-
-        for(let i=0;i<filterVal.length;i++) {
-          if (filterVal[i] == 'Yes') {
-            console.log()
-            return pjobfilter.isTeleComute==true;
-          } else if (filterVal[i] == 'No') {
-            return pjobfilter.isTeleComute==false;
-          } 
-          // else if (filterVal[i] == '0') {
-          //   return ;
-          // }
-        }
-
-    });
-    this.loading = false; 
-    this.setPage(1);
-   }
-
-   empTypesfilterValue(filterVal) {
-     //console.log(filterVal.length);
-     let toggle=false;
-     let filterval='';
-     this.loading = true;
-     this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
-        //console.log("pjobfilter.EmploymentTypes.toString().toUpperCase() "+pjobfilter.EmploymentTypes.toString().toUpperCase());
-        for(let i=0;i<filterVal.length;i++) {
-          //console.log(filterVal[i].toUpperCase());
-          //console.log("filterVal[i] :: "+filterVal[i]);
-          if (filterVal[i].toString() !='0'){
-            if (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(filterVal[i].toString().toUpperCase()) > -1 ){
-
-              filterval= filterVal[i].toString().toUpperCase();
-              toggle=true;
-              break;
-             }
-          }
-
-        }
-        if (toggle) {
-          //console.log("Job Time "+pjobfilter.JobTitle+"   ::: Filter Value : "+filterval);
-          toggle = false;
-          return (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(filterval) > -1);
-        }
-
-      });
+      this.allfilterValue();
       this.loading = false; 
       this.setPage(1);
+   }
+
+  allFilterChanges(type) {
+    this.loading = true;
+    //console.log("Type :::::: ===>>>> "+type);
+
+    //All filter change 
+
+    // if (type=='EmpTypes') {
+    //   if (this.allSelectedEmpTypes.selected) {  
+    //     this.allSelectedEmpTypes.deselect();
+    //     //return false;
+    //   }
+    //   if(this.listJobForm.controls.empTypes.value.length==this.EmpTypesList.length)
+    //     this.allSelectedEmpTypes.select();
+    // }
+
+
+    //console.log("Emp Type :::::: "+this.listJobForm.controls.empTypes.value);
+    this.allfilterValue();
+    //this.workFromHomeFilterValue(this.listJobForm.controls.workFromHome.value);
+    //this.PostJobc = this.PostJobcTmp;
+    this.loading = false; 
+    this.setPage(1);
+  }
+
+
+  allfilterValue() {
+     //console.log("XXXXXXX ::: "+filterVal);
+     let toggle=false;
+     let filterval='';
+     let workFromHome = this.listJobForm.controls['workFromHome'].value;
+     let travelRequirement  = this.listJobForm.controls['TravelReq'].value;
+     let empTypeVal = this.listJobForm.controls['empTypes'].value;
+    //  console.log(" workFromHome ::: "+workFromHome);
+    //  console.log(" travelRequirement ::: "+travelRequirement);
+    //  console.log(" empTypeVal ::: "+empTypeVal);          
+ 
+
+     if ((empTypeVal == null) || (empTypeVal == undefined) || (empTypeVal.length == 0)) {
+      //console.log("Empty :::::: &&^^**");
+      this.PostJobc= [];
+     } else {
+        this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
+          //console.log("pjobfilter.EmploymentTypes.toString().toUpperCase() "+pjobfilter.EmploymentTypes.toString().toUpperCase());
+          for(let i=0;i<empTypeVal.length;i++) {
+            //console.log(filterVal[i].toUpperCase());
+            //console.log("filterVal[i] :: "+filterVal[i]);
+            if (empTypeVal[i].toString() !='0'){
+              if (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(empTypeVal[i].toString().toUpperCase()) > -1 ){
+
+                filterval= empTypeVal[i].toString().toUpperCase();
+                toggle=true;
+                break;
+              }
+            }
+
+          
+          }
+          if (toggle) {
+            toggle = false;
+            return (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(filterval) > -1) &&
+            ((workFromHome == 'Yes')?(pjobfilter.isTeleComute==true 
+            || pjobfilter.isTeleComute.toString()=='true'):workFromHome == 'No'
+            ?(pjobfilter.isTeleComute==false || pjobfilter.isTeleComute.toString()=='false'):pjobfilter) &&
+            ((travelRequirement == 'Yes')?(pjobfilter.TravelRequirements!='No Travel'):travelRequirement == 'No'
+            ?(pjobfilter.TravelRequirements=='No Travel'):pjobfilter);
+          }
+      });
+     }
+
+
+     this.loading = false; 
     // this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
     //   pjobfilter.EmploymentTypes.toUpperCase().
     //   return pjobfilter.isSearchable == issearch;
@@ -312,9 +305,108 @@ export class ListjobComponent implements OnInit {
     // });
    }
 
-  selectListJobRecord(job) {
-    console.log("L Job ::: "+job);
-  }
+  //  selectListWorkFromHome(wfromhome) {
+  //   //console.log("Work from home  ::: "+wfromhome);
+  //   this.workFromHomeFilterValue(wfromhome);
+  //  }
+
+  //  workFromHomeFilterValue(filterVal) {
+  //   //console.log("File Value ::: "+filterVal.toString());
+  //   //  this.loading = true;
+  //   //  let telComule:boolean;
+
+  //  // this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
+  //    //return (pjobfilter.isTeleComute.toUpperCase().indexOf(appliedJpb.JobTitle.toUpperCase()) > -1) || (ajobfilter.JobIDSerial===appliedJpb.JobTitle);
+  //    this.PostJobcTmp= this.PostJobcAll.filter(function(pjobfilter) {
+
+  //     if (filterVal=='Yes') {
+  //       //console.log("Yes   ::: pjobfilter.isTeleComute ::: "+pjobfilter.isTeleComute);
+  //       //if (pjobfilter.isTeleComute=='true') 
+  //       //console.log("Yes ==  ::: pjobfilter.isTeleComute ::: "+pjobfilter.isTeleComute + "  :::: "+pjobfilter.isTeleComute);
+  //       return pjobfilter.isTeleComute==true || pjobfilter.isTeleComute.toString()=='true';
+  //     } else if (filterVal=='No') {
+  //       //console.log("No   ::: pjobfilter.isTeleComute ::: "+pjobfilter.isTeleComute);
+  //       return pjobfilter.isTeleComute==false || pjobfilter.isTeleComute.toString()=='false';
+  //     } else if (filterVal=='All') {
+  //       //console.log("ALL   ::: pjobfilter.isTeleComute ::: "+pjobfilter.isTeleComute);
+  //       return pjobfilter;
+  //       //return pjobfilter.isTeleComute==true || pjobfilter.isTeleComute.toString()=='true' || pjobfilter.isTeleComute.toString() =='false' || pjobfilter.isTeleComute==false ;
+  //     }
+
+  //     //  for(let i=0;i<filterVal.length;i++) {
+  //     //    if (filterVal[i] == 'Yes') {
+  //     //      console.log()
+  //     //      return pjobfilter.isTeleComute==true;
+  //     //    } else if (filterVal[i] == 'No') {
+  //     //      return pjobfilter.isTeleComute==false;
+  //     //    } 
+
+  //     //  }
+
+  //  });
+  // //  this.loading = false; 
+  // //  this.setPage(1);
+  // }
+
+  //  selectListTravellReq(travelreq) {
+  //   console.log("Travel Req  ::: "+travelreq);
+  //   this.TravelFilterValue(travelreq);
+  //  }
+
+  //  TravelFilterValue(filterVal) {
+  //   //console.log("File Value ::: "+filterVal.toString());
+  //    this.loading = true;
+  //    let telComule:boolean;
+
+  //  // this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
+  //    //return (pjobfilter.isTeleComute.toUpperCase().indexOf(appliedJpb.JobTitle.toUpperCase()) > -1) || (ajobfilter.JobIDSerial===appliedJpb.JobTitle);
+  //    this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
+
+  //     if (filterVal=='Yes') {
+  //       //console.log("Yes   ::: pjobfilter.isTeleComute ::: "+pjobfilter.isTeleComute);
+  //       //if (pjobfilter.isTeleComute=='true') 
+  //       //console.log("Yes ==  ::: pjobfilter.isTeleComute ::: "+pjobfilter.isTeleComute + "  :::: "+pjobfilter.isTeleComute);
+  //       return pjobfilter.TravelRequirements!='No Travel';
+  //     } else if (filterVal=='No') {
+  //       //console.log("No   ::: pjobfilter.isTeleComute ::: "+pjobfilter.isTeleComute);
+  //       return pjobfilter.TravelRequirements=='No Travel';
+  //     } else if (filterVal=='All') {
+  //       //console.log("ALL   ::: pjobfilter.isTeleComute ::: "+pjobfilter.isTeleComute);
+  //       return pjobfilter;
+  //       //return pjobfilter.isTeleComute==true || pjobfilter.isTeleComute.toString()=='true' || pjobfilter.isTeleComute.toString() =='false' || pjobfilter.isTeleComute==false ;
+  //     }
+
+  //     //  for(let i=0;i<filterVal.length;i++) {
+  //     //    if (filterVal[i] == 'Yes') {
+  //     //      console.log()
+  //     //      return pjobfilter.isTeleComute==true;
+  //     //    } else if (filterVal[i] == 'No') {
+  //     //      return pjobfilter.isTeleComute==false;
+  //     //    } 
+
+  //     //  }
+
+  //  });
+  //  this.loading = false; 
+  //  this.setPage(1);
+  // }
+
+
+  // tosslePerOne(all) { 
+  //   //console.log("Value ::: "+this.listJobForm.controls.empTypes.value);
+
+  //   // if (type=='EmpTypes') {
+  //     this.empTypesfilterValue(this.listJobForm.controls.empTypes.value);
+  //     if (this.allSelectedEmpTypes.selected) {  
+  //       this.allSelectedEmpTypes.deselect();
+  //       return false;
+  //     }
+  //     if(this.listJobForm.controls.empTypes.value.length==this.EmpTypesList.length)
+  //       this.allSelectedEmpTypes.select();
+
+
+  //  }
+
 
   getPostJobsAlgolia(keyword, location) {
 

@@ -322,17 +322,26 @@ body a{
 }
 .btn-2{
     /* background:#007bff; */
-    background:#35771e;;
+    background:#f15f43;;
     color: #fff;
     border-radius: 4px;
     text-align: center;
 }
+
+.btn-primary {
+    color: #fff !important;
+    /* background-color: #35771e !important;
+    border-color: #35771e !important; */
+    background-color: #f15f43 !important;
+    border-color: #f15f43 !important;    
+}
+
 .btn2-1b:after {
 	width: 100%;
 	height: 0;
 	top: 0;
 	left: 0;
-	background:#f15f43;
+	background:#668E57;
 	color:#fff;
 	 border-radius: 2px;
     -webkit-border-radius: 2px;

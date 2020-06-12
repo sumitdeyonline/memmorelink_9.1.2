@@ -60,19 +60,26 @@
                               </mat-select-trigger> -->
 
 
-                          <mat-option *ngFor="let emptype of EmpTypesList" [value]="emptype" (click)="tosslePerOne('EmpTypes',allSelectedEmpTypes.viewValue)">{{emptype}}</mat-option>
-                          <mat-option #allSelectedEmpTypes (click)="toggleAllSelection('EmpTypes')" [value]="0">All</mat-option>
+                          <mat-option *ngFor="let emptype of EmpTypesList" [value]="emptype" (click)="allFilterChanges('EmpTypes')">{{emptype}}</mat-option>
+                          <!-- <mat-option #allSelectedEmpTypes (click)="toggleAllSelection()" [value]="0">Any</mat-option> -->
                         </mat-select>
                     </mat-form-field>
                     &nbsp;&nbsp;
-                    <!-- <mat-form-field>
+                    <mat-form-field>
                         <mat-label>Work from Home</mat-label>
-                        <mat-select formControlName ="workFromHome" multiple>
-                          <mat-option *ngFor="let wfromhm of workFromHomeList" [value]="wfromhm" (click)="tosslePerOne('WorkFromHome',allSelectedWorkFromHome.viewValue)">{{wfromhm}}</mat-option>
-                          <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option>
+                        <mat-select formControlName ="workFromHome">
+                          <mat-option *ngFor="let wfromhm of workFromHomeTravelReqList" [value]="wfromhm" (click)="allFilterChanges('WorkFromHome')">{{wfromhm}}</mat-option>
+                          <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
                         </mat-select>
-                    </mat-form-field>                     -->
-
+                    </mat-form-field>                    
+                    &nbsp;&nbsp;
+                    <mat-form-field>
+                        <mat-label>Travel</mat-label>
+                        <mat-select formControlName ="TravelReq">
+                          <mat-option *ngFor="let wfromhm of workFromHomeTravelReqList" [value]="wfromhm" (click)="allFilterChanges('Travel')">{{wfromhm}}</mat-option>
+                          <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
+                        </mat-select>
+                    </mat-form-field>   
                 </form>
 
                     <!-- <h4>Results</h4> -->
@@ -108,7 +115,7 @@
 
 
                             <div class="thumb" [hidden]="mobile">
-                                <a [routerLink]="['/jobdetails',pj.objectID]">
+                                <a [routerLink]="['/jobdetails',pj.objectID]" target="_blank">
                                     <img src="{{pj.CompanyLogoURL}}" class="img-responsive" alt="" onerror="this.onerror=null;this.src='assets/images/a2.png';"/>
                                 </a>
                             </div>
@@ -135,7 +142,7 @@
 
 
 
-                            <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',pj.objectID]" (click) = "jobDetails(pj.objectID)">{{ pj.JobTitle }}</a></h6>
+                            <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',pj.objectID]" target="_blank">{{ pj.JobTitle }}</a></h6>
                               <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company?.substring(0,19) }}</span><span class="companyName" *ngIf="pj.Company?.length>19">...</span>
                               &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b></span>
                               &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">{{ getDateDiff(pj.LastModifiedDate) }}</span>

@@ -13,9 +13,20 @@
           <td align="right" [hidden]="mobile">
             <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onPredict()" class="btn btn-primary btn-sm">Numerology Prediction</button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <!-- <button (click)="jobList()" class="btn btn-primary btn-sm">Back to search</button>&nbsp;&nbsp; -->
             
-            <button type="button" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())"  value="Apply Now" (click)="onApply()" class="btn btn-primary btn-sm">Apply Now</button>
+            <button type="button" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())"  value="Apply Now" (click)="onApply()" class="btn btn-primary btn-sm">Apply Now</button> 
+
+
+            <!-- <div id="buttonHomePage" class="clearfix">
+              <label class="btn2 btn-2 btn2-1b">
+                  <input type="button" value="Numerology Prediction" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onPredict()" class="btn btn-primary btn-sm">
+              </label>
+              <label class="btn2 btn-2 btn2-1b">
+                  <input type="button" value="Apply Now" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())"   (click)="onApply()" class="btn btn-primary btn-sm">
+
+              </label>
+            </div>  -->
+
 
             
           </td>

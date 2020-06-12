@@ -29,16 +29,27 @@
 
 
                 <div id="myTabContent" class="tab-content">
-                    <br>
-                            <h4>Job Applied</h4>
+
+                            <!-- <h4>Job Applied</h4> -->
         
+
+                            <div id="buttonHomePage">
+                                <span style="font-size: 1.8em;">Job Applied&nbsp;&nbsp;&nbsp;&nbsp;
+        
+                                </span>
+                                <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/userprofile" value="Edit Profile"></label>
+
+                                
+                             </div>
+                            <br>
+
 
                             <form #aform="ngForm" (ngSubmit)="selectApplied(aform.value)">
                                 <div class="row">
 
-                                    <div class="col-sm-2">
+                                    <!-- <div class="col-sm-2">
                                         &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="RecordNumber">Records</label>
-                                    </div>
+                                    </div> -->&nbsp;&nbsp;&nbsp;
                                     <div class="col">
             
                                         <select ngModel name="RecordNumber" 
@@ -50,10 +61,51 @@
                                             <option value="AllRecords">All Records</option>
                                             <option value="Custom">Custom Date</option>
                                             <!--option>USA</option-->
-                                        </select>
+                                        </select>&nbsp;&nbsp;&nbsp;
+
+                                        <input type="text"  
+                                            JobTitle
+                                            placeholder="Job Title/ID & Hit Enter"
+                                            autocomplete="off"
+                                            ngModel name="JobTitle" #JobTitle="ngModel" id="JobTitle"
+                                            (keyup.enter)="setFilterValue(aform.value)">  
+
                                     </div>
 
 
+
+                                    <div class="col" [hidden] = disabledDate>
+                                        <input
+                                        type="text"
+                                        placeholder="Choose start date"
+                                        bsDatepicker
+                                        startDate
+                                        size="8"
+                                        autocomplete="off"
+                                        [disabled] = disabledDate
+                                        ngModel name="startDate" #startDate="ngModel" id="startDate"
+                                        [ngModel]="startDt"
+                                        (ngModelChange)="enableCustomFields(aform.value)"
+                                        [bsConfig]="{ isAnimated: true }">  
+                                    
+                                        &nbsp;To&nbsp;
+
+                                        <input
+                                        type="text"
+                                        placeholder="Choose end date"
+                                        autocomplete="off"
+                                        [disabled] = disabledDate
+                                        bsDatepicker
+                                        endDate
+                                        size="8"
+                                        ngModel name="endDate" #endDate="ngModel" id="endDate"
+                                        [ngModel]="endDt"
+                                        (ngModelChange)="enableCustomFields(aform.value)"
+                                        [bsConfig]="{ isAnimated: true }"> 
+
+                                    </div>
+
+<!-- 
                                     <div class="col-sm-2">
                                         &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="JobTitle">Job Title/ID </label>
                                     </div>
@@ -64,7 +116,7 @@
                                         autocomplete="off"
                                         ngModel name="JobTitle" #JobTitle="ngModel" id="JobTitle"
                                         (keyup.enter)="setFilterValue(aform.value)">    
-                                    </div>                                    
+                                    </div>                                     -->
             
 
 
@@ -120,11 +172,11 @@
                                     
 
 
-                                <div class="row" [hidden] = disabledDate>
+                                <!--div class="row" [hidden] = disabledDate>
                                     <div class="col-sm-2">&nbsp;
                                     </div>
                                 </div>
-                                <div class="row" [hidden] = disabledDate>
+                                 <div class="row" [hidden] = disabledDate>
                                     <div class="col-sm-2">
                                         &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="startDate">Start Date </label>
                                     </div>
@@ -140,9 +192,6 @@
                                         [ngModel]="startDt"
                                         (ngModelChange)="enableCustomFields(aform.value)"
                                         [bsConfig]="{ isAnimated: true }">  
-                                        <!-- <div class="error_Message" *ngIf="JobCountry.invalid && (JobCountry.dirty || JobCountry.touched)">
-                                            Please Enter Country
-                                        </div> -->
                 
                                     </div>
                                     <div class="col-sm-2">
@@ -160,15 +209,12 @@
                                         [ngModel]="endDt"
                                         (ngModelChange)="enableCustomFields(aform.value)"
                                         [bsConfig]="{ isAnimated: true }"> 
-                                        <!-- <div class="error_Message" *ngIf="JobState.invalid && (JobState.dirty || JobState.touched)">
-                                            Please Enter Job State
-                                        </div> -->
                                         </div>
-                                </div>
-                                <div class="row">
+                                </div> -->
+                                <!-- <div class="row">
                                     <div class="col-sm-2">&nbsp;
                                     </div>
-                                </div>
+                                </div> -->
                             </form>        
                             <h4 *ngIf="noResultFound !=''">{{noResultFound}}</h4>
                             <!-- loader.component.html -->
@@ -178,11 +224,9 @@
                                 </mat-progress-spinner>
                             
                             </div> 
-                            <div id="buttonHomePage" class="clearfix">
+                            <!-- <div id="buttonHomePage" class="clearfix">
                                 <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/userprofile" value="Edit Profile"></label>
-                                <!-- &nbsp;&nbsp;&nbsp;
-                                <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Search Resume"></label> -->
-                            </div> 
+                             </div>  -->
 
 
                             <hr class="hr_style">
@@ -212,7 +256,7 @@
                                         
                                             </span>
                                          
-                                            <br>
+                                            <br> 
                                             
  
 

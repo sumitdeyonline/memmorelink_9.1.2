@@ -2,7 +2,7 @@
 
 
 <div class="container">
-<br>
+
   <div class="single">
       <div class="row">
 
@@ -32,32 +32,152 @@
             <div id="myTabContent" class="tab-content">
 
 
-                  <form #searchResume="ngForm" (ngSubmit)="getResumeSearchAlgolia(searchResume)">
 
 
-                      <!-- <h4>Search Resume</h4>&nbsp; -->
+              <!-- <form #searchResumeForm="ngForm" (ngSubmit)="getResumeSearchAlgolia(searchResumeForm)"> -->
+              <form [formGroup]="searchResumeForm" (ngSubmit)="getResumeSearchAlgolia(searchResumeForm)">
+                <div id="search_form" class="clearfix">
+                    <!-- <h5>Resume Search</h5> -->
+                    <!-- <p> -->
+                    <!-- <table>
+                        <tr> -->
+                            <!-- <td colspan="4"> -->
+                               <!-- <input type="text" class="text" autocomplete="off" size="70%"
+                                ngModel name="ResumeSearch" #ResumeSearch="ngModel" id="ResumeSearch" 
+                                [ngModel]="ResumeSearchVal" 
+                                placeholder="Skills, Java, AWS, GCP, Azure etc.">
+                                 &nbsp;<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resumes"></label> -->
+                                 <table>
+                                   <tr>
+                                     <td [hidden]="!mobile">
+
+                                        <input type="text" class="text" autocomplete="off" 
+                                        formControlName="ResumeSearch" [value]="ResumeSearchVal"
+                                        placeholder="Skills, Java, AWS, GCP, Azure etc.">
+                                      </td>
+                                      <td [hidden]="mobile">
+
+                                        <input type="text" class="text" autocomplete="off" size="70%"
+                                        formControlName="ResumeSearch" [value]="ResumeSearchVal"
+                                        placeholder="Skills, Java, AWS, GCP, Azure etc.">
+                                      </td>
+
+                                      <td>
+                                        &nbsp;<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resumes"></label>  
+                                      </td>
+                                   </tr>
+                                 </table>
+
+                               
+                            <!-- </td> -->
+       
+                            <!-- <td>
+                                <label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resume"></label>
+                            </td> -->
+                        <!-- </tr>
+       
+                    </table> -->
+       
+          <!--input type="text" class="text" required="required" value= "location" ngModel name="location" #username="ngModel" id="location" placeholder="{{ location }}" value="Location" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Location';}"-->
+       
+                    <!-- </p> -->
+       
+                    </div>
+
+                    <mat-form-field>
+                      <mat-label>Employment Types</mat-label>
+                      <mat-select formControlName ="empTypes" multiple>
+
+                            <!-- <mat-select-trigger>
+                              {{empTypes.value ? EmpTypesList[0] : ''}}
+                              <span *ngIf="empTypes.value?.length > 1" class="example-additional-selection">
+                                (+{{EmpTypesList.length - 1}} {{EmpTypesList.value?.length === 2 ? 'other' : 'others'}})
+                              </span>
+                            </mat-select-trigger> -->
+
+
+                        <mat-option *ngFor="let emptype of EmpTypesList" [value]="emptype" (click)="allFilterChanges('EmpTypes')">{{emptype}}</mat-option>
+                        <!-- <mat-option #allSelectedEmpTypes (click)="toggleAllSelection()" [value]="0">Any</mat-option> -->
+                      </mat-select>
+                      </mat-form-field>
+                      &nbsp;&nbsp;
+                      <mat-form-field>
+                          <mat-label>Relocate</mat-label>
+                          <mat-select formControlName ="Relocate">
+                            <mat-option *ngFor="let rel of singleDropDownloadList" [value]="rel" (click)="allFilterChanges('WorkFromHome')">{{rel}}</mat-option>
+                            <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
+                          </mat-select>
+                      </mat-form-field>                    
+                      &nbsp;&nbsp;
+                      <mat-form-field>
+                          <mat-label>Travel</mat-label>
+                          <mat-select formControlName ="TravelReq">
+                            <mat-option *ngFor="let travel of singleDropDownloadList" [value]="travel" (click)="allFilterChanges('Travel')">{{travel}}</mat-option>
+                            <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
+                          </mat-select>
+                      </mat-form-field> 
+                      <br>
+                      <mat-form-field>
+                        <mat-label>Work Authorization</mat-label>
+                        <mat-select formControlName ="Workuthorization" multiple>
+  
+                              <!-- <mat-select-trigger>
+                                {{empTypes.value ? EmpTypesList[0] : ''}}
+                                <span *ngIf="empTypes.value?.length > 1" class="example-additional-selection">
+                                  (+{{EmpTypesList.length - 1}} {{EmpTypesList.value?.length === 2 ? 'other' : 'others'}})
+                                </span>
+                              </mat-select-trigger> -->
+  
+  
+                          <mat-option *ngFor="let workauth of WorkAuthList" [value]="workauth" (click)="allFilterChanges('WorkAuth')">{{workauth}}</mat-option>
+                          <!-- <mat-option #allSelectedEmpTypes (click)="toggleAllSelection()" [value]="0">Any</mat-option> -->
+                        </mat-select>
+                      </mat-form-field> 
+
+                      &nbsp;&nbsp;
+                      <mat-form-field>
+                          <mat-label>Travel</mat-label>
+                          <mat-select formControlName ="SecurityClearance">
+                            <mat-option *ngFor="let reqclear of singleDropDownloadList" [value]="reqclear" (click)="allFilterChanges('SecurityClear')">{{reqclear}}</mat-option>
+                            <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
+                          </mat-select>
+                      </mat-form-field>                       
+
+                
+            </form>
+
+
+
+
+
+
+                  <!-- <form #searchResume="ngForm" (ngSubmit)="getResumeSearchAlgolia(searchResume)">
+
+
 
                       <div class="row">
 
                           <div class="col">
 
-                            <!-- <input type="text" class="text" autocomplete="off" 
-                            required="required" ngModel name="ResumeSearch" #ResumeSearch="ngModel" id="ResumeSearch" 
-                            placeholder="" value="{{ ResumeSearch }}" [ngModel]="ResumeSearch" 
-                            placeholder="Search Resume">       -->
-
-                              <input type="text" autocomplete="off"  ngModel name="ResumeSearch" placeholder="Skills, Java, AWS, GCP, Azure etc." #ResumeSearch="ngModel" id="ResumeSearch" [ngModel]="ResumeSearchVal" class="form-control input-sm" required/>
+                              <input type="text" autocomplete="off"  
+                                ngModel name="ResumeSearch" 
+                                placeholder="Skills, Java, AWS, GCP, Azure etc." 
+                                #ResumeSearch="ngModel" id="ResumeSearch" 
+                                [ngModel]="ResumeSearchVal" 
+                                class="form-control input-sm" required/>
                           </div>
 
                           <div class="col">
-                            <div class="form-actions floatRight">
-                              <input type="submit" value="Find Resume" class="btn btn-primary btn-sm">
+                              <div id="search_form" class="clearfix">
+
+                              <label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resumes"></label>
+
                             </div>
 
                           </div>
                       </div>
-                  </form> 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </form>  -->
+
 
 
                     <!-- <h2>Results</h2> -->
