@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   error='';
   login = new Login();
   loginError = '';
+  mobile: boolean=false;
   //userIdPasswordWrong ='';
   constructor(fb: FormBuilder, 
               public _auth: AuthService) {
@@ -26,6 +27,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (window.screen.width <= 735) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
   }
 
   Login(loginComponent) {

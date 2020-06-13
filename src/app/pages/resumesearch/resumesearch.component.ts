@@ -3,7 +3,7 @@ import { DateformatService } from '../../services/dateformat/dateformat.service'
 
 import * as algoliasearch from 'algoliasearch';
 import {isNumeric} from 'rxjs/util/isNumeric';
-import { SEARCH_CONFIG } from '../../global-config';
+import { SEARCH_CONFIG, HOME_CONFIG } from '../../global-config';
 import { UserProfile } from 'src/app/services/firebase/userprofile/userprofile.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -24,6 +24,8 @@ export class ResumesearchComponent implements OnInit {
   @Input() ResumeSearchVal: string='';
 
   UserProfile: UserProfile[];
+  UserProfileAll: UserProfile[];
+
   //UserProfileFinal: UserProfile[] = [];
 
   client: any;
@@ -40,10 +42,11 @@ export class ResumesearchComponent implements OnInit {
   loading: boolean = false;
   pagesize = SEARCH_CONFIG.PAGE_SIZE;
   noResultFound: string='';
-  mobile: boolean=false;
+  mobile: boolean=false; 
   EmpTypesList: string[];
   WorkAuthList: string[];
   singleDropDownloadList: string[];
+  searchPlaceHolder: string = HOME_CONFIG.SEARCH_RESUME_PLACEHOLDER;
 
   constructor(private route: ActivatedRoute, private pagerService: PagerService, private router: Router,fb: FormBuilder, private etypeserv: EmploymenttypesService,public uProfile: UserprofileService ) { 
     this.searchResumeForm = fb.group({
@@ -89,15 +92,75 @@ export class ResumesearchComponent implements OnInit {
 
   allFilterChanges(type) {
 
-console.log("Type :::: "+type);
+    //console.log("Type :::: "+type);
 
-    // this.loading = true;
+    this.loading = true;
 
-
-    // this.loading = false; 
-    // this.setPage(1);
+    this.allfilterValue();
+    this.loading = false; 
+    this.setPage(1);
   }
 
+  allfilterValue() {
+
+    let emptypeFinalVal='Not Found';
+    let workAuthFinalVal='Not Found';
+    let empTypeVal = this.searchResumeForm.controls['empTypes'].value;
+    let relocateVal = this.searchResumeForm.controls['Relocate'].value;
+    let travelReqVal = this.searchResumeForm.controls['TravelReq'].value;
+    let workAuthVal = this.searchResumeForm.controls['Workuthorization'].value;
+    let securityClearVal = this.searchResumeForm.controls['SecurityClearance'].value;
+
+    this.UserProfile= this.UserProfileAll.filter(function(resumefilter) {
+      for(let i=0;i<empTypeVal.length;i++) {
+        if (empTypeVal[i].toString() !='0'){
+          if (resumefilter.EmploymentType.toString().toUpperCase().indexOf(empTypeVal[i].toString().toUpperCase()) > -1 ){
+
+            emptypeFinalVal= empTypeVal[i].toString().toUpperCase();
+            //console.log("emptypeFinalVal ::: "+emptypeFinalVal);
+            //toggle=true;
+            break;
+          } else {
+            emptypeFinalVal='Not Found';
+          }
+        }
+      }
+      for(let i=0;i<workAuthVal.length;i++) {
+          if (workAuthVal[i].toString() !='0'){
+            if (resumefilter.WorkAuthorization.toString().toUpperCase().indexOf(workAuthVal[i].toString().toUpperCase()) > -1 ){
+  
+              workAuthFinalVal= workAuthVal[i].toString().toUpperCase();
+              //console.log("emptypeFinalVal ::: "+emptypeFinalVal);
+              //toggle=true;
+              break;
+            } else {
+              workAuthFinalVal='Not Found';
+            }
+          }        
+
+      }
+      //console.log("securityClearVal   ::: "+workAuthFinalVal);
+      // return (resumefilter.WorkAuthorization.toString().toUpperCase().indexOf(workAuthFinalVal) > -1)
+
+      return ((resumefilter.EmploymentType.toString().toUpperCase().indexOf(emptypeFinalVal) > -1) &&
+        ((relocateVal == 'Yes')?(resumefilter.IsRelocate==true 
+        || resumefilter.IsRelocate.toString().toLowerCase()=='true'):relocateVal == 'No'
+        ?(resumefilter.IsRelocate==false || resumefilter.IsRelocate.toString().toLowerCase()=='false'):resumefilter) &&
+        ((travelReqVal == 'Yes')?(resumefilter.IsTravel==true 
+        || resumefilter.IsTravel.toString().toLowerCase()=='true'):travelReqVal == 'No'
+        ?(resumefilter.IsTravel==false || resumefilter.IsTravel.toString().toLowerCase()=='false'):resumefilter) &&
+        (resumefilter.WorkAuthorization.toString().toUpperCase().indexOf(workAuthFinalVal) > -1) &&
+        ((securityClearVal == 'Yes')?(resumefilter.SecurityClearance==true 
+        || resumefilter.SecurityClearance.toString().toLowerCase()=='true'):securityClearVal == 'No'
+        ?(resumefilter.SecurityClearance==false || resumefilter.SecurityClearance.toString().toLowerCase()=='false'):resumefilter))
+
+
+    });
+ 
+    
+    
+
+  }
 
 
 
@@ -121,6 +184,7 @@ console.log("Type :::: "+type);
         //let j=0;
         //this.UserProfileFinal = [];
         this.UserProfile = data.hits;
+        this.UserProfileAll = data.hits;
         if (this.UserProfile.length == 0)  {
           this.notfoundAnything();
         }        

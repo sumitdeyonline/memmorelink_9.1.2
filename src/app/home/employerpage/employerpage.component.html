@@ -1,4 +1,4 @@
-<br>
+
 <div id="search_wrapper1">
     <form #searchResume="ngForm" (ngSubmit)="getResumeSearch(searchResume)">
          <div id="search_form" class="clearfix">
@@ -7,10 +7,43 @@
              <!-- <table>
                  <tr> -->
                      <!-- <td colspan="4"> -->
-                        <input type="text" class="text" autocomplete="off" size="70%"
+                        <input type="text" class="text" autocomplete="off" [hidden]="!mobile" style="width:60% !important;"
                          ngModel name="ResumeSearch" #ResumeSearch="ngModel" id="ResumeSearch" 
-                         placeholder="Skills">
-                          &nbsp;<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resumes"></label>
+                         placeholder="{{searchPlaceHolder}}">
+                         <input type="text" class="text" autocomplete="off"  [hidden]="mobile" size="70%"
+                         ngModel name="ResumeSearch" #ResumeSearch="ngModel" id="ResumeSearch" 
+                         placeholder="{{searchPlaceHolder}}">
+
+                         <!-- <input type="text" class="text" autocomplete="off" size=1
+                         ngModel name="ResumeSearch" #ResumeSearch="ngModel" id="ResumeSearch" 
+                         placeholder="Skills"> -->
+
+                          &nbsp;<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Profiles"></label>
+
+
+                          <!-- <table>
+                            <tr>
+                              <td [hidden]="!mobile">
+                                <input type="text" class="text" autocomplete="off" size=1
+                                ngModel name="ResumeSearch" #ResumeSearch="ngModel" id="ResumeSearch" 
+                                placeholder="Skills">
+                               </td>
+                               <td [hidden]="mobile">
+                                <input type="text" class="text" autocomplete="off" size="70%" [hidden]="mobile"
+                                ngModel name="ResumeSearch" #ResumeSearch="ngModel" id="ResumeSearch" 
+                                placeholder="Skills">
+                               </td>
+
+                               <td>
+                                 &nbsp;<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resumes"></label>  
+                               </td>
+                            </tr>
+                          </table> -->
+
+
+
+
+
                      <!-- </td> -->
 
                      <!-- <td>

@@ -226,7 +226,8 @@ export class AuthService {
     // localStorage.removeItem(SESSION_CONFIG.UserRole);
     this.removeSessionItems();
     // Go back to the home route
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
+    //this.router.navigate(['/login']);
   }
 
   private removeSessionItems() {

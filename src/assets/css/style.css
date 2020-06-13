@@ -27,6 +27,11 @@ html, body{
     background:#ffffff !important; 
 }
 
+.login_div {
+    padding-left: 110px;
+    padding-right: 110px;
+}
+
 
 .tooltip {
     position: relative;
@@ -947,7 +952,7 @@ span.m_2{
     float: right;
 }
 .login-para p a {
-    font-size: 14px;
+    /* font-size: 14px; */
     font-weight: 400;
     color: rgb(219, 0, 0);
 }
@@ -1408,15 +1413,19 @@ a.btn_1.fa.fa-star-o.icon_2:hover{
 }
 
 .btn-default, .widget-content input[type="button"] {
-    /*padding-bottom: 3px;*/
+    /*padding-bottom: 3px;
     border-bottom: 2px solid #2185C5;
     background: #2185C5;
     color: #ffffff;
-    border-color:#2185C5;
+    border-color:#2185C5;*/
+    border-bottom: 2px solid #f15f43;
+    background: #f15f43;
+    color: #ffffff;
+    border-color:#f15f43;
 }
 .btn-default:hover{
-    background-color:#f15f43;
-    border-color:#f15f43;
+    background-color:#668E57;
+    border-color:#668E57;
     color:#fff;
 }
 .modal-body {
@@ -2451,7 +2460,11 @@ p.sm_1{
     border: 0px solid #d6d5d4;
     box-shadow: 2px 3px #d6d5d4;
     border-radius: 8px;
-	}
+    }
+    .login_div {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
 }
 @media only screen and (max-width:768px) {
@@ -2539,7 +2552,10 @@ p.sm_1{
     box-shadow: 2px 3px #d6d5d4;
     border-radius: 8px;
 	}
-
+    .login_div {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 }
 @media (max-width:736px){
     .banner_1{ 
@@ -2665,7 +2681,10 @@ p.sm_1{
         box-shadow: 2px 3px #d6d5d4;
         border-radius: 8px;
     }
-
+    .login_div {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
 
 }
 
@@ -2804,6 +2823,10 @@ p.sm_1{
         box-shadow: 2px 3px #d6d5d4;
         border-radius: 8px;
     }
+    .login_div {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
 
 }
 @media (max-width:414px){
@@ -2877,7 +2900,10 @@ p.sm_1{
         box-shadow: 2px 3px #d6d5d4;
         border-radius: 8px;
     }
-
+    .login_div {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
 }
 @media (max-width:384px){
     .banner_1{ 
@@ -3183,8 +3209,11 @@ p.sm_1{
     border: 0px solid #d6d5d4;
     box-shadow: 2px 3px #d6d5d4;
     border-radius: 8px;
+  }
+  .login_div {
+    padding-left: 1px;
+    padding-right: 1px;
 }
-
 
 }
 

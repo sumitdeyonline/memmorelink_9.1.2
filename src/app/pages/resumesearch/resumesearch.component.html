@@ -3,7 +3,7 @@
 
 <div class="container">
 
-  <div class="single">
+  <div class="single"> 
       <div class="row">
 
 
@@ -53,17 +53,17 @@
 
                                         <input type="text" class="text" autocomplete="off" 
                                         formControlName="ResumeSearch" [value]="ResumeSearchVal"
-                                        placeholder="Skills, Java, AWS, GCP, Azure etc.">
+                                        placeholder="{{searchPlaceHolder}}">
                                       </td>
                                       <td [hidden]="mobile">
 
                                         <input type="text" class="text" autocomplete="off" size="70%"
                                         formControlName="ResumeSearch" [value]="ResumeSearchVal"
-                                        placeholder="Skills, Java, AWS, GCP, Azure etc.">
+                                        placeholder="{{searchPlaceHolder}}">
                                       </td>
 
                                       <td>
-                                        &nbsp;<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Resumes"></label>  
+                                        &nbsp;<label class="btn2 btn-2 btn2-1b"><input type="submit" value="Search Profiles"></label>  
                                       </td>
                                    </tr>
                                  </table>
@@ -104,7 +104,7 @@
                       <mat-form-field>
                           <mat-label>Relocate</mat-label>
                           <mat-select formControlName ="Relocate">
-                            <mat-option *ngFor="let rel of singleDropDownloadList" [value]="rel" (click)="allFilterChanges('WorkFromHome')">{{rel}}</mat-option>
+                            <mat-option *ngFor="let rel of singleDropDownloadList" [value]="rel" (click)="allFilterChanges('Relocate')">{{rel}}</mat-option>
                             <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
                           </mat-select>
                       </mat-form-field>                    
@@ -136,7 +136,7 @@
 
                       &nbsp;&nbsp;
                       <mat-form-field>
-                          <mat-label>Travel</mat-label>
+                          <mat-label>Security Clearance</mat-label>
                           <mat-select formControlName ="SecurityClearance">
                             <mat-option *ngFor="let reqclear of singleDropDownloadList" [value]="reqclear" (click)="allFilterChanges('SecurityClear')">{{reqclear}}</mat-option>
                             <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
@@ -201,9 +201,9 @@
                     <div class="tab_grid" *ngFor="let rp of pagedItems">
                         <div class="jobs-item with-thumb">
 
-                          <div class="thumb" [hidden]="mobile">
+                          <!-- <div class="thumb" [hidden]="mobile">
                             <a [routerLink]="['/resumedetails',rp.objectID]"  target="_blank"><img src="assets/images/a2.png" class="img-responsive" alt=""/></a>
-                          </div>
+                          </div> -->
                           <div class="jobs_right">
                             <div class="date">{{rp.City.substring(0,3)}} <span>{{rp.State}}</span></div>
                             <div class="date_desc">
@@ -215,7 +215,7 @@
                               </h6>
                                
                               <span class="meta">
-                                  <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;<a href="mailto:{{rp.Email}}?Subject=Selected Your Resume" target="_top">{{rp.Email}}</a> &nbsp;&nbsp; 
+                                  <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;<a href="mailto:{{rp.Email}}?Subject=Selected Your Resume" target="_top">{{rp.Email}}</a> &nbsp;&nbsp; 
                                   <i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;{{rp.City}},{{rp.State}}&nbsp;&nbsp;
                                   <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;{{rp.CellPhone}}&nbsp;&nbsp;
                                   <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{ getDateDiff(rp.LastModifiedDate) }}&nbsp;days ago
@@ -227,10 +227,10 @@
                               <li><a href="#" class="fa fa-star"></a></li>
                               <li><a href="#" class="fa fa-link"></a></li-->
                             </ul>
-                            <hr class="hr_style">
-                            <div class="jobdetails">Desired Position :  {{rp.DesiredPosition.substring(0,length)}} &nbsp;
+                            <!-- <hr class="hr_style"> -->
+                            <div class="jobdetails">
+                               Desired Position :  {{rp.DesiredPosition.substring(0,length)}} &nbsp;
                               <br>Skill Set : {{rp.SkillSet.substring(0,length)}}
-                               <!--a [routerLink]="['/jobdetails',pj.id]" class="read-more">Read More</a-->
                             </div>
                           </div>
                           <div class="clearfix"> </div>

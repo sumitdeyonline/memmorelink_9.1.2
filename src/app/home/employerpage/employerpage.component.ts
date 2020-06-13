@@ -6,7 +6,8 @@ import { ApplyjobService } from 'src/app/services/firebase/applyjob/applyjob.ser
 import { ApplyJob } from 'src/app/services/firebase/applyjob/applyjob.model';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SEARCH_CONFIG } from 'src/app/global-config';
+import { SEARCH_CONFIG,HOME_CONFIG } from 'src/app/global-config';
+
 
 
 
@@ -22,10 +23,18 @@ export class EmployerpageComponent implements OnInit {
   aJob: ApplyJob[];
   noOFJob: number[];
   loading: boolean = false;
+  mobile: boolean=false;
   numberAtHomePage: number = SEARCH_CONFIG.FIRST_PAGE_RECORD_LIMIT;
+  searchPlaceHolder: string = HOME_CONFIG.SEARCH_RESUME_PLACEHOLDER;
   constructor(private postservice: PostjobService,public auth: AuthService,private appjob: ApplyjobService, private router: Router) { }
 
   ngOnInit(): void {
+
+    window.scroll(0,0);
+    if (window.screen.width <= 735) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
 
     this.loading = true;
     //let sdate = new Date();
@@ -60,7 +69,7 @@ export class EmployerpageComponent implements OnInit {
 
       this.loading = false;
       // Math.round(Math.abs(new Date().getTime() - this.pjob[0].LastModifiedDate.toDate().getTime())/(24*60*60*1000)
-      window.scroll(0,0);
+
 
       //console.log("List Service ..... 33333 ::::: "+this.pjob[1].id);
     }); 

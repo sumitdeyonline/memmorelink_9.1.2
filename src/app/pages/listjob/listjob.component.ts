@@ -49,7 +49,7 @@ export class ListjobComponent implements OnInit {
 
   PostJobc: PostJobc[];
   PostJobcAll: PostJobc[];
-  PostJobcTmp: PostJobc[];
+
   EmpTypes: EmploymentTypes[];
   //workFromHome: Array<Object>=[{name:"Yes"},{name:"Yes"}];
   //workFromHome: string[];
@@ -254,7 +254,7 @@ export class ListjobComponent implements OnInit {
   allfilterValue() {
      //console.log("XXXXXXX ::: "+filterVal);
      let toggle=false;
-     let filterval='';
+     let filterval='Not Found';
      let workFromHome = this.listJobForm.controls['workFromHome'].value;
      let travelRequirement  = this.listJobForm.controls['TravelReq'].value;
      let empTypeVal = this.listJobForm.controls['empTypes'].value;
@@ -268,6 +268,7 @@ export class ListjobComponent implements OnInit {
       this.PostJobc= [];
      } else {
         this.PostJobc= this.PostJobcAll.filter(function(pjobfilter) {
+          //toggle = this.checkEmpType(empTypeVal,pjobfilter);
           //console.log("pjobfilter.EmploymentTypes.toString().toUpperCase() "+pjobfilter.EmploymentTypes.toString().toUpperCase());
           for(let i=0;i<empTypeVal.length;i++) {
             //console.log(filterVal[i].toUpperCase());
@@ -276,22 +277,25 @@ export class ListjobComponent implements OnInit {
               if (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(empTypeVal[i].toString().toUpperCase()) > -1 ){
 
                 filterval= empTypeVal[i].toString().toUpperCase();
-                toggle=true;
+                //toggle=true;
                 break;
+              } else {
+                filterval='Not Found';
               }
             }
 
           
           }
-          if (toggle) {
-            toggle = false;
+          // if (toggle) {
+            //toggle = false;
             return (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(filterval) > -1) &&
+            //return (toggle==true) &&            
             ((workFromHome == 'Yes')?(pjobfilter.isTeleComute==true 
-            || pjobfilter.isTeleComute.toString()=='true'):workFromHome == 'No'
-            ?(pjobfilter.isTeleComute==false || pjobfilter.isTeleComute.toString()=='false'):pjobfilter) &&
+            || pjobfilter.isTeleComute.toString().toLowerCase()=='true'):workFromHome == 'No'
+            ?(pjobfilter.isTeleComute==false || pjobfilter.isTeleComute.toString().toLowerCase()=='false'):pjobfilter) &&
             ((travelRequirement == 'Yes')?(pjobfilter.TravelRequirements!='No Travel'):travelRequirement == 'No'
             ?(pjobfilter.TravelRequirements=='No Travel'):pjobfilter);
-          }
+          // }
       });
      }
 
@@ -304,6 +308,23 @@ export class ListjobComponent implements OnInit {
     //   ajobfilter.JobTitle.toUpperCase().indexOf(appliedJpb.JobTitle.toUpperCase()) > -1
     // });
    }
+
+  //  checkEmpType(empTypeVal,pjobfilter):boolean {
+  //     let toggle=false;
+  //     for(let i=0;i<empTypeVal.length;i++) {
+  //       //console.log(filterVal[i].toUpperCase());
+  //       //console.log("filterVal[i] :: "+filterVal[i]);
+  //       if (empTypeVal[i].toString() !='0'){
+  //         if (pjobfilter.EmploymentTypes.toString().toUpperCase().indexOf(empTypeVal[i].toString().toUpperCase()) > -1 ){
+
+  //           //filterval= empTypeVal[i].toString().toUpperCase();
+  //           toggle=true;
+  //           break;
+  //         }
+  //       }
+  //     }
+  //     return toggle;
+  //   }
 
   //  selectListWorkFromHome(wfromhome) {
   //   //console.log("Work from home  ::: "+wfromhome);
