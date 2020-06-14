@@ -128,7 +128,7 @@ export class ValueServicesComponent implements OnInit {
         this.valueservicesSucessMessage = model.email+" has been sucessfully updated."
         let subject = 'You have updated your profile';
         let body = 'Thank you <b>'+model.email+'</b> for updating your profile.<br /> <b>Thank you <br>MemoreLink Team</b> '
-        this.sEmail.sendEmail(model.email,'',subject,body);
+        this.sEmail.sendEmail(model.email,'',subject,body,'support');
         window.scroll(0,0);
         return true;
       } else {
@@ -144,7 +144,7 @@ export class ValueServicesComponent implements OnInit {
               /* Email Start */
               let subject = 'Welcome to MeMoreLink!';
               let body = 'Thank you <b>'+model.email+'</b> for registering <br><br> Company: '+model.company+'<br>Company Address: '+model.companyAddress+'<br>Company Phone: '+model.phone+' <br><br>  Best of luck! <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
-              this.sEmail.sendEmail(model.email,'',subject,body);
+              this.sEmail.sendEmail(model.email,'',subject,body,'support');
               window.scroll(0,0);
               return true;
           },

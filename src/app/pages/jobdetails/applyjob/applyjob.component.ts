@@ -176,7 +176,7 @@ export class ApplyjobComponent implements OnInit {
     // Candidate Job Email 
     let subject = 'You have applied for: '+this.pjob.JobTitle;
     let body = 'Thank you <b>'+this.applyJobForm.get('Email').value+'</b>  for applying for the job.<br/></br> <b>Job Title: </b> '+this.pjob.JobTitle+' <br /> <b>Job Location: </b>'+this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry+'<br /> <b>Job Description : </b>'+this.pjob.JobDesc+' <br />Resume Filename: '+filename+'  <br><br> <b>Thank you <br>MemoreLink Team</b>'
-    this.sEmail.sendEmail(this.applyJobForm.get('Email').value,'',subject,body);
+    this.sEmail.sendEmail(this.applyJobForm.get('Email').value,'',subject,body,'job');
     
     // Recruiter Job Email 
 
@@ -189,11 +189,11 @@ export class ApplyjobComponent implements OnInit {
               '  <br /> <b>Job Location: </b>'+this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry+
               ' <br /><b>Job Description : </b>'+this.pjob.JobDesc+
               ' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
-    this.sEmail.sendEmail(this.pjob.ApplyToEmail,'',vJobSublect,vBody);
+    this.sEmail.sendEmail(this.pjob.ApplyToEmail,'',vJobSublect,vBody,'job');
 
     if ((this.pjob.CCToEmail != null) && (this.pjob.CCToEmail != undefined)) {
       if (this.pjob.CCToEmail.trim() !='') {
-        this.sEmail.sendEmail(this.pjob.CCToEmail,'',vJobSublect,vBody);
+        this.sEmail.sendEmail(this.pjob.CCToEmail,'',vJobSublect,vBody,'job');
       } else {
         //console.log("No CC email");
       }

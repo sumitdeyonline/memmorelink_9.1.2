@@ -130,7 +130,7 @@ export class UploadresumeComponent implements OnInit {
     /* Email Start */
     let subject = 'You have uploaded your resume';
     let body = 'Thank you '+this.auth.userProfile.name+'  for uploading your resume.  <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
-    this.sEmail.sendEmail(this.auth.userProfile.name,'',subject,body);
+    this.sEmail.sendEmail(this.auth.userProfile.name,'',subject,body,'support');
 
 
     //this.router.navigate(['/userprofile']);

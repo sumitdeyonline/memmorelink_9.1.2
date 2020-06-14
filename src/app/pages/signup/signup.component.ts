@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit {
           //this.router.navigate(['/signupconfirm']);
           let subject = 'Welcome to MeMoreLink!';
           let body = 'Thank you <b>'+model.email+'</b> for registering.<br/><br/>Best of luck <br /><br /> <b>Thank you <br>MeMoreLink Team</b> '
-          this.sEmail.sendEmail(model.email,'',subject,body);
+          this.sEmail.sendEmail(model.email,'',subject,body,'support');
           window.scroll(0,0);
           return true;
       },

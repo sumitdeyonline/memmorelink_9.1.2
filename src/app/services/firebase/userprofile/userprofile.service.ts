@@ -182,7 +182,7 @@ export class UserprofileService {
         //Email Sent to the users
         let subject = uprofile.FirstName+' '+uUploadProfile.LastName+', we are excited to be a part of MemoreLink';
         let body = '<b>'+uprofile.FirstName+' '+uUploadProfile.LastName+', we are excited to be a part of MemoreLink, we are premier Job site where you can search your dream job with the Numerology Predection, please visit our site(https://memorelink.com) . Wish you best of luck for your future</b>  <br /><br /> UserID : '+uUploadProfile.Email+'<br />Temp Password: Memorelink1 <br /><br />Please send us email(support@memorelink.com) if you want to unsubscribe yourself from us.<br/></br> <b>Thank you <br>MemoreLink Team</b> '
-        this.sEmail.sendEmail(uUploadProfile.Email,'',subject,body);
+        this.sEmail.sendEmail(uUploadProfile.Email,'',subject,body,'support');
       });
 
   }

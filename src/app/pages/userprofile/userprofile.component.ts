@@ -230,7 +230,7 @@ export class UserProfileComponent implements OnInit {
     /* Email Start */
     let subject = 'You have updated your profile';
     let body = 'Thank you '+this.auth.userProfile.name+'  for updating your profile.  <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
-    this.sEmail.sendEmail(this.auth.userProfile.name,'',subject,body);
+    this.sEmail.sendEmail(this.auth.userProfile.name,'',subject,body,'support');
 
     window.scroll(0,0);
     //this.getFilesWithDownloadURL(this.rUploadService.downloadURL);

@@ -26,23 +26,36 @@
         <div class="col-md-8">
             <div class="col_3">
 
-
+              <br>
               <div id="myTabContent" class="tab-content">
 
-                    
+
+
+                <div class="row">
+                    <div class="col">
+                        <h4>&nbsp;Jobs Posted</h4>
+                    </div>
+                    <div class="col">
+
+                        <div id="buttonHomePage" class="clearfix" align="middle">
+                            <!-- <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/resumesearch" value="Search Profiles"></label> -->
+                            <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/postjob" value="Post Job"></label>
+                            
+                            <!-- <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Resume Search"></label> -->
+                        </div>
+                    </div>
+                </div>                
 
                        
                         <!-- <h4>Jobs Posted</h4> -->
-                    <div id="buttonHomePage">
+                    <!-- <div id="buttonHomePage"> 
                         <span style="font-size: 1.8em;">Jobs Posted&nbsp;&nbsp;&nbsp;&nbsp;
 
                         </span>
 
                         
                             <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/postjob" value="Post Job"></label>
-                        <!-- &nbsp;&nbsp;&nbsp;
-                        <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Search Resume"></label> -->
-                    </div>
+                     </div> -->
                     <br>
                     <form #postform="ngForm" (ngSubmit)="selectPostedJob(postform.value)">
 

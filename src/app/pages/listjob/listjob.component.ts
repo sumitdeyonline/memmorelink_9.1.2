@@ -89,6 +89,7 @@ export class ListjobComponent implements OnInit {
   //toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
   EmpTypesList: string[];
   workFromHomeTravelReqList: string[];
+  searchParameter:boolean=false;
 
   constructor(private router: Router, 
               private route: ActivatedRoute, 
@@ -463,8 +464,12 @@ export class ListjobComponent implements OnInit {
 
           //console.log("All Data" +this.PostJobc[0].CompanyLogoURL);
           if (this.PostJobc.length == 0)  {
-            this.notfoundAnything();
+            this.searchParameter = true;
+            this.notfoundAnything(); 
           }
+          else {
+            this.searchParameter = false;
+          }             
           // this.SpinnerService.hide();
           this.loading = false; 
           this.setPage(1);
@@ -659,7 +664,7 @@ export class ListjobComponent implements OnInit {
   }
 
   notfoundAnything() {
-    this.noResultFound = "No Record Found";
+    this.noResultFound = "No Record(s) Found";
     this.loading = false; 
 
   }
@@ -715,8 +720,12 @@ export class ListjobComponent implements OnInit {
         //console.log("No City State");
         //this.SpinnerService.hide(); 
         if (this.PostJobc.length == 0)  {
+          this.searchParameter = true;
           this.notfoundAnything();
         }
+        else {
+          this.searchParameter = false;
+        }   
         this.loading = false; 
 
         this.setPage(1);
@@ -736,7 +745,11 @@ export class ListjobComponent implements OnInit {
         //this.SpinnerService.hide(); 
         //console.log("City or State");
         if (this.PostJobc.length == 0)  {
+          this.searchParameter = true;
           this.notfoundAnything();
+        }
+        else {
+          this.searchParameter = false;
         }
         this.loading = false; 
         this.setPage(1);

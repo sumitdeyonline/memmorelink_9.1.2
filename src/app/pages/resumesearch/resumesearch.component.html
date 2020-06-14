@@ -88,43 +88,11 @@
                     <!-- </p> -->
        
                     </div>
+                    <div [hidden]="searchParameter">
 
-                    <mat-form-field [hidden]="searchParameter">
-                      <mat-label>Employment Types</mat-label>
-                      <mat-select formControlName ="empTypes" multiple>
-
-                            <!-- <mat-select-trigger>
-                              {{empTypes.value ? EmpTypesList[0] : ''}}
-                              <span *ngIf="empTypes.value?.length > 1" class="example-additional-selection">
-                                (+{{EmpTypesList.length - 1}} {{EmpTypesList.value?.length === 2 ? 'other' : 'others'}})
-                              </span>
-                            </mat-select-trigger> -->
-
-
-                        <mat-option *ngFor="let emptype of EmpTypesList" [value]="emptype" (click)="allFilterChanges('EmpTypes')">{{emptype}}</mat-option>
-                        <!-- <mat-option #allSelectedEmpTypes (click)="toggleAllSelection()" [value]="0">Any</mat-option> -->
-                      </mat-select>
-                      </mat-form-field>
-                      &nbsp;&nbsp;
                       <mat-form-field [hidden]="searchParameter">
-                          <mat-label>Relocate</mat-label>
-                          <mat-select formControlName ="Relocate">
-                            <mat-option *ngFor="let rel of singleDropDownloadList" [value]="rel" (click)="allFilterChanges('Relocate')">{{rel}}</mat-option>
-                            <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
-                          </mat-select>
-                      </mat-form-field>                    
-                      &nbsp;&nbsp;
-                      <mat-form-field [hidden]="searchParameter">
-                          <mat-label>Travel</mat-label>
-                          <mat-select formControlName ="TravelReq">
-                            <mat-option *ngFor="let travel of singleDropDownloadList" [value]="travel" (click)="allFilterChanges('Travel')">{{travel}}</mat-option>
-                            <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
-                          </mat-select>
-                      </mat-form-field> 
-                      <br>
-                      <mat-form-field [hidden]="searchParameter">
-                        <mat-label>Work Authorization</mat-label>
-                        <mat-select formControlName ="Workuthorization" multiple>
+                        <mat-label>Employment Types</mat-label>
+                        <mat-select formControlName ="empTypes" multiple>
   
                               <!-- <mat-select-trigger>
                                 {{empTypes.value ? EmpTypesList[0] : ''}}
@@ -134,19 +102,57 @@
                               </mat-select-trigger> -->
   
   
-                          <mat-option *ngFor="let workauth of WorkAuthList" [value]="workauth" (click)="allFilterChanges('WorkAuth')">{{workauth}}</mat-option>
+                          <mat-option *ngFor="let emptype of EmpTypesList" [value]="emptype" (click)="allFilterChanges('EmpTypes')">{{emptype}}</mat-option>
                           <!-- <mat-option #allSelectedEmpTypes (click)="toggleAllSelection()" [value]="0">Any</mat-option> -->
                         </mat-select>
-                      </mat-form-field> 
-
-                      &nbsp;&nbsp;
-                      <mat-form-field [hidden]="searchParameter">
-                          <mat-label>Security Clearance</mat-label>
-                          <mat-select formControlName ="SecurityClearance">
-                            <mat-option *ngFor="let reqclear of singleDropDownloadList" [value]="reqclear" (click)="allFilterChanges('SecurityClear')">{{reqclear}}</mat-option>
-                            <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
+                        </mat-form-field>
+                        &nbsp;&nbsp;
+                        <mat-form-field [hidden]="searchParameter">
+                            <mat-label>Relocate</mat-label>
+                            <mat-select formControlName ="Relocate">
+                              <mat-option *ngFor="let rel of singleDropDownloadList" [value]="rel" (click)="allFilterChanges('Relocate')">{{rel}}</mat-option>
+                              <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
+                            </mat-select>
+                        </mat-form-field>                    
+                        &nbsp;&nbsp;
+                        <mat-form-field [hidden]="searchParameter">
+                            <mat-label>Travel</mat-label>
+                            <mat-select formControlName ="TravelReq">
+                              <mat-option *ngFor="let travel of singleDropDownloadList" [value]="travel" (click)="allFilterChanges('Travel')">{{travel}}</mat-option>
+                              <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
+                            </mat-select>
+                        </mat-form-field> 
+                        <br>
+                        <mat-form-field [hidden]="searchParameter">
+                          <mat-label>Work Authorization</mat-label>
+                          <mat-select formControlName ="Workuthorization" multiple>
+    
+                                <!-- <mat-select-trigger>
+                                  {{empTypes.value ? EmpTypesList[0] : ''}}
+                                  <span *ngIf="empTypes.value?.length > 1" class="example-additional-selection">
+                                    (+{{EmpTypesList.length - 1}} {{EmpTypesList.value?.length === 2 ? 'other' : 'others'}})
+                                  </span>
+                                </mat-select-trigger> -->
+    
+    
+                            <mat-option *ngFor="let workauth of WorkAuthList" [value]="workauth" (click)="allFilterChanges('WorkAuth')">{{workauth}}</mat-option>
+                            <!-- <mat-option #allSelectedEmpTypes (click)="toggleAllSelection()" [value]="0">Any</mat-option> -->
                           </mat-select>
-                      </mat-form-field>                       
+                        </mat-form-field> 
+  
+                        &nbsp;&nbsp;
+                        <mat-form-field [hidden]="searchParameter">
+                            <mat-label>Security Clearance</mat-label>
+                            <mat-select formControlName ="SecurityClearance">
+                              <mat-option *ngFor="let reqclear of singleDropDownloadList" [value]="reqclear" (click)="allFilterChanges('SecurityClear')">{{reqclear}}</mat-option>
+                              <!-- <mat-option #allSelectedWorkFromHome (click)="toggleAllSelection('WorkFromHome')" [value]="0">All</mat-option> -->
+                            </mat-select>
+                        </mat-form-field>   
+
+
+                    </div>
+
+                    
 
                 
               </form>

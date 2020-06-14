@@ -393,11 +393,11 @@ export class PostjobComponent implements OnInit {
 
       }
 
-    this.sEmail.sendEmail(postJobForm.value.ApplyToEmail,'',subject,body);
+    this.sEmail.sendEmail(postJobForm.value.ApplyToEmail,'',subject,body,'job');
 
     if ((postJobForm.value.CCToEmail != null) && (postJobForm.value.CCToEmail != undefined)) {
       if (postJobForm.value.CCToEmail.trim() !='') {
-        this.sEmail.sendEmail(postJobForm.value.CCToEmail,'',subject,body);
+        this.sEmail.sendEmail(postJobForm.value.CCToEmail,'',subject,body,'job');
       } else {
         //console.log("No CC email");
       }
