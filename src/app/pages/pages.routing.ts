@@ -21,6 +21,7 @@ import { RemoreuserComponent } from './remoreuser/remoreuser.component';
 import { ApplicantsComponent } from './applicants/applicants.component';
 import { ApplicantappliedComponent } from './applicants/applicantapplied/applicantapplied.component';
 import { CandidateComponent } from './applicants/candidate/candidate.component';
+import { FaqComponent } from './faq/faq.component';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -52,13 +53,17 @@ export const pagesRouting = RouterModule.forChild([
         component: TechNewsDetailsComponent
     },
     {
-        path: 'login',
+        path: 'signin',
         component: LoginComponent
     },
     {
         path: 'resetpassword',
         component: ResetpasswordComponent
     },
+    {
+        path: 'faq',
+        component: FaqComponent
+    },    
     {
         path: 'userprofile',
         component: UserProfileComponent,

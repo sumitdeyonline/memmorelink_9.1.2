@@ -47,6 +47,7 @@ export class ResumesearchComponent implements OnInit {
   WorkAuthList: string[];
   singleDropDownloadList: string[];
   searchPlaceHolder: string = HOME_CONFIG.SEARCH_RESUME_PLACEHOLDER;
+  searchParameter:boolean=false;
 
   constructor(private route: ActivatedRoute, private pagerService: PagerService, private router: Router,fb: FormBuilder, private etypeserv: EmploymenttypesService,public uProfile: UserprofileService ) { 
     this.searchResumeForm = fb.group({
@@ -65,6 +66,11 @@ export class ResumesearchComponent implements OnInit {
         this.searchResumeForm.controls['ResumeSearch'].setValue(this.ResumeSearchVal);
         this.resumeSearch(this.ResumeSearchVal);
         //console.log("ResumeSearch " + this.ResumeSearchVal);
+      } else {
+        this.searchParameter = true;
+        this.UserProfile=[];
+        this.loading = false;
+        this.setPage(1);
       }
 
       //console.log("Location " + this.location);
@@ -84,7 +90,7 @@ export class ResumesearchComponent implements OnInit {
 
   ngOnInit() { 
     window.scroll(0,0);
-    if (window.screen.width <= 735) { // 768px portrait
+    if (window.screen.width <= 736) { // 768px portrait
       this.mobile = true;
       //console.log("Windows ::: "+this.mobile);
     }
@@ -186,8 +192,12 @@ export class ResumesearchComponent implements OnInit {
         this.UserProfile = data.hits;
         this.UserProfileAll = data.hits;
         if (this.UserProfile.length == 0)  {
+          this.searchParameter = true;
           this.notfoundAnything();
-        }        
+        }  
+        else {
+          this.searchParameter = false;
+        }     
         this.loading = false;
         this.setPage(1);
 
@@ -296,7 +306,7 @@ export class ResumesearchComponent implements OnInit {
 
 
   notfoundAnything() {
-    this.noResultFound = "No Record Found";
+    this.noResultFound = "No Record(s) Found";
     this.loading = false; 
 
   }

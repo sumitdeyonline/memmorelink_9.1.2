@@ -74,6 +74,7 @@ import { ApplicantsComponent } from './applicants/applicants.component';
 import { ApplicantappliedComponent } from './applicants/applicantapplied/applicantapplied.component';
 import { MatSelectModule } from '@angular/material/select';
 import { CandidateComponent } from './applicants/candidate/candidate.component';
+import { FaqComponent } from './faq/faq.component';
 // import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
 // import { TechNewsComponent } from './tech-news';
@@ -159,6 +160,7 @@ import { CandidateComponent } from './applicants/candidate/candidate.component';
         ApplicantsComponent,
         ApplicantappliedComponent,
         CandidateComponent,
+        FaqComponent,
         
         // SignupConfirmComponent
       // AdminhomeComponent,

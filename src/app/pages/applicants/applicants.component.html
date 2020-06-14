@@ -9,7 +9,7 @@
             <div class="col-md-8">
                 <br>
                 <div class="col_3">
-                    <h4>Job Applied for {{jobTitle}} [{{jobID}}]</h4>
+                    <h4>Applicants for {{jobTitle}} [{{jobID}}]</h4>
                     <br>
   
 
@@ -92,7 +92,7 @@
                             <div class="jobs_right">
                                 <div class="date">{{ aj.CreatedDate.toDate() |  date:'dd'}} <span>{{ dformat.monthNumToSigName(aj.CreatedDate.toDate() |  date:'MM') }}</span></div>
                                 <div class="date_desc"><h6 class="title"><a href="mailto:{{aj.FromEmail}}?Subject=Selected your resume" target="_top">{{aj.FirstName}}&nbsp;{{aj.LastName}}</a></h6>
-                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;<a href="mailto:{{aj.FromEmail}}?Subject=Selected your resume" target="_top">{{aj.FromEmail}}</a>
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;<a [routerLink]="['/applicantapplied',aj.FromEmail]" target="_top">{{aj.FromEmail}}</a>
                                     &nbsp;&nbsp;<i class="fa fa-phone" aria-hidden="true"></i>&nbsp;{{aj.PhoneNumber}}
                                     &nbsp;&nbsp;<i class="fa fa-file" aria-hidden="true"></i>&nbsp;<a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>&nbsp;
                                     &nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{aj?.CoverLetter}}</span></div>

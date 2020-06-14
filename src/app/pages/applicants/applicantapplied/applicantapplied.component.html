@@ -9,7 +9,7 @@
                 <div class="col_3">
                     <br>
                     <!-- <h2>Applicants</h2> -->
-                    <h4 *ngIf="pagedItems !=null && pagedItems.length>0">Job(s) Applied By : {{emailid}}</h4> 
+                    <h4 *ngIf="pagedItems !=null && pagedItems.length>0">Job(s) Applied By : <a href="mailto:{{emailid}}?Subject=Selected your resume">{{emailid}}</a></h4> 
                     <br>
   
 

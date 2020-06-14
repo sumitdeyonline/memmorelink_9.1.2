@@ -9,10 +9,14 @@
 					<table>
 						<tr>
 							<td>
-								<input type="text" class="text" autocomplete="off" size="46%"
+								<input type="text" class="text" autocomplete="off" size="46%" [hidden]="mobile"
 								required="required" ngModel name="keyword" #username="ngModel" id="keyword" 
 								placeholder="" value="{{ keyword }}" [ngModel]="keyword" 
-								placeholder="Skills, Job Desc. or Job title">
+								placeholder="{{searchPleaceholder}}">
+								<input type="text" class="text" autocomplete="off"  [hidden]="!mobile"
+								required="required" ngModel name="keyword" #username="ngModel" id="keyword" 
+								placeholder="" value="{{ keyword }}" [ngModel]="keyword" 
+								placeholder="{{searchPleaceholder}}">
 							</td>
 							<td>
 								<!-- <input type="text" class="text" required="required" 
@@ -28,7 +32,7 @@
 								(taSelected)="selectedStatic($event,f.value)">	 -->
 								
 								
-								<input type="text" class="text" required="required" size="20%"
+								<input type="text" class="text" required="required" size="20%" [hidden]="mobile"
 								value= "location" 
 								ngModel name="location"
 								#username="ngModel" 
@@ -39,6 +43,18 @@
 								placeholder= "City or Zipcode"
 								[ngbTypeahead]="search" 
 								(keyup)="zipcodeCitySearch($event.target.value)"/>	
+
+								<input type="text" class="text" required="required" [hidden]="!mobile"
+								value= "location" 
+								ngModel name="location"
+								#username="ngModel" 
+								id="location" placeholder="" 
+								value="{{ location }}" 
+								autocomplete="off"
+								[(ngModel)]="location" 
+								placeholder= "City or Zipcode"
+								[ngbTypeahead]="search" 
+								(keyup)="zipcodeCitySearch($event.target.value)"/>									
 
 
 								<!-- <div class="autocomplete" style="width:300px;">

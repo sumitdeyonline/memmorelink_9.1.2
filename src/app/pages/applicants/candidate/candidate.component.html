@@ -51,7 +51,13 @@
                                         &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="RecordNumber">Records</label>
                                     </div> -->&nbsp;&nbsp;&nbsp;
                                     <div class="col">
-            
+                                        <input type="text"  
+                                        JobTitle
+                                        placeholder="Job Title/ID & Hit Enter"
+                                        autocomplete="off"
+                                        ngModel name="JobTitle" #JobTitle="ngModel" id="JobTitle"
+                                        (keyup.enter)="setFilterValue(aform.value)">&nbsp;&nbsp;&nbsp;
+
                                         <select ngModel name="RecordNumber" 
                                             RecordNumber
                                             ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
@@ -61,14 +67,9 @@
                                             <option value="AllRecords">All Records</option>
                                             <option value="Custom">Custom Date</option>
                                             <!--option>USA</option-->
-                                        </select>&nbsp;&nbsp;&nbsp;
+                                        </select>
 
-                                        <input type="text"  
-                                            JobTitle
-                                            placeholder="Job Title/ID & Hit Enter"
-                                            autocomplete="off"
-                                            ngModel name="JobTitle" #JobTitle="ngModel" id="JobTitle"
-                                            (keyup.enter)="setFilterValue(aform.value)">  
+
 
                                     </div>
 

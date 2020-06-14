@@ -2385,6 +2385,9 @@ p.sm_1{
     .banner_1{ 
         margin-left: unset; 
     }
+    #search_wrapper1 {
+        margin-top: 0em;
+    }
     .navbar-brand {
     padding: 10px 0;
     }	
@@ -2523,10 +2526,10 @@ p.sm_1{
         font-size: 1.6em;
     }
     #search_wrapper1 {
-        margin-top: 2em;
+        margin-top: 0em;
     }
     .banner_1 {
-    min-height: 160px;
+    min-height: 80px;
     }
     .dropdown-menu.columns-3 {
         min-width: 445px;
@@ -2608,8 +2611,11 @@ p.sm_1{
     .navbar-nav {
         margin: 0;
     }
-    #search_wrapper {
+    /* #search_wrapper {
         margin-top: 3em;
+    } */
+    #search_wrapper1 {
+        margin-top: 0em;
     }
     #search_form input[type="text"] {
         margin: 0px 0;
@@ -2619,6 +2625,9 @@ p.sm_1{
     }
     .banner {
         min-height: 410px;
+    }
+    .banner_1 {
+        min-height: 80px;
     }
     .col-sm-4.row_2 {
         text-align: center;
@@ -2715,7 +2724,7 @@ p.sm_1{
         font-size: 1.4em;
     }
     #search_wrapper {
-        margin-top: 2em;
+        margin-top: 0em;
     }
     .banner {
         min-height: 365px;
@@ -2740,7 +2749,7 @@ p.sm_1{
         margin: 2em 0;
     }
     .banner_1 {
-        min-height: 140px;
+        min-height: 80px;
     }
     .nav>li>a {
         padding: 6px 10px;
@@ -2830,6 +2839,9 @@ p.sm_1{
 
 }
 @media (max-width:414px){
+    #search_wrapper1 {
+        margin-top: 0em;
+    }
     .banner_1{ 
         margin-left: unset; 
     }
@@ -2904,8 +2916,14 @@ p.sm_1{
         padding-left: 1px;
         padding-right: 1px;
     }
+    .banner_1 {
+        min-height: 80px;
+    }
 }
 @media (max-width:384px){
+    #search_wrapper1 {
+        margin-top: 0em;
+    }
     .banner_1{ 
         margin-left: unset; 
     }
@@ -2927,6 +2945,9 @@ p.sm_1{
     }
     .banner {
         min-height: 330px;
+    }
+    .banner_1 {
+        min-height: 80px;
     }
     .grid_1 {
         padding: 2em 0 0em;
@@ -2961,7 +2982,7 @@ p.sm_1{
         font-size: 1.1em;
     }
     .banner_1 {
-        min-height: 120px;
+        min-height: 80px;
     }
     .widget {
         margin: 1em 0 2em;

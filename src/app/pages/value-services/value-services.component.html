@@ -1,5 +1,5 @@
 
-<searchheader></searchheader>
+<searchheader *ngIf ="!_auth.isAuthenticated()"></searchheader>
 
 
 
@@ -23,7 +23,8 @@
             <div class="login_div">
 
               <div class="col_3">
-                <h2>Employer Sing Up</h2>
+                <h2 *ngIf ="!_auth.isAuthenticated()">Employer Sign Up</h2>
+                <h2 *ngIf ="_auth.isAuthenticated()">Profile</h2>
  
  
                 <signup-confirm [signupSucessMessage] = "valueservicesSucessMessage"></signup-confirm>
@@ -146,6 +147,7 @@
     
                    <div class="form-group">
                      <table>
+                      <tr><td>&nbsp;</td></tr>
                        <tr>
                          <td>
  
@@ -165,6 +167,9 @@
                            <button class="btn_common btn-default" type="button" value=" reset" id="reset" name="reset" *ngIf="!_auth.isAuthenticated()" (click)="resetForm(valueservicesForm)">
                                <i class="fa fa-repeat"></i>&nbsp;Reset
                            </button>
+                           <button class="btn_common btn-default" type="button" value=" reset" id="reset" name="reset" *ngIf="_auth.isAuthenticated()" (click)="Cancel()">
+                            <i class="fa fa-repeat"></i>&nbsp;Cancel
+                        </button>
                          </td>
                        </tr>
                      </table>

@@ -1,5 +1,6 @@
 
 <div id="search_wrapper1">
+    <br>
     <form #searchResume="ngForm" (ngSubmit)="getResumeSearch(searchResume)">
          <div id="search_form" class="clearfix">
              <!-- <h5>Resume Search</h5> -->
@@ -66,7 +67,7 @@
 
     <div class="table-container">
     
-
+        <br>
         <div ali class="progress-loader" [hidden]="!loading">
                         
             <mat-progress-spinner [mode]="'indeterminate'" [color]="'warn'" style="align-content: center;left:45%;">
@@ -79,7 +80,7 @@
                 <tr>
                     <th colspan="3">
                         <!-- Job Posted&nbsp;({{pjob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a> -->
-                        Job Posted&nbsp;<div class="tooltip"><i class="fa fa-commenting-o"></i><span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>                        <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
+                        Jobs Posted&nbsp;<div class="tooltip"><i class="fa fa-commenting-o"></i><span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/jobpoststatus']" class="read-more">More</a>                        <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
                     </th>
     
                 </tr>  

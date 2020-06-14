@@ -27,7 +27,12 @@
       <div class="col-md-8">
           <div class="col_3">
 
+            <br>
 
+            <div class="row" [hidden]="searchParameter" [hidden]="!searchParameter && !mobile" style="height:100px">
+              <div class="col-sm-2">&nbsp;
+              </div>
+            </div>
 
             <div id="myTabContent" class="tab-content">
 
@@ -84,7 +89,7 @@
        
                     </div>
 
-                    <mat-form-field>
+                    <mat-form-field [hidden]="searchParameter">
                       <mat-label>Employment Types</mat-label>
                       <mat-select formControlName ="empTypes" multiple>
 
@@ -101,7 +106,7 @@
                       </mat-select>
                       </mat-form-field>
                       &nbsp;&nbsp;
-                      <mat-form-field>
+                      <mat-form-field [hidden]="searchParameter">
                           <mat-label>Relocate</mat-label>
                           <mat-select formControlName ="Relocate">
                             <mat-option *ngFor="let rel of singleDropDownloadList" [value]="rel" (click)="allFilterChanges('Relocate')">{{rel}}</mat-option>
@@ -109,7 +114,7 @@
                           </mat-select>
                       </mat-form-field>                    
                       &nbsp;&nbsp;
-                      <mat-form-field>
+                      <mat-form-field [hidden]="searchParameter">
                           <mat-label>Travel</mat-label>
                           <mat-select formControlName ="TravelReq">
                             <mat-option *ngFor="let travel of singleDropDownloadList" [value]="travel" (click)="allFilterChanges('Travel')">{{travel}}</mat-option>
@@ -117,7 +122,7 @@
                           </mat-select>
                       </mat-form-field> 
                       <br>
-                      <mat-form-field>
+                      <mat-form-field [hidden]="searchParameter">
                         <mat-label>Work Authorization</mat-label>
                         <mat-select formControlName ="Workuthorization" multiple>
   
@@ -135,7 +140,7 @@
                       </mat-form-field> 
 
                       &nbsp;&nbsp;
-                      <mat-form-field>
+                      <mat-form-field [hidden]="searchParameter">
                           <mat-label>Security Clearance</mat-label>
                           <mat-select formControlName ="SecurityClearance">
                             <mat-option *ngFor="let reqclear of singleDropDownloadList" [value]="reqclear" (click)="allFilterChanges('SecurityClear')">{{reqclear}}</mat-option>
@@ -144,7 +149,7 @@
                       </mat-form-field>                       
 
                 
-            </form>
+              </form>
 
 
 
@@ -189,7 +194,7 @@
                       <mat-progress-spinner [mode]="'indeterminate'" [color]="'warn'" style="align-content: center;left:45%;">
                       </mat-progress-spinner>
                   
-                  </div>                
+                    </div>                
 
                   <!-- <div ali class="progress-loader" [hidden]="!loading" style="align-content: center;left:45%;">
                   

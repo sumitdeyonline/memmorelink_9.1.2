@@ -8,10 +8,10 @@
     <div class="single">
         <div class="form-container">
             <br>
-            <table>
+            <!-- <table>
                 <tr>
                   <td>
-                    <h2 class="title" style="color: red;">Post Job</h2>
+
                   </td>
                   <td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -21,7 +21,7 @@
                 </tr>
               </table>
               
-              <hr/>
+              <hr/> -->
 
             
 	      <!-- <signup-confirm [signupSucessMessage] = "signupSucessMessage"></signup-confirm>
@@ -38,10 +38,12 @@
                     <div class="col-sm-2">
                         <h3 class="title" style="color: red;">Job Details</h3>&nbsp;
                     </div>
-                    <div class="col">&nbsp;</div>
+                    <div class="col">                        
+                        <button (click)="myjobList()" class="btn btn-primary btn-sm">Back to Posted Jobs</button>
+                    </div>
                     <div class="col-sm-2">&nbsp;</div>
                     <div class="col">
-	
+
                         <div class="form-actions floatRight">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
                         </div>
@@ -57,7 +59,7 @@
                 
                 <div class="row">
                     <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="isSearchable">Active in Search</label>
+                        <label style="font-weight: bold;" for="isSearchable">Active</label>
                     </div>
                     <div class="col">
                         <div class="custom-control custom-switch">
@@ -68,6 +70,10 @@
                             
                             <!-- <label class="custom-control-label" for="isSearchable">Toggle this switch element</label> -->
                           </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">&nbsp;
                     </div>
                 </div>
                 <div class="row">
@@ -425,7 +431,7 @@
                     </div>
                 </div>
 
-
+<!-- 
                 <div class="row">
                   <div class="form-actions floatRight">
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
@@ -433,7 +439,35 @@
                 </div>
                 <div class="error_Message" *ngIf="(!f.valid || !checkSecureImageURL(CompanyLogoURL.value)) && f.touched">
                     &nbsp;&nbsp;&nbsp;(Please enter required fields)
-                </div>                 
+                </div>   -->
+
+                
+                <div class="row">
+                        <div class="col-sm-2">
+                            &nbsp;
+                        </div>
+                        <div class="col">
+                            &nbsp;
+                        </div>
+
+                    <div class="col-sm-2">
+                        <!-- <div class="form-actions floatRight">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
+                        </div> -->
+                    </div>
+                    <div class="col">
+                        <div class="form-actions floatRight">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
+                        </div>
+                        <div class="error_Message" *ngIf="(!f.valid || !checkSecureImageURL(CompanyLogoURL.value)) && f.touched">
+                            &nbsp;&nbsp;&nbsp;(Please enter required fields)
+                        </div>
+                    </div>
+                </div>
+                
+                
+
+
               </form>
             </div>
             <br>

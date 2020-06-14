@@ -11,6 +11,7 @@ import { UserRole } from 'src/app/services/firebase/userprofile/userrole.model';
 import { EmailService } from 'src/app/services/email/email.service';
 import { AngularUtilityComponent } from 'src/app/common';
 import {isNumeric} from 'rxjs/util/isNumeric';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'valueservices',
@@ -38,7 +39,7 @@ export class ValueServicesComponent implements OnInit {
   utility = new AngularUtilityComponent();
 
 
-  constructor(public _auth: AuthService, fb: FormBuilder, public udetails: UserdetailsService, private uProfile: UserprofileService, private sEmail: EmailService) {
+  constructor(public _auth: AuthService,private router: Router, fb: FormBuilder, public udetails: UserdetailsService, private uProfile: UserprofileService, private sEmail: EmailService) {
 
     // this.valueservicesForm = fb.group({
     //   email: ['', Validators.required,Validators.email],
@@ -218,6 +219,10 @@ export class ValueServicesComponent implements OnInit {
     phoneNumberFormat(phone) {
 
       this.udetails.selectedValueServices.phone = this.utility.formatUSNumber(phone);
+    }
+
+    Cancel() {
+      this.router.navigate(['/authlandingpage'])
     }
 
 }

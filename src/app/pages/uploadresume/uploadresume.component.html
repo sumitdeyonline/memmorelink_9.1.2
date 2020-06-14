@@ -3,6 +3,7 @@
       <label><h4>&nbsp;&nbsp;Resume<span style="color: red;">&nbsp;*</span></h4></label>
   </div>
   <div class="col">
+    <div id="buttonHomePage" class="clearfix">
       <div *ngIf="currentFileUpload" class="progress">
           <div class="progress-bar progress-bar-info progress-bar-striped"
                       role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
@@ -12,7 +13,12 @@
       </div>
       <label class="btn btn-default"> <input type="file" name="fileUpload" (change)="selectFile($event)">
       </label>&nbsp;&nbsp;&nbsp;
-      <button class="btn btn-success" [disabled]="!selectedFiles || !resumeUploadEnabled" (click)="upload()">Upload</button>
+
+        <button class="btn btn-primary" [disabled]="!selectedFiles || !resumeUploadEnabled" (click)="upload()">Upload</button>
+        <!-- <button class="btn btn-success" [disabled]="!selectedFiles || !resumeUploadEnabled" (click)="upload()">Upload</button> -->
+
+      <!-- <label class="btn2 btn-2 btn2-1b"><input type="button" [disabled]="!selectedFiles || !resumeUploadEnabled" (click)="upload()" value="Upload"></label> -->
+
       <!-- <label class="btn2 btn-2 btn2-1b"><input type="button" [disabled]="!selectedFiles || !resumeUploadEnabled" (click)="upload()"></label> -->
       <!--a href="{{rUploadService.downloadURL}}" [hidden]="!resumeUploadEnabled" target="_blank">{{rUploadService.fileName}}</a-->
       &nbsp; <!--a href="{{rUploadService.downloadURL}}" [hidden]="!resumeUploadEnabled" target="_blank">Resume1</a-->
@@ -21,6 +27,7 @@
           (.doc, .docx, .pdf, .ppt, .pptx)
       </div>
   </div>
+</div>
 </div>
 <br>
 <div class="table-container">

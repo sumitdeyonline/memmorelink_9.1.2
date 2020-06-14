@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (window.screen.width <= 735) { // 768px portrait
+    if (window.screen.width <= 736) { // 768px portrait
       this.mobile = true;
       //console.log("Windows ::: "+this.mobile);
     }

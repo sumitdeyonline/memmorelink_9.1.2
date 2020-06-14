@@ -26,19 +26,35 @@
         <div class="col-md-8">
             <div class="col_3">
 
-
+                <br>
 
                 <div id="myTabContent" class="tab-content">
 
-                        <div id="buttonHomePage">
+                        <!-- <div id="buttonHomePage">
                             <span style="font-size: 1.8em;">Applicants&nbsp;&nbsp;&nbsp;&nbsp;
 
                             </span>
 
 
-                            <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/resumesearch" value="Search Resume"></label>
+                            <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/resumesearch" value="Search Profiles"></label>
                         </div>
-                        <br>
+                        <br> -->
+
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <h4>&nbsp;&nbsp;Applicants</h4>
+                            </div>
+                            <div class="col">
+        
+                                <div id="buttonHomePage" class="clearfix" align="middle">
+                                    <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/resumesearch" value="Search Profiles"></label>
+                                    
+                                    <!-- <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Resume Search"></label> -->
+                                </div>
+                            </div>
+                        </div>
+
         
 
                             <form #aform="ngForm" (ngSubmit)="selectApplied(aform.value)">
@@ -48,7 +64,13 @@
                                         &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="RecordNumber">Records</label>
                                     </div> -->
                                     <div class="col">
-            
+                                        &nbsp;&nbsp;&nbsp;
+                                        <input type="text"  
+                                        JobTitle
+                                        placeholder="Job Title/ID & Hit Enter"
+                                        autocomplete="off"
+                                        ngModel name="JobTitle" #JobTitle="ngModel" id="JobTitle"
+                                        (keyup.enter)="setFilterValue(aform.value)">  
                                         &nbsp;&nbsp;&nbsp;
                                         <select ngModel name="RecordNumber" 
                                         RecordNumber
@@ -59,13 +81,8 @@
                                         <option value="AllRecords">All Records</option>
                                         <option value="Custom">Custom Date</option>
                                             <!--option>USA</option-->
-                                        </select> &nbsp;&nbsp;&nbsp;
-                                        <input type="text"  
-                                        JobTitle
-                                        placeholder="Job Title/ID & Hit Enter"
-                                        autocomplete="off"
-                                        ngModel name="JobTitle" #JobTitle="ngModel" id="JobTitle"
-                                        (keyup.enter)="setFilterValue(aform.value)">    
+                                        </select> 
+  
                                     </div>
                                     <div class="col" [hidden] = disabledDate>
                                         <input
@@ -238,7 +255,7 @@
                                         <div class="date">{{ aj.CreatedDate.toDate() |  date:'dd'}} <span>{{ dformat.monthNumToSigName(aj.CreatedDate.toDate() |  date:'MM') }}</span></div>
                                         <div class="date_desc"><h6 class="title"><a href="mailto:{{aj.FromEmail}}?Subject=Selected your resume" target="_top">{{aj.FirstName}}&nbsp;{{aj.LastName}}</a></h6>
 
-                                         <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;<a href="mailto:{{aj.FromEmail}}?Subject=Selected your resume" target="_top">{{aj.FromEmail}}</a>
+                                         <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;<a [routerLink]="['/applicantapplied',aj.FromEmail]" target="_top">{{aj.FromEmail}}</a>
                                          &nbsp;&nbsp;<span class="meta"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;{{aj.PhoneNumber}}</span>
                                          &nbsp;&nbsp;<i class="fa fa-file" aria-hidden="true"></i>&nbsp;<span class="meta"><a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>
                                          &nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{aj?.CoverLetter}}</span></div>

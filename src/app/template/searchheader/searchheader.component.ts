@@ -3,7 +3,7 @@ import { ListJob } from './listjob';
 import { FormBuilder, Validators,FormControl  } from '@angular/forms';
 import { AuthService } from '../../services/authentication/auth.service';
 import { Router } from '@angular/router';
-import { SEARCH_CONFIG } from '../../global-config';
+import { SEARCH_CONFIG, HOME_CONFIG } from '../../global-config';
 import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 import { isNumeric } from 'rxjs/util/isNumeric';
@@ -38,6 +38,8 @@ export class SearchheaderComponent implements OnInit {
   // 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
   // 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
   searchvar =[];
+  mobile: boolean=false;
+  searchPleaceholder=HOME_CONFIG.SEARCH_POST_PLACEHOLDER;
   // formatter = (result: string) => result.toUpperCase();
   search = (text$: Observable<string>) =>
     text$.pipe(
@@ -63,6 +65,10 @@ export class SearchheaderComponent implements OnInit {
     //constructor() {    }
   ngOnInit() {
     //this.keyword = "testing";
+    if (window.screen.width <= 736) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
   }
 
   searchjob(jobsearchComponent) {
