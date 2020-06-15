@@ -13,15 +13,35 @@
             <form #userProfileForm="ngForm" (ngSubmit)="userProfileSubmit(userProfileForm)">
 
                 <div class="row">
+                    <!-- <div class="error_Message" *ngIf="!userProfileForm.valid && userProfileForm.touched">
+                        (Please enter required fields)
+                    </div>   -->
+                    <div class="col-sm-2">
+                        <h3 class="title" style="color: red;">Profile</h3>&nbsp;
+                    </div>
+                    <div class="col">
+                        <input type="button" value="{{editProfileText}}" class="btn btn-primary btn-sm" [disabled]="!isUpdate" (click)="EnableEdit()">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" class="btn btn-primary btn-sm" [disabled]="!userProfileForm.valid || !isUpdateProfile">
+                        <div class="error_Message" *ngIf="!userProfileForm.valid && userProfileForm.touched">
+                            (Please enter required fields)
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+
+                    </div>
+                    <div class="col">
+                        <input type="button" routerLink="/uploadresumepage" [disabled]="isUpdateProfile" value="Upload Resume" class="btn btn-primary btn-sm">
+                    </div>
+                </div>
+
+                <!-- <div class="row">
 
 
                     <div class="col-sm-2">
                         <h3 class="title" style="color: red;">Profile</h3>&nbsp;
                     </div>
-                    <!-- <div class="col">
-                            &nbsp;
 
-                    </div> -->
                     <div class="col-sm-2">
                         <div class="col" align="left">
                             <div class="form-actions floatRight">
@@ -39,7 +59,7 @@
                         (Please enter required fields)
                     </div>
 
-                </div>
+                </div> -->
 
                 <hr>
 
@@ -594,7 +614,7 @@ emptype
             </div> -->
 
 
-            
+<!--             
             <div class="row">
                 <div class="error_Message" *ngIf="!userProfileForm.valid && userProfileForm.touched">
                     (Please enter required fields)
@@ -609,6 +629,29 @@ emptype
                 </div>
                 <div class="col-sm-2">
  
+                </div>
+                <div class="col">
+                    <input type="button" routerLink="/uploadresumepage" [disabled]="isUpdateProfile" value="Upload Resume" class="btn btn-primary btn-sm">
+                </div>
+            </div> -->
+
+            <div class="row">
+                <!-- <div class="error_Message" *ngIf="!userProfileForm.valid && userProfileForm.touched">
+                    (Please enter required fields)
+                </div>   -->
+                <div class="col-sm-2">
+                    &nbsp;
+                </div>
+                <div class="col">
+                    <input type="button" value="{{editProfileText}}" class="btn btn-primary btn-sm" [disabled]="!isUpdate" (click)="EnableEdit()">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" class="btn btn-primary btn-sm" [disabled]="!userProfileForm.valid || !isUpdateProfile">
+                    <div class="error_Message" *ngIf="!userProfileForm.valid && userProfileForm.touched">
+                        (Please enter required fields)
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+
                 </div>
                 <div class="col">
                     <input type="button" routerLink="/uploadresumepage" [disabled]="isUpdateProfile" value="Upload Resume" class="btn btn-primary btn-sm">

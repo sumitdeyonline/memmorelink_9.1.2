@@ -10,7 +10,7 @@
           <td>
             <h3 *ngIf="pjob !=null" class="title" style="color: red;">{{ pjob.JobTitle }}</h3>
           </td>
-          <td align="right" [hidden]="mobile">
+          <td align="left" [hidden]="mobile">
             <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onPredict()" class="btn btn-primary btn-sm">Numerology Prediction</button>
             &nbsp;&nbsp;&nbsp;&nbsp;
             
@@ -116,7 +116,7 @@
             <hr/>
             <h4 *ngIf="pjob?.ApplyToURL !='' && pjob?.ApplyToURL !=null && pjob?.ApplyToURL !=undefined"> Apply to this URL</h4>
             <div *ngIf="pjob?.ApplyToURL !='' && pjob?.ApplyToURL !=null && pjob?.ApplyToURL !=undefined"><a href="{{pjob?.ApplyToURL}}" target="_blank">{{pjob?.ApplyToURL}}</a></div>
-
+            <hr *ngIf="pjob?.ApplyToURL !='' && pjob?.ApplyToURL !=null && pjob?.ApplyToURL !=undefined"/>
             <!-- <div *ngIf="pjob !=null && pjob?.JobID !=undefined  && pjob?.JobID !=null">Job ID : {{pjob?.JobID}}</div>
             <hr *ngIf="pjob !=null && pjob?.JobID !=undefined  && pjob?.JobID !=null"/> -->
             <table align="left"> 

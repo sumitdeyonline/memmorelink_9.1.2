@@ -14,11 +14,17 @@ export class UploadresumepageComponent implements OnInit {
   relocate: any='';
   travel: any='';
   security: any='';
+  mobile: boolean=false;
 
   constructor(private _uprofile: UserprofileService, public auth: AuthService) {    window.scroll(0,0); }
 
   ngOnInit(): void {
     window.scroll(0,0);
+    window.scroll(0,0);
+    if (window.screen.width <= 736) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
     this._uprofile.getUserDetails(this.auth.userProfile.name,'U').subscribe(uprof=> {
       this.uprofile = uprof;
       if ((this.uprofile[0] != null) && (this.uprofile[0] != undefined)) {
