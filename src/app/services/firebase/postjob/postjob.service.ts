@@ -167,6 +167,7 @@ export class PostjobService {
   addUpdatePostJobs(pjobc :  PostJobc,id: string, createDate: Date, createdBy: string, uDetails: UserDetails ) {
 
     //pjobc.LastModifiedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
+    //console.log("FFGGHH===>>>> "+pjobc.JobID);
 
     pjobc.LastModifiedDate = new Date();
     pjobc.LastModifiedBy = this.auth.userProfile.name;
@@ -318,10 +319,12 @@ export class PostjobService {
 
     let jobDesc = this.htmlToPlaintext(pjobc.JobDesc);
     let skill = this.htmlToPlaintext(pjobc.Skills);
-    let jobID='';
+    //let jobID='';
 
-    if ((pjobc.JobID != undefined) && (pjobc.JobID != null))
-      jobID=pjobc.JobID;
+    //console.log("Job ID ::: "+pjobc.JobID);
+
+    // if ((pjobc.JobID != undefined) && (pjobc.JobID != null))
+    //   jobID=pjobc.JobID;
 
     // console.log("Job Desc ::: "+jobDesc);
     // console.log("Job Skill ::: "+skill);
@@ -344,7 +347,7 @@ export class PostjobService {
         id: id,
         objectID: id,
         JobTitle:pjobc.JobTitle,
-        JobID:jobID,
+        JobID:pjobc.JobID,
         Company:pjobc.Company,
         CompanyLogoURL: pjobc.CompanyLogoURL,
         // JobDesc:pjobc.JobDesc,

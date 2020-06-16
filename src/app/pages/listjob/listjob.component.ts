@@ -23,6 +23,9 @@ import { EmploymenttypesService } from 'src/app/services/firebase/employmenttype
 import { EmploymentTypes } from 'src/app/services/firebase/employmenttypes/employmenttypes.model';
 import { EmploymentTypesList } from './empTypes.model';
 import { MatOption } from '@angular/material/core';
+import { AuthService } from 'src/app/services/authentication/auth.service';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { SavejobComponent } from './savejob/savejob.component';
 //import { ZipCityState } from './zipcity.model';
 //import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -99,7 +102,9 @@ export class ListjobComponent implements OnInit {
               private http: HttpClient,
               private locserv: LocationService,
               private etypeserv: EmploymenttypesService,
-              fb: FormBuilder) {
+              fb: FormBuilder,
+              private dialog: MatDialog,
+              public auth: AuthService) {
               // private SpinnerService: NgxSpinnerService) {
 
     window.scroll(0,0);
@@ -794,18 +799,23 @@ export class ListjobComponent implements OnInit {
       // this.EmpTypeDropDown[i] = tmpstr.;
       // console.log("tmpStr  ::: "+tmpstr);
     });
-
-    // for(let i=0;i<this.PostJobc.length;i++) {
-
-    //   this.PostJobc[i].EmploymentTypes.length
-    //   //this.EmpTypes[i].EmploymentType = this.PostJobc[i].EmploymentTypes;
-    //   console.log(this.PostJobc[i].EmploymentTypes+ " Length :::: "+this.PostJobc[i].EmploymentTypes.length);
-    //   for (let j=0;j<this.PostJobc[i].EmploymentTypes.length;j++) {
-    //     console.log(this.PostJobc[i].EmploymentTypes[j]);
-    //   }
-    // }
   }
 
+  favoriteJob(listjob) {
+    console.log("Pst Job ID :::: "+listjob.id);
+
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.data = this.pjob.ApplyToEmail;
+    dialogConfig.data = listjob;
+    // dialogConfig.height = "4";
+    // dialogConfig.width ="3";      
+     dialogConfig.height = "40%";
+     if (this.mobile)
+      dialogConfig.width ="90%";
+     else 
+      dialogConfig.width ="25%";
+    this.dialog.open(SavejobComponent, dialogConfig);
+  }
   
   setPage(page: number) {
     //console.log("Page Count");

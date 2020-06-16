@@ -75,6 +75,8 @@ import { ApplicantappliedComponent } from './applicants/applicantapplied/applica
 import { MatSelectModule } from '@angular/material/select';
 import { CandidateComponent } from './applicants/candidate/candidate.component';
 import { FaqComponent } from './faq/faq.component';
+import { SavejobsService } from '../services/firebase/savejobs/savejobs.service';
+import { SavejobComponent } from './listjob/savejob/savejob.component';
 // import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
 // import { TechNewsComponent } from './tech-news';
@@ -161,6 +163,7 @@ import { FaqComponent } from './faq/faq.component';
         ApplicantappliedComponent,
         CandidateComponent,
         FaqComponent,
+        SavejobComponent
         
         // SignupConfirmComponent
       // AdminhomeComponent,
@@ -196,7 +199,8 @@ import { FaqComponent } from './faq/faq.component';
       ContentfulrapperService,
       AuthGuardService,
       EmploymenttypesService,
-      SequencenumberService
+      SequencenumberService,
+      SavejobsService
 
       //AlphabetNumerologyService
       //AdminGuardService

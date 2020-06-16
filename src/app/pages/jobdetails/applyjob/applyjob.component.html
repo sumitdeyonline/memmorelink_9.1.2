@@ -71,7 +71,8 @@
       </label>&nbsp;&nbsp;
       <!--i class="fa fa-upload fa-2x" aria-hidden="true" (click)="upload()"></i-->
 
-      <button class="btn btn-success" (click)="upload()" [disabled]="!selectedFiles || !filleUploadEnabled">Upload</button>
+      <!-- <button class="btn btn-success" (click)="upload()" [disabled]="!selectedFiles || !filleUploadEnabled">Upload</button> -->
+      <button class="btn btn-primary" (click)="upload()" [disabled]="!selectedFiles || !filleUploadEnabled">Upload</button>
 
 
       <div class="row">
@@ -84,7 +85,7 @@
                             {{progress.percentage}}%</div>
               </div>
               <div style="color: green;" *ngIf="!filleUploadEnabled">
-                  Please Upload Resume(.doc, .docx, .pdf, .ppt, .pptx)
+                  (.doc, .docx, .pdf, .ppt, .pptx)
               </div>
           </div>
       </div>

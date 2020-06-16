@@ -137,15 +137,46 @@
 
                             
                           <div class="jobs_right">
+
+
+
+
                             <!--div class="date">{{ pj.LastModifiedDate.toDate() | date:'dd' }} <span>{{ dformat.monthNumToSigName(pj.LastModifiedDate.toDate() | date:'MM') }}</span></div-->
                             <div class="date">{{ pj.LastModifiedDate |  date:'dd'}} <span>{{ dformat.monthNumToSigName(pj.LastModifiedDate |  date:'MM') }}</span></div>
 
 
 
-                            <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',pj.objectID]" target="_blank">{{ pj.JobTitle }}</a></h6>
+                            <div class="date_desc">
+                              <!-- <h6 class="title">
+                                  
+                                  <a [routerLink]="['/jobdetails',pj.objectID]" target="_blank">{{ pj.JobTitle }}</a>
+                                  <span class="meta" align="Right">
+                                    <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="favoriteJob(pj)" class="btn btn-primary btn-sm">Save for Later</button>
+ 
+                                  </span>
+ 
+                              </h6> -->
+                              <!-- <div align="center">
+                                <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="favoriteJob(pj)" class="btn btn-primary btn-sm">Save for Later</button>
+                              </div> -->
+
+                              <div class="row">
+                                <div class="col">
+                                    <h6 class="title">
+                                        <a [routerLink]="['/jobdetails',pj.objectID]" target="_blank">{{ pj.JobTitle }}</a>
+                                    </h6>
+                                </div>
+                                <div class="col" align="right">
+                                    <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="favoriteJob(pj)" class="btn btn-primary btn-sm">Save for Later</button>
+                                </div>
+                              </div>
+
+
+
                               <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;<span class="companyName">{{ pj.Company?.substring(0,19) }}</span><span class="companyName" *ngIf="pj.Company?.length>19">...</span>
                               &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ pj.JobCity }}, {{ pj.JobState }}</b></span>
                               &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">{{ getDateDiff(pj.LastModifiedDate) }}</span>
+                              <!-- &nbsp;&nbsp;&nbsp;            <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="favoriteJob(pj)" class="btn btn-primary btn-sm">Save for Later</button> -->
                             </div>
                             
                             <div class="clearfix"> </div>

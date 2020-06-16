@@ -206,6 +206,7 @@ export class PostjobComponent implements OnInit {
 
   JobPostSubmit(postJobForm : NgForm) {
     let type;
+    let jobIDTemp;
     //console.log ("postJobForm.value.Email ::: "+postJobForm.value.Email);
     // postJobForm.value.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
     // console.log ("Datatat ::: "+postJobForm.value.CreatedDate);
@@ -266,6 +267,27 @@ export class PostjobComponent implements OnInit {
     }
     //console.log("postJobForm.value.TravelRequirements : "+postJobForm.value.TravelRequirements);
 
+    let pjob:PostJobc = {JobTitle:postJobForm.value.JobTitle,
+      JobDesc:postJobForm.value.JobDesc,
+      Skills:postJobForm.value.Skills,
+      Company:postJobForm.value.Company,
+      CompanyLogoURL:postJobForm.value.CompanyLogoURL,
+      ApplyToEmail:postJobForm.value.ApplyToEmail,
+      CCToEmail:postJobForm.value.CCToEmail,
+      ApplyToURL:postJobForm.value.ApplyToURL,
+      JobCity:postJobForm.value.JobCity,
+      JobState:postJobForm.value.JobState,
+      JobCountry:postJobForm.value.JobCountry,
+      JobZip:postJobForm.value.JobZip,
+      EmploymentTypes:postJobForm.value.EmploymentTypes,   
+      JobPayRate:postJobForm.value.JobPayRate,  
+      Compensation:postJobForm.value.Compensation,  
+      JobLength:postJobForm.value.JobLength,  
+      TravelRequirements:postJobForm.value.TravelRequirements,  
+      isTeleComute:postJobForm.value.isTeleComute,  
+      isSearchable:postJobForm.value.isSearchable,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+     }
+
     if ((this.id == null) || (this.id == '')) {
 
       this.postJobCount = this.postJobCount + 1;
@@ -284,26 +306,7 @@ export class PostjobComponent implements OnInit {
       // console.log("Form Value ::: isTeleComute"+postJobForm.value.isTeleComute);
 
 
-      let pjob:PostJobc = {JobTitle:postJobForm.value.JobTitle,
-                           JobDesc:postJobForm.value.JobDesc,
-                           Skills:postJobForm.value.Skills,
-                           Company:postJobForm.value.Company,
-                           CompanyLogoURL:postJobForm.value.CompanyLogoURL,
-                           ApplyToEmail:postJobForm.value.ApplyToEmail,
-                           CCToEmail:postJobForm.value.CCToEmail,
-                           ApplyToURL:postJobForm.value.ApplyToURL,
-                           JobCity:postJobForm.value.JobCity,
-                           JobState:postJobForm.value.JobState,
-                           JobCountry:postJobForm.value.JobCountry,
-                           JobZip:postJobForm.value.JobZip,
-                           EmploymentTypes:postJobForm.value.EmploymentTypes,   
-                           JobPayRate:postJobForm.value.JobPayRate,  
-                           Compensation:postJobForm.value.Compensation,  
-                           JobLength:postJobForm.value.JobLength,  
-                           TravelRequirements:postJobForm.value.TravelRequirements,  
-                           isTeleComute:postJobForm.value.isTeleComute,  
-                           isSearchable:postJobForm.value.isSearchable,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                          }
+
 
 
       //let id = 'O7TvY8yrEsJY0UHonBDr';
@@ -350,8 +353,11 @@ export class PostjobComponent implements OnInit {
       type = "Created";
     } else {
       type = "Updated";
+
+      pjob.JobID = ""+this.postJob.JobID;
       //this.userDetails[0]={};
-      this.postjobService.addUpdatePostJobs(postJobForm.value,this.id,this.postJob.CreatedDate, this.postJob.CreatedBy, null);
+      //this.postjobService.addUpdatePostJobs(postJobForm.value,this.id,this.postJob.CreatedDate, this.postJob.CreatedBy, null);
+      this.postjobService.addUpdatePostJobs(pjob,this.id,this.postJob.CreatedDate, this.postJob.CreatedBy, null);
     }
 
     //console.log("$Key VALUE :::::: "+postJobForm.value.$key);
@@ -540,6 +546,9 @@ export class PostjobComponent implements OnInit {
 
   getFieldForUpdate() {
     
+//console.log("this.postJob========>>>>>"+this.postJob.JobID);
+
+    this.postjobService.selectedPostJobc.JobID = this.postJob.JobID;
     this.postjobService.selectedPostJobc.id = this.id;
     this.postjobService.selectedPostJobc.JobTitle = this.postJob.JobTitle;
     this.postjobService.selectedPostJobc.JobDesc = this.postJob.JobDesc;

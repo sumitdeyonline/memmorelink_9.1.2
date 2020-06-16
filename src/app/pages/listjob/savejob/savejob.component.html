@@ -1,0 +1,33 @@
+
+<div *ngIf="auth.isAuthenticated()">
+  <h2 mat-dialog-title >{{pjob.JobTitle}} {{message}}</h2>
+</div>
+
+
+<div *ngIf="!auth.isAuthenticated()">
+  <h2 mat-dialog-title>Sign In To Use This Functionality</h2>
+  <div id="buttonHomePage" class="clearfix">
+    <h6>If already registered&nbsp;
+      <label class="btn2 btn-2 btn2-1b">
+        
+        <a [routerLink]="['/signin']" target="_blank"><input type="button" value="Sign In"></a>
+      </label> 
+    </h6>
+  </div>
+
+  <div id="buttonHomePage" class="clearfix">
+    <h6>
+      Register?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <label class="btn2 btn-2 btn2-1b">
+            <a [routerLink]="['/signup']" target="_blank"><input type="button" value="Candidate Sign Up"></a>
+        </label>
+    </h6>
+  </div>
+</div>
+
+
+<button class="mat-raised-button" (click)="close()">Ok</button>
+
+
+
+<!-- <login *ngIf="!auth.isAuthenticated()"></login> -->
