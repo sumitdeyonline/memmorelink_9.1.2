@@ -1,3 +1,5 @@
+
+
 <div class="table-container">
 
     <div ali class="progress-loader" [hidden]="!loading" >
@@ -6,6 +8,60 @@
         </mat-progress-spinner>
     
     </div>  
+
+    <table>
+
+
+        <thead>
+            <tr>
+                <th colspan="4">
+                    <!-- Today's Applied Job&nbsp;({{aJob?.length}}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a  [routerLink]="['/appliedjob']" class="read-more">More</a> -->
+                    Save Job(s)&nbsp;&nbsp;<div class="tooltip"><i class="fa fa-commenting-o"></i><span class="tooltiptext">Last {{numberAtHomePage}} &nbsp; Records.</span></div>
+                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a [routerLink]="['/candidate']" class="read-more">More</a>  -->
+
+                    <!-- <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job"> -->
+                </th>
+
+            </tr>  
+        </thead>      
+        <thead>
+            <tr>
+                <th>Job Title <a (click)="sortValue('asc','JobTitle','SaveJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','JobTitle','SaveJob')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Company <a (click)="sortValue('asc','Company','SaveJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Company','SaveJob')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Location <a (click)="sortValue('asc','Location','SaveJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Location','SaveJob')"><i class="fa fa-caret-down"></i></a></th>
+                <!-- <th>Employment Type</th>                 -->
+                <th>Date Applied <a (click)="sortValue('asc','CreatedDate','SaveJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','CreatedDate','SaveJob')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Applied?</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let sj of savejob">
+                <td><a [routerLink]="['/jobdetails',sj.JobID]" target="_blank">{{ sj.JobTitle?.substring(0,35) }} <span *ngIf="sj.JobTitle?.length>35">...</span></a></td>
+                <td>{{sj.company}}</td>
+                <td>{{sj.joblocation}}</td>
+                <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
+                <td>{{sj.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
+                <td>{{sj.ApplyJob==true?'Yes':'No'}}</td>
+            </tr>
+        </tbody>
+
+
+
+    </table>  
+
+</div>
+
+<br>
+
+<div class="table-container">
+
+    <!-- <div ali class="progress-loader" [hidden]="!loading" >
+                        
+        <mat-progress-spinner [mode]="'indeterminate'" [color]="'warn'" style="align-content: center;left:45%;">
+        </mat-progress-spinner>
+    
+    </div>   -->
 
     <table>
 
@@ -48,6 +104,7 @@
     </table>  
 
 </div>
+
 
 <br>
 

@@ -1,32 +1,47 @@
 
-<div *ngIf="auth.isAuthenticated()">
+<!-- <div *ngIf="auth.isAuthenticated() && !Isdelete">
   <h2 mat-dialog-title >{{pjob.JobTitle}} {{message}}</h2>
+</div> -->
+
+<div *ngIf="auth.isAuthenticated() && Isdelete">
+  <h2 mat-dialog-title >{{pjob.JobTitle}} has been saved already.</h2>
+   Do you want to unsubscribe from the save list?
+   <!-- <label class="btn2 btn-2 btn2-1b"> -->
+      <button *ngIf="!deletedSaveJob" class="btn btn-primary" (click)="deleteSaveJob(sjobscheck[0].id)">Unsubscribe</button>
+      <h6 *ngIf="deletedSaveJob">Unsubscribe the user</h6>
+   <!-- </label> -->
+   <br><br>
 </div>
 
 
 <div *ngIf="!auth.isAuthenticated()">
-  <h2 mat-dialog-title>Sign In To Use This Functionality</h2>
+  <h2 mat-dialog-title>Save Job</h2>
+  <hr>
+  <br>
   <div id="buttonHomePage" class="clearfix">
-    <h6>If already registered&nbsp;
+    <h6>
       <label class="btn2 btn-2 btn2-1b">
         
         <a [routerLink]="['/signin']" target="_blank"><input type="button" value="Sign In"></a>
       </label> 
+      &nbsp;to use this functionality
     </h6>
   </div>
 
   <div id="buttonHomePage" class="clearfix">
     <h6>
-      Register?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <!-- Register?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
         <label class="btn2 btn-2 btn2-1b">
             <a [routerLink]="['/signup']" target="_blank"><input type="button" value="Candidate Sign Up"></a>
         </label>
+        &nbsp; to Register
     </h6>
   </div>
 </div>
+<br>
 
 
-<button class="mat-raised-button" (click)="close()">Ok</button>
+<button class="mat-raised-button" (click)="close()">Cancel</button>
 
 
 

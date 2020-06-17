@@ -7,6 +7,8 @@ import { FIREBASE_CONFIG, SEARCH_CONFIG } from 'src/app/global-config';
 import { map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
+import { ApplyjobService } from '../applyjob/applyjob.service';
+import { ApplyJob } from '../applyjob/applyjob.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,9 @@ export class SavejobsService {
   sjCollection: AngularFirestoreCollection <SaveJob>;
   SaveJobc: Observable<SaveJob[]>;
   sDoc: AngularFirestoreDocument<SaveJob>;
+  ajob:ApplyJob[];
 
-  constructor(private auth: AuthService, private afs : AngularFirestore) { 
+  constructor(private auth: AuthService, private afs : AngularFirestore, private applyjob: ApplyjobService) { 
     this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob);
   }
 
@@ -85,13 +88,15 @@ export class SavejobsService {
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
           ref.where('username','==',username).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc')); 
       }            
-    } else if (type=='UDF') {
+    } else if (type=='UCF') {
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
           ref.where('username','==',username).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.FIRST_PAGE_RECORD_LIMIT));                  
-    } else if (type=='UDM') {
-      this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-        ref.where('username','==',username).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.MORE_PAGE_RECORD_LIMIT));                  
-    } else if (type=='CD') {
+    } 
+    // else if (type=='UDM') {
+    //   this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
+    //     ref.where('username','==',username).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.MORE_PAGE_RECORD_LIMIT));                  
+    // } 
+    else if (type=='CD') {
       //console.log("!!!!! Start Date :: "+startDT+" End Date ::: "+endDt);
       if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
         //console.log("Start Date :: "+startDT+" End Date ::: "+endDt);
@@ -197,7 +202,17 @@ export class SavejobsService {
         // console.log("Country Name  ..... 3");;
         const data = a.payload.doc.data() as SaveJob;
         data.id = a.payload.doc.id;
-        // console.log("Country Name  ..... 4" +data.id);
+        //console.log("Country Name  ..... 4===>" +data.JobID);
+        // if (this.getSaveApplyJob(data.JobID)) {
+          
+        //   data.ApplyJob = true;
+
+        // } else {
+          
+        //   data.ApplyJob = false;
+
+        // }
+        
         return data;
       });
     }));
@@ -205,6 +220,23 @@ export class SavejobsService {
     return this.SaveJobc;
   } 
 
+
+  // getSaveApplyJob(jobid):boolean {
+  //   let sjob=false;
+  //   //console.log("Step 1  ..");
+  //   this.applyjob.getApplyJobByUserJobID(this.auth.userProfile.name,jobid).subscribe(ajobs=>{
+  //     this.ajob = ajobs;
+      
+  //     if (this.ajob.length>0) {
+  //       //console.log("Country Name  ..... ajob.length :::: " +this.ajob.length);
+  //       sjob = true;
+  //     } else {
+  //       //console.log("Country Name  ..... ajob.length :::: else  " +this.ajob.length);
+  //       sjob = false;
+  //     }
+  //   });
+  //   return sjob;
+  // }
 
 
 }

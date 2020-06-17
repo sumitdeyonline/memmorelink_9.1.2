@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { FIREBASE_CONFIG, SEARCH_CONFIG } from 'src/app/global-config';
 import { ApplyJob } from './applyjob.model';
 import { map, catchError } from 'rxjs/operators';
+import { SaveJob } from '../savejobs/savejobs.model';
+
 
 
 @Injectable({
@@ -16,16 +18,39 @@ export class ApplyjobService {
   ApplyJobc: Observable<ApplyJob[]>;
   aDoc: AngularFirestoreDocument<ApplyJob>;
 
+  // sjCollection: AngularFirestoreCollection <SaveJob>;
+  // SaveJobc: Observable<SaveJob[]>;
+  // sDoc: AngularFirestoreDocument<SaveJob>;
+  // sjob:SaveJob;
+
+
   constructor(private auth: AuthService, private afs : AngularFirestore) {
     this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob);
+    //this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob);
   }
 
   addUpdateApplyJobs(ajobc :  ApplyJob) {
     this.ajCollection.add(ajobc).then((entry) => {
-      //("Entry is "+entry.id);
+      console.log("Entry is "+entry.id);
+     // this.saveAppliedJob(entry.id);
+
     })
   }
 
+
+
+  // saveAppliedJob(id) {
+  //   //this.sjob = new SaveJob();
+  //   this.sDoc = this.afs.doc(`${FIREBASE_CONFIG.SaveJob}/${id}`);
+  //   this.sjob = { ApplyJob : true};
+  //   this.sDoc.update(this.sjob).then((entry) => {
+  //     //console.log("Entry ISSSSS "+entry.id);
+
+
+  //   });
+  // }
+
+  
   getApplyJobByAdmin(username,type,company,startDT?:Date,endDt?:Date) {
 
     // if ((searchParam.trim() == '') && (serachParam2.trim() !=''))
@@ -226,6 +251,33 @@ export class ApplyjobService {
         const data = a.payload.doc.data() as ApplyJob;
         data.id = a.payload.doc.id;
         // console.log("Country Name  ..... 4" +data.id);
+        return data;
+      });
+    }));
+
+    return this.ApplyJobc;
+  } 
+
+  getApplyJobByUserJobIDCandidate(user,type,jobid) {
+    //console.log("dshsdkfksdfklsdfklsld :::: jobid "+jobid);
+    if (type == 'U') {
+      this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+        ref.where('FromEmail','==',user).orderBy('CreatedDate','desc'));
+    } else if (type == 'UJ') {
+      this.ajCollection = this.afs.collection(FIREBASE_CONFIG.ApplyJob, ref =>  
+        ref.where('FromEmail','==',user).where('JobID','==',jobid).orderBy('CreatedDate','desc'));
+    }
+
+
+          //console.log("Country Name  ..... 1");
+    this.ApplyJobc = this.ajCollection.snapshotChanges().pipe(map(changes => {
+       //console.log("Country Name  ..... 2");
+      return changes.map(a => {
+         
+        const data = a.payload.doc.data() as ApplyJob;
+        data.id = a.payload.doc.id;
+        //console.log("Country Name  ..... 3::::: "+data.JobID);;
+         //console.log("Apply Job ID" +data.id);
         return data;
       });
     }));

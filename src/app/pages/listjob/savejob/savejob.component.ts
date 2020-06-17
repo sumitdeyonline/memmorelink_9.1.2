@@ -27,6 +27,10 @@ export class SavejobComponent implements OnInit {
   loginError = '';
   mobile: boolean=false;
 
+  Isdelete: boolean=false;
+  deletedSaveJob:boolean = false;
+  deleteJobMsg: string='';
+
 
 
   pjob: PostJobc;
@@ -49,16 +53,19 @@ export class SavejobComponent implements OnInit {
   ngOnInit(): void { 
     this.message = '';
     this.pjob = this.data;
-    console.log("this.JobID ::: "+this.pjob.JobID);
+    //console.log("this.JobID ::: "+this.pjob.JobID);
 
     if (this.auth.isAuthenticated()) {
 
-      console.log("this.sjobscheck.auth  :::: ");
+      //console.log("this.sjobscheck.auth  :::: ");
 
       this.sjob.getUserCompanyByAdmin(this.auth.userProfile.name,this.pjob.id).subscribe(sjob=>{
         this.sjobscheck = sjob;
+
         console.log("this.sjobscheck.auth 2  :::: "+this.sjobscheck.length);
         if (this.sjobscheck.length == 0){
+          this.Isdelete=false;
+          this.deletedSaveJob = false;
           console.log("this.sjobscheck.length  :::: "+this.sjobscheck.length);
           this.uDetails.getUserDetails(this.auth.userProfile.name,'U').subscribe(udetail=>{
             this.userProfile = udetail;
@@ -77,7 +84,7 @@ export class SavejobComponent implements OnInit {
               };
               this.sjob.addUpdateSaveJobs(this.sJobs);
               this.message = ' has been saved';
-              console.log("You have save the job : "+this.sJobs);
+              //console.log("You have save the job : "+this.sJobs);
     
             } 
             // \else {
@@ -86,7 +93,10 @@ export class SavejobComponent implements OnInit {
     
           });
         } else {
-          this.message = ' has been saved already, no need to save it again';
+          //console.log("this.sjobscheck "+this.sjobscheck[0].id);
+          //this.message = " has been saved already. You don't want to keep this job save?";
+          this.Isdelete=true;
+
         }
       })
 
@@ -100,6 +110,12 @@ export class SavejobComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  deleteSaveJob(id) {
+    //console.log("Deleted... "+id);
+    this.sjob.deleteSaveJobWithID(id);
+    this.deletedSaveJob = true;
   }
 
   Login(loginComponent) {

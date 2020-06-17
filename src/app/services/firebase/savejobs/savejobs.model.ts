@@ -11,5 +11,6 @@ export interface SaveJob {
     joblocation?: string;
     company?: string;
     CreatedDate? : Date;
+    ApplyJob?:boolean;
   }
   

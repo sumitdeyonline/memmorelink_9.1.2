@@ -264,6 +264,7 @@ export class PostjobService {
 
   }
 
+  
 
 //   getUpdateSequenceNumber(id) {
 

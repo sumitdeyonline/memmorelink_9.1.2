@@ -809,11 +809,11 @@ export class ListjobComponent implements OnInit {
     dialogConfig.data = listjob;
     // dialogConfig.height = "4";
     // dialogConfig.width ="3";      
-     dialogConfig.height = "40%";
+     dialogConfig.height = "45%";
      if (this.mobile)
       dialogConfig.width ="90%";
      else 
-      dialogConfig.width ="25%";
+      dialogConfig.width ="30%";
     this.dialog.open(SavejobComponent, dialogConfig);
   }
   

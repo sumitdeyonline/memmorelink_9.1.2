@@ -7,6 +7,8 @@ import { UploadResume } from 'src/app/services/firebase/uploadresume/uploadresum
 import { UploadResumeService } from 'src/app/services/firebase/uploadresume/upload-resume.service';
 import { SEARCH_CONFIG } from 'src/app/global-config';
 import { Router } from '@angular/router';
+import { SavejobsService } from 'src/app/services/firebase/savejobs/savejobs.service';
+import { SaveJob } from 'src/app/services/firebase/savejobs/savejobs.model';
 
 @Component({
   selector: 'employeepage',
@@ -16,12 +18,17 @@ import { Router } from '@angular/router';
 export class EmployeepageComponent implements OnInit {
 
   aJob: ApplyJob[];
+  aJobTemp: ApplyJob[];
+  savejob: SaveJob[];
   loading: boolean = false;
   uresume: UploadResume[];
   numberAtHomePage: number = SEARCH_CONFIG.FIRST_PAGE_RECORD_LIMIT;
-  constructor(public auth: AuthService,private appjob: ApplyjobService, private uresumeservice: UploadResumeService,  private router: Router) { }
+  constructor(public auth: AuthService,private appjob: ApplyjobService,
+     private uresumeservice: UploadResumeService,
+     private sjob:SavejobsService,
+     private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
 
     this.loading = true;
     //let sdate = new Date();
@@ -32,6 +39,12 @@ export class EmployeepageComponent implements OnInit {
     let endDt = new Date();
     //let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
     //console.log("end date ::: "+endDt);
+
+    this.appjob.getApplyJobByUserJobIDCandidate(this.auth.userProfile.name,'U','').subscribe(ajob=> {
+      this.aJobTemp = ajob;
+
+    });
+
 
     this.appjob.getApplyJobByAdmin(this.auth.userProfile.name,'CUF','').subscribe(udtl=> {
   
@@ -64,8 +77,85 @@ export class EmployeepageComponent implements OnInit {
       this.loading = false; 
     });     
 
+
+    this.sjob.getSaveJobByAdmin(this.auth.userProfile.name,'UCF','').subscribe(sjob=> {
+  
+      this.savejob = sjob;
+      //console.log(" Length :::: "+this.savejob.length);
+
+      if (this.savejob.length == 0) {
+        
+        //this.setPage(1);
+        this.savejob = [];
+
+      } else {
+
+        if (this.aJobTemp.length > 0) {
+          
+          //console.log("applyjob ::::: before ");
+          for (let i=0;i<this.savejob.length;i++) {
+            let applyjob  = this.aJobTemp.find(apply=>apply.JobID == this.savejob[i].JobID);
+            if (applyjob !=undefined || applyjob !=null) {
+              //console.log("applyjob ::::: "+applyjob.JobID);
+              this.savejob[i].ApplyJob = true;
+            }
+
+            //this.savejob[i].ApplyJob =
+            //this.noOFJob[i] = this.getJobCount(this.pjob[i].JobID);
+            //this.noOFJob[i] = this.getJobCount(this.pjob[i].JobID);
+            //console.log("Count ::: "+this.getJobCount(this.pjob[i],i) );
+            //this.getJobCount(this.savejob[i],i);
+            //console.log("Recird True ::: "+this.savejob[i].ApplyJob);
+          }
+
+        } 
+
+
+
+
+        // this.savejob = this.aJobAll.filter(function(ajobfilter) {
+        //   // return ajobfilter.JobTitle = appliedJpb.JobTitle;
+        //   //console.log("ajobfilter.JobTitle.indexOf(appliedJpb.JobTitle) "+ajobfilter.JobTitle.indexOf(appliedJpb.JobTitle));
+        //   return (ajobfilter.JobTitle.toUpperCase().indexOf(appliedJpb.JobTitle.toUpperCase()) > -1) || (ajobfilter.JobIDSerial===appliedJpb.JobTitle);
+        // });
+
+
+      }
+      
+
+      //console.log("Company :::==>>>> "+this.aJob[0].company);
+      this.loading = false; 
+    });     
+
+  
+
   }
 
+
+//   getJobCount(job,i) {
+//     let aJobtmp: ApplyJob[];
+//     let nofRecord=0;
+//     this.appjob.getApplyJobByUserJobID(this.auth.userProfile.name,job.JobID).subscribe(ajob=> {
+//       aJobtmp = ajob;
+// //console.log("nofRecord :: "+aJobtmp.length);
+//       if (aJobtmp.length > 0) {
+//         nofRecord = aJobtmp.length;
+//         //console.log("nofRecord :: "+nofRecord);
+//         job.ApplyJob = true;
+//         //console.log("Recird True ::: "+job.Applied);
+//         //console.log("Company ::: "+this.aJob[0].company);
+//         return;
+//       }  else {
+//         job.ApplyJob = false;
+//         //console.log("Recird False ::: "+job.Applied);
+//       }
+//       //this.noOFJob[i] = nofRecord;
+
+//       //console.log("Company :::: "+this.noOFJob[i]);
+//     });
+//     return;
+//   }
+  
 
 
   sortValue(type,field,datatype) {
@@ -233,6 +323,85 @@ export class EmployeepageComponent implements OnInit {
 
 
 
+    } else  if (datatype == 'SaveJob') {
+      this.savejob= this.savejob.sort((a,b) => {
+        if (type=='asc') {
+          switch(field) {
+            case 'JobTitle':
+              var nameA = a.JobTitle.toUpperCase(); // ignore upper and lowercase
+              var nameB = b.JobTitle.toUpperCase(); // ignore upper and lowercase
+              break;
+            case 'Company':
+              var nameA = a.company.toUpperCase(); // ignore upper and lowercase
+              var nameB = b.company.toUpperCase(); // ignore upper and lowercase
+              break;              
+            // case 'Email':
+            //   var nameA = a.FromEmail.toUpperCase(); // ignore upper and lowercase
+            //   var nameB = b.FromEmail.toUpperCase(); // ignore upper and lowercase
+            //   break;   
+            case 'Location':
+              var nameA = a.joblocation.toUpperCase(); // ignore upper and lowercase
+              var nameB = b.joblocation.toUpperCase(); // ignore upper and lowercase
+              break;    
+            case 'CreatedDate':
+              var dateA = a.CreatedDate; // ignore upper and lowercase
+              var dateB = b.CreatedDate; // ignore upper and lowercase
+              break;                             
+
+          }
+
+
+        } else {
+
+          switch(field) {
+          case 'JobTitle':
+            var nameA = b.JobTitle.toUpperCase(); // ignore upper and lowercase
+            var nameB = a.JobTitle.toUpperCase(); // ignore upper and lowercase
+            break;
+          case 'Company':
+            var nameA = b.company.toUpperCase(); // ignore upper and lowercase
+            var nameB = a.company.toUpperCase(); // ignore upper and lowercase
+            break;        
+          // case 'Email':
+          //   var nameA = b.FromEmail.toUpperCase(); // ignore upper and lowercase
+          //   var nameB = a.FromEmail.toUpperCase(); // ignore upper and lowercase
+          //   break; 
+          case 'Location':
+            var nameA = b.joblocation.toUpperCase(); // ignore upper and lowercase
+            var nameB = a.joblocation.toUpperCase(); // ignore upper and lowercase
+            break;             
+          case 'CreatedDate':
+            var dateA = b.CreatedDate; // ignore upper and lowercase
+            var dateB = a.CreatedDate; // ignore upper and lowercase
+            break;             
+          }
+
+        }
+
+
+        if (field=='CreatedDate') {
+
+          if (dateA < dateB) {
+            return -1;
+          }
+          if (dateA > dateB) {
+            return 1;
+          }        
+
+        } else {
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+        }
+
+
+
+        // names must be equal
+        return 0;
+      })
     }
   }
 
