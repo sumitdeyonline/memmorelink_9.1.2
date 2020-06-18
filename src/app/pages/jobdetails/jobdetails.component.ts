@@ -6,6 +6,11 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { ApplyjobComponent } from './applyjob/applyjob.component';
 import { JobpredictionComponent } from 'src/app/alphabetnumerology';
 import { AuthService } from 'src/app/services/authentication/auth.service';
+import { SavejobComponent } from '../listjob/savejob/savejob.component';
+import { SavejobsService } from 'src/app/services/firebase/savejobs/savejobs.service';
+import { SaveJob } from 'src/app/services/firebase/savejobs/savejobs.model';
+import { ApplyjobService } from 'src/app/services/firebase/applyjob/applyjob.service';
+import { ApplyJob } from 'src/app/services/firebase/applyjob/applyjob.model';
 //import { PostJobc } from '../../services/firebase/postjob.model';
 //import { PostjobService } from '../../services/firebase/postjob.service';
 
@@ -18,14 +23,22 @@ export class JobdetailsComponent implements OnInit {
 
   id: any; 
   public pjob: PostJobc;
+  pjobtemp: PostJobc[];
+  aJobCheck: ApplyJob[];
   keyword: string;
   location: string;
   travelReq: string;
   mobile: boolean=false;
   isActive: boolean=true;
+  sjobscheck: SaveJob[];
+  isSaveJob:boolean = false;
+  saveJobButtonMsg:string='Save for Later';
+
+  isApplyJob:boolean = false;
+  ApplyJobButtonMsg:string='Apply Now';
   //fileNameDialogRef: MatDialogRef<ApplyjobComponent>;
 
-  constructor(private _activeRoute:ActivatedRoute, private postservice: PostjobService, private dialog: MatDialog, public auth: AuthService) {
+  constructor(private _activeRoute:ActivatedRoute, private appjob: ApplyjobService, private sjob:SavejobsService, private postservice: PostjobService, private dialog: MatDialog, public auth: AuthService) {
     window.scroll(0,0);
     this._activeRoute.queryParams.subscribe(params => {
       //console.log(params);
@@ -40,7 +53,7 @@ export class JobdetailsComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() { 
 
     if (window.screen.width <= 768) { // 768px portrait
       this.mobile = true;
@@ -72,11 +85,56 @@ export class JobdetailsComponent implements OnInit {
       } else {
         this.travelReq = "Work from home not available";
       }
+      this.verifySaveJob();
+      this.verifyApplyJob();
+      
       //alert("Last Modifed Date :::::: "+this.pjob.LastModifiedDate);
       //console.log("List Service ..... 33333 ::::: "+this.pjob.Compensation);
     })
 
   }
+
+
+  verifySaveJob() {
+    //console.log("ID:::: "+this.id);
+    this.sjob.getUserCompanyByAdmin(this.auth.userProfile.name,this.id).subscribe(sjob=>{
+      this.sjobscheck = sjob;
+
+      //console.log("this.sjobscheck.auth 2  :::: "+this.sjobscheck.length);
+      if (this.sjobscheck.length == 0){  
+        this.isSaveJob = false;
+        this.saveJobButtonMsg='Save for Later';
+      } else {
+        //console.log("this.sjobscheck "+this.sjobscheck[0].id);
+        //this.message = " has been saved already. You don't want to keep this job save?";
+        this.isSaveJob = true;
+        this.saveJobButtonMsg='Job Saved';
+
+      }
+    })
+  }
+
+  verifyApplyJob() {
+    //console.log("ID:::: "+this.id);
+    this.appjob.getApplyJobByUserJobIDCandidate(this.auth.userProfile.name,'UJ',this.id).subscribe(ajob=>{
+      this.aJobCheck = ajob;
+
+      //console.log("this.sjobscheck.auth 2  :::: "+this.sjobscheck.length);
+      if (this.aJobCheck.length == 0){  
+        this.isApplyJob = false;
+        this.ApplyJobButtonMsg ='Apply Now';
+      } else {
+        //console.log("this.sjobscheck "+this.sjobscheck[0].id);
+        //this.message = " has been saved already. You don't want to keep this job save?";
+
+        this.isApplyJob = true;
+        this.ApplyJobButtonMsg ='Applied';
+
+      }
+    })
+  }
+
+
 
   jobList() {
      //console.log("Search Componenet ******* "+jobsearchComponent.keyword+" Location "+jobsearchComponent.location);
@@ -87,6 +145,7 @@ export class JobdetailsComponent implements OnInit {
   onApply() {
     //console.log("Pst Job ID :::: "+this.pjob.ApplyToEmail);
       const dialogConfig = new MatDialogConfig();
+      
       // dialogConfig.data = this.pjob.ApplyToEmail;
       this.pjob.id = this.id;
       dialogConfig.data = this.pjob;
@@ -131,6 +190,31 @@ export class JobdetailsComponent implements OnInit {
     //this.postservice.deletePostJob(pjob);
   }
 
+  favoriteJob() {
+    //console.log("Pst Job ID :::: "+listjob.id);
+
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.data = this.pjob.ApplyToEmail;
+    // let pjobtemp: PostJobc[] = [{id:this.pjob.id,
+    //                           JobID: this.pjob.JobID,
+    //                           JobTitle:this.pjob.JobTitle,
+    //                           JobCity:this.pjob.JobCity,
+    //                           JobState:this.pjob.JobState,
+    //                           JobCountry:this.pjob.JobCountry,
+    //                           Company:this.pjob.Company
+    //                           }];
+    this.pjob.id = this.id;
+    dialogConfig.data = this.pjob;
+    // dialogConfig.height = "4";
+    // dialogConfig.width ="3";      
+     dialogConfig.height = "35%";
+     if (this.mobile)
+      dialogConfig.width ="90%";
+     else 
+      dialogConfig.width ="30%";
+    this.dialog.open(SavejobComponent, dialogConfig);
+  }
+
   getDateDiff(dateIput) {
     let lastModifyDate = new Date(dateIput);
     //console.log("Get Time :::::::===> "+dateIput.toDate().getTime());
@@ -139,5 +223,44 @@ export class JobdetailsComponent implements OnInit {
     return Math.round(Math.abs(new Date().getTime() - dateIput.toDate().getTime())/(24*60*60*1000));
     //return Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000);
   }
+
+  // getDateDiff(dateIput) {
+  //   //console.log("dateIput :: "+dateIput);
+  //   let hleft=0;
+  //   let lastModifyDate = new Date(dateIput);
+  //   let finalResult='';
+  //   let resultLessthan24 = '';
+  //   let hr=0,min=0;
+  //   //console.log("lastModifyDate ::: "+lastModifyDate);
+  //   let hour=  Math.round(Math.abs(new Date().getTime() - lastModifyDate.getTime())/(60*60*1000));
+  //   let day = Math.round(hour/24);
+  //   if (hour >=24){
+  //     hleft = hour-day*24;
+  //   } else {
+  //     hleft = Math.round(Math.abs(new Date().getTime() - lastModifyDate.getTime())/(60*1000));
+  //     if (hleft > 60 ) {
+  //       let hr =  Math.round(hleft/60);
+  //       let min = hleft - hr*60;
+  //       if (min < 0) min=60+min;
+  //       resultLessthan24 = hr+" hours "+min+ " minutes ago";
+  //     } else {
+  //       resultLessthan24 = Math.abs(hleft)+" minutes ago";
+  //     } 
+  //   }
+
+  //   if (hour<24?finalResult=resultLessthan24:finalResult= ""+day+" days "+Math.abs(hleft)+" hours ago") 
+  //   // {
+  //   //   finalResult=""+hleft+" hours ago";
+  //   // } else {
+  //   //   finalResult= ""+day+" days "+hleft+" hours ago";
+  //   // }
+  //     //let hleft= hour-day*24;
+
+  //   //console.log("day ::: "+ day+ " Hour left : "+hleft);
+  //   return finalResult;
+  //   //return Math.round(Math.abs(new Date().getTime() - lastModifyDate.getTime())/(24*60*60*1000));
+  //   //return Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000);
+  // }
+  
 
 }

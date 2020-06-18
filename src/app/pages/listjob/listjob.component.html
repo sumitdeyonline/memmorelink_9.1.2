@@ -144,9 +144,10 @@
                             <!--div class="date">{{ pj.LastModifiedDate.toDate() | date:'dd' }} <span>{{ dformat.monthNumToSigName(pj.LastModifiedDate.toDate() | date:'MM') }}</span></div-->
                             <div class="date">{{ pj.LastModifiedDate |  date:'dd'}} <span>{{ dformat.monthNumToSigName(pj.LastModifiedDate |  date:'MM') }}</span></div>
 
-
-
                             <div class="date_desc">
+                                <h6 class="title"><a [routerLink]="['/jobdetails',pj.objectID]" target="_blank">{{ pj.JobTitle }}</a></h6>
+
+                            <!-- <div class="date_desc"> -->
                               <!-- <h6 class="title">
                                   
                                   <a [routerLink]="['/jobdetails',pj.objectID]" target="_blank">{{ pj.JobTitle }}</a>
@@ -159,7 +160,7 @@
                               <!-- <div align="center">
                                 <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="favoriteJob(pj)" class="btn btn-primary btn-sm">Save for Later</button>
                               </div> -->
-
+<!-- 
                               <div class="row">
                                 <div class="col">
                                     <h6 class="title">
@@ -169,7 +170,7 @@
                                 <div class="col" align="right">
                                     <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="favoriteJob(pj)" class="btn btn-primary btn-sm">Save for Later</button>
                                 </div>
-                              </div>
+                              </div> -->
 
 
 
@@ -185,6 +186,8 @@
                               <!--li><a href="#" class="fa fa-plus toggle"></a></li>
                               <li><a href="#" class="fa fa-star"></a></li>
                               <li><a href="#" class="fa fa-link"></a></li-->
+                                <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="favoriteJob(pj)" class="btn btn-primary btn-sm">Save for Later</button>
+ 
                             </ul>
                             <hr class="hr_style">
                             <div [innerHTML]="pj.JobDesc?.substring(0,length)" class="jobdetails"></div>

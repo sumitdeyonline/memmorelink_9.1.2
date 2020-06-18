@@ -105,6 +105,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AdminpageComponent } from './home/adminpage/adminpage.component';
 import { EmployeepageComponent } from './home/employeepage/employeepage.component';
 import { AuthlandingpageComponent } from './home/authlandingpage/authlandingpage.component';
+import { SavedialogComponent } from './home/employeepage/savedialog/savedialog.component';
 
 //import { MiddleimageComponent } from './home/middleimage/middleimage.component';
 // import { HomeComponent } from './homepage/home/home.component';
@@ -133,6 +134,7 @@ import { AuthlandingpageComponent } from './home/authlandingpage/authlandingpage
     AdminpageComponent,
     EmployeepageComponent,
     AuthlandingpageComponent,
+    SavedialogComponent,
 
     //NotfoundComponent,
     //LoginComponent,

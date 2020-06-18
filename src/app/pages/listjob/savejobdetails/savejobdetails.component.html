@@ -1,4 +1,4 @@
-<!-- <searchheader></searchheader> -->
+<searchheader></searchheader>
 
 <div class="container">
 
@@ -26,64 +26,55 @@
         <div class="col-md-8">
             <div class="col_3">
 
-                <br>
+
 
                 <div id="myTabContent" class="tab-content">
 
-                        <!-- <div id="buttonHomePage">
-                            <span style="font-size: 1.8em;">Applicants&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            </span>
-
-
-                            <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/resumesearch" value="Search Profiles"></label>
-                        </div>
-                        <br> -->
-
-
-                        <div class="row">
-                            <div class="col-sm-2">
-                                <h4>&nbsp;&nbsp;Applicants</h4>
-                            </div>
-                            <div class="col">
-        
-                                <div id="buttonHomePage" class="clearfix" align="middle">
-                                    <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/resumesearch" value="Search Profiles"></label>
-                                    
-                                    <!-- <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Resume Search"></label> -->
-                                </div>
-                            </div>
-                        </div>
-                        <br>
+                            <!-- <h4>Job Applied</h4> -->
         
 
-                            <form #aform="ngForm" (ngSubmit)="selectApplied(aform.value)">
+                            <div id="buttonHomePage">
+                                <span style="font-size: 1.8em;">Saved Job(s)&nbsp;&nbsp;&nbsp;&nbsp;
+        
+                                </span>
+                                <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/userprofile" value="Edit Profile"></label>
+
+                                
+                             </div>
+                            <br>
+
+
+                            <form #saveform="ngForm" (ngSubmit)="selectApplied(saveform.value)">
                                 <div class="row">
-<!-- 
-                                    <div class="col-sm-2">
+
+                                    <!-- <div class="col-sm-2">
                                         &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="RecordNumber">Records</label>
-                                    </div> -->
+                                    </div> -->&nbsp;&nbsp;&nbsp;
                                     <div class="col">
-                                        &nbsp;&nbsp;&nbsp;
                                         <input type="text"  
                                         JobTitle
                                         placeholder="Job Title/ID & Hit Enter"
                                         autocomplete="off"
                                         ngModel name="JobTitle" #JobTitle="ngModel" id="JobTitle"
-                                        (keyup.enter)="setFilterValue(aform.value)">  
-                                        &nbsp;&nbsp;&nbsp;
+                                        (keyup.enter)="setFilterValue(saveform.value)">&nbsp;&nbsp;&nbsp;
+
                                         <select ngModel name="RecordNumber" 
-                                        RecordNumber
-                                        ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
-                                        [ngModel]="recordDetails[0].name"
-                                            (ngModelChange)="selectApplied(aform.value)">
-                                        <option value="fewRecords" selected>Last {{noOfRecordFirst}} Records</option>
-                                        <option value="AllRecords">All Records</option>
-                                        <option value="Custom">Custom Date</option>
+                                            RecordNumber
+                                            ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
+                                            [ngModel]="recordDetails[0].name"
+                                             (ngModelChange)="selectApplied(saveform.value)">
+                                            <option value="fewRecords" selected>Last {{noOfRecordFirst}} Records</option>
+                                            <option value="AllRecords">All Records</option>
+                                            <option value="Custom">Custom Date</option>
                                             <!--option>USA</option-->
-                                        </select> 
-  
+                                        </select>
+
+
+
                                     </div>
+
+
+
                                     <div class="col" [hidden] = disabledDate>
                                         <input
                                         type="text"
@@ -95,25 +86,28 @@
                                         [disabled] = disabledDate
                                         ngModel name="startDate" #startDate="ngModel" id="startDate"
                                         [ngModel]="startDt"
-                                        (ngModelChange)="enableCustomFields(aform.value)"
+                                        (ngModelChange)="enableCustomFields(saveform.value)"
                                         [bsConfig]="{ isAnimated: true }">  
+                                    
                                         &nbsp;To&nbsp;
+
                                         <input
                                         type="text"
                                         placeholder="Choose end date"
                                         autocomplete="off"
                                         [disabled] = disabledDate
-                                        size="8"
                                         bsDatepicker
                                         endDate
+                                        size="8"
                                         ngModel name="endDate" #endDate="ngModel" id="endDate"
                                         [ngModel]="endDt"
-                                        (ngModelChange)="enableCustomFields(aform.value)"
+                                        (ngModelChange)="enableCustomFields(saveform.value)"
                                         [bsConfig]="{ isAnimated: true }"> 
 
                                     </div>
 
-                                    <!-- <div class="col-sm-2">
+<!-- 
+                                    <div class="col-sm-2">
                                         &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="JobTitle">Job Title/ID </label>
                                     </div>
                                     <div class="col">
@@ -122,7 +116,7 @@
                                         placeholder="Job Title/ID & Hit Enter"
                                         autocomplete="off"
                                         ngModel name="JobTitle" #JobTitle="ngModel" id="JobTitle"
-                                        (keyup.enter)="setFilterValue(aform.value)">    
+                                        (keyup.enter)="setFilterValue(saveform.value)">    
                                     </div>                                     -->
             
 
@@ -133,7 +127,7 @@
                                         value="fewRecords"
                                         ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
                                         [ngModel]="fewRecords"
-                                        (ngModelChange)="selectApplied(aform.value)"> 
+                                        (ngModelChange)="selectApplied(saveform.value)"> 
                                         &nbsp;<label style="font-weight: bold;" for="RecordNumber">Last {{noOfRecordFirst}} Records </label>
                                     </div> -->
 
@@ -146,7 +140,7 @@
                                         value="AllRecords"
                                         ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
                                         [ngModel]="fewRecords"
-                                        (ngModelChange)="selectApplied(aform.value)">                                 
+                                        (ngModelChange)="selectApplied(saveform.value)">                                 
                                         &nbsp;<label style="font-weight: bold;" for="RecordNumber">All Records </label>
                                     </div> -->
 
@@ -160,7 +154,7 @@
                                         value="Custom"
                                         ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
                                         [ngModel]="fewRecords"
-                                        (ngModelChange)="enableCustomFields(aform.value)">                                 
+                                        (ngModelChange)="enableCustomFields(saveform.value)">                                 
                                         &nbsp;<label style="font-weight: bold;" for="RecordNumber">Custom Date </label>
                                     </div> -->
 
@@ -179,11 +173,11 @@
                                     
 
 
-                                <!-- <div class="row" [hidden] = disabledDate>
+                                <!--div class="row" [hidden] = disabledDate>
                                     <div class="col-sm-2">&nbsp;
                                     </div>
                                 </div>
-                                <div class="row" [hidden] = disabledDate>
+                                 <div class="row" [hidden] = disabledDate>
                                     <div class="col-sm-2">
                                         &nbsp;&nbsp;&nbsp;<label style="font-weight: bold;" for="startDate">Start Date </label>
                                     </div>
@@ -197,9 +191,8 @@
                                         [disabled] = disabledDate
                                         ngModel name="startDate" #startDate="ngModel" id="startDate"
                                         [ngModel]="startDt"
-                                        (ngModelChange)="enableCustomFields(aform.value)"
+                                        (ngModelChange)="enableCustomFields(saveform.value)"
                                         [bsConfig]="{ isAnimated: true }">  
-
                 
                                     </div>
                                     <div class="col-sm-2">
@@ -215,17 +208,17 @@
                                         endDate
                                         ngModel name="endDate" #endDate="ngModel" id="endDate"
                                         [ngModel]="endDt"
-                                        (ngModelChange)="enableCustomFields(aform.value)"
+                                        (ngModelChange)="enableCustomFields(saveform.value)"
                                         [bsConfig]="{ isAnimated: true }"> 
-
                                         </div>
                                 </div> -->
                                 <!-- <div class="row">
                                     <div class="col-sm-2">&nbsp;
                                     </div>
                                 </div> -->
-                            </form>        
-                            <h4 *ngIf="noResultFound !=''">{{noResultFound}}</h4>
+                            </form> 
+                            <br *ngIf="noResultFound !=''">       
+                            <h4 *ngIf="noResultFound !=''">&nbsp;&nbsp;{{noResultFound}}</h4>
                             <!-- loader.component.html -->
                             <div ali class="progress-loader" [hidden]="!loading" >
                             
@@ -234,8 +227,8 @@
                             
                             </div> 
                             <!-- <div id="buttonHomePage" class="clearfix">
-                                <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/resumesearch" value="Search Resume"></label>
-                            </div>  -->
+                                <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/userprofile" value="Edit Profile"></label>
+                             </div>  -->
 
 
                             <hr class="hr_style">
@@ -253,22 +246,21 @@
                                     
                                     <div class="jobs_right">
                                         <div class="date">{{ aj.CreatedDate.toDate() |  date:'dd'}} <span>{{ dformat.monthNumToSigName(aj.CreatedDate.toDate() |  date:'MM') }}</span></div>
-                                        <div class="date_desc"><h6 class="title"><a href="mailto:{{aj.FromEmail}}?Subject=Selected your resume" target="_top">{{aj.FirstName}}&nbsp;{{aj.LastName}}</a></h6>
+                                        <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj?.JobTitle }}</a>
+                                            &nbsp;<i class="fa fa-hashtag"></i><span class="companyName">{{ aj?.JobIDSerial}}</span>
+                                        </h6>
 
-                                         <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;<a [routerLink]="['/applicantapplied',aj.FromEmail]" target="_top">{{aj.FromEmail}}</a>
-                                         &nbsp;&nbsp;<span class="meta"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;{{aj.PhoneNumber}}</span>
-                                         &nbsp;&nbsp;<i class="fa fa-file-o" aria-hidden="true"></i>&nbsp;<span class="meta"><a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>
+                                        <i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ aj.joblocation }}</b></span>
+                                            &nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">&nbsp;Saved on {{ aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }} &nbsp;&nbsp; <i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp; {{aj.ApplyJob==true?'Applied':'Not Applied'}}</span>
+
+                                         <!-- &nbsp;&nbsp;<i class="fa fa-file" aria-hidden="true"></i>&nbsp;<span class="meta"><a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>
                                          &nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{aj?.CoverLetter}}</span></div>
                                         
-                                            </span>
+                                            </span> -->
                                          
-                                            <span class="meta"><br><b>Job Title:</b>&nbsp; <a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj?.JobTitle }}</a></span>
-                                            <br>
+                                            <br> 
                                             
-                                            <i class="fa fa-hashtag"></i>&nbsp;<span class="companyName">{{ aj?.JobIDSerial}}</span>
-
-                                            &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ aj.joblocation }}</b></span>
-                                            &nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">&nbsp;Applied on {{ aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
+ 
 
                                         </div>
                                         <div class="clearfix"> </div>
@@ -276,7 +268,12 @@
                                         <!--li><a href="#" class="fa fa-plus toggle"></a></li>
                                         <li><a href="#" class="fa fa-star"></a></li>
                                         <li><a href="#" class="fa fa-link"></a></li-->
+                                            <li><a (click)="onDelete(aj)" class="fa fa-trash"></a></li>
                                         </ul>
+                                        <div class="clearfix"> </div> 
+
+
+
                                         <!-- <hr class="hr_style">
 
                                         <span class="meta">
@@ -295,7 +292,7 @@
                             </div>
 
                             <!-- pager -->
-                            <ul *ngIf="pager.pages && pager.pages.length && aJob.length>pagesize" class="pagination">
+                            <ul *ngIf="pager.pages && pager.pages.length && sJob.length>pagesize" class="pagination">
                                 <li [ngClass]="{disabled:pager.currentPage === 1}">
                                     <a (click)="setPage(1)">&laquo;</a>
                                 </li>

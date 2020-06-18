@@ -53,7 +53,7 @@ export class SavejobComponent implements OnInit {
   ngOnInit(): void { 
     this.message = '';
     this.pjob = this.data;
-    //console.log("this.JobID ::: "+this.pjob.JobID);
+    //console.log("this.JobID ::: "+this.pjob.id);
 
     if (this.auth.isAuthenticated()) {
 
@@ -62,11 +62,11 @@ export class SavejobComponent implements OnInit {
       this.sjob.getUserCompanyByAdmin(this.auth.userProfile.name,this.pjob.id).subscribe(sjob=>{
         this.sjobscheck = sjob;
 
-        console.log("this.sjobscheck.auth 2  :::: "+this.sjobscheck.length);
+        //console.log("this.sjobscheck.auth 2  :::: "+this.sjobscheck.length);
         if (this.sjobscheck.length == 0){
           this.Isdelete=false;
           this.deletedSaveJob = false;
-          console.log("this.sjobscheck.length  :::: "+this.sjobscheck.length);
+          //console.log("this.sjobscheck.length  :::: "+this.sjobscheck.length);
           this.uDetails.getUserDetails(this.auth.userProfile.name,'U').subscribe(udetail=>{
             this.userProfile = udetail;
     
@@ -83,7 +83,7 @@ export class SavejobComponent implements OnInit {
                 CreatedDate: new Date()
               };
               this.sjob.addUpdateSaveJobs(this.sJobs);
-              this.message = ' has been saved';
+              this.message = ' has been saved.';
               //console.log("You have save the job : "+this.sJobs);
     
             } 
@@ -118,32 +118,32 @@ export class SavejobComponent implements OnInit {
     this.deletedSaveJob = true;
   }
 
-  Login(loginComponent) {
-    //console.log("UserName and PAssword");
-    //this._auth.setLoginError('');
+  // Login(loginComponent) {
+  //   //console.log("UserName and PAssword");
+  //   //this._auth.setLoginError('');
 
-    //console.log("Login Componenet *******");
-    this.loginError ='';
-    this.auth.login(loginComponent.username, loginComponent.password);
+  //   //console.log("Login Componenet *******");
+  //   this.loginError ='';
+  //   this.auth.login(loginComponent.username, loginComponent.password);
  
     
-     setTimeout(() =>{
-      if (this.auth.isAuthenticated()) {
-        //console.log("Authenticated ....");
-      } else {
-        //this.login.username = '';
+  //    setTimeout(() =>{
+  //     if (this.auth.isAuthenticated()) {
+  //       //console.log("Authenticated ....");
+  //     } else {
+  //       //this.login.username = '';
 
 
-          this.login.password = '';
-          //this.loginError ='Wrong Username or Password';
-          this.loginError = localStorage.getItem(AUTH_CONFIG.authErrorMeg);
-          localStorage.removeItem(AUTH_CONFIG.authErrorMeg);
-        //console.log("ERROR ::::::::: --->>>>>"+this._auth.getLoginErrorMsg());
-        //console.log("ERROR ::::::::: --->>>>>"+this.loginError);
-      }
-     }, 1000);    
-    //this._authService.login();
-    //this._authService.getProfile();
-  }
+  //         this.login.password = '';
+  //         //this.loginError ='Wrong Username or Password';
+  //         this.loginError = localStorage.getItem(AUTH_CONFIG.authErrorMeg);
+  //         localStorage.removeItem(AUTH_CONFIG.authErrorMeg);
+  //       //console.log("ERROR ::::::::: --->>>>>"+this._auth.getLoginErrorMsg());
+  //       //console.log("ERROR ::::::::: --->>>>>"+this.loginError);
+  //     }
+  //    }, 1000);    
+  //   //this._authService.login();
+  //   //this._authService.getProfile();
+  // }
 
 }

@@ -52,7 +52,7 @@ html, body{
   .tooltip .tooltiptext {
     visibility: hidden;
     width:  220px;
-    background-color: black;
+    background-color: #f15f43;
     color: #fff;
     text-align: center;
     border-radius: 6px;

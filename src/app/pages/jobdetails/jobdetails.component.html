@@ -11,21 +11,11 @@
             <h3 *ngIf="pjob !=null" class="title" style="color: red;">{{ pjob.JobTitle }}</h3>
           </td>
           <td align="left" [hidden]="mobile">
-            <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onPredict()" class="btn btn-primary btn-sm">Numerology Prediction</button>
+
+            <!-- <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onPredict()" class="btn btn-primary btn-sm">Numerology Prediction</button> -->
             &nbsp;&nbsp;&nbsp;&nbsp;
             
-            <button type="button" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())"  value="Apply Now" (click)="onApply()" class="btn btn-primary btn-sm">Apply Now</button> 
-
-
-            <!-- <div id="buttonHomePage" class="clearfix">
-              <label class="btn2 btn-2 btn2-1b">
-                  <input type="button" value="Numerology Prediction" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onPredict()" class="btn btn-primary btn-sm">
-              </label>
-              <label class="btn2 btn-2 btn2-1b">
-                  <input type="button" value="Apply Now" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())"   (click)="onApply()" class="btn btn-primary btn-sm">
-
-              </label>
-            </div>  -->
+            <!-- <button type="button" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())"  value="Apply Now" (click)="onApply()" class="btn btn-primary btn-sm">Apply Now</button>  -->
 
 
             
@@ -40,6 +30,32 @@
               &nbsp;&nbsp;<i class="fa fa-calendar"></i>&nbsp;<span class="meta" *ngIf="pjob !=null"><b>{{ getDateDiff(pjob.LastModifiedDate) }}&nbsp;days ago</b></span>  
               &nbsp;&nbsp;<i class="fa fa-hashtag"></i>&nbsp;<span class="companyName">{{ pjob?.JobID}}</span>
               <hr/>
+
+              
+              <!-- <table align="left"> 
+                <tr>
+                  <td align="left">
+                    &nbsp;<button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onPredict()" class="btn btn-primary btn-sm">Numerology Prediction</button>
+                    &nbsp;       
+                    <button type="button" value="Apply Now" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onApply()" class="btn btn-primary btn-sm">Apply Now</button>
+                    &nbsp;&nbsp;<button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="favoriteJob()" class="btn btn-primary btn-sm">Save for Later</button>
+                  </td>
+                  <td>&nbsp;
+  
+                  </td>
+                </tr>  
+                <tr rowspan="2"><td>&nbsp;</td></tr>              
+              </table> -->
+              &nbsp;<button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onPredict()" class="btn btn-primary btn-sm">Numerology Prediction</button>
+              
+              &nbsp;&nbsp;<button type="button" *ngIf="(auth.isAuthenticated() && auth.isUserRole() && isApplyJob)" [disabled]="isApplyJob" value="Apply Now" (click)="onApply()" class="btn btn-primary btn-sm">{{ApplyJobButtonMsg}}</button> 
+              <button type="button" *ngIf="(auth.isAuthenticated() && auth.isUserRole() && !isApplyJob)"  value="Apply Now" [disabled]="isApplyJob" (click)="onApply()" class="btn btn-primary btn-sm">{{ApplyJobButtonMsg}}</button> 
+              <button type="button" *ngIf="!auth.isAuthenticated()"  value="Apply Now" (click)="onApply()" class="btn btn-primary btn-sm">{{ApplyJobButtonMsg}}</button> 
+
+              &nbsp;<button type="button" value="Predict the Job" *ngIf="(auth.isAuthenticated() && auth.isUserRole() && isSaveJob)"  (click)="favoriteJob()" class="btn btn-primary btn-sm">{{saveJobButtonMsg}}</button>
+              <button type="button" value="Predict the Job" *ngIf="(auth.isAuthenticated() && auth.isUserRole() && !isSaveJob)" (click)="favoriteJob()" class="btn btn-primary btn-sm">{{saveJobButtonMsg}}</button>
+              <button type="button" value="Predict the Job" *ngIf="(!auth.isAuthenticated())" (click)="favoriteJob()" class="btn btn-primary btn-sm">{{saveJobButtonMsg}}</button>
+
               <div class="jobdetails_public">
                 <span *ngIf="pjob !=null" class="meta"><b><i class="fa fa-briefcase"></i>&nbsp;&nbsp;{{ pjob.EmploymentTypes }}</b></span><br>
                 <span *ngIf="pjob !=null" class="meta"><b><i class="fa fa-money"></i>&nbsp;&nbsp;{{ pjob.Compensation }}</b></span><br>
@@ -123,9 +139,10 @@
               <tr>
                 <td align="left">
                   <!-- <button (click)="jobList()" class="btn btn-primary btn-sm">Back to search</button>&nbsp;&nbsp; -->
-                  <button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onPredict()" class="btn btn-primary btn-sm">Numerology Prediction</button>
-                  &nbsp;&nbsp;&nbsp;&nbsp;        
+                  &nbsp;<button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onPredict()" class="btn btn-primary btn-sm">Numerology Prediction</button>
+                  &nbsp;       
                   <button type="button" value="Apply Now" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="onApply()" class="btn btn-primary btn-sm">Apply Now</button>
+                  &nbsp;&nbsp;<button type="button" value="Predict the Job" *ngIf="!auth.isAuthenticated() || (auth.isAuthenticated() && auth.isUserRole())" (click)="favoriteJob()" class="btn btn-primary btn-sm">Save for Later</button>
                 </td>
                 <td>&nbsp;
 

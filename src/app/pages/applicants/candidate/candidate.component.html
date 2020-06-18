@@ -34,7 +34,7 @@
         
 
                             <div id="buttonHomePage">
-                                <span style="font-size: 1.8em;">Job Applied&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="font-size: 1.8em;">Applied Job(s)&nbsp;&nbsp;&nbsp;&nbsp;
         
                                 </span>
                                 <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/userprofile" value="Edit Profile"></label>
@@ -252,7 +252,7 @@
                                         <i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ aj.joblocation }}</b></span>
                                             &nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">&nbsp;Applied on {{ aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
 
-                                         &nbsp;&nbsp;<i class="fa fa-file" aria-hidden="true"></i>&nbsp;<span class="meta"><a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>
+                                         &nbsp;&nbsp;<i class="fa fa-file-o" aria-hidden="true"></i>&nbsp;<span class="meta"><a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>
                                          &nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{aj?.CoverLetter}}</span></div>
                                         
                                             </span>

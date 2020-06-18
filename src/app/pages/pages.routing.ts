@@ -22,6 +22,7 @@ import { ApplicantsComponent } from './applicants/applicants.component';
 import { ApplicantappliedComponent } from './applicants/applicantapplied/applicantapplied.component';
 import { CandidateComponent } from './applicants/candidate/candidate.component';
 import { FaqComponent } from './faq/faq.component';
+import { SavejobdetailsComponent } from './listjob/savejobdetails/savejobdetails.component';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -74,7 +75,11 @@ export const pagesRouting = RouterModule.forChild([
         component: UploadresumepageComponent,
         canActivate: [AuthGuardService]
     }, 
-
+    {
+        path: 'savejobdetails',
+        component: SavejobdetailsComponent,
+        canActivate: [AuthGuardService]
+    }, 
     {
         path: 'removeuser',
         component: RemoreuserComponent,

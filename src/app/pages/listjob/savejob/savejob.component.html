@@ -2,27 +2,39 @@
 <!-- <div *ngIf="auth.isAuthenticated() && !Isdelete">
   <h2 mat-dialog-title >{{pjob.JobTitle}} {{message}}</h2>
 </div> -->
+<h2 mat-dialog-title>Save Job for Future Reference</h2>
+<hr>
+
 
 <div *ngIf="auth.isAuthenticated() && Isdelete">
-  <h2 mat-dialog-title >{{pjob.JobTitle}} has been saved already.</h2>
-   Do you want to unsubscribe from the save list?
+  <!-- <h6 *ngIf="!deletedSaveJob">{{pjob.JobTitle}} is already saved.</h6>
+  <h6 *ngIf="deletedSaveJob">{{pjob.JobTitle}} is removed sucessfully.</h6> -->
+
+  <p *ngIf="!deletedSaveJob"><b>{{pjob.JobTitle}}</b> is already saved.</p>
+  <p *ngIf="deletedSaveJob"><b>{{pjob.JobTitle}}</b> is removed sucessfully.</p>
+   <br>
    <!-- <label class="btn2 btn-2 btn2-1b"> -->
-      <button *ngIf="!deletedSaveJob" class="btn btn-primary" (click)="deleteSaveJob(sjobscheck[0].id)">Unsubscribe</button>
-      <h6 *ngIf="deletedSaveJob">Unsubscribe the user</h6>
+      <!-- <h6 *ngIf="deletedSaveJob">Remove this saved job</h6> -->
+      <button *ngIf="!deletedSaveJob" class="btn btn-primary" (click)="deleteSaveJob(sjobscheck[0].id)">Remove</button>
+      &nbsp;&nbsp;<button *ngIf="!deletedSaveJob" class="btn btn-primary" (click)="close()">Cancel</button>
+      <button *ngIf="deletedSaveJob" class="btn btn-primary" (click)="close()">Continue</button>
+
    <!-- </label> -->
    <br><br>
 </div>
 
+<div *ngIf="auth.isAuthenticated() && !Isdelete">
+  <b>{{pjob.JobTitle}}</b> {{message}}
+  &nbsp;&nbsp;<br><br><button class="btn btn-primary" (click)="close()">Continue</button>
+</div>
 
 <div *ngIf="!auth.isAuthenticated()">
-  <h2 mat-dialog-title>Save Job</h2>
-  <hr>
-  <br>
+
   <div id="buttonHomePage" class="clearfix">
     <h6>
       <label class="btn2 btn-2 btn2-1b">
         
-        <a [routerLink]="['/signin']" target="_blank"><input type="button" value="Sign In"></a>
+        <a [routerLink]="['/signin']" target="_blank"><input type="button" value="          Sign In         "></a>
       </label> 
       &nbsp;to use this functionality
     </h6>
@@ -34,14 +46,22 @@
         <label class="btn2 btn-2 btn2-1b">
             <a [routerLink]="['/signup']" target="_blank"><input type="button" value="Candidate Sign Up"></a>
         </label>
-        &nbsp; to Register
+        &nbsp;to register
     </h6>
   </div>
+  <br>
+  <!-- <button class="btn btn-primary" (click)="close()">Cancel</button> -->
+  <div id="buttonHomePage" class="clearfix">
+    <label class="btn2 btn-2 btn2-1b">
+      <a (click)="close()"><input type="button" value="          Cancel          "></a>
+    </label>
+  </div>
+
 </div>
-<br>
 
 
-<button class="mat-raised-button" (click)="close()">Cancel</button>
+
+
 
 
 

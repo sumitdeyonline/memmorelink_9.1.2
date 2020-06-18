@@ -9,6 +9,8 @@ import { SEARCH_CONFIG } from 'src/app/global-config';
 import { Router } from '@angular/router';
 import { SavejobsService } from 'src/app/services/firebase/savejobs/savejobs.service';
 import { SaveJob } from 'src/app/services/firebase/savejobs/savejobs.model';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { SavedialogComponent } from './savedialog/savedialog.component';
 
 @Component({
   selector: 'employeepage',
@@ -26,6 +28,7 @@ export class EmployeepageComponent implements OnInit {
   constructor(public auth: AuthService,private appjob: ApplyjobService,
      private uresumeservice: UploadResumeService,
      private sjob:SavejobsService,
+     private dialog: MatDialog,
      private router: Router) { }
 
   ngOnInit(): void { 
@@ -156,6 +159,22 @@ export class EmployeepageComponent implements OnInit {
 //     return;
 //   }
   
+
+  onDelete(sjob) {
+    //console.log("Pst Job ID :::: "+pjob.id);
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = sjob.id;
+      // dialogConfig.height = "4";
+      // dialogConfig.width ="3";
+       this.dialog.open(SavedialogComponent, dialogConfig);
+    //  dialogConfig.disableClose = false;
+    //  dialogConfig.autoFocus = true;
+
+    //this.fileNameDialogRef = this.dialog.open(DialogComponent);
+    //this.fileNameDialogRef = this.dialog.open(DialogComponent, dialogConfig);
+    //this.postservice.deletePostJob(pjob);
+  }
+
 
 
   sortValue(type,field,datatype) {

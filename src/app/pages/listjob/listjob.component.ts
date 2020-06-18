@@ -802,14 +802,14 @@ export class ListjobComponent implements OnInit {
   }
 
   favoriteJob(listjob) {
-    console.log("Pst Job ID :::: "+listjob.id);
+    //console.log("Pst Job ID :::: "+listjob.id);
 
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.data = this.pjob.ApplyToEmail;
     dialogConfig.data = listjob;
     // dialogConfig.height = "4";
     // dialogConfig.width ="3";      
-     dialogConfig.height = "45%";
+     dialogConfig.height = "35%";
      if (this.mobile)
       dialogConfig.width ="90%";
      else 
