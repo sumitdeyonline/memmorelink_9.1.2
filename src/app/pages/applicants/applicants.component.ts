@@ -47,15 +47,36 @@ export class ApplicantsComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
+
     if (window.screen.width <= 768) { // 768px portrait
       this.mobile = true;
       //console.log("Windows ::: "+this.mobile);
     }
 
 
+    
+    this._activeRoute.queryParams.subscribe(params => {
+      //console.log(params);
+      this.jobTitle = params['jobtitle'];
+      this.jobID = params['jobidserial'];
+
+      // this.listjob.keyword = this.keyword;
+      // this.listjob.location = this.location;
+    })
+
+
+
     this._activeRoute.paramMap.subscribe(params => {
       this.jobId = params.get('jobid');
-      //console.log("Key Value :::::::: "+this.jobId);
+    //   console.log("Keyword " + this.jobId);
+
+    //   //this.jobTitle = params['jobtitle'];
+    //   this.jobTitle = params.get('jobtitle');
+    //   console.log("Keyword :: jobtitle" + this.jobTitle);
+
+    //  // this.jobID = params['jobidserial'];
+    //   this.jobID = params.get('jobidserial');
+    //   console.log("Key Value :::::::: "+this.jobID);
     });    
 
     this.apply.getApplyJobByAdmin(this.jobId,'AJID','', this.startDt, this.endDt).subscribe(ajob=> {
@@ -121,9 +142,16 @@ export class ApplicantsComponent implements OnInit {
 }
 
   notfoundAnything() {
-    this.noResultFound = "No Applied Job Found";
+    this.noResultFound = "No Applicant(s) Found";
     this.loading = false; 
 
+  }
+
+  coverLetterCheck(val) {
+    if (val == null || val==undefined || val == '') {
+      return "No Cover Letter"
+    }
+    return val;
   }
 
   setPage(page: number) {

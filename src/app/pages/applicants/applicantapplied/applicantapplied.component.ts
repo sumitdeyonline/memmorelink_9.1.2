@@ -126,6 +126,13 @@ export class ApplicantappliedComponent implements OnInit {
 
   }
 
+  coverLetterCheck(val) {
+    if (val == null || val==undefined || val == '') {
+      return "No Cover Letter"
+    }
+    return val;
+  }
+
   setPage(page: number) {
     //console.log("Page Count");
     window.scroll(0,0);

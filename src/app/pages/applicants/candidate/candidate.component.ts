@@ -34,6 +34,7 @@ export class CandidateComponent implements OnInit {
   pagesize = SEARCH_CONFIG.PAGE_SIZE;
   noOfRecordFirst = SEARCH_CONFIG.MORE_PAGE_RECORD_LIMIT;
   recordDetails=[{name:"fewRecords"},{name:"AllRecords"},{name: "Custom"}];
+  allRecords=SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT;
 
   constructor(public auth: AuthService, private appjob: ApplyjobService,fb: FormBuilder, public dformat: DateformatService, private pagerService: PagerService) { 
 
@@ -285,6 +286,14 @@ export class CandidateComponent implements OnInit {
     this.noResultFound = "No Applied Job Found";
     this.loading = false; 
 
+  }
+
+  
+  coverLetterCheck(val) {
+    if (val == null || val==undefined || val == '') {
+      return "No Cover Letter"
+    }
+    return val;
   }
 
   setPage(page: number) {

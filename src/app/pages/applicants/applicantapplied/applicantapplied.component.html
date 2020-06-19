@@ -96,7 +96,7 @@
                                     <i class="fa fa-hashtag"></i>&nbsp;<span class="companyName">{{ aj?.JobIDSerial}}</span>
                                     &nbsp;&nbsp;<i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;<span class="meta"><b>{{ aj.joblocation }}</b>&nbsp;</span><span class="title"></span>
                                     &nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta"><b>Applied:</b> {{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
-                                    <br><span class="meta"><i class="fa fa-hand-o-right"></i>&nbsp; {{aj.FirstName}}&nbsp;{{aj.LastName}}&nbsp;&nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{aj.CoverLetter}}</span></div></span>
+                                    <br><span class="meta"><i class="fa fa-hand-o-right"></i>&nbsp; {{aj.FirstName}}&nbsp;{{aj.LastName}}&nbsp;&nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{coverLetterCheck(aj?.CoverLetter)}}</span></div></span>
                                 </div>
 
                                 <!-- <div class="date_desc"><h6 class="title"><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{aj.JobTitle}}</a></h6>

@@ -7,11 +7,11 @@
 </mat-dialog-content-->
 
 <div style="color: red;" *ngIf="checkApplied">
-  {{ applySucessMessage }}&nbsp;&nbsp;<button class="mat-raised-button" (click)="close()">Close</button>
+  {{ applySucessMessage }}&nbsp;&nbsp;<br><br><button class="mat-raised-button" (click)="close()">Close</button>
 </div>
 
 <div *ngIf="!checkApplied">
-
+    <h6 *ngIf="auth.isAuthenticated()">Email ID : {{auth.userProfile.name}}</h6>
 
     <form [formGroup]="applyJobForm">
       <div class="applyjob-container">
@@ -27,11 +27,12 @@
                   placeholder="Last Name *"
                 formControlName="LastName">
         </mat-form-field>
-        <mat-form-field>
-          <input matInput
+        <mat-form-field *ngIf="!auth.isAuthenticated()">
+          <input matInput 
               placeholder="Enter your Email *"
               formControlName="Email">
         </mat-form-field>
+
         <mat-form-field>
           <input matInput
                 placeholder="Phone Number *"

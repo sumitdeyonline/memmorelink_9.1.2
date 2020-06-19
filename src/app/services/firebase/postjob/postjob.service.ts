@@ -438,13 +438,13 @@ export class PostjobService {
 
     if (type=='U') {
       this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref => 
-        ref.where('LastModifiedBy','==',searchParam).orderBy('LastModifiedDate','desc'));
+        ref.where('LastModifiedBy','==',searchParam).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));
     } else if (type=='C') {
       this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-        ref.where('Company','==',searchParam).orderBy('LastModifiedDate','desc'));      
+        ref.where('Company','==',searchParam).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
     } else if (type=='UC') {
       this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-        ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).orderBy('LastModifiedDate','desc'));      
+        ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
     } else if (type=='UDF') {
       this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
         ref.where('LastModifiedBy','==',searchParam).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.FIRST_PAGE_RECORD_LIMIT));        
@@ -455,15 +455,15 @@ export class PostjobService {
 
       if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
         this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-          ref.where('CreatedBy','==',searchParam).where('LastModifiedDate', '>=', startDT).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));        
+          ref.where('CreatedBy','==',searchParam).where('LastModifiedDate', '>=', startDT).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));        
 
       } else if (startDT.toString() == 'Invalid Date') {
         this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-          ref.where('CreatedBy','==',searchParam).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));        
+          ref.where('CreatedBy','==',searchParam).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));        
 
       } else if (endDt.toString() == 'Invalid Date') {
         this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-          ref.where('CreatedBy','==',searchParam).where('LastModifiedDate', '>=', startDT).orderBy('LastModifiedDate','desc'));      
+          ref.where('CreatedBy','==',searchParam).where('LastModifiedDate', '>=', startDT).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
       } 
 
     } else if (type=='CD') {
@@ -472,16 +472,16 @@ export class PostjobService {
       if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
         //console.log("All clear : "+startDT.getDate()+ " End Date ::"+endDt);
         this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-          ref.where('Company','==',searchParam).where('LastModifiedDate', '>=', startDT).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));      
+          ref.where('Company','==',searchParam).where('LastModifiedDate', '>=', startDT).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
       } else if (startDT.toString() == 'Invalid Date') {
         //console.log("Start Date Null");
         this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-          ref.where('Company','==',searchParam).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));      
+          ref.where('Company','==',searchParam).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
 
       } else if (endDt.toString() == 'Invalid Date') {
         //console.log("End Date Null");
         this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-          ref.where('Company','==',searchParam).where('LastModifiedDate', '>=', startDT).orderBy('LastModifiedDate','desc'));      
+          ref.where('Company','==',searchParam).where('LastModifiedDate', '>=', startDT).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
 
       } 
 
@@ -490,16 +490,16 @@ export class PostjobService {
       if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
         //console.log("All clear : "+startDT.getDate()+ " End Date ::"+endDt);
         this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-          ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).where('LastModifiedDate', '>=', startDT).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));      
+          ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).where('LastModifiedDate', '>=', startDT).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
       } else if (startDT.toString() == 'Invalid Date') {
         //console.log("Start Date Null");
         this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-          ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc'));      
+          ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).where('LastModifiedDate', '<=', endDt).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
 
       } else if (endDt.toString() == 'Invalid Date') {
         //console.log("End Date Null");
         this.pjCollection = this.afs.collection(FIREBASE_CONFIG.PostJob, ref =>
-          ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).where('LastModifiedDate', '>=', startDT).orderBy('LastModifiedDate','desc'));      
+          ref.where('CreatedBy','==',searchParam).where('Company','==',serachParam2).where('LastModifiedDate', '>=', startDT).orderBy('LastModifiedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
 
       } 
 

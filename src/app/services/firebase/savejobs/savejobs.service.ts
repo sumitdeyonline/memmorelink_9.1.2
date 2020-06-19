@@ -37,7 +37,7 @@ export class SavejobsService {
     this.sDoc.delete();
   }
 
-  getUserCompanyByAdmin(username,jobid) {
+  getUserCompanyByAdminTakeOne(username,jobid) {
     this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
       ref.where('username','==',username).where('JobID','==',jobid).orderBy('CreatedDate','desc'));   
 
@@ -66,61 +66,61 @@ export class SavejobsService {
 
     if (type=='U') {
       this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-        ref.where('username','==',username).orderBy('CreatedDate','desc'));      
+        ref.where('username','==',username).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
     } if (type=='UJID') {
       this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-        ref.where('username','==',username).where('JobID','==',company).orderBy('CreatedDate','desc'));      
+        ref.where('username','==',username).where('JobID','==',company).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
     } else if (type=='C') {
       this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-        ref.where('company','==',company).orderBy('CreatedDate','desc'));      
+        ref.where('company','==',company).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));      
     } else if (type=='UC') {
       this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-        ref.where('username','==',username).where('company','==',company).orderBy('CreatedDate','desc'));         
+        ref.where('username','==',username).where('company','==',company).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));         
     } else if (type=='UD') {
       if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-          ref.where('username','==',username).where('CreatedDate', '>=', startDT).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));         
+          ref.where('username','==',username).where('CreatedDate', '>=', startDT).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));         
       } else if (startDT.toString() == 'Invalid Date') {
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-          ref.where('username','==',username).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));         
+          ref.where('username','==',username).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));         
 
       } else if (endDt.toString() == 'Invalid Date') {
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-          ref.where('username','==',username).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc')); 
+          ref.where('username','==',username).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT)); 
       }            
     } else if (type=='UCF') {
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
           ref.where('username','==',username).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.FIRST_PAGE_RECORD_LIMIT));                  
     } 
-    // else if (type=='UDM') {
-    //   this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-    //     ref.where('username','==',username).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.MORE_PAGE_RECORD_LIMIT));                  
-    // } 
+    else if (type=='UCM') {
+      this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
+        ref.where('username','==',username).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.MORE_PAGE_RECORD_LIMIT));                  
+    } 
     else if (type=='CD') {
       //console.log("!!!!! Start Date :: "+startDT+" End Date ::: "+endDt);
       if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
         //console.log("Start Date :: "+startDT+" End Date ::: "+endDt);
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-          ref.where('company','==',company).where('CreatedDate', '>=', startDT).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));          
+          ref.where('company','==',company).where('CreatedDate', '>=', startDT).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));          
       } else if (startDT.toString() == 'Invalid Date') { 
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-          ref.where('company','==',company).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));            
+          ref.where('company','==',company).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));            
       } else if (endDt.toString() == 'Invalid Date') {
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-          ref.where('company','==',company).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc'));          
+          ref.where('company','==',company).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));          
       }
     } else if (type=='UCD') {
       if ((startDT.toString() != 'Invalid Date') && ((endDt.toString() != 'Invalid Date'))) {
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-          ref.where('username','==',username).where('company','==',company).where('CreatedDate', '>=', startDT).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));         
+          ref.where('username','==',username).where('company','==',company).where('CreatedDate', '>=', startDT).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));         
 
       } else if (startDT.toString() == 'Invalid Date') {  
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-          ref.where('username','==',username).where('company','==',company).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc'));         
+          ref.where('username','==',username).where('company','==',company).where('CreatedDate', '<=', endDt).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));         
 
       } else if (endDt.toString() == 'Invalid Date') {
         this.sjCollection = this.afs.collection(FIREBASE_CONFIG.SaveJob, ref =>  
-          ref.where('username','==',username).where('company','==',company).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc'));         
+          ref.where('username','==',username).where('company','==',company).where('CreatedDate', '>=', startDT).orderBy('CreatedDate','desc').limit(SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT));         
 
       }
     } 

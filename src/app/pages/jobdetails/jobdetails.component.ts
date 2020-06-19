@@ -85,8 +85,12 @@ export class JobdetailsComponent implements OnInit {
       } else {
         this.travelReq = "Work from home not available";
       }
-      this.verifySaveJob();
-      this.verifyApplyJob();
+
+      if (this.auth.isAuthenticated()) {
+        this.verifySaveJob();
+        this.verifyApplyJob();
+      }
+
       
       //alert("Last Modifed Date :::::: "+this.pjob.LastModifiedDate);
       //console.log("List Service ..... 33333 ::::: "+this.pjob.Compensation);
@@ -97,7 +101,7 @@ export class JobdetailsComponent implements OnInit {
 
   verifySaveJob() {
     //console.log("ID:::: "+this.id);
-    this.sjob.getUserCompanyByAdmin(this.auth.userProfile.name,this.id).subscribe(sjob=>{
+    this.sjob.getUserCompanyByAdminTakeOne(this.auth.userProfile.name,this.id).subscribe(sjob=>{
       this.sjobscheck = sjob;
 
       //console.log("this.sjobscheck.auth 2  :::: "+this.sjobscheck.length);

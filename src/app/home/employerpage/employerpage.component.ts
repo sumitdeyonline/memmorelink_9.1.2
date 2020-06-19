@@ -116,6 +116,13 @@ export class EmployerpageComponent implements OnInit {
     return;
   }
 
+  getURLValue(id,jobTitle,jobid) {
+    // console.log("id  :: "+id);
+    // console.log("jobTitle  :: "+jobTitle);
+    // console.log("jobid  :: "+jobid);
+    this.router.navigate(['/applicants',id], { queryParams: {  jobtitle: jobTitle, 'jobidserial': jobid}, 'queryParamsHandling': 'merge' });
+  }
+
   sortValue(type,field,datatype) {
   //sortValue(field,type) {
 

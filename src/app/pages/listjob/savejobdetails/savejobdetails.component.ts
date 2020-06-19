@@ -37,7 +37,7 @@ export class SavejobdetailsComponent implements OnInit {
   pagesize = SEARCH_CONFIG.PAGE_SIZE;
   noOfRecordFirst = SEARCH_CONFIG.MORE_PAGE_RECORD_LIMIT;
   recordDetails=[{name:"fewRecords"},{name:"AllRecords"},{name: "Custom"}];
-
+  allRecords=SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT;
 
   constructor(public auth: AuthService, fb: FormBuilder, public dformat: DateformatService,private dialog: MatDialog,private appjob: ApplyjobService, private sjob:SavejobsService, private pagerService: PagerService) { 
     window.scroll(0,0);
@@ -59,7 +59,7 @@ export class SavejobdetailsComponent implements OnInit {
     }
     this.appjob.getApplyJobByUserJobIDCandidate(this.auth.userProfile.name,'U','').subscribe(ajob=> {
       this.aJobTemp = ajob;
-      this.CallingData('UCF',"");
+      this.CallingData('UCM',"");
     });    
 
 
@@ -117,7 +117,7 @@ export class SavejobdetailsComponent implements OnInit {
         this.startDt = '';
         this.CallingData('U',saveJpb);
     } else if (saveJpb.RecordNumber == 'fewRecords') {
-        this.CallingData('UCF',saveJpb);
+        this.CallingData('UCM',saveJpb);
     } else if (saveJpb.RecordNumber == 'Custom') {
         this.startDt = '';
         this.enableCustomFields(saveJpb);

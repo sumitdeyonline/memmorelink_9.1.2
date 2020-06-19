@@ -61,6 +61,7 @@ export class JobpoststatusComponent implements OnInit {
   // paged items
   pagedItems: any[];
   loading: boolean = false;
+  allRecordsDisp=SEARCH_CONFIG.ALL_PAGE_RECORD_LIMIT;
 
   constructor(private auth: AuthService,
       private postservice: PostjobService,

@@ -63,9 +63,9 @@
                                             ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
                                             [ngModel]="recordDetails[0].name"
                                              (ngModelChange)="selectApplied(aform.value)">
-                                            <option value="fewRecords" selected>Last {{noOfRecordFirst}} Records</option>
-                                            <option value="AllRecords">All Records</option>
-                                            <option value="Custom">Custom Date</option>
+                                            <option value="fewRecords" selected>Last {{noOfRecordFirst}} Records[Max]</option>
+                                            <option value="AllRecords">All Records[{{allRecords}} Max]</option>
+                                            <option value="Custom">Custom Date[{{allRecords}} Max]</option>
                                             <!--option>USA</option-->
                                         </select>
 
@@ -75,7 +75,7 @@
 
 
 
-                                    <div class="col" [hidden] = disabledDate>
+                                    <div class="col" [hidden] = disabledDate aling="right">
                                         <input
                                         type="text"
                                         placeholder="Choose start date"
@@ -253,7 +253,7 @@
                                             &nbsp;&nbsp;<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<span class="meta">&nbsp;Applied on {{ aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>
 
                                          &nbsp;&nbsp;<i class="fa fa-file-o" aria-hidden="true"></i>&nbsp;<span class="meta"><a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>
-                                         &nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{aj?.CoverLetter}}</span></div>
+                                         &nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{coverLetterCheck(aj?.CoverLetter)}}</span></div>
                                         
                                             </span>
                                          

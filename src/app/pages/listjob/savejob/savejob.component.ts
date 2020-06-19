@@ -59,9 +59,8 @@ export class SavejobComponent implements OnInit {
 
       //console.log("this.sjobscheck.auth  :::: ");
 
-      this.sjob.getUserCompanyByAdmin(this.auth.userProfile.name,this.pjob.id).subscribe(sjob=>{
-        this.sjobscheck = sjob;
-
+      this.sjob.getUserCompanyByAdminTakeOne(this.auth.userProfile.name,this.pjob.id).subscribe(sjob=>{
+        this.sjobscheck = sjob; 
         //console.log("this.sjobscheck.auth 2  :::: "+this.sjobscheck.length);
         if (this.sjobscheck.length == 0){
           this.Isdelete=false;

@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
   error: any[]; // {"name":"BadRequestError","code":"user_exists","description":"The user already exists.","statusCode":400}
 
   constructor(public _auth: AuthService, fb: FormBuilder, private udetails: UserdetailsService, private sEmail: EmailService) {
-
+    window.scroll(0,0);
     this.signupForm = fb.group({
       email: ['', Validators.required,Validators.email],
       password: ['', Validators.required,Validators.minLength(5)],
@@ -32,6 +32,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scroll(0,0);
   }
 
   signUp(model: Signup) {

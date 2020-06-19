@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   //userIdPasswordWrong ='';
   constructor(fb: FormBuilder, 
               public _auth: AuthService) {
+    window.scroll(0,0);
     this.form = fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scroll(0,0);
     if (window.screen.width <= 736) { // 768px portrait
       this.mobile = true;
       //console.log("Windows ::: "+this.mobile);
