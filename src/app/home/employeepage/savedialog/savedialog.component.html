@@ -1,5 +1,5 @@
-<h2 mat-dialog-title *ngIf="!isDeleted">Are you sure you want to delete the save job?</h2>
-<h2 mat-dialog-title *ngIf="isDeleted">Save Job Deleted Sucessfully</h2>
+<h2 mat-dialog-title *ngIf="!isDeleted">Remove this job?</h2>
+<h2 mat-dialog-title *ngIf="isDeleted">Job removed sucessfully</h2>
 
 <!--mat-dialog-content>
 
@@ -7,10 +7,23 @@
 </mat-dialog-content-->
 
 <mat-dialog-actions *ngIf="!isDeleted">
-    <button class="mat-raised-button" (click)="deleteRecord()">Yes</button>
-    <button class="mat-raised-button" (click)="close()">No</button>
+    <!-- <button class="mat-raised-button" (click)="deleteRecord()">Remove</button>
+    <button class="mat-raised-button" (click)="close()">Cancel</button> -->
+
+    <button class="btn btn-primary" (click)="deleteRecord()">Yes</button>
+    &nbsp;&nbsp;<button class="btn btn-primary" (click)="close()">No</button>
+    
+
 </mat-dialog-actions>
 
+
+
+
+
+
 <mat-dialog-actions *ngIf="isDeleted">
-    <button class="mat-raised-button" (click)="close()">Ok</button>
+    <!-- <button class="mat-raised-button" (click)="close()">Ok</button> -->
+    <button class="btn btn-primary" (click)="close()">Continue</button>
+
 </mat-dialog-actions>
+<br>

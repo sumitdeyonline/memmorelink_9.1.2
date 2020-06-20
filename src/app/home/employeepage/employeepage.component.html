@@ -26,12 +26,12 @@
         </thead>      
         <thead>
             <tr>
-                <th>Company <a (click)="sortValue('asc','Company','SaveJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Company','SaveJob')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Company <a (click)="sortValue('asc','Company','SaveJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','Company','SaveJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
  
-                <th>Job Title [ID]<a (click)="sortValue('asc','JobTitle','SaveJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','JobTitle','SaveJob')"><i class="fa fa-caret-down"></i></a></th>
-                <th>Location <a (click)="sortValue('asc','Location','SaveJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Location','SaveJob')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Job Title [ID]<a (click)="sortValue('asc','JobTitle','SaveJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','JobTitle','SaveJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
+                <th>Location <a (click)="sortValue('asc','Location','SaveJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','Location','SaveJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
                 <!-- <th>Employment Type</th>                 -->
-                <th>Date Saved <a (click)="sortValue('asc','CreatedDate','SaveJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','CreatedDate','SaveJob')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Date Saved <a (click)="sortValue('asc','CreatedDate','SaveJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','CreatedDate','SaveJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
                 <th>Applied</th>
 
             </tr>
@@ -81,12 +81,13 @@
         </thead>      
         <thead>
             <tr>
-                <th>Company <a (click)="sortValue('asc','Company','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Company','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
-                <th>Job Title [ID]<a (click)="sortValue('asc','JobTitle','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','JobTitle','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
-                <th>Location <a (click)="sortValue('asc','Location','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','Location','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Company <a (click)="sortValue('asc','Company','ApplyJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','Company','ApplyJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
+                <th>Job Title [ID]<a (click)="sortValue('asc','JobTitle','ApplyJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','JobTitle','ApplyJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
+                <th>Location <a (click)="sortValue('asc','Location','ApplyJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','Location','ApplyJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
                 <!-- <th>Employment Type</th>                 -->
-                <th>Date Applied <a (click)="sortValue('asc','CreatedDate','ApplyJob')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','CreatedDate','ApplyJob')"><i class="fa fa-caret-down"></i></a></th>
-                <th>Resume Filename</th>
+                <th>Resume</th>
+                <th>Date Applied <a (click)="sortValue('asc','CreatedDate','ApplyJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','CreatedDate','ApplyJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
+
 
             </tr>
         </thead>
@@ -96,8 +97,9 @@
                 <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,35) }} [{{aj.JobIDSerial}}] <span *ngIf="aj.JobTitle?.length>35">...</span></a></td>
                 <td>{{aj.joblocation}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
-                <td>{{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
                 <td><a href="{{aj.fileUploadURL}}" target="_blank">Download</a></td>
+                <td>{{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
+
             </tr>
         </tbody>
 
@@ -125,9 +127,9 @@
         </thead>      
         <thead>
             <tr>
-                <th>Resume Filename <a (click)="sortValue('asc','ResumeFileName','UploadResume')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','ResumeFileName','UploadResume')"><i class="fa fa-caret-down"></i></a></th>
-                <th>Date Created <a (click)="sortValue('asc','CreatedDate','UploadResume')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','CreatedDate','UploadResume')"><i class="fa fa-caret-down"></i></a></th>
-                <th>Date Modified <a (click)="sortValue('asc','ModifiedDate','UploadResume')"><i class="fa fa-caret-up"></i></a><a (click)="sortValue('des','ModifiedDate','UploadResume')"><i class="fa fa-caret-down"></i></a></th>
+                <th>Resume <a (click)="sortValue('asc','ResumeFileName','UploadResume')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','ResumeFileName','UploadResume')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
+                <th>Date Created <a (click)="sortValue('asc','CreatedDate','UploadResume')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','CreatedDate','UploadResume')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
+                <th>Date Modified <a (click)="sortValue('asc','ModifiedDate','UploadResume')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','ModifiedDate','UploadResume')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
                 <!-- <th>Employment Type</th>                 -->
                 <!-- <th>Resume Filename</th> -->
 

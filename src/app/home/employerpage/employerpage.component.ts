@@ -7,6 +7,7 @@ import { ApplyJob } from 'src/app/services/firebase/applyjob/applyjob.model';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SEARCH_CONFIG,HOME_CONFIG } from 'src/app/global-config';
+import { listenerCount } from 'cluster';
 
 
 
@@ -21,6 +22,7 @@ import { SEARCH_CONFIG,HOME_CONFIG } from 'src/app/global-config';
 export class EmployerpageComponent implements OnInit {
   pjob: PostJobc[];
   aJob: ApplyJob[];
+  aJobTemp:ApplyJob[];
   noOFJob: number[];
   loading: boolean = false;
   mobile: boolean=false;
@@ -50,8 +52,14 @@ export class EmployerpageComponent implements OnInit {
     //let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
     // console.log(" this.auth.userProfile.name :::: "+this.auth.userProfile.name);
 
+    this.appjob.getApplyJobByAdmin(this.auth.userProfile.name,'U','').subscribe(ajob=> {
+      this.aJobTemp = ajob;
+
+    });
+
     this.postservice.getPostJobsByUser(this.auth.userProfile.name, 'UDF','').subscribe(pjob=> {
       this.pjob = pjob;
+
       //console.log("Last Updated ::: "+ Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000));
       // console.log("Last Updated ::: "+ this.getDateDiff(this.pjob[3].LastModifiedDate));
       if (this.pjob.length == 0) {
@@ -60,10 +68,28 @@ export class EmployerpageComponent implements OnInit {
         this.pjob = [];
       } else {
         for (let i=0;i<this.pjob.length;i++) {
+          let count=0;
+          // let applyjob = this.aJobTemp.find(apply=>(apply.id == this.pjob[i].JobID)?count++:'');
+          // let count=0;
+          for (let j=0;j<this.aJobTemp.length;j++) {
+            if (this.aJobTemp[j].JobID == this.pjob[i].id)
+              count = count + 1;
+          }
+          this.pjob[i].ApplicantCount = count;
+
+          // if (applyjob !=undefined || applyjob !=null) {
+          //   //console.log("applyjob ::::: "+applyjob.JobID);
+          //   this.pjob[i].ApplicantCount = applyjob.length;
+          // } else {
+          //   this.pjob[i].ApplicantCount = 0
+          // }         
             //this.noOFJob[i] = this.getJobCount(this.pjob[i].JobID);
             //this.noOFJob[i] = this.getJobCount(this.pjob[i].JobID);
             //console.log("Count ::: "+this.getJobCount(this.pjob[i],i) );
-            this.getJobCount(this.pjob[i],i);
+
+          /*********  This is the other approach *********/
+           //this.getJobCount(this.pjob[i],i); 
+          /*********  This is the other approach end *********/           
         }
       }
 
@@ -90,7 +116,7 @@ export class EmployerpageComponent implements OnInit {
     });   
 
 
-  }
+  } 
 
   getJobCount(job,i) {
     let aJobtmp: ApplyJob[];

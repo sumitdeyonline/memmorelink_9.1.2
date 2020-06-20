@@ -40,6 +40,8 @@ export class JobdetailsComponent implements OnInit {
 
   constructor(private _activeRoute:ActivatedRoute, private appjob: ApplyjobService, private sjob:SavejobsService, private postservice: PostjobService, private dialog: MatDialog, public auth: AuthService) {
     window.scroll(0,0);
+    // console.log("Test :::: ");
+
     this._activeRoute.queryParams.subscribe(params => {
       //console.log(params);
       this.keyword = params['keyword'];
@@ -69,6 +71,10 @@ export class JobdetailsComponent implements OnInit {
       this.pjob = pjob;
       //alert(this.pjob.isTeleComute);
 
+      if (this.pjob == null || this.pjob == undefined) {
+        this.isActive = false;
+      }
+
       if (!this.pjob?.isSearchable) {
         this.isActive = false;
       }
@@ -90,6 +96,8 @@ export class JobdetailsComponent implements OnInit {
         this.verifySaveJob();
         this.verifyApplyJob();
       }
+
+      //console.log("saveJobButtonMsg ::: "+this.saveJobButtonMsg);
 
       
       //alert("Last Modifed Date :::::: "+this.pjob.LastModifiedDate);
@@ -115,6 +123,7 @@ export class JobdetailsComponent implements OnInit {
         this.saveJobButtonMsg='Job Saved';
 
       }
+      //console.log("saveJobButtonMsg ::: 22::::: "+this.saveJobButtonMsg);
     })
   }
 
@@ -209,9 +218,10 @@ export class JobdetailsComponent implements OnInit {
     //                           }];
     this.pjob.id = this.id;
     dialogConfig.data = this.pjob;
+
     // dialogConfig.height = "4";
     // dialogConfig.width ="3";      
-     dialogConfig.height = "35%";
+     dialogConfig.height = "25%";
      if (this.mobile)
       dialogConfig.width ="90%";
      else 

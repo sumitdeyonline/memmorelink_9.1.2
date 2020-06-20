@@ -10,6 +10,7 @@ import { UserprofileService } from 'src/app/services/firebase/userprofile/userpr
 import { UserProfile } from 'src/app/services/firebase/userprofile/userprofile.model';
 import { Login } from '../../login/Login';
 import { AUTH_CONFIG } from 'src/app/global-config';
+import { Router } from '@angular/router';
 
 
 
@@ -40,8 +41,8 @@ export class SavejobComponent implements OnInit {
   message:string='';
   constructor(private dialogRef: MatDialogRef<SavejobComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, fb: FormBuilder, 
-    public auth: AuthService,private sjob:SavejobsService, private uDetails:UserprofileService,  private sEmail: EmailService) { 
-
+    public auth: AuthService,private sjob:SavejobsService, private uDetails:UserprofileService, private router: Router, private sEmail: EmailService) { 
+      this.pjob = this.data;
       this.form = fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
@@ -52,7 +53,7 @@ export class SavejobComponent implements OnInit {
 
   ngOnInit(): void { 
     this.message = '';
-    this.pjob = this.data;
+
     //console.log("this.JobID ::: "+this.pjob.id);
 
     if (this.auth.isAuthenticated()) {
@@ -83,6 +84,7 @@ export class SavejobComponent implements OnInit {
               };
               this.sjob.addUpdateSaveJobs(this.sJobs);
               this.message = ' has been saved.';
+              //this.router.navigate(['/authlandingpage']);
               //console.log("You have save the job : "+this.sJobs);
     
             } 
@@ -108,11 +110,31 @@ export class SavejobComponent implements OnInit {
 
 
   close() {
+
+    // setTimeout(() => {
+    //   this.router.navigated = true;
+    //   this.router.navigate(['/jobdetails',this.pjob.id]);
+    //   //this.router.navigate(['/jobdetails','abc']);
+    //   //this.dialogRef.close();
+    //   }, 500);
+
+
+    // const defaltOnSameUrlNavigation = this.router.onSameUrlNavigation;
+    // this.router.onSameUrlNavigation = 'reload';
+    // this.router.navigateByUrl(this.router.url, {
+    //   replaceUrl: true
+    // });
+    // this.router.onSameUrlNavigation = defaltOnSameUrlNavigation;
+
+    //this.router.navigate(['/jobdetails',this.pjob.id]);
+    window.location.reload();
     this.dialogRef.close();
+
   }
 
   deleteSaveJob(id) {
     //console.log("Deleted... "+id);
+    //this.router.navigate(['/authlandingpage']);
     this.sjob.deleteSaveJobWithID(id);
     this.deletedSaveJob = true;
   }

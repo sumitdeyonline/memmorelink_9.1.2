@@ -526,12 +526,12 @@ emptype
 
 
             <hr/>
-            <h3 class="title" style="color: red;">Field of study</h3>&nbsp;
+            <h3 class="title" style="color: red;">Education</h3>&nbsp;
 
 
             <div class="row">
                 <div class="col-sm-2">
-                    <label style="font-weight: bold;" for="Education">Education<span style="color: red;">&nbsp;*</span></label>
+                    <label style="font-weight: bold;" for="Education">Field of Study<span style="color: red;">&nbsp;*</span></label>
                 </div>
                 <div class="col">
                     <input type="text" ngModel name="Education" maxlength="50" [disabled]="!isUpdateProfile" #Education="ngModel" id="Education" [ngModel]="uProfile.selectedUserProfile?.Education" (ngModelChange)="uProfile.selectedUserProfile.Education" class="form-control input-sm" required/>

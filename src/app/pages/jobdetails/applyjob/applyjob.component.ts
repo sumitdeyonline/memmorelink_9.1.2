@@ -63,6 +63,7 @@ export class ApplyjobComponent implements OnInit {
         //PhoneNumber: [null, [Validators.required, Validators.pattern('[0-9]{3}?[-. ]?[0-9]{3}?[-. ]?[0-9]{4}')]],
         PhoneNumber: [null, [Validators.required, Validators.pattern('[(. ]?[0-9]{3}?[). ]?[ . ]?[0-9]{3}?[-. ]?[0-9]{4}')]],
         //PhoneNumber: [null, [Validators.required]],
+        //PhoneNumber: [null, [Validators.required]],
         CoverLetter:[null],
         fileUpload: [Validators.required],
         fileUploadExist: [null]

@@ -8,9 +8,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+.dropdown > .dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+
 [class*="list-group"] {
     text-align-last: left !important;
 }
+
+/* .navbar-nav li:hover .dropdown-menu {
+    display: block;
+}  */
 
 .custom-switch {
     padding-left: 0rem !important;
@@ -54,9 +67,10 @@ html, body{
     width:  220px;
     background-color: #f15f43;
     color: #fff;
-    text-align: center;
+    text-align: left;
     border-radius: 6px;
-    padding: 3px 0;
+    padding: 1px 0px;
+    padding-left: 8px;
   
     /* Position the tooltip */
     position: absolute;
@@ -2945,6 +2959,9 @@ p.sm_1{
     }
 }
 @media (max-width:384px){
+
+
+
     #search_wrapper1 {
         margin-top: 0em;
     }

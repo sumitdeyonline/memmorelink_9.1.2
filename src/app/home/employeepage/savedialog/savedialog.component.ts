@@ -26,7 +26,7 @@ export class SavedialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  deleteRecord() {
+  deleteRecord() { 
     //console.log("Data ::: "+this.data);
     this.saveservice.deleteSaveJobWithID(this.data);
     this.isDeleted = true;
