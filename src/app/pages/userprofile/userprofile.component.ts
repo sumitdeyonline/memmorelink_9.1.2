@@ -6,10 +6,9 @@ import { DatePipe, formatDate } from '@angular/common';
 import { UserprofileService } from 'src/app/services/firebase/userprofile/userprofile.service';
 import { Country } from 'src/app/services/firebase/userprofile/country.model';
 import { State } from 'src/app/services/firebase/userprofile/state.model';
-import { map } from 'rxjs/operators';
 //import { exists } from 'fs';
 import { AuthService } from 'src/app/services/authentication/auth.service';
-import { FIREBASE_CONFIG } from 'src/app/global-config';
+import { FIREBASE_CONFIG, SEARCH_CONFIG } from 'src/app/global-config';
 import { UserProfile } from 'src/app/services/firebase/userprofile/userprofile.model';
 import { Observable } from 'rxjs';
 import { EmailService } from 'src/app/services/email/email.service';
@@ -19,6 +18,10 @@ import { EmploymenttypesService } from 'src/app/services/firebase/employmenttype
 import { EmploymentTypes } from 'src/app/services/firebase/employmenttypes/employmenttypes.model';
 import { Router } from '@angular/router';
 import { WorkAuthorization } from 'src/app/services/firebase/userprofile/workauthorization.model';
+import {debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
+import { CityDetails } from '../listjob/city.model';
+import { isNumeric } from 'rxjs/util/isNumeric';
+import { LocationService } from 'src/app/services/location/location.service';
 //import { CommondialogComponent } from 'src/app/common/commondialog';
 
 
@@ -28,6 +31,16 @@ import { WorkAuthorization } from 'src/app/services/firebase/userprofile/workaut
   styleUrls: ['./userprofile.component.css']
 })
 export class UserProfileComponent implements OnInit {
+
+  searchvar =[];
+  // formatter = (result: string) => result.toUpperCase();
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.trim().length < SEARCH_CONFIG.MAX_CHARACTER_TYPE_AHEAD  ? []
+        : this.searchvar.filter(v => v.toLowerCase().indexOf(term.trim().toLowerCase()) > -1).slice(0, 10))
+    )
 
   id: any;
   selectedFiles: FileList;
@@ -41,9 +54,10 @@ export class UserProfileComponent implements OnInit {
   isUpdateProfile: boolean = false;
   editProfileText: string ="Edit Profile";
   countries: Country[];
-  state: State[];
+  states: State[];
   utility = new AngularUtilityComponent();
   isWorkAuthHide: boolean =false;
+  mobile: boolean=false;
   //userProfileArray: Array<string> = ["Citizen","Green Card","GC EAD","Other EAD","H1B","L1 Visa","L3 Visa","F1 Student Visa"];
 
 
@@ -62,7 +76,7 @@ export class UserProfileComponent implements OnInit {
   // ];
 
 
-  constructor(private rUploadService: UploadResumeService, private changeDetector : ChangeDetectorRef, public uProfile: UserprofileService, private router: Router, public auth: AuthService, private sEmail: EmailService, private dialog: MatDialog,private etypeserv: EmploymenttypesService) {
+  constructor(private rUploadService: UploadResumeService, private locserv: LocationService, private changeDetector : ChangeDetectorRef, public uProfile: UserprofileService, private router: Router, public auth: AuthService, private sEmail: EmailService, private dialog: MatDialog,private etypeserv: EmploymenttypesService) {
 
     this.getWorkAutjorization();
     this.uProfile.getUserDetails(this.auth.userProfile.name,'U').subscribe(uprop=> {
@@ -97,6 +111,7 @@ export class UserProfileComponent implements OnInit {
 
 
         this.getFieldForUpdate();
+        this.getState(this.userProfile[0].Country);
         if (this.workauthArray?.find(tree => tree?.name == this.userProfile[0]?.WorkAuthorization) == undefined) {
           this.isWorkAuthHide = true;
           this.isUpdateProfile = false; 
@@ -115,7 +130,10 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
 
-
+    if (window.screen.width <= 736) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
 
     // if ((this.id == null) || (this.id == '')) {
     //   console.log("NEW FORM ....");
@@ -140,10 +158,24 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  getState(country) {
+  // getState(country) {
+  //   this.uProfile.getStateDetails(country).subscribe(sprop => {
+  //     this.state = sprop;
+  //     //console.log("Country :::::::: => "+this.state.length);
+  //   })
+  // }
+
+  getState(country,selectstate?) {
     this.uProfile.getStateDetails(country).subscribe(sprop => {
-      this.state = sprop;
-      //console.log("Country :::::::: => "+this.state.length);
+      this.states = sprop;
+      if (selectstate !=null && selectstate !=undefined){
+        this.uProfile.selectedUserProfile.State = selectstate;
+        //console.log("selectstate  ::: "+this.uProfile.selectedUserProfile.State);
+      } 
+      // else {
+      //   console.log("selectstate ====>>>>>> ::: "+this.uProfile.selectedUserProfile.State);
+      // }
+      //console.log("State :::::::: => "+this.uProfile.selectedUserProfile.State);
     })
   }
 
@@ -286,6 +318,9 @@ export class UserProfileComponent implements OnInit {
     if (uprofileForm.value.CurrentPosition == undefined) {
       uprofileForm.value.CurrentPosition = "";
     }    
+    if (uprofileForm.value.state == undefined) {
+      uprofileForm.value.state = "";
+    }
     // console.log ('Address2  ::: '+ uprofileForm.value.Address2);
     // console.log ('City  ::: '+ uprofileForm.value.City);
     // console.log ('State  ::: '+ uprofileForm.value.State);
@@ -364,7 +399,7 @@ export class UserProfileComponent implements OnInit {
     //console.log ('SalaryExpectation  ::: '+ uprofileForm.value.SalaryExpectation);
 
     //console.log ('File Name   ::: '+ this.rUploadService.fileName);
-    //console.log ('File URL   ::: '+ this.rUploadService.downloadURL);
+    //console.log ('Job City   ::: '+ uprofileForm.value.City);
 
     // this.fileUploadEnabled = true; // Enabled File Download
     uprofileForm.value.Email = this.auth.userProfile.name;
@@ -507,8 +542,17 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+
+  disabledMale():boolean {
+    //console.log("this.isUpdateProfile :: "+this.isUpdateProfile);
+    if (this.isUpdateProfile) return false;
+    else return true;
+  }
+
+  
+
   getFieldForUpdate() {
-    this.getState(this.userProfile[0].Country);
+    //this.getState(this.userProfile[0].Country);
     this.uProfile.selectedUserProfile.id = this.userProfile[0].id;
     this.uProfile.selectedUserProfile.FirstName = this.userProfile[0].FirstName;
     this.uProfile.selectedUserProfile.LastName = this.userProfile[0].LastName;
@@ -568,5 +612,73 @@ export class UserProfileComponent implements OnInit {
   phoneNumberFormatHome(phone) {
     this.uProfile.selectedUserProfile.HomePhone =  this.utility.formatUSNumber(phone)
   }
+
+  setCountryState(location) {
+
+    const item = location.item.split(',');
+    let countyCode='';
+    // if (item.regionCode === 'regionCode') {
+    //  this.form.query = item.value;
+    // }
+
+
+    // console.log("City ::: "+item[0]);
+    // console.log("State ::: "+item[1]);
+    // console.log("Country ::: "+item[2]);
+    if (item[2] == 'US') countyCode = 'USA';
+    this.getState(countyCode,item[1]);
+    this.uProfile.selectedUserProfile.City = item[0];
+    //this.uProfile.selectedUserProfile.State= item[1];
+    this.uProfile.selectedUserProfile.Country = countyCode;
+
+  }
+
+  zipcodeCitySearch(localtionval) {
+    let getcity='';
+    let array=[];
+    let cityD : CityDetails;
+    // this.locserv.getCityStateFromZip(zipcode).then(() => {
+    //   this.UploadResumeProfileBulk(uname,ResumeURL,ResumeFileName,contenttype,csvRecords); 
+    // });
+    //console.log("Zipcode :: "+zipcode);
+    //console.log("XXXX==> : "+localtionval);
+
+    if (localtionval.trim().length > SEARCH_CONFIG.MAX_CHARACTER_TYPE_AHEAD) {
+      let inputval = localtionval.trim();
+      if (isNumeric(inputval)) {
+        if (localtionval.trim().length == SEARCH_CONFIG.MAX_CHARACTER_TYPE_AHEAD_ZIPCODE){
+          this.locserv.getCityStateFromZip(inputval).subscribe((data: any[])=>{ 
+            this.searchvar = [data['city']+","+data['state']];
+            //console.log("Get value : "+this.form.controls['location'].getValue());
+
+            //this.location = data['city']+","+data['state'];
+
+            //return ['Livermore,CA'];
+            //return [data['city']+","+data['state']];
+          });
+        }
+
+      } else {
+        this.locserv.getCityStateSearch(localtionval.trim()).subscribe((data: any[]) => {
+          // this.http.get(getCityID,{responseType: 'json',headers: headers})
+          //          .map((data: any[]) => {
+      
+            const array = JSON.parse(JSON.stringify(data)) as any[];
+            //console.log(array['data']);
+            
+            for(let i=0;i<array['data'].length;i++) {
+              cityD = new CityDetails();
+              cityD = array['data'][i];
+              this.searchvar[i] = cityD.city+","+cityD.regionCode+","+cityD.countryCode;
+
+            }
+
+        })
+
+      }
+
+    }
+  }
+
 
 }

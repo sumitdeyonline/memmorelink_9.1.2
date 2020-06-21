@@ -23,6 +23,7 @@ export class UploadresumeComponent implements OnInit {
   isUpdate: boolean = false;
   isNewUpload: boolean = false;
   uResume: UploadResume [];
+  mobile: boolean=false;
 
 
 
@@ -62,6 +63,10 @@ export class UploadresumeComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (window.screen.width <= 736) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
   }
 
 

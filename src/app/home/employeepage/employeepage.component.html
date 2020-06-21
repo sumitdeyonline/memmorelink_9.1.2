@@ -47,7 +47,27 @@
                 <td>{{sj.ApplyJob==true?'Yes':'No'}}</td>
             </tr>
         </tbody>
+        <thead>
+            <tr>
+                <th colspan="1" align="right">
+                    <div id="buttonHomePage" class="clearfix">
+                        <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/uploadresumepage" value="Upload Resume"></label>
+                        &nbsp;&nbsp;&nbsp;
 
+                        <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/userprofile" value="Edit Profile"></label>
+                        &nbsp;&nbsp;&nbsp;
+                        <!-- <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Resume Search"></label> -->
+                    </div> 
+
+
+                    <!-- <div class="col-md-6 col-lg-3 mb-3 mb-lg-0" *ngIf="auth.isPostJobRole()">
+                        <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job">
+                    </div> -->
+                </th>
+
+
+            </tr>
+        </thead> 
 
 
     </table>  
@@ -102,7 +122,27 @@
 
             </tr>
         </tbody>
+        <thead>
+            <tr>
+                <th colspan="1" align="right">
+                    <div id="buttonHomePage" class="clearfix">
+                        <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/uploadresumepage" value="Upload Resume"></label>
+                        &nbsp;&nbsp;&nbsp;
 
+                        <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/userprofile" value="Edit Profile"></label>
+                        &nbsp;&nbsp;&nbsp;
+                        <!-- <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Resume Search"></label> -->
+                    </div> 
+
+
+                    <!-- <div class="col-md-6 col-lg-3 mb-3 mb-lg-0" *ngIf="auth.isPostJobRole()">
+                        <input type="button" class="btn btn-primary btn-block" routerLink="/postjob" value="Post Job">
+                    </div> -->
+                </th>
+
+
+            </tr>
+        </thead> 
 
 
     </table>  

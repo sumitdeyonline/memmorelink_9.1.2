@@ -7,10 +7,13 @@
 </mat-dialog-content-->
 
 <mat-dialog-actions *ngIf="!isDeleted">
-    <button class="mat-raised-button" (click)="deleteRecord()">Yes</button>
-    <button class="mat-raised-button" (click)="close()">No</button>
+    <!-- <button class="mat-raised-button" (click)="deleteRecord()">Yes</button>
+    <button class="mat-raised-button" (click)="close()">No</button> -->
+    <button class="btn btn-primary" (click)="deleteRecord()">Yes</button>
+    &nbsp;&nbsp;<button class="btn btn-primary" (click)="close()">No</button>
 </mat-dialog-actions>
 
 <mat-dialog-actions *ngIf="isDeleted">
-    <button class="mat-raised-button" (click)="close()">Ok</button>
+    <!-- <button class="mat-raised-button" (click)="close()">Ok</button> -->
+    <button class="btn btn-primary" (click)="close()">Continue</button>
 </mat-dialog-actions>

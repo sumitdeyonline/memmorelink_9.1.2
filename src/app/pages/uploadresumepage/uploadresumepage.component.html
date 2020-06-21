@@ -21,13 +21,12 @@
                 <div class="form-container">
                     <div class="row">
                         <div class="col">
-                            <h4>&nbsp;&nbsp;Profile</h4>
+                            <h4>Profile</h4>
                         </div>
                         <div class="col">
     
                             <div id="buttonHomePage" class="clearfix" align="left" >
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/userprofile" value="Edit Profile"></label>
-                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/userprofile" value="Edit Profile"></label>
                                 <!-- <label *ngIf="auth.isResumeSearchRole()"  class="btn2 btn-2 btn2-1b"><input *ngIf="auth.isResumeSearchRole()" type="button" routerLink="/resumesearch" value="Resume Search"></label> -->
                             </div>
 
@@ -180,7 +179,14 @@
     
                         <div class="row">
     
-    
+                            <div class="col-sm-2">
+                                <label style="font-weight: bold;" for="State">State</label>
+                            </div>
+                            <div class="col" *ngIf="uprofile !=null">
+                                {{ uprofile[0]?.State }}
+                            </div>
+                            <div class="col" *ngIf="uprofile == null"></div>
+                            
                             <div class="col-sm-2">
                                     <label style="font-weight: bold;" for="Country">Country</label>
                             </div>
@@ -192,13 +198,7 @@
     
     
     
-                            <div class="col-sm-2">
-                                <label style="font-weight: bold;" for="State">State</label>
-                            </div>
-                            <div class="col" *ngIf="uprofile !=null">
-                                {{ uprofile[0]?.State }}
-                            </div>
-                            <div class="col" *ngIf="uprofile == null"></div>
+
                         </div>
                         <!-- <div class="row">
                             <div class="col-sm-2">&nbsp;

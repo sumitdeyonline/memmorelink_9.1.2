@@ -5,17 +5,26 @@
 
 } */
 table {
+
+
+    border-radius:6px;
+
+
     display: flex;
     flex-flow: column;
     height: 100%;
     width: 100%;
     border: 1px solid#dddddd;;
 }
+td:first-child, th:first-child {
+    border-left: none;
+}
+
 table thead {
     /* head takes the height it requires, 
     and it's not scaled when table is resized */
     flex: 0 0 auto;
-    width: calc(100% - 0.9em);
+    width: calc(100% - 1.0em);
 }
 table tbody {
     /* body takes all the remaining available space */
@@ -34,6 +43,10 @@ table thead, table tbody tr {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+
+    border-left:solid #dddddd 1px;
+    border-top:solid #dddddd 1px;
+
 }
 
 td, th {
@@ -43,6 +56,10 @@ td, th {
   }
 td {
     font-size: .8rem;
+}
+
+th {
+    border-top: none;
 }
   /* ::-webkit-scrollbar {
     width: 10px;

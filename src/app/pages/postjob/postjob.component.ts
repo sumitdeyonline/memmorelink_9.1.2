@@ -36,7 +36,7 @@ import { Options } from 'ng5-slider';
 //import { Sequence } from 'src/app/services/firebase/postjob/sequence.model';
 import { SequencenumberService } from 'src/app/services/firebase/sequencenumber/sequencenumber.service';
 import { Sequence } from 'src/app/services/firebase/sequencenumber/sequence.model';
-// import * as ClassicEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+// import * as ClassicEditor from '@ckeditor/ckeditor5-build-decoupled-document'; 
 
   
 @Component({
@@ -91,7 +91,7 @@ export class PostjobComponent implements OnInit {
   // public signupSucessMessage:string;
   public Editor = ClassicEditor;
   EmploymentTypesField: string;
-
+  mobile: boolean=false;
 
   constructor(private _activeRoute: ActivatedRoute, public _auth: AuthService, fb: FormBuilder, public postjobService: PostjobService,
               private toastrservice: ToastrService,
@@ -197,6 +197,11 @@ export class PostjobComponent implements OnInit {
   ngOnInit() {
     // let dateFormat = require('mm/dd/yyyy');
     window.scroll(0,0);
+    if (window.screen.width <= 736) { // 768px portrait
+      this.mobile = true;
+      //console.log("Windows ::: "+this.mobile);
+    }
+
 
   }
 

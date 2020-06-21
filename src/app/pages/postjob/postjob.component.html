@@ -40,17 +40,28 @@
                     </div>
                     <div class="col">                        
                         <button (click)="myjobList()" class="btn btn-primary btn-sm">Back to Posted Jobs</button>
+                        &nbsp;<input type="submit" value="Submit" *ngIf="mobile" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
+                            <div class="error_Message" *ngIf="(!f.valid || !checkSecureImageURL(CompanyLogoURL.value)) && f.touched && mobile">
+                            &nbsp;(Please enter required fields)
+                            </div> 
+                        <!-- <div class="form-actions floatRight" *ngIf="mobile">
+                            &nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
+                            </div>
+                            <div class="error_Message" *ngIf="(!f.valid || !checkSecureImageURL(CompanyLogoURL.value)) && f.touched && mobile">
+                            &nbsp;(Please enter required fields)
+                        </div>  -->
+                        
                     </div>
                     <div class="col-sm-2">&nbsp;</div>
                     <div class="col">
 
                         <div class="form-actions floatRight">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" *ngIf="!mobile" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
                         </div>
-                        <div class="error_Message" *ngIf="(!f.valid || !checkSecureImageURL(CompanyLogoURL.value)) && f.touched">
+                        <div class="error_Message" *ngIf="(!f.valid || !checkSecureImageURL(CompanyLogoURL.value)) && f.touched && !mobile">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Please enter required fields)
                         </div> 
-                        <br>
+                        <br *ngIf="!mobile">
                     </div>
                 </div>                
 
@@ -259,6 +270,8 @@
                             <select ngModel name="JobState" #JobState="ngModel" id="JobState" [ngModel]="postjobService.selectedPostJobc?.JobState" (ngModelChange)="postjobService.selectedPostJobc.JobState" class="form-control input-sm" required>
                               <option>Select State</option>
                               <option [value]="st.StateName" *ngFor="let st of state">{{st.StateDisplayName}}({{st.StateName}})</option>
+                             
+
                           </select>
                         <div class="error_Message" *ngIf="JobState.invalid && (JobState.dirty || JobState.touched)">
                           Please Enter Job State
@@ -457,13 +470,13 @@
                     </div>
                     <div class="col">
                         <div class="form-actions floatRight">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
+                            <input type="submit" value="Submit" [disabled]="!f.valid || !checkSecureImageURL(CompanyLogoURL.value)" class="btn btn-primary btn-sm">
                         </div>
                         <div class="error_Message" *ngIf="(!f.valid || !checkSecureImageURL(CompanyLogoURL.value)) && f.touched">
-                            &nbsp;&nbsp;&nbsp;(Please enter required fields)
+                            (Please enter required fields)
                         </div>
                     </div>
-                </div>
+                </div> 
                 
                 
 

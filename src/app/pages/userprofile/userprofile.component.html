@@ -6,13 +6,13 @@
 <div class="container">
     <div class="single">
         <div class="form-container">
-            <br>
+            <br *ngIf="!mobile">
             <!-- <h2>User Profile</h2> -->
 
 
             <form #userProfileForm="ngForm" (ngSubmit)="userProfileSubmit(userProfileForm)">
 
-                <div class="row">
+                <div class="row" style="width:100%">
                     <!-- <div class="error_Message" *ngIf="!userProfileForm.valid && userProfileForm.touched">
                         (Please enter required fields)
                     </div>   -->
@@ -21,17 +21,19 @@
                     </div>
                     <div class="col">
                         <input type="button" value="{{editProfileText}}" class="btn btn-primary btn-sm" [disabled]="!isUpdate" (click)="EnableEdit()">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" class="btn btn-primary btn-sm" [disabled]="!userProfileForm.valid || !isUpdateProfile">
+                        &nbsp;&nbsp;&nbsp;<input type="submit" value="Submit" class="btn btn-primary btn-sm" [disabled]="!userProfileForm.valid || !isUpdateProfile">
                         <div class="error_Message" *ngIf="!userProfileForm.valid && userProfileForm.touched">
                             (Please enter required fields)
                         </div>
+                        &nbsp;&nbsp;&nbsp;<input type="button" routerLink="/uploadresumepage" *ngIf="mobile" [disabled]="isUpdateProfile" value="Upload Resume" class="btn btn-primary btn-sm">
+
                     </div>
 
                     <div class="col-sm-2">
 
                     </div>
                     <div class="col">
-                        <input type="button" routerLink="/uploadresumepage" [disabled]="isUpdateProfile" value="Upload Resume" class="btn btn-primary btn-sm">
+                        <input type="button" routerLink="/uploadresumepage" *ngIf="!mobile"  [disabled]="isUpdateProfile" value="Upload Resume" class="btn btn-primary btn-sm">
                     </div>
                 </div>
 
@@ -96,17 +98,30 @@
                     <div class="col-sm-2">
                         <label style="font-weight: bold;" for="Sex">Gender<span style="color: red;">&nbsp;*</span></label>
                     </div>
-                    <div class="col">
+                    <div class="col" >
 
-                        <label class="radio-inline">
+                        <!-- <label class="radio-inline"> 
                             <input type="radio" ngModel name="Sex" [disabled]="!isUpdateProfile" #Sex="ngModel" id="Sex" [ngModel]="uProfile.selectedUserProfile?.Sex" (ngModelChange)="uProfile.selectedUserProfile.Sex" value="Male" required>Male
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;
                         <label class="radio-inline">
-                            <input type="radio" ngModel name="Sex" [disabled]="!isUpdateProfile" #Sex="ngModel" id="Sex" [ngModel]="uProfile.selectedUserProfile?.Sex" (ngModelChange)="uProfile.selectedUserProfile.Sex" value="Female" required>Female
+                            <input type="radio" ngModel name="Sex" [disabled]="disabledMale()" #Sex="ngModel" id="Sex" [ngModel]="uProfile.selectedUserProfile?.Sex" (ngModelChange)="uProfile.selectedUserProfile.Sex" value="Female" required>Female
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;
                         <label class="radio-inline">
                             <input type="radio" ngModel name="Sex" [disabled]="!isUpdateProfile" #Sex="ngModel" id="Sex" [ngModel]="uProfile.selectedUserProfile?.Sex" (ngModelChange)="uProfile.selectedUserProfile.Sex" value="Other" required>Prefer not to disclose
-                        </label>                        
+                        </label> -->
+                        
+                        
+                        <label class="radio-inline"> 
+                            <input type="radio" ngModel name="Sex" [attr.disabled]="!isUpdateProfile ? '' : null" [disabled]="!isUpdateProfile" #Sex="ngModel" id="Sex" [ngModel]="uProfile.selectedUserProfile?.Sex" (ngModelChange)="uProfile.selectedUserProfile.Sex" value="Male" required>Male
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="radio-inline">
+                            <input type="radio" ngModel name="Sex" [attr.disabled]="!isUpdateProfile ? '' : null" #Sex="ngModel" id="Sex" [ngModel]="uProfile.selectedUserProfile?.Sex" (ngModelChange)="uProfile.selectedUserProfile.Sex" value="Female" required>Female
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="radio-inline">
+                            <input type="radio" ngModel name="Sex" [attr.disabled]="!isUpdateProfile ? '' : null" #Sex="ngModel" id="Sex" [ngModel]="uProfile.selectedUserProfile?.Sex" (ngModelChange)="uProfile.selectedUserProfile.Sex" value="Other" required>Prefer not to disclose
+                        </label>
+
+
                         <div class="error_Message" *ngIf="Sex.invalid && (Sex.dirty || Sex.touched)">
                           Gender Required
                         </div>
@@ -195,7 +210,10 @@
                         <label style="font-weight: bold;" for="City">City<span style="color: red;">&nbsp;*</span></label>
                     </div>
                     <div class="col">
-                        <input type="text" ngModel name="City" maxlength="50" [disabled]="!isUpdateProfile" #City="ngModel" id="City" [ngModel]="uProfile.selectedUserProfile?.City" (ngModelChange)="uProfile.selectedUserProfile.City" class="form-control input-sm" required/>
+                        <input type="text" ngModel name="City" maxlength="50" [disabled]="!isUpdateProfile" #City="ngModel" id="City" [ngModel]="uProfile.selectedUserProfile?.City" (ngModelChange)="uProfile.selectedUserProfile.City" class="form-control input-sm" autocomplete="off" [ngbTypeahead]="search" (keyup)="zipcodeCitySearch($event.target.value)" (selectItem)="setCountryState($event)" required/>
+ 
+                        <!-- <input type="text" autocomplete="off" ngModel name="JobCity" #JobCity="ngModel" id="JobCity" maxlength="150" [ngModel]="postjobService.selectedPostJobc?.JobCity" (ngModelChange)="postjobService.selectedPostJobc.JobCity" class="form-control input-sm" autocomplete="off" [ngbTypeahead]="search" (keyup)="zipcodeCitySearch($event.target.value)" (selectItem)="setCountryState($event)" required/> -->
+ 
                         <div class="error_Message" *ngIf="City.invalid && (City.dirty || City.touched)">
                             Please Enter City
                         </div>
@@ -217,6 +235,18 @@
                 </div>
                 <div class="row">
 
+                    <div class="col-sm-2">
+                        <label style="font-weight: bold;" for="State">State<span style="color: red;">&nbsp;*</span></label>
+                    </div>
+                    <div class="col">
+                        <select ngModel name="State" [disabled]="!isUpdateProfile" #State="ngModel" id="State" [ngModel]="uProfile.selectedUserProfile?.State" (ngModelChange)="uProfile.selectedUserProfile.State" class="form-control input-sm" required>
+                            <option>Select State</option>
+                            <option [value]="st.StateName" *ngFor="let st of states">{{st.StateDisplayName}}({{st.StateName}})</option>
+                        </select>
+                        <div class="error_Message" *ngIf="State.invalid && (State.dirty || State.touched)">
+                            Please Select State
+                        </div>
+                     </div>
 
                     <div class="col-sm-2">
                             <label style="font-weight: bold;" for="Country">Country<span style="color: red;">&nbsp;*</span></label>
@@ -233,20 +263,6 @@
                     </div>
 
 
-
-
-                    <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="State">State<span style="color: red;">&nbsp;*</span></label>
-                    </div>
-                    <div class="col">
-                        <select ngModel name="State" [disabled]="!isUpdateProfile" #State="ngModel" id="State" [ngModel]="uProfile.selectedUserProfile?.State" (ngModelChange)="uProfile.selectedUserProfile.State" class="form-control input-sm" required>
-                            <option>Select State</option>
-                            <option [value]="st.StateName" *ngFor="let st of state">{{st.StateDisplayName}}({{st.StateName}})</option>
-                        </select>
-                        <div class="error_Message" *ngIf="State.invalid && (State.dirty || State.touched)">
-                            Please Select State
-                        </div>
-                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-2">&nbsp;
@@ -313,10 +329,10 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <h3 class="title" style="color: red;">Job Preference</h3>&nbsp;
+                </div>
                 <hr/>
-                <h3 class="title" style="color: red;">Job Preference</h3>&nbsp;
-
-
                 <div class="row">
                     <div class="col-sm-2">
                         <label style="font-weight: bold;" for="EmploymentType">Employment Type<span style="color: red;">&nbsp;*</span></label>
@@ -412,9 +428,12 @@ emptype
                     </div>
                 </div>
 
-                <hr/>
-                <h3 class="title" style="color: red;">Professional Experience</h3>&nbsp;
+                <div class="row">
+                    <h3 class="title" style="color: red;">Professional Experience</h3>&nbsp;
 
+                </div>
+                
+                <hr/>
 
                 <div class="row">
                     <div class="col-sm-2">
@@ -525,9 +544,13 @@ emptype
 
 
 
-            <hr/>
-            <h3 class="title" style="color: red;">Education</h3>&nbsp;
 
+            
+
+            <div class="row">
+                <h3 class="title" style="color: red;">Education</h3>&nbsp;
+            </div>
+            <hr/>
 
             <div class="row">
                 <div class="col-sm-2">
@@ -576,8 +599,11 @@ emptype
             </div>
 
 
+            <div class="row">
+                <h3 class="title" style="color: red;">Skillset</h3>&nbsp;
+            </div>
             <hr/>
-            <h3 class="title" style="color: red;">Skillset</h3>&nbsp;
+
 
             <div class="row">
                 <div class="col-sm-2">
@@ -648,13 +674,15 @@ emptype
                     <div class="error_Message" *ngIf="!userProfileForm.valid && userProfileForm.touched">
                         (Please enter required fields)
                     </div>
+                    &nbsp;&nbsp;&nbsp;<input type="button" routerLink="/uploadresumepage" *ngIf="mobile" [disabled]="isUpdateProfile" value="Upload Resume" class="btn btn-primary btn-sm">
+
                 </div>
 
                 <div class="col-sm-2">
 
                 </div>
                 <div class="col">
-                    <input type="button" routerLink="/uploadresumepage" [disabled]="isUpdateProfile" value="Upload Resume" class="btn btn-primary btn-sm">
+                    <input type="button" routerLink="/uploadresumepage" *ngIf="!mobile" [disabled]="isUpdateProfile" value="Upload Resume" class="btn btn-primary btn-sm">
                 </div>
             </div>
 
