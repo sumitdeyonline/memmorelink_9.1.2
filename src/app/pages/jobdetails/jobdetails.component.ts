@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostJobc } from 'src/app/services/firebase/postjob/postjob.model';
 import { PostjobService } from 'src/app/services/firebase/postjob/postjob.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
@@ -38,7 +38,7 @@ export class JobdetailsComponent implements OnInit {
   ApplyJobButtonMsg:string='Apply Now';
   //fileNameDialogRef: MatDialogRef<ApplyjobComponent>;
 
-  constructor(private _activeRoute:ActivatedRoute, private appjob: ApplyjobService, private sjob:SavejobsService, private postservice: PostjobService, private dialog: MatDialog, public auth: AuthService) {
+  constructor(private _activeRoute:ActivatedRoute, private router: Router,private appjob: ApplyjobService, private sjob:SavejobsService, private postservice: PostjobService, private dialog: MatDialog, public auth: AuthService) {
     window.scroll(0,0);
     // console.log("Test :::: ");
 
@@ -227,6 +227,11 @@ export class JobdetailsComponent implements OnInit {
      else 
       dialogConfig.width ="30%";
     this.dialog.open(SavejobComponent, dialogConfig);
+  }
+
+  editJob() {
+    // console.log("Edit Job ..."+id);
+    this.router.navigate(['/postjob',this.id]);
   }
 
   getDateDiff(dateIput) {

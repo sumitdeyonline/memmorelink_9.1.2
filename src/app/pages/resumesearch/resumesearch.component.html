@@ -27,9 +27,9 @@
       <div class="col-md-8">
           <div class="col_3">
 
-            <br>
+            <!-- <br> -->
 
-            <div class="row" [hidden]="searchParameter" [hidden]="!searchParameter && !mobile" style="height:100px">
+            <div class="row" [hidden]="!searchParameter || mobile" style="height:100px">
               <div class="col-sm-2">&nbsp;
               </div>
             </div>
@@ -86,7 +86,7 @@
           <!--input type="text" class="text" required="required" value= "location" ngModel name="location" #username="ngModel" id="location" placeholder="{{ location }}" value="Location" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Location';}"-->
        
                     <!-- </p> -->
-       
+                    <br *ngIf="mobile">
                     </div>
                     <div [hidden]="searchParameter">
 

@@ -166,17 +166,36 @@ export class UserProfileComponent implements OnInit {
   // }
 
   getState(country,selectstate?) {
-    this.uProfile.getStateDetails(country).subscribe(sprop => {
-      this.states = sprop;
-      if (selectstate !=null && selectstate !=undefined){
-        this.uProfile.selectedUserProfile.State = selectstate;
-        //console.log("selectstate  ::: "+this.uProfile.selectedUserProfile.State);
-      } 
-      // else {
-      //   console.log("selectstate ====>>>>>> ::: "+this.uProfile.selectedUserProfile.State);
-      // }
-      //console.log("State :::::::: => "+this.uProfile.selectedUserProfile.State);
-    })
+
+    if (selectstate == undefined || selectstate == null || this.uProfile.selectedUserProfile.State != selectstate) {
+      this.uProfile.getStateDetails(country).subscribe(sprop => {
+        this.states = sprop;
+        if (selectstate !=null && selectstate !=undefined){
+          // setTimeout(() => {
+            this.uProfile.selectedUserProfile.State = selectstate;
+          // }, 200);
+  
+          //console.log("selectstate  ::: "+this.uProfile.selectedUserProfile.State);
+        } 
+      })
+    } 
+    // else {
+    //   if (this.uProfile.selectedUserProfile.State != selectstate) {
+    //     this.uProfile.getStateDetails(country).subscribe(sprop => {
+    //       this.states = sprop;
+    //       if (selectstate !=null && selectstate !=undefined){
+    //         // setTimeout(() => {
+    //           this.uProfile.selectedUserProfile.State = selectstate;
+    //         // }, 200);
+    
+    //         //console.log("selectstate  ::: "+this.uProfile.selectedUserProfile.State);
+    //       } 
+    //     })
+    //   }
+    // }
+
+
+
   }
 
   getEmpTypes() {
@@ -626,7 +645,7 @@ export class UserProfileComponent implements OnInit {
     // console.log("State ::: "+item[1]);
     // console.log("Country ::: "+item[2]);
     if (item[2] == 'US') countyCode = 'USA';
-    this.getState(countyCode,item[1]);
+    this.getState(countyCode,item[1].toString().trim());
     this.uProfile.selectedUserProfile.City = item[0];
     //this.uProfile.selectedUserProfile.State= item[1];
     this.uProfile.selectedUserProfile.Country = countyCode;

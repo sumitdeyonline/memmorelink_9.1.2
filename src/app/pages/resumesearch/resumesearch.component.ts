@@ -92,7 +92,7 @@ export class ResumesearchComponent implements OnInit {
     window.scroll(0,0);
     if (window.screen.width <= 736) { // 768px portrait
       this.mobile = true;
-      //console.log("Windows ::: "+this.mobile);
+      console.log("Windows ::: "+this.mobile);
     }
   }
 

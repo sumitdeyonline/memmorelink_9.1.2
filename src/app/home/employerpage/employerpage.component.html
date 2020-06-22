@@ -88,7 +88,7 @@
             <thead>
                 <tr>
                     <!-- <th>Job ID</th>           -->
-                    <th>Job Title[JobID] <a (click)="sortValue('asc','JobTitle','PostJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','JobTitle','PostJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
+                    <th>Job Title [ID] <a (click)="sortValue('asc','JobTitle','PostJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','JobTitle','PostJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
                     <th>Location <a (click)="sortValue('asc','JobCity','PostJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','JobCity','PostJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
                     <!-- <th>Date Created</th>                 -->
                     <th>Date Modified <a (click)="sortValue('asc','LastModifiedDate','PostJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','LastModifiedDate','PostJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
@@ -148,7 +148,7 @@
                 <tr>
                     <th>Name <a (click)="sortValue('asc','Name','ApplyJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','Name','ApplyJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
                     <th>Email <a (click)="sortValue('asc','Email','ApplyJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','Email','ApplyJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
-                    <th>Job Title[JobID] <a (click)="sortValue('asc','JobTitle','ApplyJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','JobTitle','ApplyJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
+                    <th>Job Title [ID] <a (click)="sortValue('asc','JobTitle','ApplyJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','JobTitle','ApplyJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
                     <th>Location <a (click)="sortValue('asc','Location','ApplyJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','Location','ApplyJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>                    
                     <th>Date Applied <a (click)="sortValue('asc','CreatedDate','ApplyJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','CreatedDate','ApplyJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>                
 
@@ -157,7 +157,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let aj of aJob">
-                    <td>{{aj.FirstName}}&nbsp;{{aj.LastName}}</td>
+                    <td>{{aj.FirstName}} {{aj.LastName}}</td>
                     <td><a [routerLink]="['/applicantapplied',aj.FromEmail]">{{aj.FromEmail?.substring(0,20)}}</a></td>
                     <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,35) }}<span *ngIf="aj.JobTitle?.length>35">...</span> [{{aj.JobIDSerial}}]</a></td>
                     <td>{{ aj.joblocation }}</td>

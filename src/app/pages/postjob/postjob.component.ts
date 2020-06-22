@@ -473,13 +473,17 @@ export class PostjobComponent implements OnInit {
 
 
   getState(country,selectstate?) {
-    this.uProfile.getStateDetails(country).subscribe(sprop => {
-      this.state = sprop;
-      if (selectstate !=null && selectstate !=undefined){
-        this.postjobService.selectedPostJobc.JobState= selectstate;
-      }
-      //console.log("State :::::::: => "+this.state.length);
-    })
+
+    if (selectstate == undefined || selectstate == null || this.uProfile.selectedUserProfile.State != selectstate) {
+
+      this.uProfile.getStateDetails(country).subscribe(sprop => {
+        this.state = sprop;
+        if (selectstate !=null && selectstate !=undefined){
+          this.postjobService.selectedPostJobc.JobState= selectstate;
+        }
+        //console.log("State :::::::: => "+this.state.length);
+      })
+    }
   }
 
   setCountryState(location) {
