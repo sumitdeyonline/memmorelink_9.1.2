@@ -37,7 +37,7 @@
         <mat-form-field>
           <input matInput
                 placeholder="Phone Number *"
-              formControlName="PhoneNumber"
+              formControlName="PhoneNumber" 
               #PhoneNumber
               (keyup)="phoneNumberFormat($event.target.value);">
               
@@ -51,6 +51,8 @@
           </textarea>
         </mat-form-field>
 
+        <!-- <ckeditor [editor]="Editor" [config]="{ placeholder: 'Enter Description Here...' }"  minHeight="50px" [spellcheck]="true" formControlName="CoverLetter"></ckeditor>        
+ -->
 
         <mat-form-field *ngIf="numberOfResume > 0">
           <select matNativeControl placeholder="Select Resume *"

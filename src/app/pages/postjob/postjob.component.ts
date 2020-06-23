@@ -474,7 +474,7 @@ export class PostjobComponent implements OnInit {
 
   getState(country,selectstate?) {
 
-    if (selectstate == undefined || selectstate == null || this.uProfile.selectedUserProfile.State != selectstate) {
+    if (selectstate == undefined || selectstate == null || this.postjobService.selectedPostJobc.JobState != selectstate) {
 
       this.uProfile.getStateDetails(country).subscribe(sprop => {
         this.state = sprop;
@@ -499,10 +499,23 @@ export class PostjobComponent implements OnInit {
     // console.log("State ::: "+item[1]);
     // console.log("Country ::: "+item[2]);
     if (item[2] == 'US') countyCode = 'USA';
+     this.postjobService.selectedPostJobc.JobCity = item[0];
+     this.postjobService.selectedPostJobc.JobCountry = countyCode;
     this.getState(countyCode,item[1]);
-    this.postjobService.selectedPostJobc.JobCity = item[0];
+    // console.log("this.postjobService.selectedPostJobc.JobCity item[0] "+item[0]);
+    // if (this.postjobService.selectedPostJobc.JobCity == item[0]) {
+    //   this.postjobService.selectedPostJobc.JobCity = item[0]+'';
+    //   console.log("this.postjobService.selectedPostJobc.JobCity Inside 1"+this.postjobService.selectedPostJobc.JobCity);
+    //   //this.postjobService.selectedPostJobc.JobCity = item[0];
+    //   console.log("this.postjobService.selectedPostJobc.JobCity Inside 2 "+this.postjobService.selectedPostJobc.JobCity);
+    // } else {
+    //   this.postjobService.selectedPostJobc.JobCity = item[0];
+    // }
+    // console.log("this.postjobService.selectedPostJobc.JobCity  "+this.postjobService.selectedPostJobc.JobCity);
+
+    // console.log("this.postjobService.selectedPostJobc.JobCity  After :: "+this.postjobService.selectedPostJobc.JobCity);
     //this.postjobService.selectedPostJobc.JobState= item[1];
-    this.postjobService.selectedPostJobc.JobCountry = countyCode;
+
 
   }
 

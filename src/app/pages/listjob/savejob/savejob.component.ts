@@ -82,12 +82,23 @@ export class SavejobComponent implements OnInit {
                 company: this.pjob.Company,
                 CreatedDate: new Date()
               };
-              this.sjob.addUpdateSaveJobs(this.sJobs);
-              this.message = ' has been saved.';
               //this.router.navigate(['/authlandingpage']);
               //console.log("You have save the job : "+this.sJobs);
     
-            } 
+            } else {
+              this.sJobs = { FirstName: '',
+                LastName: '',
+                JobID: this.pjob.id,
+                JobIDSerial: ""+this.pjob.JobID,
+                JobTitle:  this.pjob.JobTitle,
+                username: this.auth.userProfile.name,
+                joblocation: this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry,
+                company: this.pjob.Company,
+                CreatedDate: new Date()
+              };
+            }
+            this.sjob.addUpdateSaveJobs(this.sJobs);
+            this.message = ' has been saved.';
             // \else {
             //   this.applyJobForm.controls['Email'].setValue(this.auth.userProfile.name);
             // }

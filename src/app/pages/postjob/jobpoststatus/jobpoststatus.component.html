@@ -80,9 +80,9 @@
                                 ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
                                 [ngModel]="recordDetails[0].name"
                                  (ngModelChange)="selectPostedJob(postform.value)">
-                                <option value="fewRecords" selected>Last {{noOfRecordFirst}} Records[Max]</option>
-                                <option value="AllRecords">All Records[{{allRecordsDisp}} Max]</option>
-                                <option value="Custom">Custom Date[{{allRecordsDisp}} Max]</option>
+                                <option value="fewRecords" selected>Latest Records [{{noOfRecordFirst}} Max]</option>
+                                <option value="AllRecords">All Records [{{allRecordsDisp}} Max]</option>
+                                <option value="Custom">Custom Dates [{{allRecordsDisp}} Max]</option>
                                 <!--option>USA</option-->
                             </select>
                             

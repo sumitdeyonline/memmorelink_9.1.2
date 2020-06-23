@@ -63,9 +63,9 @@
                                             ngModel name="RecordNumber" #RecordNumber="ngModel" id="RecordNumber"
                                             [ngModel]="recordDetails[0].name"
                                              (ngModelChange)="selectApplied(saveform.value)">
-                                            <option value="fewRecords" selected>Last {{noOfRecordFirst}} Records[Max]</option>
-                                            <option value="AllRecords">All Records[{{allRecords}} Max]</option>
-                                            <option value="Custom">Custom Date[{{allRecords}} Max]</option>
+                                            <option value="fewRecords" selected>Latest Records [{{noOfRecordFirst}} Max]</option>
+                                            <option value="AllRecords">All Records [{{allRecords}} Max]</option>
+                                            <option value="Custom">Custom Dates [{{allRecords}} Max]</option>
                                             <!--option>USA</option-->
                                         </select>
 

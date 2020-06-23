@@ -96,7 +96,12 @@
                                     <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;<a [routerLink]="['/applicantapplied',aj.FromEmail]" target="_top">{{aj.FromEmail}}</a>
                                     &nbsp;&nbsp;<i class="fa fa-phone" aria-hidden="true"></i>&nbsp;{{aj.PhoneNumber}}
                                     &nbsp;&nbsp;<i class="fa fa-file-o" aria-hidden="true"></i>&nbsp;<a style="text-decoration: none; color:black;" href="{{aj.fileUploadURL}}" target="_blank">Resume</a>&nbsp;
-                                    &nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter<span class="tooltiptext">{{coverLetterCheck(aj?.CoverLetter)}}</span></div>
+                                    &nbsp;&nbsp;<div class="tooltip"><i class="fa fa-file-text-o"></i>&nbsp;Cover Letter
+                                        <span class="tooltiptext">
+                                            <!-- {{coverLetterCheck(aj?.CoverLetter)}} -->
+                                            <div *ngIf="aj !=null" [innerHTML]="coverLetterCheck(aj?.CoverLetter)"></div>
+                                        </span>
+                                    </div>
                                     <br><span class="meta"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;<b>Date Applied:</b> {{ aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy h:mm a' }}</span>&nbsp;
                                 </div>
                                 <div class="clearfix"> </div>
