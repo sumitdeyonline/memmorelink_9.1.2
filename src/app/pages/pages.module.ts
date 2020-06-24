@@ -78,6 +78,8 @@ import { FaqComponent } from './faq/faq.component';
 import { SavejobsService } from '../services/firebase/savejobs/savejobs.service';
 import { SavejobComponent } from './listjob/savejob/savejob.component';
 import { SavejobdetailsComponent } from './listjob/savejobdetails/savejobdetails.component';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
+import { CookiesComponent } from './cookies/cookies.component';
 // import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
 // import { TechNewsComponent } from './tech-news';
@@ -165,7 +167,9 @@ import { SavejobdetailsComponent } from './listjob/savejobdetails/savejobdetails
         CandidateComponent,
         FaqComponent,
         SavejobComponent,
-        SavejobdetailsComponent
+        SavejobdetailsComponent,
+        PrivacypolicyComponent,
+        CookiesComponent
         
         // SignupConfirmComponent
       // AdminhomeComponent,

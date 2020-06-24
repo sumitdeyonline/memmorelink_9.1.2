@@ -9,6 +9,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
 
+/* width */
+::-webkit-scrollbar {
+    width: 13px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 2px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #ececec; 
+    border-radius: 2px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f15f43; 
+  }
+
+
+
+
+
 .dropdown:hover > .dropdown-menu {
     display: block;
 }

@@ -204,8 +204,7 @@ export class EmployeepageComponent implements OnInit {
             case 'CreatedDate':
               var dateA = a.CreatedDate; // ignore upper and lowercase
               var dateB = b.CreatedDate; // ignore upper and lowercase
-              break;                             
-
+              break;
           }
 
 
@@ -366,6 +365,10 @@ export class EmployeepageComponent implements OnInit {
               var dateA = a.CreatedDate; // ignore upper and lowercase
               var dateB = b.CreatedDate; // ignore upper and lowercase
               break;                             
+            case 'ApplyJob':
+              var nameA = a.ApplyJob == true? 'Yes':'No'; //a.CreatedDate; // ignore upper and lowercase
+              var nameB = b.ApplyJob == true? 'Yes':'No'; // ignore upper and lowercase
+              break;  
 
           }
 
@@ -392,7 +395,11 @@ export class EmployeepageComponent implements OnInit {
           case 'CreatedDate':
             var dateA = b.CreatedDate; // ignore upper and lowercase
             var dateB = a.CreatedDate; // ignore upper and lowercase
-            break;             
+            break;   
+          case 'ApplyJob':
+            var nameA = b.ApplyJob == true? 'Yes':'No'; //a.CreatedDate; // ignore upper and lowercase
+            var nameB = a.ApplyJob == true? 'Yes':'No'; // ignore upper and lowercase
+            break;                        
           }
 
         }

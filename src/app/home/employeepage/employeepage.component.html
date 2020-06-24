@@ -32,14 +32,14 @@
                 <th>Location <a (click)="sortValue('asc','Location','SaveJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','Location','SaveJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
                 <!-- <th>Employment Type</th>                 -->
                 <th>Date Saved <a (click)="sortValue('asc','CreatedDate','SaveJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','CreatedDate','SaveJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
-                <th>Applied</th>
+                <th>Applied <a (click)="sortValue('asc','ApplyJob','SaveJob')"><i class="fa fa-caret-up" style="font-size:20px"></i></a><a (click)="sortValue('des','ApplyJob','SaveJob')"><i class="fa fa-caret-down" style="font-size:20px"></i></a></th>
 
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let sj of savejob">
                 <td>{{sj.company}}</td>
-                <td><a [routerLink]="['/jobdetails',sj.JobID]" target="_blank">{{ sj.JobTitle?.substring(0,35) }} [{{sj.JobIDSerial}}] <span *ngIf="sj.JobTitle?.length>35">...[{{sj.JobIDSerial}}]</span></a></td>
+                <td><a [routerLink]="['/jobdetails',sj.JobID]" target="_blank">{{ sj.JobTitle?.substring(0,35) }}<span *ngIf="sj.JobTitle?.length>35">...</span></a> [{{sj.JobIDSerial}}]</td>
                 <td>{{sj.joblocation}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
                 <td>{{sj.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
@@ -114,7 +114,7 @@
         <tbody>
             <tr *ngFor="let aj of aJob">
                 <td>{{aj.company}}</td>
-                <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,35) }} [{{aj.JobIDSerial}}] <span *ngIf="aj.JobTitle?.length>35">...</span></a></td>
+                <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,35) }}<span *ngIf="aj.JobTitle?.length>35">...</span></a> [{{aj.JobIDSerial}}] </td>
                 <td>{{aj.joblocation}}</td>
                 <!-- <td>{{pj.EmploymentTypes.toString().substring(0,10)}}</td> -->
                 <td><a href="{{aj.fileUploadURL}}" target="_blank">Download</a></td>

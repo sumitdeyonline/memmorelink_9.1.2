@@ -56,7 +56,8 @@ export class SequencenumberService {
           this.cqDoc.update({ SeqNum: data.SeqNum + 1 })
           data.id = a.payload.doc.id;
 
-          let num = ""+data.SeqNum+ Math.round(Math.random()*(999 + 1 - 100));
+          //let num = ""+data.SeqNum+ Math.round(Math.random()*(999 + 1 - 100));
+          let num = ""+data.SeqNum+ Math.round(Math.random()*(999));
           data.SeqNum = Number(num);
           
          //let seqNum = data.SeqNum + 1;

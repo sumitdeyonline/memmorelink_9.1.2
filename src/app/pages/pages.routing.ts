@@ -23,6 +23,8 @@ import { ApplicantappliedComponent } from './applicants/applicantapplied/applica
 import { CandidateComponent } from './applicants/candidate/candidate.component';
 import { FaqComponent } from './faq/faq.component';
 import { SavejobdetailsComponent } from './listjob/savejobdetails/savejobdetails.component';
+import { CookiesComponent } from './cookies/cookies.component';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -64,7 +66,16 @@ export const pagesRouting = RouterModule.forChild([
     {
         path: 'faq',
         component: FaqComponent
-    },    
+    },  
+    {
+        path: 'privacypolicy',
+        component: PrivacypolicyComponent
+    }, 
+    {
+        path: 'cookies',
+        component: CookiesComponent
+    }, 
+    
     {
         path: 'userprofile',
         component: UserProfileComponent,

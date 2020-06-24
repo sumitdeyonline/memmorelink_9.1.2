@@ -6,19 +6,23 @@
         <ul class="f_list f_list1">
           <li><a routerLink="">Home</a></li>
           <li><a routerLink="/signin" *ngIf="!auth.isAuthenticated()">Sign In</a></li>
-          <li><a routerLink="/signup" *ngIf="!auth.isAuthenticated()">Sign Up</a></li>
-          <li><a routerLink="/about">About Us</a></li>
+          <li><a routerLink="/signup" *ngIf="!auth.isAuthenticated()">Applicant Sign Up </a></li>
+          <li><a routerLink="/valueservices" *ngIf="!auth.isAuthenticated()">Employer Sign Up</a></li>
+          <li><a routerLink="/uploadresumepage" *ngIf="auth.isAuthenticated() && auth.isUserRole()">Profile</a></li>
+          <li><a routerLink="/valueservices" *ngIf="auth.isAuthenticated() && (auth.isPostJobRole() || auth.isResumeSearchRole())">Edit Profile</a></li>
+          <li><a routerLink="" (click) = "auth.logout()" *ngIf="auth.isAuthenticated()">Sign Out</a></li>
+          
           <!-- <li><a href='{{email}}' target="_top">Help</a></li> -->
-          <li><a routerLink="/faq" target="_top">Help</a></li>
+          
           
         </ul>
-        <!-- <ul class="f_list">
-          <li><a href="features.html">Features</a></li>
-          <li><a href="terms.html">Terms of use</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-          <li><a href="jobs.html">Post a Job</a></li>
-        </ul> -->
-        <div class="clearfix"> </div>
+        <ul class="f_list">
+          <li><a routerLink="/about">About Us</a></li>
+          <li><a routerLink="/faq" target="_top">Help</a></li>
+          <li><a routerLink="/privacypolicy">Privacy</a></li>
+          <li><a routerLink="/cookies">Cookies</a></li>
+        </ul>
+        <!-- <div class="clearfix"> </div> -->
       </div>
       <!-- <div class="col-md-3 grid_3">
         <h4>Twitter Widget</h4>
@@ -37,13 +41,13 @@
       <div class="col-md-3 grid_3">
         <h4>Social Media</h4>
         <p>
-          &nbsp;&nbsp;<a href="https://twitter.com/MemoreLink" target="_blank"><i class="fa fa-twitter tw1"></i></a>
+          <a href="https://twitter.com/MemoreLink" target="_blank"><i class="fa fa-twitter tw1"></i></a>
           <a href="https://www.facebook.com/memorelink" target="_blank"><i class="fa fa-facebook"></i></a>
           <!-- <a href="https://play.google.com/store/apps/details?id=io.techsite.memorelink&hl=en_US"><img src="assets/images/google-play-icon.webp"></a>
  -->
         </p>
         <p>
-          &nbsp;<a href="https://play.google.com/store/apps/details?id=io.techsite.memorelink&hl=en_US" target="_blank"><img src="assets/images/google-play-icon.webp"></a>
+          <a href="https://play.google.com/store/apps/details?id=io.techsite.memorelink&hl=en_US" target="_blank"><img src="assets/images/google-play-icon.webp"></a>
         </p>
         <!-- <a href="https://play.google.com/store/apps/details?id=io.techsite.memorelink&hl=en_US"><img src="assets/images/google-play-icon.webp"></a> -->
         <!-- <form> 

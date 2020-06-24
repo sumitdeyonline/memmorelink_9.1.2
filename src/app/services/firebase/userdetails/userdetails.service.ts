@@ -66,7 +66,7 @@ export class UserdetailsService {
     // };
     // console.log("User Name ::::: "+uname);
     // console.log("User Role ::::: "+uRole);
-     //console.log("company Logo URL ::::: "+CompanyLogoURL);
+    //  console.log("company Logo URL ::::: "+CompanyLogoURL);
     // console.log("companyAddress ::::: "+companyAddress);
     // console.log("phone ::::: "+phone);
     if ((company == undefined) || (company == null)) company = '';
