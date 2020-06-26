@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FileUpload } from 'src/app/services/firebase/uploadresume/FileUpload';
-import { AuthService } from 'src/app/services/authentication/auth.service';
-import { UserprofileService } from 'src/app/services/firebase/userprofile/userprofile.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UploadResumeService } from 'src/app/services/firebase/uploadresume/upload-resume.service';
-import { UploadResume } from 'src/app/services/firebase/uploadresume/uploadresume.model';
+import { UserprofileService } from 'src/app/services/firebase/userprofile/userprofile.service';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 import { EmailService } from 'src/app/services/email/email.service';
-import { Router } from '@angular/router';
+import { FileUpload } from 'src/app/services/firebase/uploadresume/FileUpload';
+import { UploadResume } from 'src/app/services/firebase/uploadresume/uploadresume.model';
+import { EncrdecrserviceService } from 'src/app/services/EncriptDecript/encrdecrservice.service';
+import { AUTH_CONFIG } from 'src/app/global-config';
+// import * as CryptoJS from 'crypto-js';
 
 @Component({
-  selector: 'uploadresume',
-  templateUrl: './uploadresume.component.html',
-  styleUrls: ['./uploadresume.component.css']
+  selector: 'app-upload-resume-registration',
+  templateUrl: './upload-resume-registration.component.html',
+  styleUrls: ['./upload-resume-registration.component.css']
 })
-export class UploadresumeComponent implements OnInit {
+export class UploadResumeRegistrationComponent implements OnInit {
+  userid='';
 
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
@@ -24,12 +28,28 @@ export class UploadresumeComponent implements OnInit {
   isNewUpload: boolean = false;
   uResume: UploadResume [];
   mobile: boolean=false;
+  signupSucessMessage = '';
+  constructor(private route: ActivatedRoute,
+              public rUploadService: UploadResumeService, 
+              private uProfile: UserprofileService,
+              private router: Router, 
+              public auth: AuthService,
+              private sEmail: EmailService,
+              private EncrDecr: EncrdecrserviceService) { 
 
+    this.route.queryParams.subscribe(params => {
 
+      //this.userid = params['userid'];
+      this.userid = this.EncrDecr.get(AUTH_CONFIG.secureKey,params['ur']);
+      // this.userEmail = params['userid'];
+      // this.userid = CryptoJS.AES.decrypt(this.userEmail.trim().toString());
+      // console.log(" this.userid "+this.userid);
 
-  constructor(public rUploadService: UploadResumeService, private uProfile: UserprofileService,private router: Router, private auth: AuthService,private sEmail: EmailService) {
+      //this.userid = params['userid'];
+      //console.log("this.userid " + this.userid);
+    });
 
-    this.rUploadService.getResumeDetails(this.auth.userProfile.name).subscribe(uprop=> {
+    this.rUploadService.getResumeDetails(this.userid).subscribe(uprop=> {
       this.uResume = uprop;
       // this.resetForm();
       //console.log("Resume Upload");
@@ -60,24 +80,17 @@ export class UploadresumeComponent implements OnInit {
       }
 
     })
+
   }
 
-  ngOnInit() {
+  ngOnInit(): void { 
+    window.scroll(0,0);
     if (window.screen.width <= 736) { // 768px portrait
       this.mobile = true;
       //console.log("Windows ::: "+this.mobile);
     }
   }
 
-
-  selectFile(event) {
-    this.selectedFiles = event.target.files;
-    if (this.validateFile(this.selectedFiles.item(0).name)) {
-      this.resumeUploadEnabled = true;
-    } else {
-      this.resumeUploadEnabled = false;
-    }
-  }
 
   upload() { 
     let id;
@@ -115,7 +128,7 @@ export class UploadresumeComponent implements OnInit {
 
       if (!this.isUpdate) {
         //console.log("New Entry ... ");
-        this.rUploadService.pushFileToStorage(this.currentFileUpload, this.progress, null);
+        this.rUploadService.pushFileToStorage(this.currentFileUpload, this.progress, null,this.userid);
       } else {
         //console.log("Updating ....... ");
         this.rUploadService.pushFileToStorage(this.currentFileUpload, this.progress, id);
@@ -133,12 +146,14 @@ export class UploadresumeComponent implements OnInit {
 
 
     /* Email Start */
-    let subject = 'You have uploaded your resume';
-    let body = 'Thank you '+this.auth.userProfile.name+'  for uploading your resume.  <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
-    this.sEmail.sendEmail(this.auth.userProfile.name,'',subject,body,'support');
+    // let subject = 'You have uploaded your resume';
+    // let body = 'Thank you '+this.auth.userProfile.name+'  for uploading your resume.  <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
+    // this.sEmail.sendEmail(this.auth.userProfile.name,'',subject,body,'support');
 
 
     //this.router.navigate(['/userprofile']);
+
+     this.signupSucessMessage = "You have been sucessfully registered. "
 
   }
 
@@ -157,6 +172,13 @@ export class UploadresumeComponent implements OnInit {
     this.rUploadService.deleteFileUpload(fileUpload);
   }
 
-
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+    if (this.validateFile(this.selectedFiles.item(0).name)) {
+      this.resumeUploadEnabled = true;
+    } else {
+      this.resumeUploadEnabled = false;
+    }
+  }
 
 }

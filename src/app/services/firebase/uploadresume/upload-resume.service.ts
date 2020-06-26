@@ -82,7 +82,7 @@ export class UploadResumeService {
 
   }
 
-  pushFileToStorage(fileUpload: FileUpload, progress: { percentage: number }, id: string) {
+  pushFileToStorage(fileUpload: FileUpload, progress: { percentage: number }, id: string,regid?:string) {
 
 
     const storageRef = firebase.storage().ref();
@@ -140,8 +140,14 @@ export class UploadResumeService {
           this.saveFileData(fileUpload);
           let uResume = {} as UploadResume;
           uResume.ResumeFileName = this.fileName;
-          uResume.UserID =  this.auth.userProfile.name;
-          uResume.Username =  this.auth.userProfile.name;
+          if (this.auth.isAuthenticated()) {
+            uResume.UserID =  this.auth.userProfile.name;
+            uResume.Username =  this.auth.userProfile.name;
+          } else {
+            uResume.UserID =  regid;
+            uResume.Username =  regid;
+          }
+
           uResume.ResumeURL =  this.downloadURL;
           uResume.ResumeID =  "";
           uResume.ResumeExt =  this.fileName.substring(this.fileName.lastIndexOf(".")+1,this.fileName.length);

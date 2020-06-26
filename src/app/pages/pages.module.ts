@@ -80,6 +80,9 @@ import { SavejobComponent } from './listjob/savejob/savejob.component';
 import { SavejobdetailsComponent } from './listjob/savejobdetails/savejobdetails.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 import { CookiesComponent } from './cookies/cookies.component';
+import { UserregistrationComponent } from './signup/userregistration/userregistration.component';
+import { UploadResumeRegistrationComponent } from './signup/upload-resume-registration/upload-resume-registration.component';
+import { EncrdecrserviceService } from '../services/EncriptDecript/encrdecrservice.service';
 // import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
 // import { TechNewsComponent } from './tech-news';
@@ -169,7 +172,9 @@ import { CookiesComponent } from './cookies/cookies.component';
         SavejobComponent,
         SavejobdetailsComponent,
         PrivacypolicyComponent,
-        CookiesComponent
+        CookiesComponent,
+        UserregistrationComponent,
+        UploadResumeRegistrationComponent
         
         // SignupConfirmComponent
       // AdminhomeComponent,
@@ -206,7 +211,8 @@ import { CookiesComponent } from './cookies/cookies.component';
       AuthGuardService,
       EmploymenttypesService,
       SequencenumberService,
-      SavejobsService
+      SavejobsService,
+      EncrdecrserviceService
 
       //AlphabetNumerologyService
       //AdminGuardService

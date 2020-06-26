@@ -99,7 +99,7 @@
             <tbody>
                 <tr *ngFor="let pj of pjob">
                     <!-- <td>{{ pj?.JobID}}</td> -->
-                    <td><a [routerLink]="['/jobdetails',pj.id]" target="_blank">{{ pj.JobTitle?.substring(0,35) }}<span *ngIf="pj.JobTitle?.length>35">...</span> [{{ pj?.JobID}}]</a></td>
+                    <td><a [routerLink]="['/jobdetails',pj.id]" target="_blank">{{ pj.JobTitle?.substring(0,35) }}<span *ngIf="pj.JobTitle?.length>35">...</span></a> [{{ pj?.JobID}}]</td>
                     <td>{{ pj.JobCity?.substring(0,15) }}, {{ pj.JobState }}</td>
                     <!-- <td>{{pj.CreatedDate?.toDate() | date: 'MM/dd/yyyy'}}</td>                     -->
                     <td>{{pj.LastModifiedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
@@ -159,7 +159,7 @@
                 <tr *ngFor="let aj of aJob">
                     <td>{{aj.FirstName}} {{aj.LastName}}</td>
                     <td><a [routerLink]="['/applicantapplied',aj.FromEmail]">{{aj.FromEmail?.substring(0,20)}}</a></td>
-                    <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,35) }}<span *ngIf="aj.JobTitle?.length>35">...</span> [{{aj.JobIDSerial}}]</a></td>
+                    <td><a [routerLink]="['/jobdetails',aj.JobID]" target="_blank">{{ aj.JobTitle?.substring(0,35) }}<span *ngIf="aj.JobTitle?.length>35">...</span></a> [{{aj.JobIDSerial}}]</td>
                     <td>{{ aj.joblocation }}</td>
                     <td>{{aj.CreatedDate?.toDate() | date: 'MM/dd/yyyy  h:mm a'}}</td>
                 </tr>

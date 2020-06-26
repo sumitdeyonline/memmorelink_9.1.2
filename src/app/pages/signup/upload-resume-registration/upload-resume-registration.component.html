@@ -1,0 +1,96 @@
+<searchheader></searchheader>
+
+
+<div class="container">
+
+  <div class="single">
+      <div class="row">
+
+
+        <div class="col-md-8">
+            <br>
+            <!-- <h3>Upload Resume</h3> -->
+            <div class="col_3">
+                <!-- <hr/> -->
+
+
+
+                <br>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label><h4>Resume<span style="color: red;">&nbsp;*</span></h4></label>
+                    </div>
+                    <div class="col">
+                      <div id="buttonHomePage" class="clearfix">
+                        <div *ngIf="currentFileUpload" class="progress">
+                            <div class="progress-bar progress-bar-info progress-bar-striped"
+                                        role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                                        aria-valuemin="0" aria-valuemax="100"
+                                        [ngStyle]="{width:progress.percentage+'%'}">
+                                        {{progress.percentage}}%</div>
+                        </div>
+                        <label class="btn btn-default"> <input type="file" name="fileUpload" (change)="selectFile($event)">
+                        </label>
+                  
+                  
+                          <br *ngIf="mobile">&nbsp;&nbsp;
+                          <button class="btn btn-primary" [disabled]="!selectedFiles || !resumeUploadEnabled" (click)="upload()">Upload</button>
+                          <!-- <button class="btn btn-success" [disabled]="!selectedFiles || !resumeUploadEnabled" (click)="upload()">Upload</button> -->
+                  
+                        <!-- <label class="btn2 btn-2 btn2-1b"><input type="button" [disabled]="!selectedFiles || !resumeUploadEnabled" (click)="upload()" value="Upload"></label> -->
+                  
+                        <!-- <label class="btn2 btn-2 btn2-1b"><input type="button" [disabled]="!selectedFiles || !resumeUploadEnabled" (click)="upload()"></label> -->
+                        <!--a href="{{rUploadService.downloadURL}}" [hidden]="!resumeUploadEnabled" target="_blank">{{rUploadService.fileName}}</a-->
+                        &nbsp; <!--a href="{{rUploadService.downloadURL}}" [hidden]="!resumeUploadEnabled" target="_blank">Resume1</a-->
+                        <!-- &nbsp; <a href="{{rUploadService.selectedUploadResume?.ResumeURL}}" [hidden]="!isNewUpload" target="_blank">Resume</a> -->
+                        <div style="color: green;" *ngIf="!resumeUploadEnabled">
+                            (.doc, .docx, .pdf, .ppt, .pptx)
+                        </div>
+                    </div>
+                  </div>
+                  </div>
+
+
+                <br>
+
+
+            <div id="buttonHomePage" class="clearfix" *ngIf="signupSucessMessage != null && signupSucessMessage !=''">
+                <p style="color:#006309; font-size: 19px;" *ngIf="signupSucessMessage != null && signupSucessMessage !=''" >
+                    {{ signupSucessMessage }}         
+                </p>
+                <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/signin" value="Sign In"></label>
+                &nbsp;&nbsp;&nbsp;
+            </div>
+              
+
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+             <div class="col_3">
+                <advertisement></advertisement>
+             </div>
+  
+  
+  
+  
+        </div>
+
+        <div class="clearfix"> </div>
+    </div>
+
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+

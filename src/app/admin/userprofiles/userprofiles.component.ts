@@ -72,5 +72,22 @@ export class UserprofilesComponent implements OnInit {
     })
   }
 
+  deleteUser(id) {
+
+      // return this.auth.removeUserAdmin(ID[0],"auth0|"+auth0id);
+              // Delete Resume
+         //this.resume.deleteUloadResumeByUsername(username);
+        // Delete profile 
+         //this.profile.deleteUserProfileByName(username);
+        // Delete Userdetails 
+        //console.log("Before delete users"); 
+          this.uProfile.deleteUserProfileById(id); 
+          return;
+         //console.log("User Deleted") 
+
+
+
+  }
+
 
 }

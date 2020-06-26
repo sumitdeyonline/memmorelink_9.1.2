@@ -6,6 +6,8 @@ import { AUTH_CONFIG, FIREBASE_CONFIG } from '../../global-config';
 import { UserdetailsService } from 'src/app/services/firebase/userdetails/userdetails.service';
 import { EmailService } from 'src/app/services/email/email.service';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
+import { EncrdecrserviceService } from 'src/app/services/EncriptDecript/encrdecrservice.service';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class SignupComponent implements OnInit {
 
   error: any[]; // {"name":"BadRequestError","code":"user_exists","description":"The user already exists.","statusCode":400}
 
-  constructor(private router: Router,public _auth: AuthService, fb: FormBuilder, private udetails: UserdetailsService, private sEmail: EmailService) {
+  constructor(private router: Router,public _auth: AuthService,private EncrDecr: EncrdecrserviceService, fb: FormBuilder, private udetails: UserdetailsService, private sEmail: EmailService) {
     window.scroll(0,0);
     this.signupForm = fb.group({
       email: ['', Validators.required,Validators.email],
@@ -50,14 +52,21 @@ export class SignupComponent implements OnInit {
           this.signupSucessMessage = model.email+" has been sucessfully registered";
           //console.log(this.signupSucessMessage);
           //console.log("modelSignup :: " +modelSignup['_id']);
-          this.udetails.addUpdateUserDetails(null, model.email,FIREBASE_CONFIG.UserRole, model.company, null,model.companyAddress,model.phone,0,modelSignup['_id']);
+          // setTimeout(() => {
+            this.udetails.addUpdateUserDetails(null, model.email,FIREBASE_CONFIG.UserRole, model.company, null,model.companyAddress,model.phone,0,modelSignup['_id']);
+
+          // }, 100);
           //this.router.navigate(['/signupconfirm']);
           let subject = 'Welcome to MeMoreLink!';
           let body = 'Thank you <b>'+model.email+'</b> for registering.<br/><br/>Best of luck <br /><br /> <b>Thank you <br>MeMoreLink Team</b> '
           this.sEmail.sendEmail(model.email,'',subject,body,'support');
           window.scroll(0,0);
-          //this.router.navigate(['technewsdetails',model.email]);
-          return true;
+          // let email = CryptoJS.AES.encrypt(model.email.trim());
+          // console.log("email ::: "+email);
+          // this.router.navigate(['/userregistration'],{ queryParams: {userid: email}, 'queryParamsHandling': 'merge' });
+          var encrypted = this.EncrDecr.set(AUTH_CONFIG.secureKey, model.email.trim());
+          this.router.navigate(['/userregistration'],{ queryParams: {ur: encrypted}, 'queryParamsHandling': 'merge' });          
+          //return true;
       },
       error => {
         this.error = error;

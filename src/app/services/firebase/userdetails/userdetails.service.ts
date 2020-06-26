@@ -22,6 +22,7 @@ import { ValueServices } from '../../authentication/valueservices.model';
 import { FileUpload } from '../uploadresume/FileUpload';
 import { UploadResumeService } from '../uploadresume/upload-resume.service';
 import { UserProfile } from '../userprofile/userprofile.model';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -48,7 +49,7 @@ export class UserdetailsService {
   progress: { percentage: number } = { percentage: 0 }; 
   bulkFile: File;
 
-  constructor(private afs : AngularFirestore, private auth: AuthService, private http: HttpClient, public rUploadService: UploadResumeService) {
+  constructor(private router: Router,private afs : AngularFirestore, private auth: AuthService, private http: HttpClient, public rUploadService: UploadResumeService) {
     this.udCollection = this.afs.collection(FIREBASE_CONFIG.UserDetails);
      // this.udCollection = this.afs.collection<UserDetails>('userDetail');
     this.userDetailc = this.udCollection.valueChanges();
@@ -84,8 +85,15 @@ export class UserdetailsService {
       const  cDate = new Date();
       let  udeatils: UserDetails = { userName: uname, userRole: uRole,company: company,CompanyLogoURL:CompanyLogoURL,companyAddress:companyAddress,phone:phone,createdDate: cDate,LastModifiedDate: mDate, postjobCount: postjobCount, auth0UserID: auth0userid};
   
-      //console.log(udeatils);
-      this.udCollection.add(udeatils);
+      this.udCollection = this.afs.collection(FIREBASE_CONFIG.UserDetails);
+      this.udCollection.add(udeatils); 
+
+      // console.log(udeatils);
+      //   if (firstpage == 'FP') {
+      //     this.router.navigate(['/userregistration'],{ queryParams: {userid: uname}, 'queryParamsHandling': 'merge' });
+      //   }
+
+
       // this.adUserDetails( uname);
       // this.userDetail.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
       // uDetails.username = uname;
@@ -207,19 +215,24 @@ export class UserdetailsService {
     this.getUserDetails(username,'U').subscribe(updetails=> {
       this.userDetails = updetails;
       //console.log("User Details :::: "+this.userDetails[0].id);
-      if ((this.userDetails[0] !=undefined) && (this.userDetails[0] !=null))
+      if ((this.userDetails[0] !=undefined) && (this.userDetails[0] !=null)) {
         this.deleteUserDetailsById(this.userDetails[0].id);
-      return;
+        this.userDetails = null;
+        return;
+      }
 
-    })
+
+    });
 
 
   }
 
   deleteUserDetailsById(id) {
+    let idcode="XXX";
     //console.log("List Service ..... 3 ::::::=> "+id);
     this.udDoc = this.afs.doc(`${FIREBASE_CONFIG.UserDetails}/${id}`);
     this.udDoc.delete();
+
   }  
 
 

@@ -61,7 +61,8 @@ export class UserprofileService {
     if ((id == null) || (id == '')) {
       //uprofile.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
       uprofile.CreatedDate = new Date();
-      uprofile.Username = this.auth.userProfile.name;
+      if (this.auth.isAuthenticated())
+        uprofile.Username = this.auth.userProfile.name;
       uprofile.isSearchable = true;
       //pjobc.JobTitle =
       // console.log ("Create Date ::: "+pjobc.CreatedDate);
@@ -396,7 +397,13 @@ export class UserprofileService {
   AlgoliaObjectUpdate(tranType, uprofile, id, createDate) {
     //console.log("Algolia Update Object..... :::::: "+createDate.seconds);
     let objects;
-
+    let username='';
+    if (this.auth.isAuthenticated()) {
+      username = this.auth.userProfile.name;
+    } else {
+      username = uprofile.Username;
+    }
+    //console.log("User name ::: "+username);
 
     if ((tranType == null) || (tranType == '')) {
       objects = [{
@@ -425,7 +432,8 @@ export class UserprofileService {
         SkillSet:uprofile.SkillSet,
         Education:uprofile.Education,
         SalaryExpectation:uprofile.SalaryExpectation,
-        Username:this.auth.userProfile.name,
+        // Username:this.auth.userProfile.name,
+        Username:username,
         CreatedDate:uprofile.CreatedDate.getTime(),
         LastModifiedDate:uprofile.LastModifiedDate.getTime(),
         isSearchable:true,
@@ -568,6 +576,19 @@ export class UserprofileService {
     //console.log("List Service ..... 3 ::::::=> "+id);
     this.upDoc = this.afs.doc(`${FIREBASE_CONFIG.UserProfile}/${id}`);
     this.upDoc.delete();
+
+    this.client = algoliasearch(SEARCH_CONFIG.ALGOLIA_APP_ID, SEARCH_CONFIG.ALGOLIA_API_KEY,
+      { protocol: SEARCH_CONFIG.PROTOCOLS });
+
+
+      //console.log("Delete Index :::: "+id);
+      this.index = this.client.initIndex(SEARCH_CONFIG.INDEX_NAME_PROFILE);
+
+
+      this.index.deleteObject(id, function(err, content) {
+        if (err) throw err;
+       // console.log("Delete Content :::::: "+content);
+      });
 
   }  
 

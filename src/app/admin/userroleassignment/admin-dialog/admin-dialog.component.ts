@@ -31,9 +31,10 @@ export class AdminDialogComponent implements OnInit {
 
   deleteRecord() {
     let ID = this.data.split("||");
-    let username = ID[0];
-    let auth0id = ID[1];
-    //console.log("Userane :: "+username+" Auth0 ID :: "+auth0id);
+    let userid = ID[0];
+    let username = ID[1];
+    let auth0id = ID[2];
+    //console.log("Userane :: "+userid+" Auth0 ID :: "+auth0id);
     //this.postservice.deletePostJobWithID(this.data);
 
     this.auth.getAdmintoken().subscribe(res=>{
@@ -46,16 +47,16 @@ export class AdminDialogComponent implements OnInit {
       this.auth.deleteUser("auth0|"+auth0id).subscribe(response=>{
     // return this.auth.removeUserAdmin(ID[0],"auth0|"+auth0id);
             // Delete Resume
-       this.resume.deleteUloadResumeByUsername(username);
+       //this.resume.deleteUloadResumeByUsername(username);
       // Delete profile 
-       this.profile.deleteUserProfileByName(username);
+       //this.profile.deleteUserProfileByName(username);
       // Delete Userdetails 
       //console.log("Before delete users"); 
-        this.udetails.deleteUserDetailsByName(username); 
-
+        this.udetails.deleteUserDetailsById(userid); 
+        return;
        //console.log("User Deleted") 
-      })
-
+      });
+      return;
 
     });
 

@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   constructor(public auth: AuthService) { 
 
     //console.log("NavBar Compoment ***");
+    //console.log("auth.userProfile?.email_verified ::: "+this.auth.userProfile?.email_verified);
   }
 
   ngOnInit() {

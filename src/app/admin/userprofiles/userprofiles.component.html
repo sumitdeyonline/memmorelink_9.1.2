@@ -34,7 +34,8 @@
           <div *ngFor="let uPro of userProfile">
 
 
-            <h3 class="title" style="color: red;">Profile(ID : {{uPro.id}}&nbsp;[User Name : &nbsp;{{uPro.Username}}])</h3>&nbsp;
+            <h3 class="title" style="color: red;">Profile(ID : {{uPro.id}}&nbsp;[User Name : &nbsp;{{uPro.Username}}])&nbsp;<a (click)="deleteUser(uPro.id)" class="fa fa-trash"></a>
+            </h3>&nbsp;
 
             <div class="row">
                 <div class="col-sm-2">
