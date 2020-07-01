@@ -260,9 +260,18 @@ export class AuthService {
       if (profile) {
         self.userProfile = profile;
           //localStorage.setItem('profile', this.userProfile);
+          // console.log("Profile Name "+profile.name);
+          // console.log("Profile Name (email_verified ) :::: "+profile.email_verified);
+          if (!profile.email_verified) {
+            this.removeSessionItems();
+            localStorage.setItem(AUTH_CONFIG.authErrorMeg, 'No');
+            this.router.navigate(['/signin']);
+            return; 
+          }
           localStorage.setItem(SESSION_CONFIG.profile, JSON.stringify(profile));
  
-          //console.log("Profile Name "+profile.name);
+
+          
           // Check for the employer Role
 
           if (this.userProfile !=null) {

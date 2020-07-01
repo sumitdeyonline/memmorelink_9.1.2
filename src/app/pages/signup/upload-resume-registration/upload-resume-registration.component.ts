@@ -153,7 +153,7 @@ export class UploadResumeRegistrationComponent implements OnInit {
 
     //this.router.navigate(['/userprofile']);
 
-     this.signupSucessMessage = "You have been sucessfully registered. "
+     this.signupSucessMessage = "You have been sucessfully registered. Please verify your email and Signin to the account"
 
   }
 

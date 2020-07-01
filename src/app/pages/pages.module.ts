@@ -83,6 +83,7 @@ import { CookiesComponent } from './cookies/cookies.component';
 import { UserregistrationComponent } from './signup/userregistration/userregistration.component';
 import { UploadResumeRegistrationComponent } from './signup/upload-resume-registration/upload-resume-registration.component';
 import { EncrdecrserviceService } from '../services/EncriptDecript/encrdecrservice.service';
+import { SignupverifyComponent } from './login/signupverify/signupverify.component';
 // import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
 // import { TechNewsComponent } from './tech-news';
@@ -174,7 +175,8 @@ import { EncrdecrserviceService } from '../services/EncriptDecript/encrdecrservi
         PrivacypolicyComponent,
         CookiesComponent,
         UserregistrationComponent,
-        UploadResumeRegistrationComponent
+        UploadResumeRegistrationComponent,
+        SignupverifyComponent
         
         // SignupConfirmComponent
       // AdminhomeComponent,

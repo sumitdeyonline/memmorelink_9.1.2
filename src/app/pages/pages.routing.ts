@@ -27,6 +27,7 @@ import { CookiesComponent } from './cookies/cookies.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 import { UserregistrationComponent } from './signup/userregistration/userregistration.component';
 import { UploadResumeRegistrationComponent } from './signup/upload-resume-registration/upload-resume-registration.component';
+import { SignupverifyComponent } from './login/signupverify/signupverify.component';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -84,6 +85,10 @@ export const pagesRouting = RouterModule.forChild([
     {
         path: 'uploadresumeregistration',
         component: UploadResumeRegistrationComponent
+    },
+    {
+        path: 'signupverify',
+        component: SignupverifyComponent
     },
     
 

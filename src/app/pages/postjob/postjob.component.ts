@@ -212,6 +212,7 @@ export class PostjobComponent implements OnInit {
   JobPostSubmit(postJobForm : NgForm) {
     let type;
     let jobIDTemp;
+    let updatedmsg;
     //console.log ("postJobForm.value.Email ::: "+postJobForm.value.Email);
     // postJobForm.value.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
     // console.log ("Datatat ::: "+postJobForm.value.CreatedDate);
@@ -356,6 +357,7 @@ export class PostjobComponent implements OnInit {
       // this.postjobService.addUpdatePostJobs(postJobForm.value,this.id, new Date(), "", this.userDetails[0]);
       // console.log("NEW FORM ....");
       type = "Created";
+      updatedmsg = "You have posted your job";
     } else {
       type = "Updated";
 
@@ -363,6 +365,7 @@ export class PostjobComponent implements OnInit {
       //this.userDetails[0]={};
       //this.postjobService.addUpdatePostJobs(postJobForm.value,this.id,this.postJob.CreatedDate, this.postJob.CreatedBy, null);
       this.postjobService.addUpdatePostJobs(pjob,this.id,this.postJob.CreatedDate, this.postJob.CreatedBy, null);
+      updatedmsg = "You have edited your job";
     }
 
     //console.log("$Key VALUE :::::: "+postJobForm.value.$key);
@@ -417,7 +420,9 @@ export class PostjobComponent implements OnInit {
     setTimeout(() => {
       window.scroll(0,0);
       const dialogConfig = new MatDialogConfig();
-      dialogConfig.data = type+"||jobpoststatus||You have posted your job";
+      //dialogConfig.data = type+"||jobpoststatus||You have posted your job";
+      dialogConfig.data = type+"||jobpoststatus||"+updatedmsg;
+      
       this.dialog.open(CommondialogComponent, dialogConfig);
       this.resetForm(postJobForm);
   

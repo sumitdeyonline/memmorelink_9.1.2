@@ -9,6 +9,7 @@ interface AuthSessionConfiguration {
     ResumeSearchRole: string,
     AdminRole: string,
     UserRole: string
+    //EmailVerified: string
 }
 
 export const SESSION_CONFIG: AuthSessionConfiguration = {
@@ -22,4 +23,5 @@ export const SESSION_CONFIG: AuthSessionConfiguration = {
     ResumeSearchRole: 'ResumeSearchRole',
     AdminRole: 'AdminRole',
     UserRole: 'UserRole'
+    //EmailVerified:'EmailVerified'
 };

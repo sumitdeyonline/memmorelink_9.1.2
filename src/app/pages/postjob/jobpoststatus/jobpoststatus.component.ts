@@ -53,7 +53,8 @@ export class JobpoststatusComponent implements OnInit {
   mobile: boolean = false;
   disabledDate : boolean = true;
   recordDetails=[{name:"fewRecords"},{name:"AllRecords"},{name: "Custom"}];
-  activeDetails=[{name:"Active"},{name:"InActive"},{name:"All"}]
+  //activeDetails=[{name:"Active"},{name:"InActive"},{name:"All"}]
+  activeDetails=[{name:"All"},{name:"Active"},{name:"InActive"}]
   //recordDetails=["fewRecords","AllRecords","Custom"];
   //ActiveInActive:any;
 
@@ -76,7 +77,8 @@ export class JobpoststatusComponent implements OnInit {
           startDate: [''],
           endDate: [''],
           RecordNumber: ['fewRecords'],
-          ActiveInActive:['Active']
+          ActiveInActive:['All']
+          //ActiveInActive:['Active']
         })
     
         
@@ -118,7 +120,8 @@ export class JobpoststatusComponent implements OnInit {
       // console.log(" endDt :::: "+endDt);
       // console.log(" this.auth.userProfile.name :::: "+this.auth.userProfile.name);
 
-    this.CallingData('UDM','Active',true);
+    //this.CallingData('UDM','Active',true);
+    this.CallingData('UDM','All',true);
 
     // this.postservice.getPostJobsByUser(this.auth.userProfile.name, 'UDM','').subscribe(pjob=> {
     //   this.pjob = pjob; 

@@ -33,6 +33,11 @@ export class LoginComponent implements OnInit {
       this.mobile = true;
       //console.log("Windows ::: "+this.mobile);
     }
+
+    if (localStorage.getItem(AUTH_CONFIG.authErrorMeg)=='No') {
+      this.loginError = AUTH_CONFIG.authErrorMegDetails;
+      localStorage.removeItem(AUTH_CONFIG.authErrorMeg);
+    }
   }
 
   Login(loginComponent) {
