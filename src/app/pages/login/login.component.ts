@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Login } from './Login';
 import { AuthService } from '../../services/authentication/auth.service';
@@ -10,6 +10,7 @@ import { AUTH_CONFIG } from 'src/app/global-config';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('recaptcha', {static: false }) recaptchaElement: ElementRef;
 
   title = '';
   form;
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.addRecaptchaScript();
     window.scroll(0,0);
     if (window.screen.width <= 736) { // 768px portrait
       this.mobile = true;
@@ -71,5 +73,35 @@ export class LoginComponent implements OnInit {
   /*public setuserIdPasswordWrongText(errorMsg) {
     this.userIdPasswordWrong = errorMsg;
   }*/
+
+  renderReCaptch() {
+
+    if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
+      window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+        'sitekey' : AUTH_CONFIG.SiteKey,
+        'callback': (response) => {
+            //console.log(response);
+        }
+      });
+    }
+
+
+  }
+ 
+  addRecaptchaScript() {
+ 
+    window['grecaptchaCallback'] = () => {
+      this.renderReCaptch();
+    }
+ 
+    (function(d, s, id, obj){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { obj.renderReCaptch(); return;}
+      js = d.createElement(s); js.id = id;
+      js.src = AUTH_CONFIG.GoogleRecaptchaSite;
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'recaptcha-jssdk', this));
+ 
+  }
 
 }

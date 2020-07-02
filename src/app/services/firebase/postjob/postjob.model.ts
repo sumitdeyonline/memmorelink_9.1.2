@@ -28,4 +28,5 @@ export interface PostJobc {
     LastModifiedBy? : string;
     LastModifiedDate? : Date;
     ApplicantCount?: number;
+    RequiredRefresh?: string;
   }

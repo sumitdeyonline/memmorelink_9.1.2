@@ -806,6 +806,7 @@ export class ListjobComponent implements OnInit {
 
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.data = this.pjob.ApplyToEmail;
+    listjob.RequiredRefresh = "No"
     dialogConfig.data = listjob;
     // dialogConfig.height = "4";
     // dialogConfig.width ="3";      

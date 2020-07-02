@@ -217,6 +217,7 @@ export class JobdetailsComponent implements OnInit {
     //                           Company:this.pjob.Company
     //                           }];
     this.pjob.id = this.id;
+    this.pjob.RequiredRefresh = "Yes";
     dialogConfig.data = this.pjob;
 
     // dialogConfig.height = "4";

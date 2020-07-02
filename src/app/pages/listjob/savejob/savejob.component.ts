@@ -31,7 +31,7 @@ export class SavejobComponent implements OnInit {
   Isdelete: boolean=false;
   deletedSaveJob:boolean = false;
   deleteJobMsg: string='';
-
+  pagetype: string='';
 
 
   pjob: PostJobc;
@@ -42,7 +42,14 @@ export class SavejobComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<SavejobComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, fb: FormBuilder, 
     public auth: AuthService,private sjob:SavejobsService, private uDetails:UserprofileService, private router: Router, private sEmail: EmailService) { 
+     
+      // let ID = this.data.split("||");
+      // this.pjob = ID[0];
+      // this.pagetype = ID[1];
+
       this.pjob = this.data;
+      // console.log("this.pagetype  :: this.RequiredRefresh "+ this.pjob.RequiredRefresh);
+      // console.log("this.pagetype  :: this.Title "+ this.pjob.JobTitle);
       this.form = fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
@@ -138,7 +145,8 @@ export class SavejobComponent implements OnInit {
     // this.router.onSameUrlNavigation = defaltOnSameUrlNavigation;
 
     //this.router.navigate(['/jobdetails',this.pjob.id]);
-    window.location.reload();
+    if (this.pjob.RequiredRefresh == 'Yes')
+      window.location.reload();
     this.dialogRef.close();
 
   }
