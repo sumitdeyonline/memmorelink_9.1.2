@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators, NgForm, EmailValidator, FormGroup, FormControl  } from '@angular/forms';
 import { Signup } from '../../services/authentication/signup';
 import { AuthService } from '../../services/authentication/auth.service';
@@ -16,6 +16,7 @@ import { EncrdecrserviceService } from 'src/app/services/EncriptDecript/encrdecr
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  @ViewChild('recaptcha', {static: false }) recaptchaElement: ElementRef;
 
   signupForm: any;
   signup = new Signup();
@@ -35,6 +36,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.addRecaptchaScript();
     window.scroll(0,0);
   }
 
@@ -49,7 +51,7 @@ export class SignupComponent implements OnInit {
       modelSignup => {
           // refresh the list
           //alert("User Addred");
-          this.signupSucessMessage = model.email+" has been sucessfully registered";
+          this.signupSucessMessage = model.email+" has been sucessfully registered, please check your email to verify your email ID";
           //console.log(this.signupSucessMessage);
           //console.log("modelSignup :: " +modelSignup['_id']);
           // setTimeout(() => {
@@ -115,5 +117,35 @@ export class SignupComponent implements OnInit {
       }
 
     }
+
+    renderReCaptch() {
+
+      if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
+        window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+          'sitekey' : AUTH_CONFIG.SiteKey,
+          'callback': (response) => {
+              //console.log(response);
+          }
+        });
+      }
+  
+  
+    }
+   
+    addRecaptchaScript() {
+   
+      window['grecaptchaCallback'] = () => {
+        this.renderReCaptch();
+      }
+   
+      (function(d, s, id, obj){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { obj.renderReCaptch(); return;}
+        js = d.createElement(s); js.id = id;
+        js.src = AUTH_CONFIG.GoogleRecaptchaSite;
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'recaptcha-jssdk', this));
+   
+    }    
 
 }

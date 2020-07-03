@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { FormBuilder, Validators, NgForm, EmailValidator, FormGroup, FormControl  } from '@angular/forms';
 import { AuthService } from 'src/app/services/authentication/auth.service';
@@ -19,7 +19,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./value-services.component.css']
 })
 export class ValueServicesComponent implements OnInit {
-
+  @ViewChild('recaptcha', {static: false }) recaptchaElement: ElementRef;
+  
   userDetails: UserDetails[];
   ValueServices: ValueServices[];
   valueservicesForm: any;
@@ -105,6 +106,7 @@ export class ValueServicesComponent implements OnInit {
 
 
   ngOnInit() {
+    this.addRecaptchaScript();
   }
 
   signUpValueServices(model: ValueServices) {
@@ -136,15 +138,15 @@ export class ValueServicesComponent implements OnInit {
           modelsignup => {
               // refresh the list
               //alert("User Addred");
-              this.valueservicesSucessMessage = model.email+" has been sucessfully registered"
+              this.valueservicesSucessMessage = model.email+" has been sucessfully registered, Please check your email to verify your email ID";
               //console.log(this.valueservicesSucessMessage);
               //console.log("Value Radio Burron ::::===>>>>>>> "+this.userActualRole);
               this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, this.userActualRole, model.company, model.CompanyLogoURL, model.companyAddress,  model.phone,this.jobcount,modelsignup['_id']);
               //this.router.navigate(['/signupconfirm']);
               /* Email Start */
-              let subject = 'Welcome to MeMoreLink!';
-              let body = 'Thank you <b>'+model.email+'</b> for registering <br><br> Company: '+model.company+'<br>Company Address: '+model.companyAddress+'<br>Company Phone: '+model.phone+' <br><br>  Best of luck! <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
-              this.sEmail.sendEmail(model.email,'',subject,body,'support');
+              // let subject = 'Welcome to MeMoreLink!';
+              // let body = 'Thank you <b>'+model.email+'</b> for registering <br><br> Company: '+model.company+'<br>Company Address: '+model.companyAddress+'<br>Company Phone: '+model.phone+' <br><br>  Best of luck! <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
+              // this.sEmail.sendEmail(model.email,'',subject,body,'support');
               window.scroll(0,0);
               return true;
           },
@@ -223,6 +225,37 @@ export class ValueServicesComponent implements OnInit {
 
     Cancel() {
       this.router.navigate(['/authlandingpage'])
+    }
+
+
+    renderReCaptch() {
+
+      if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
+        window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+          'sitekey' : AUTH_CONFIG.SiteKey,
+          'callback': (response) => {
+              //console.log(response);
+          }
+        });
+      }
+  
+  
+    }
+   
+    addRecaptchaScript() {
+   
+      window['grecaptchaCallback'] = () => {
+        this.renderReCaptch();
+      }
+   
+      (function(d, s, id, obj){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { obj.renderReCaptch(); return;}
+        js = d.createElement(s); js.id = id;
+        js.src = AUTH_CONFIG.GoogleRecaptchaSite;
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'recaptcha-jssdk', this));
+   
     }
 
 }

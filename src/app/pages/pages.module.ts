@@ -84,6 +84,7 @@ import { UserregistrationComponent } from './signup/userregistration/userregistr
 import { UploadResumeRegistrationComponent } from './signup/upload-resume-registration/upload-resume-registration.component';
 import { EncrdecrserviceService } from '../services/EncriptDecript/encrdecrservice.service';
 import { SignupverifyComponent } from './login/signupverify/signupverify.component';
+import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
 // import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
 // import { TechNewsComponent } from './tech-news';
@@ -214,7 +215,8 @@ import { SignupverifyComponent } from './login/signupverify/signupverify.compone
       EmploymenttypesService,
       SequencenumberService,
       SavejobsService,
-      EncrdecrserviceService
+      EncrdecrserviceService,
+      RecaptchaService
 
       //AlphabetNumerologyService
       //AdminGuardService

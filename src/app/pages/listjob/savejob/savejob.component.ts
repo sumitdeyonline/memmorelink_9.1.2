@@ -145,7 +145,7 @@ export class SavejobComponent implements OnInit {
     // this.router.onSameUrlNavigation = defaltOnSameUrlNavigation;
 
     //this.router.navigate(['/jobdetails',this.pjob.id]);
-    if (this.pjob.RequiredRefresh == 'Yes')
+    if ((this.pjob.RequiredRefresh == 'Yes') && (this.auth.isAuthenticated()))
       window.location.reload();
     this.dialogRef.close();
 

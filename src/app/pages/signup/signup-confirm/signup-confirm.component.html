@@ -1,5 +1,8 @@
 <p style="color:#006309; font-size: 19px;" *ngIf="signupSucessMessage != null && signupSucessMessage !=''" >
-    {{ signupSucessMessage }} &nbsp;<a *ngIf="!_auth.isAuthenticated()" routerLink="/login">Login</a> 
-    <a *ngIf="_auth.isAuthenticated()" routerLink="/signin" (click) = "_auth.logout()">Please Log Back in to view the changes</a>           
-</p>
+    {{ signupSucessMessage }} &nbsp;
+  </p>
+    <!-- <a *ngIf="!_auth.isAuthenticated()" routerLink="/login">Login</a>  -->
+    <div style="color:#006309; font-size: 19px;" *ngIf="_auth.isAuthenticated()">
+      Please Log Back in to view the changes&nbsp;<a *ngIf="_auth.isAuthenticated()" routerLink="/signin" (click) = "_auth.removeSessionItems()">Sign In</a>           
+    </div>
   <!--div class="button" *ngIf="signupSucessMessage != null && signupSucessMessage !=''"><a routerLink="/login">Login</a></div-->

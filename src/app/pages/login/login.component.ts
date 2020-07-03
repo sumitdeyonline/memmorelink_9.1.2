@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Login } from './Login';
 import { AuthService } from '../../services/authentication/auth.service';
 import { AUTH_CONFIG } from 'src/app/global-config';
+import { RecaptchaService } from 'src/app/services/recaptcha/recaptcha.service';
 
 @Component({
   selector: 'login',
@@ -20,8 +21,11 @@ export class LoginComponent implements OnInit {
   mobile: boolean=false;
   //userIdPasswordWrong ='';
   constructor(fb: FormBuilder, 
-              public _auth: AuthService) {
+              public _auth: AuthService,
+              public recaptcha: RecaptchaService) {
     window.scroll(0,0);
+    //this.addRecaptchaScript();
+    //this.recaptcha.addRecaptchaScript(this.recaptchaElement);
     this.form = fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -30,6 +34,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.addRecaptchaScript();
+    //this.recaptcha.addRecaptchaScript(this.recaptchaElement);
     window.scroll(0,0);
     if (window.screen.width <= 736) { // 768px portrait
       this.mobile = true;
@@ -50,6 +55,7 @@ export class LoginComponent implements OnInit {
     this.loginError ='';
     this._auth.login(loginComponent.username, loginComponent.password);
  
+    //this.addRecaptchaScript();
     
      setTimeout(() =>{
       if (this._auth.isAuthenticated()) {

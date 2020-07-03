@@ -230,7 +230,7 @@ export class AuthService {
     //this.router.navigate(['/login']);
   }
 
-  private removeSessionItems() {
+  public removeSessionItems() {
     localStorage.removeItem(SESSION_CONFIG.accessToken);
     localStorage.removeItem(SESSION_CONFIG.idToken);
     localStorage.removeItem(SESSION_CONFIG.expireAt);

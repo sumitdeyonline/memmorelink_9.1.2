@@ -32,9 +32,7 @@ export class SignupverifyComponent implements OnInit {
 
 
 
-    let subject = 'Welcome to MeMoreLink!';
-    let body = 'Thank you <b>'+this.email+'</b> for registering.<br/><br/>Best of luck <br /><br /> <b>Thank you <br>MeMoreLink Team</b> '
-    this.sEmail.sendEmail(this.email,'',subject,body,'support');
+
 
   }
 
@@ -44,6 +42,9 @@ export class SignupverifyComponent implements OnInit {
       //this.mobile = true;
       //console.log("Windows ::: "+this.mobile);
     }
+    let subject = 'Welcome to MeMoreLink!';
+    let body = 'Thank you <b>'+this.email+'</b> for registering.<br/><br/>Best of luck <br /><br /> <b>Thank you <br>MeMoreLink Team</b> '
+    this.sEmail.sendEmail(this.email,'',subject,body,'support');
 
   }
 

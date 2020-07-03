@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
@@ -28,7 +28,8 @@ import { EncrdecrserviceService } from 'src/app/services/EncriptDecript/encrdecr
   styleUrls: ['./userregistration.component.css']
 })
 export class UserregistrationComponent implements OnInit { 
-
+  @ViewChild('recaptcha', {static: false }) recaptchaElement: ElementRef;
+  
   userid='';
   searchvar =[];
   // formatter = (result: string) => result.toUpperCase();
@@ -132,6 +133,7 @@ export class UserregistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.addRecaptchaScript();
     if (window.screen.width <= 736) { // 768px portrait
       this.mobile = true;
     }
@@ -570,6 +572,36 @@ export class UserregistrationComponent implements OnInit {
       }
 
     }
+  }
+
+  renderReCaptch() {
+
+    if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
+      window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+        'sitekey' : AUTH_CONFIG.SiteKey,
+        'callback': (response) => {
+            //console.log(response);
+        }
+      });
+    }
+
+
+  }
+ 
+  addRecaptchaScript() {
+ 
+    window['grecaptchaCallback'] = () => {
+      this.renderReCaptch();
+    }
+ 
+    (function(d, s, id, obj){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { obj.renderReCaptch(); return;}
+      js = d.createElement(s); js.id = id;
+      js.src = AUTH_CONFIG.GoogleRecaptchaSite;
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'recaptcha-jssdk', this));
+ 
   }
 
 }
