@@ -16,9 +16,9 @@ import { AUTH_CONFIG } from 'src/app/global-config';
   styleUrls: ['./upload-resume-registration.component.css']
 })
 export class UploadResumeRegistrationComponent implements OnInit {
-  @ViewChild('recaptcha', {static: false }) recaptchaElement: ElementRef;
+  @ViewChild('recaptchauploadres', {static: false }) recaptchaElement: ElementRef;
   userid='';
-
+  public sitekey='';
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
   progress: { percentage: number } = { percentage: 0 };
@@ -97,6 +97,7 @@ export class UploadResumeRegistrationComponent implements OnInit {
   upload() { 
     let id;
     const file = this.selectedFiles.item(0);
+    if (this.sitekey != '') {
     //console.log("this.selectedFiles.item(0) :::::: => "+this.selectedFiles.item(0));
     if (this.validateFile(this.selectedFiles.item(0).name)) {
       this.selectedFiles = undefined;
@@ -155,7 +156,11 @@ export class UploadResumeRegistrationComponent implements OnInit {
 
     //this.router.navigate(['/userprofile']);
 
-     this.signupSucessMessage = "Registration complete. Please check your email to verify your email ID"
+     this.signupSucessMessage = "Registration complete. Please check your email to verify your email ID";
+
+    } else {
+      alert("Please check I'm not a robot");
+    }
 
   }
 
@@ -184,16 +189,17 @@ export class UploadResumeRegistrationComponent implements OnInit {
   }
 
   renderReCaptch() {
-
-    if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
+    setTimeout(() =>{
+    //if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
       window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
         'sitekey' : AUTH_CONFIG.SiteKey,
         'callback': (response) => {
+          this.sitekey = response;
             //console.log(response);
         }
       });
-    }
-
+    //}
+    }, 100); 
 
   }
  

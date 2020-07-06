@@ -53,15 +53,27 @@
                           
                           <div class="card mt-3" align="left">
                             <div class="card-body">
-                                <div #recaptcha ></div>
+                                <div #recaptchasignin ></div>
                             </div>
                           </div>
+                          <!-- <div class="error_Message" *ngIf="sitekey ===''">                      
+                            Please select I'm not a robot.
+                          </div> -->
+                          <!-- <div class="g-recaptcha" data-sitekey="{{sitekey}}" data-callback="verifyCaptcha"></div>
+                          <div id="g-recaptcha-error"></div> -->
+
+                          <!-- <div class="g-recaptcha"
+                          data-callback="capcha_filled()"
+                          data-expired-callback="capcha_expired()"
+                          data-sitekey="{{sitekey}}"></div> -->
+
+                          <!-- <recaptchaselecter></recaptchaselecter> -->
                           <!--div class="login-check">
                               <label class="checkbox1"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up for Newsletter</label>
                           </div-->
                           <br>
                           <div class="textbox-wrap">
-                            <button class="btn_common btn-default" type="submit" value=" Submit" id="submit" [disabled]="!f.valid" name="submit" >
+                            <button class="btn_common btn-default" type="submit" value=" Submit" id="submit" [disabled]="!f.valid && sitekey !=''" name="submit" >
                               <i class="fa fa-user"></i>&nbsp;Continue
                             </button> 
 

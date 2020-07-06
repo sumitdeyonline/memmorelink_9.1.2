@@ -106,6 +106,7 @@ import { AdminpageComponent } from './home/adminpage/adminpage.component';
 import { EmployeepageComponent } from './home/employeepage/employeepage.component';
 import { AuthlandingpageComponent } from './home/authlandingpage/authlandingpage.component';
 import { SavedialogComponent } from './home/employeepage/savedialog/savedialog.component';
+import { RouterModule } from '@angular/router';
 
 //import { MiddleimageComponent } from './home/middleimage/middleimage.component';
 // import { HomeComponent } from './homepage/home/home.component';
@@ -213,6 +214,9 @@ import { SavedialogComponent } from './home/employeepage/savedialog/savedialog.c
     //AngularFontAwesomeModule,
     //NgxEditorModule,
     CommonProjectModule
+  ],
+  exports: [
+    RouterModule
   ],
   providers: [
     AuthService,

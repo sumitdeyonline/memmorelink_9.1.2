@@ -28,8 +28,8 @@ import { EncrdecrserviceService } from 'src/app/services/EncriptDecript/encrdecr
   styleUrls: ['./userregistration.component.css']
 })
 export class UserregistrationComponent implements OnInit { 
-  @ViewChild('recaptcha', {static: false }) recaptchaElement: ElementRef;
-  
+  @ViewChild('recaptchauserreg', {static: false }) recaptchaElement: ElementRef;
+  public sitekey='';
   userid='';
   searchvar =[];
   // formatter = (result: string) => result.toUpperCase();
@@ -437,68 +437,72 @@ export class UserregistrationComponent implements OnInit {
 
     // this.fileUploadEnabled = true; // Enabled File Download
     uprofileForm.value.Email = this.userid;
-    if (useridParam == null){
-      //uprofileForm.value.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
-      // uprofileForm.value.ResumeID = this.uPloadFileKey;
-      // uprofileForm.value.ResumeFileName = this.rUploadService.fileName;
-      //uprofileForm.value.ResumeURL = this.rUploadService.downloadURL;
-      //uprofileForm.value.ResumeExt = this.rUploadService.fileName.substring(this.rUploadService.fileName.lastIndexOf(".")+1);
-      uprofileForm.value.UserID = this.userid;
-      uprofileForm.value.Username = this.userid;
 
-      //console.log ('CreatedDate  ::: '+ uprofileForm.value.CreatedDate);
-      //console.log ('ResumeID  ::: '+ uprofileForm.value.ResumeID);
-      //console.log ('ResumeFileName  ::: '+ uprofileForm.value.ResumeFileName+' Extertion '+uprofileForm.value.ResumeFileName.substring(uprofileForm.value.ResumeFileName.length - 3,uprofileForm.value.ResumeFileName.length));
-      //console.log ('ResumeFileName  ::: '+ uprofileForm.value.ResumeFileName+' Extertion '+uprofileForm.value.ResumeFileName.substring(uprofileForm.value.ResumeFileName.lastIndexOf(".")+1));
+    if (this.sitekey != '') {
+      if (useridParam == null){
+        //uprofileForm.value.CreatedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
+        // uprofileForm.value.ResumeID = this.uPloadFileKey;
+        // uprofileForm.value.ResumeFileName = this.rUploadService.fileName;
+        //uprofileForm.value.ResumeURL = this.rUploadService.downloadURL;
+        //uprofileForm.value.ResumeExt = this.rUploadService.fileName.substring(this.rUploadService.fileName.lastIndexOf(".")+1);
+        uprofileForm.value.UserID = this.userid;
+        uprofileForm.value.Username = this.userid;
 
-       //console.log ('ResumeURL  ::: '+ uprofileForm.value.ResumeURL);
-       //console.log ('ResumeExt  ::: '+ uprofileForm.value.ResumeExt);
-      // console.log ('UserID  ::: '+ uprofileForm.value.UserID);
-      // console.log ('Username  ::: '+ uprofileForm.value.Username);
-      this.uProfile.addUpdateUserProfile(uprofileForm.value, this.id, new Date());
-      
-      //this.router.navigate(['/uploadresumeregistration'],{ queryParams: {userid: this.userEmail}, 'queryParamsHandling': 'merge' });
-      this.router.navigate(['/uploadresumeregistration'],{ queryParams: {ur: this.userEmail}, 'queryParamsHandling': 'merge' });
-      
+        //console.log ('CreatedDate  ::: '+ uprofileForm.value.CreatedDate);
+        //console.log ('ResumeID  ::: '+ uprofileForm.value.ResumeID);
+        //console.log ('ResumeFileName  ::: '+ uprofileForm.value.ResumeFileName+' Extertion '+uprofileForm.value.ResumeFileName.substring(uprofileForm.value.ResumeFileName.length - 3,uprofileForm.value.ResumeFileName.length));
+        //console.log ('ResumeFileName  ::: '+ uprofileForm.value.ResumeFileName+' Extertion '+uprofileForm.value.ResumeFileName.substring(uprofileForm.value.ResumeFileName.lastIndexOf(".")+1));
+
+        //console.log ('ResumeURL  ::: '+ uprofileForm.value.ResumeURL);
+        //console.log ('ResumeExt  ::: '+ uprofileForm.value.ResumeExt);
+        // console.log ('UserID  ::: '+ uprofileForm.value.UserID);
+        // console.log ('Username  ::: '+ uprofileForm.value.Username);
+        this.uProfile.addUpdateUserProfile(uprofileForm.value, this.id, new Date());
+        
+        //this.router.navigate(['/uploadresumeregistration'],{ queryParams: {userid: this.userEmail}, 'queryParamsHandling': 'merge' });
+        this.router.navigate(['/uploadresumeregistration'],{ queryParams: {ur: this.userEmail}, 'queryParamsHandling': 'merge' });
+        
+      } else {
+        //this.isWorkAuthHide = false;
+        //uprofileForm.value.ModifiedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
+        // if (this.uPloadFileKey !=null)
+        //   uprofileForm.value.ResumeID = this.uPloadFileKey;
+        // else {
+        //   uprofileForm.value.ResumeID = this.uProfile.selectedUserProfile.ResumeID;
+        // }
+        // if (this.rUploadService.fileName !=null) {
+        //   uprofileForm.value.ResumeFileName = this.rUploadService.fileName;
+
+        // } else {
+        //   uprofileForm.value.ResumeFileName = this.uProfile.selectedUserProfile.ResumeFileName;
+        // }
+
+        // if (this.rUploadService.downloadURL !=null)
+        //   uprofileForm.value.ResumeURL = this.rUploadService.downloadURL;
+        // else
+        //   uprofileForm.value.ResumeURL = this.uProfile.selectedUserProfile.ResumeURL;
+
+        // if (this.rUploadService.fileName !=null)
+        //   uprofileForm.value.ResumeExt = this.rUploadService.fileName.substring(this.rUploadService.fileName.lastIndexOf(".")+1);
+        // else
+        //   uprofileForm.value.ResumeExt =  this.uProfile.selectedUserProfile.ResumeExt;
+        //console.log ('CreatedDate  ::: '+ uprofileForm.value.CreatedDate);
+        // if (uprofileForm.value.ResumeID == null) {
+        //   uprofileForm.value.ResumeID
+        // }
+        //console.log ('ResumeID  ::: '+ uprofileForm.value.ResumeID);
+        //console.log ('ResumeFileName  ::: '+ uprofileForm.value.ResumeFileName+' Extertion '+uprofileForm.value.ResumeFileName.substring(uprofileForm.value.ResumeFileName.length - 3,uprofileForm.value.ResumeFileName.length));
+
+        // console.log ('ResumeURL  ::: '+ uprofileForm.value.ResumeURL);
+        // console.log ('ResumeExt  ::: '+ uprofileForm.value.ResumeExt);
+        //console.log ('UserID  ::: '+ uprofileForm.value.UserID);
+        // console.log ('Resume File Name  ::: '+ this.uProfile.selectedUserProfile.ResumeFileName);
+        this.uProfile.addUpdateUserProfile(uprofileForm.value, useridParam, this.userProfile[0].CreatedDate);
+
+      }
     } else {
-      //this.isWorkAuthHide = false;
-      //uprofileForm.value.ModifiedDate = formatDate(new Date(), 'MM/dd/yyyy', 'en');
-      // if (this.uPloadFileKey !=null)
-      //   uprofileForm.value.ResumeID = this.uPloadFileKey;
-      // else {
-      //   uprofileForm.value.ResumeID = this.uProfile.selectedUserProfile.ResumeID;
-      // }
-      // if (this.rUploadService.fileName !=null) {
-      //   uprofileForm.value.ResumeFileName = this.rUploadService.fileName;
-
-      // } else {
-      //   uprofileForm.value.ResumeFileName = this.uProfile.selectedUserProfile.ResumeFileName;
-      // }
-
-      // if (this.rUploadService.downloadURL !=null)
-      //   uprofileForm.value.ResumeURL = this.rUploadService.downloadURL;
-      // else
-      //   uprofileForm.value.ResumeURL = this.uProfile.selectedUserProfile.ResumeURL;
-
-      // if (this.rUploadService.fileName !=null)
-      //   uprofileForm.value.ResumeExt = this.rUploadService.fileName.substring(this.rUploadService.fileName.lastIndexOf(".")+1);
-      // else
-      //   uprofileForm.value.ResumeExt =  this.uProfile.selectedUserProfile.ResumeExt;
-      //console.log ('CreatedDate  ::: '+ uprofileForm.value.CreatedDate);
-      // if (uprofileForm.value.ResumeID == null) {
-      //   uprofileForm.value.ResumeID
-      // }
-      //console.log ('ResumeID  ::: '+ uprofileForm.value.ResumeID);
-      //console.log ('ResumeFileName  ::: '+ uprofileForm.value.ResumeFileName+' Extertion '+uprofileForm.value.ResumeFileName.substring(uprofileForm.value.ResumeFileName.length - 3,uprofileForm.value.ResumeFileName.length));
-
-      // console.log ('ResumeURL  ::: '+ uprofileForm.value.ResumeURL);
-      // console.log ('ResumeExt  ::: '+ uprofileForm.value.ResumeExt);
-      //console.log ('UserID  ::: '+ uprofileForm.value.UserID);
-      // console.log ('Resume File Name  ::: '+ this.uProfile.selectedUserProfile.ResumeFileName);
-      this.uProfile.addUpdateUserProfile(uprofileForm.value, useridParam, this.userProfile[0].CreatedDate);
-
+      alert("Please check I'm not a robot");
     }
-
 
   }
 
@@ -576,15 +580,17 @@ export class UserregistrationComponent implements OnInit {
 
   renderReCaptch() {
 
-    if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
+    setTimeout(() =>{
+    //if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
       window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
         'sitekey' : AUTH_CONFIG.SiteKey,
         'callback': (response) => {
+          this.sitekey = response;
             //console.log(response);
         }
       });
-    }
-
+    //}
+      }, 100); 
 
   }
  

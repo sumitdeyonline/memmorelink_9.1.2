@@ -28,6 +28,7 @@ import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component'
 import { UserregistrationComponent } from './signup/userregistration/userregistration.component';
 import { UploadResumeRegistrationComponent } from './signup/upload-resume-registration/upload-resume-registration.component';
 import { SignupverifyComponent } from './login/signupverify/signupverify.component';
+import { NgModule } from '@angular/core';
 
 // import { AdminhomeComponent } from './adminhome/adminhome.component';
 // import { AdminGuardService } from '../services/authentication/admin-guard.service';
@@ -211,3 +212,8 @@ export const pagesRouting = RouterModule.forChild([
         data: { expectedScopes: ['write:messages']}
     }
 ]);
+
+// @NgModule({
+//     imports: [RouterModule.forChild(pagesRouting, config:{onSameUrlNavigation: 'reload'})],
+//     exports: [RouterModule]
+// })

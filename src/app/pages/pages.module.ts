@@ -85,6 +85,7 @@ import { UploadResumeRegistrationComponent } from './signup/upload-resume-regist
 import { EncrdecrserviceService } from '../services/EncriptDecript/encrdecrservice.service';
 import { SignupverifyComponent } from './login/signupverify/signupverify.component';
 import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
+import { RecaptchaselecterComponent } from './recaptchaselecter/recaptchaselecter.component';
 // import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
 // import { TechNewsComponent } from './tech-news';
@@ -177,7 +178,8 @@ import { RecaptchaService } from '../services/recaptcha/recaptcha.service';
         CookiesComponent,
         UserregistrationComponent,
         UploadResumeRegistrationComponent,
-        SignupverifyComponent
+        SignupverifyComponent,
+        RecaptchaselecterComponent
         
         // SignupConfirmComponent
       // AdminhomeComponent,

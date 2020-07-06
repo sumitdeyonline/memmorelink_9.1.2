@@ -164,4 +164,4 @@ export const routing = RouterModule.forRoot([
       }
 
 
-], { initialNavigation: 'enabled' });
+], { initialNavigation: 'enabled', onSameUrlNavigation: 'reload' });

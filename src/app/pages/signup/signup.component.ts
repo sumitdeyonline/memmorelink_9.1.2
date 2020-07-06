@@ -16,8 +16,8 @@ import { EncrdecrserviceService } from 'src/app/services/EncriptDecript/encrdecr
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  @ViewChild('recaptcha', {static: false }) recaptchaElement: ElementRef;
-
+  @ViewChild('recaptchasignup', {static: false }) recaptchaElement: ElementRef;
+  public sitekey='';
   signupForm: any;
   signup = new Signup();
   signupMessage: string='';
@@ -46,38 +46,44 @@ export class SignupComponent implements OnInit {
     model.connection = AUTH_CONFIG.connection;
     model.response_type = AUTH_CONFIG.responseType;
 
-    //model.username = "Sumit Dey";
-    this._auth.signUp(model).subscribe(
-      modelSignup => {
-          // refresh the list
-          //alert("User Addred");
-          this.signupSucessMessage = model.email+" has been sucessfully registered, please check your email to verify your email ID";
-          //console.log(this.signupSucessMessage);
-          //console.log("modelSignup :: " +modelSignup['_id']);
-          // setTimeout(() => {
-            this.udetails.addUpdateUserDetails(null, model.email,FIREBASE_CONFIG.UserRole, model.company, null,model.companyAddress,model.phone,0,modelSignup['_id']);
+    if (this.sitekey != '') {
+      this._auth.signUp(model).subscribe(
+        modelSignup => {
+            // refresh the list
+            //alert("User Addred");
+            this.signupSucessMessage = model.email+" has been sucessfully registered, please check your email to verify your email ID";
+            //console.log(this.signupSucessMessage);
+            //console.log("modelSignup :: " +modelSignup['_id']);
+            // setTimeout(() => {
+              this.udetails.addUpdateUserDetails(null, model.email,FIREBASE_CONFIG.UserRole, model.company, null,model.companyAddress,model.phone,0,modelSignup['_id']);
+  
+            // }, 100);
+            //this.router.navigate(['/signupconfirm']);
+            // let subject = 'Welcome to MeMoreLink!';
+            // let body = 'Thank you <b>'+model.email+'</b> for registering.<br/><br/>Best of luck <br /><br /> <b>Thank you <br>MeMoreLink Team</b> '
+            // this.sEmail.sendEmail(model.email,'',subject,body,'support');
+            window.scroll(0,0);
+            // let email = CryptoJS.AES.encrypt(model.email.trim());
+            // console.log("email ::: "+email);
+            // this.router.navigate(['/userregistration'],{ queryParams: {userid: email}, 'queryParamsHandling': 'merge' });
+            var encrypted = this.EncrDecr.set(AUTH_CONFIG.secureKey, model.email.trim());
+            this.router.navigate(['/userregistration'],{ queryParams: {ur: encrypted}, 'queryParamsHandling': 'merge' });          
+            //return true;
+        },
+        error => {
+          this.error = error;
+          //console.log("Message 2 "+error);
+          //console.log("Message 1 "+error[1].name);
+          //console.log("Message 2 "+error.description);
+          //this.signupMessage = error; //   "This user already exists."
+          this.signupMessage = "User already exists or password does not satisfy minimum requrements"; //   "This user already exists."
+        });
+    } else {
+      alert("Please check I'm not a robot");
+    }
 
-          // }, 100);
-          //this.router.navigate(['/signupconfirm']);
-          // let subject = 'Welcome to MeMoreLink!';
-          // let body = 'Thank you <b>'+model.email+'</b> for registering.<br/><br/>Best of luck <br /><br /> <b>Thank you <br>MeMoreLink Team</b> '
-          // this.sEmail.sendEmail(model.email,'',subject,body,'support');
-          window.scroll(0,0);
-          // let email = CryptoJS.AES.encrypt(model.email.trim());
-          // console.log("email ::: "+email);
-          // this.router.navigate(['/userregistration'],{ queryParams: {userid: email}, 'queryParamsHandling': 'merge' });
-          var encrypted = this.EncrDecr.set(AUTH_CONFIG.secureKey, model.email.trim());
-          this.router.navigate(['/userregistration'],{ queryParams: {ur: encrypted}, 'queryParamsHandling': 'merge' });          
-          //return true;
-      },
-      error => {
-        this.error = error;
-        //console.log("Message 2 "+error);
-        //console.log("Message 1 "+error[1].name);
-        //console.log("Message 2 "+error.description);
-        //this.signupMessage = error; //   "This user already exists."
-        this.signupMessage = "User already exists or password does not satisfy minimum requrements"; //   "This user already exists."
-      });
+    //model.username = "Sumit Dey";
+
 
 
 
@@ -120,15 +126,18 @@ export class SignupComponent implements OnInit {
 
     renderReCaptch() {
 
-      if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
+      setTimeout(() =>{
+
+      //if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
         window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
           'sitekey' : AUTH_CONFIG.SiteKey,
           'callback': (response) => {
+            this.sitekey = response;
               //console.log(response);
           }
         });
-      }
-  
+      //}
+    }, 100); 
   
     }
    

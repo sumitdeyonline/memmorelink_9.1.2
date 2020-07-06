@@ -19,8 +19,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./value-services.component.css']
 })
 export class ValueServicesComponent implements OnInit {
-  @ViewChild('recaptcha', {static: false }) recaptchaElement: ElementRef;
-  
+  @ViewChild('recaptchavalueservice', {static: false }) recaptchaElement: ElementRef;
+  public sitekey='';
   userDetails: UserDetails[];
   ValueServices: ValueServices[];
   valueservicesForm: any;
@@ -122,43 +122,50 @@ export class ValueServicesComponent implements OnInit {
     if ((model.userRole == null) || (model.userRole == undefined) || (model.userRole == '')) {
       //console.log("Value NULL");
     } else {
-      if (this._auth.isAuthenticated()) {
-        model.email = this._auth.userProfile.name;
-         //console.log("Company URL ::::: "+model.CompanyLogoURL);
-         //console.log("this.udetails.selectedValueServices.auth0UserID ::::: "+this.udetails.selectedValueServices.auth0UserID);
-        this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, model.userRole, model.company, model.CompanyLogoURL, model.companyAddress, model.phone,this.jobcount,this.udetails.selectedValueServices.auth0UserID);
-        this.valueservicesSucessMessage = model.email+" has been sucessfully updated."
-        let subject = 'You have updated your profile';
-        let body = 'Thank you <b>'+model.email+'</b> for updating your profile.<br /> <b>Thank you <br>MemoreLink Team</b> '
-        this.sEmail.sendEmail(model.email,'',subject,body,'support');
-        window.scroll(0,0);
-        return true;
-      } else {
-        this._auth.signUp(model).subscribe(
-          modelsignup => {
-              // refresh the list
-              //alert("User Addred");
-              this.valueservicesSucessMessage = model.email+" has been sucessfully registered, Please check your email to verify your email ID";
-              //console.log(this.valueservicesSucessMessage);
-              //console.log("Value Radio Burron ::::===>>>>>>> "+this.userActualRole);
-              this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, this.userActualRole, model.company, model.CompanyLogoURL, model.companyAddress,  model.phone,this.jobcount,modelsignup['_id']);
-              //this.router.navigate(['/signupconfirm']);
-              /* Email Start */
-              // let subject = 'Welcome to MeMoreLink!';
-              // let body = 'Thank you <b>'+model.email+'</b> for registering <br><br> Company: '+model.company+'<br>Company Address: '+model.companyAddress+'<br>Company Phone: '+model.phone+' <br><br>  Best of luck! <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
-              // this.sEmail.sendEmail(model.email,'',subject,body,'support');
-              window.scroll(0,0);
-              return true;
-          },
-          error => {
-            this.error = error;
-            //console.log("Message 2 "+error);
-            //console.log("Message 1 "+error[1].name);
-            //console.log("Message 2 "+error.description);
-            //this.signupMessage = error; //   "This user already exists."
-            this.valueservicesSucessMessage = "User already exists or password does not satisfy minimum requrements"; //   "This user already exists."
-          });
-       }
+
+      if (this.sitekey != '') {
+
+        if (this._auth.isAuthenticated()) {
+          model.email = this._auth.userProfile.name;
+          //console.log("Company URL ::::: "+model.CompanyLogoURL);
+          //console.log("this.udetails.selectedValueServices.auth0UserID ::::: "+this.udetails.selectedValueServices.auth0UserID);
+          this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, model.userRole, model.company, model.CompanyLogoURL, model.companyAddress, model.phone,this.jobcount,this.udetails.selectedValueServices.auth0UserID);
+          this.valueservicesSucessMessage = model.email+" has been sucessfully updated."
+          let subject = 'You have updated your profile';
+          let body = 'Thank you <b>'+model.email+'</b> for updating your profile.<br /> <b>Thank you <br>MemoreLink Team</b> '
+          this.sEmail.sendEmail(model.email,'',subject,body,'support');
+          window.scroll(0,0);
+          return true;
+        } else {
+          this._auth.signUp(model).subscribe(
+            modelsignup => {
+                // refresh the list
+                //alert("User Addred");
+                this.valueservicesSucessMessage = model.email+" has been sucessfully registered, Please check your email to verify your email ID";
+                //console.log(this.valueservicesSucessMessage);
+                //console.log("Value Radio Burron ::::===>>>>>>> "+this.userActualRole);
+                this.udetails.addUpdateUserDetails(this.userDetailsID, model.email, this.userActualRole, model.company, model.CompanyLogoURL, model.companyAddress,  model.phone,this.jobcount,modelsignup['_id']);
+                //this.router.navigate(['/signupconfirm']);
+                /* Email Start */
+                // let subject = 'Welcome to MeMoreLink!';
+                // let body = 'Thank you <b>'+model.email+'</b> for registering <br><br> Company: '+model.company+'<br>Company Address: '+model.companyAddress+'<br>Company Phone: '+model.phone+' <br><br>  Best of luck! <br /><br /> <b>Thank you <br>MemoreLink Team</b> '
+                // this.sEmail.sendEmail(model.email,'',subject,body,'support');
+                window.scroll(0,0);
+                return true;
+            },
+            error => {
+              this.error = error;
+              //console.log("Message 2 "+error);
+              //console.log("Message 1 "+error[1].name);
+              //console.log("Message 2 "+error.description);
+              //this.signupMessage = error; //   "This user already exists."
+              this.valueservicesSucessMessage = "User already exists or password does not satisfy minimum requrements"; //   "This user already exists."
+            });
+          }
+
+        } else {
+          alert("Please check I'm not a robot");
+        }
 
       }
     }
@@ -229,16 +236,17 @@ export class ValueServicesComponent implements OnInit {
 
 
     renderReCaptch() {
-
-      if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
+      setTimeout(() =>{
+      //if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
         window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
           'sitekey' : AUTH_CONFIG.SiteKey,
           'callback': (response) => {
+            this.sitekey = response;
               //console.log(response);
           }
         });
-      }
-  
+      //}
+      }, 100); 
   
     }
    
