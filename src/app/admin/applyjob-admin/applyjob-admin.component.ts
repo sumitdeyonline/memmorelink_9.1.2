@@ -116,9 +116,12 @@ export class ApplyjobAdminComponent implements OnInit {
     if ((apjob.username.trim() != '') || (apjob.company.trim() != '')) {
 
       let sdate = new Date(apjob.startDate);
+      // let startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+sdate.getDate());
+      // let edate = new Date(apjob.endDate);
+      // let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1)); 
+      
       let startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+sdate.getDate());
-      let edate = new Date(apjob.endDate);
-      let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
+      let endDt = new Date(apjob.endDate);
 
       this.appjob.getApplyJobByAdmin(apjob.username,callType,apjob.company, startDt, endDt).subscribe(udtl=> {
 

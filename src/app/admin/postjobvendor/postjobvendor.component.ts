@@ -118,13 +118,16 @@ export class PostjobvendorComponent implements OnInit {
 
       if ((postjobSearch.username.trim() != '') || (postjobSearch.company.trim() != '')) {
         let sdate = new Date(postjobSearch.startDate);
+        // let startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+sdate.getDate());
+        // let edate = new Date(postjobSearch.endDate);
+        // let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));   
+
         let startDt = new Date(sdate.getFullYear()+'-'+(sdate.getMonth()+1)+'-'+sdate.getDate());
-        let edate = new Date(postjobSearch.endDate);
-        let endDt = new Date(edate.getFullYear()+'-'+(edate.getMonth()+1)+'-'+(edate.getDate()+1));  
+        let endDt = new Date(postjobSearch.endDate);
   
         //console.log("Search ::::"+callType);
         this.pJob.getPostJobsByUser(postjobSearch.username.trim(),callType,postjobSearch.company.trim(),startDt,endDt).subscribe(udtl=> {
-          this.postJobc = udtl;
+          this.postJobc = udtl; 
           //console.log(" Length :::: "+this.postJobc.length);
     
     

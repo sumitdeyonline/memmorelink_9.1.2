@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, FormControl   } from '@angular/forms';
 import { FileUpload } from 'src/app/services/firebase/uploadresume/FileUpload';
 import { UploadResumeService } from 'src/app/services/firebase/uploadresume/upload-resume.service';
-import { FIREBASE_CONFIG } from 'src/app/global-config';
+import { FIREBASE_CONFIG, AUTH_CONFIG } from 'src/app/global-config';
 import { PostJobc } from 'src/app/services/firebase/postjob/postjob.model';
 import { ApplyJob } from 'src/app/services/firebase/applyjob/applyjob.model';
 import { AuthService } from 'src/app/services/authentication/auth.service';
@@ -26,6 +26,8 @@ import { UserProfile } from 'src/app/services/firebase/userprofile/userprofile.m
   styleUrls: ['./applyjob.component.css']
 })
 export class ApplyjobComponent implements OnInit {
+  @ViewChild('recaptchapplyjob', {static: false }) public recaptchaElement: ElementRef;
+  public sitekey='';
 
   applyJobForm: FormGroup;
   selectedFiles: FileList;
@@ -108,6 +110,7 @@ export class ApplyjobComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.addRecaptchaScript();
   }
 
 
@@ -130,20 +133,22 @@ export class ApplyjobComponent implements OnInit {
     //console.log("First Name ::: "+this.applyJobForm.get('FirstName').value);
     let username ='anonymous';
 
-    if (this.auth.isAuthenticated()) {
-      username = this.auth.userProfile.name;
-    }
- 
-    //this.applyJob = new ApplyNow[];
-     //this.applyJob.FirstName = applynowform.FirstName;
+    if (this.sitekey != '') {
+
+      if (this.auth.isAuthenticated()) {
+        username = this.auth.userProfile.name;
+      }
+  
+      //this.applyJob = new ApplyNow[];
+      //this.applyJob.FirstName = applynowform.FirstName;
 
 
 
-      //console.log("First Name "+this.applyJobForm)
+        //console.log("First Name "+this.applyJobForm)
 
-      // console.log("User name ::: "+this.applyJob.username);
-      // console.log("Created Date ::: "+this.applyJob.CreatedDate);
-      //console.log("Download URL ::: "+this.applyJob.fileUploadURL);
+        // console.log("User name ::: "+this.applyJob.username);
+        // console.log("Created Date ::: "+this.applyJob.CreatedDate);
+        //console.log("Download URL ::: "+this.applyJob.fileUploadURL);
       
       let checkEmail='';
       if (this.auth.isAuthenticated()) {
@@ -151,80 +156,81 @@ export class ApplyjobComponent implements OnInit {
       } else {
         checkEmail = this.applyJobForm.get('Email').value;
       }
+        this.ajob.getApplyJobByUserJobIDCandidateTakeOne(checkEmail,this.pjob.id).subscribe(ajob=>{
+          this.ajobscheck = ajob; 
+          //console.log("this.ajobscheck ::: "+this.ajobscheck.length);
+          if (this.ajobscheck.length == 0) {
 
-      this.ajob.getApplyJobByUserJobIDCandidateTakeOne(checkEmail,this.pjob.id).subscribe(ajob=>{
-        this.ajobscheck = ajob; 
-        //console.log("this.ajobscheck ::: "+this.ajobscheck.length);
-        if (this.ajobscheck.length == 0) {
 
+              this.applyJob = { FirstName: this.applyJobForm.get('FirstName').value,
+              LastName: this.applyJobForm.get('LastName').value,
+              FromEmail: this.applyJobForm.get('Email').value,
+              ApplyToEmail: this.pjob.ApplyToEmail,
+              CCToEmail:  this.pjob.CCToEmail,
+              ApplyToURL: this.pjob.ApplyToURL,
+              PhoneNumber: this.applyJobForm.get('PhoneNumber').value,
+              CoverLetter: this.applyJobForm.get('CoverLetter').value,
+              fileUploadURL: this.rUploadService.downloadURLTempResume,
+              JobID: this.pjob.id,
+              JobIDSerial:this.pjob.JobID,
+              JobTitle: this.pjob.JobTitle,
+              username : username,
+              joblocation: this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry,
+              company: this.pjob.Company,
+              CreatedDate: new Date()
+            };
 
-            this.applyJob = { FirstName: this.applyJobForm.get('FirstName').value,
-            LastName: this.applyJobForm.get('LastName').value,
-            FromEmail: this.applyJobForm.get('Email').value,
-            ApplyToEmail: this.pjob.ApplyToEmail,
-            CCToEmail:  this.pjob.CCToEmail,
-            ApplyToURL: this.pjob.ApplyToURL,
-            PhoneNumber: this.applyJobForm.get('PhoneNumber').value,
-            CoverLetter: this.applyJobForm.get('CoverLetter').value,
-            fileUploadURL: this.rUploadService.downloadURLTempResume,
-            JobID: this.pjob.id,
-            JobIDSerial:this.pjob.JobID,
-            JobTitle: this.pjob.JobTitle,
-            username : username,
-            joblocation: this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry,
-            company: this.pjob.Company,
-            CreatedDate: new Date()
-          };
+            this.ajob.addUpdateApplyJobs(this.applyJob);
 
-          this.ajob.addUpdateApplyJobs(this.applyJob);
+            // let filename='';
+            // if (this.auth.isAuthenticated()) {
+            //   for (let i=0;i<this.uResume.length;i++) {
+            //     if (this.applyJob.fileUploadURL.toLowerCase() == this.uResume[i].ResumeURL) {
+            //       filename = this.uResume[i].ResumeFileName;
+            //       //console.log("File Name :::: "+filename);
+            //       break;
+            //     }
+            //   }
+            // } 
 
-          // let filename='';
-          // if (this.auth.isAuthenticated()) {
-          //   for (let i=0;i<this.uResume.length;i++) {
-          //     if (this.applyJob.fileUploadURL.toLowerCase() == this.uResume[i].ResumeURL) {
-          //       filename = this.uResume[i].ResumeFileName;
-          //       //console.log("File Name :::: "+filename);
-          //       break;
-          //     }
-          //   }
-          // } 
-
- 
-      
-          // Candidate Job Email 
-          let subject = 'You have applied for: '+this.pjob.JobTitle;
-          let body = 'Thank you <b>'+checkEmail+'</b>  for applying for the job.<br/></br> <b>Job Title: </b> '+this.pjob.JobTitle+' <br /> <b>Job Location: </b>'+this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry+'<br /> <b>Job Description : </b>'+this.pjob.JobDesc+'  <br><br> <b>Thank you <br>MemoreLink Team</b>'
-          this.sEmail.sendEmail(checkEmail,'',subject,body,'job');
-          
-          // Recruiter Job Email 
-      
-          let vJobSublect =this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+' has applied for the job '+this.pjob.JobTitle;
-          let vBody =this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+ ' has applied for the job <br/> <br/> <b>Candidate Email: </b>'+checkEmail+
-                    '  <br/> <b>Candidate Phone: </b>'+this.applyJobForm.get('PhoneNumber').value+
-                    '  <br/> <b>Cover Letter : </b>'+this.applyJobForm.get('CoverLetter').value+
-                    ' <br /> <b>Resume  : </b><a href="'+this.applyJob?.fileUploadURL+'">Resume Link</a><br>'+
-                    '  <br /> <b>Job Title: </b>'+this.pjob.JobTitle+
-                    '  <br /> <b>Job Location: </b>'+this.pjob?.JobCity+', '+this.pjob?.JobState+', '+this.pjob?.JobCountry+
-                    ' <br /><b>Job Description : </b>'+this.pjob.JobDesc+
-                    ' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
-          this.sEmail.sendEmail(this.pjob.ApplyToEmail,'',vJobSublect,vBody,'job');
-      
-          if ((this.pjob.CCToEmail != null) && (this.pjob.CCToEmail != undefined)) {
-            if (this.pjob.CCToEmail.trim() !='') {
-              this.sEmail.sendEmail(this.pjob.CCToEmail,'',vJobSublect,vBody,'job');
-            } else {
-              //console.log("No CC email");
+  
+        
+            // Candidate Job Email 
+            let subject = 'You have applied for: '+this.pjob.JobTitle;
+            let body = 'Thank you <b>'+checkEmail+'</b>  for applying for the job.<br/></br> <b>Job Title: </b> '+this.pjob.JobTitle+' <br /> <b>Job Location: </b>'+this.pjob.JobCity+', '+this.pjob.JobState+', '+this.pjob.JobCountry+'<br /> <b>Job Description : </b>'+this.pjob.JobDesc+'  <br><br> <b>Thank you <br>MemoreLink Team</b>'
+            this.sEmail.sendEmail(checkEmail,'',subject,body,'job');
+            
+            // Recruiter Job Email 
+        
+            let vJobSublect =this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+' has applied for the job '+this.pjob.JobTitle;
+            let vBody =this.applyJobForm.get('FirstName').value+' '+this.applyJobForm.get('LastName').value+ ' has applied for the job <br/> <br/> <b>Candidate Email: </b>'+checkEmail+
+                      '  <br/> <b>Candidate Phone: </b>'+this.applyJobForm.get('PhoneNumber').value+
+                      '  <br/> <b>Cover Letter : </b>'+this.applyJobForm.get('CoverLetter').value+
+                      ' <br /> <b>Resume  : </b><a href="'+this.applyJob?.fileUploadURL+'">Resume Link</a><br>'+
+                      '  <br /> <b>Job Title: </b>'+this.pjob.JobTitle+
+                      '  <br /> <b>Job Location: </b>'+this.pjob?.JobCity+', '+this.pjob?.JobState+', '+this.pjob?.JobCountry+
+                      ' <br /><b>Job Description : </b>'+this.pjob.JobDesc+
+                      ' <br />  <br><br> <b>Thank you <br>MemoreLink Team</b>'
+            this.sEmail.sendEmail(this.pjob.ApplyToEmail,'',vJobSublect,vBody,'job');
+        
+            if ((this.pjob.CCToEmail != null) && (this.pjob.CCToEmail != undefined)) {
+              if (this.pjob.CCToEmail.trim() !='') {
+                this.sEmail.sendEmail(this.pjob.CCToEmail,'',vJobSublect,vBody,'job');
+              } else {
+                //console.log("No CC email");
+              }
             }
+      
+
+          } else {
+            this.applySucessMessage = "You have applied this job("+this.pjob.JobTitle+") already";
           }
-    
+          this.checkApplied = true;
+        });
 
-        } else {
-          this.applySucessMessage = "You have applied this job("+this.pjob.JobTitle+") already";
-        }
-        this.checkApplied = true;
-      });
-
-
+      } else {
+        alert("Please check I'm not a robot");
+      }
 
 
   /* Email Start */ 
@@ -340,6 +346,44 @@ export class ApplyjobComponent implements OnInit {
     //console.log("Phone : "+phone);
     //this.applyJobForm.setValue(this.utility.formatUSNumber(phone):'PhoneNumber').value = this.utility.formatUSNumber(phone);
     this.applyJobForm.controls['PhoneNumber'].setValue(this.utility.formatUSNumber(phone));
+  }
+
+
+  renderReCaptch() {
+    //console.log("Repatch ..")
+
+    setTimeout(() =>{
+
+     //if (this.recaptchaElement != undefined && this.recaptchaElement !=null) {
+      window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+        'sitekey' : AUTH_CONFIG.SiteKey,
+        'callback': (response) => {
+          this.sitekey = response;
+            //console.log(response);
+
+        }
+      });
+     //}
+    }, 100);  
+
+  }
+ 
+  addRecaptchaScript() {
+ 
+    window['grecaptchaCallback'] = () => {
+      this.renderReCaptch();
+    }
+    
+
+
+    (function(d, s, id, obj){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { obj.renderReCaptch(); return;}
+      js = d.createElement(s); js.id = id;
+      js.src = AUTH_CONFIG.GoogleRecaptchaSite;
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'recaptcha-jssdk', this));
+ 
   }
 
 }

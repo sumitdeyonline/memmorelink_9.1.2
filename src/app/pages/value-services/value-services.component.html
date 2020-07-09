@@ -27,7 +27,8 @@
                 <h2 *ngIf ="_auth.isAuthenticated()">Profile</h2>
  
  
-                <signup-confirm [signupSucessMessage] = "valueservicesSucessMessage"></signup-confirm>
+                <!-- <signup-confirm [signupSucessMessage] = "valueservicesSucessMessage"></signup-confirm> -->
+                <signup-confirm [signupSucessMessage] = "valueservicesSucessMessage" *ngIf="valueservicesSucessMessage != null && valueservicesSucessMessage !=''"></signup-confirm>
                 <div id="site_form" [hidden]="valueservicesSucessMessage != null && valueservicesSucessMessage !=''">
                  <p class="error_Message" *ngIf="valueservicesMessage != null && valueservicesMessage !=''">
                      {{ valueservicesMessage }}
