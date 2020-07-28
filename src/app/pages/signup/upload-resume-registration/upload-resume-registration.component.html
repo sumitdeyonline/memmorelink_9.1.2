@@ -13,7 +13,12 @@
             <div class="col_3">
                 <!-- <hr/> -->
 
-
+                <div id="buttonHomePage" class="clearfix" *ngIf="signupSucessMessage != null && signupSucessMessage !=''">
+                    <p style="color:#006309; font-size: 19px;" *ngIf="signupSucessMessage != null && signupSucessMessage !=''" >
+                        {{ signupSucessMessage }}         
+                    </p>
+                    <!-- <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/signin" value="Sign In"></label> -->
+                </div>
 
                 <br>
                 <div class="row">
@@ -58,13 +63,7 @@
                   </div>
                   <br>
 
-            <div id="buttonHomePage" class="clearfix" *ngIf="signupSucessMessage != null && signupSucessMessage !=''">
-                <p style="color:#006309; font-size: 19px;" *ngIf="signupSucessMessage != null && signupSucessMessage !=''" >
-                    {{ signupSucessMessage }}         
-                </p>
-                <!-- <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/signin" value="Sign In"></label> -->
-                &nbsp;&nbsp;&nbsp;
-            </div>
+
               
 
 

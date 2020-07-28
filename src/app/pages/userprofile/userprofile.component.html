@@ -236,20 +236,7 @@
                 <div class="row">
 
                     <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="State">State<span style="color: red;">&nbsp;*</span></label>
-                    </div>
-                    <div class="col">
-                        <select ngModel name="State" [disabled]="!isUpdateProfile" #State="ngModel" id="State" [ngModel]="uProfile.selectedUserProfile?.State" (ngModelChange)="uProfile.selectedUserProfile.State" class="form-control input-sm" required>
-                            <option>Select State</option>
-                            <option [value]="st.StateName" *ngFor="let st of states">{{st.StateDisplayName}}({{st.StateName}})</option>
-                        </select>
-                        <div class="error_Message" *ngIf="State.invalid && (State.dirty || State.touched)">
-                            Please Select State
-                        </div>
-                     </div>
-
-                    <div class="col-sm-2">
-                            <label style="font-weight: bold;" for="Country">Country<span style="color: red;">&nbsp;*</span></label>
+                        <label style="font-weight: bold;" for="Country">Country<span style="color: red;">&nbsp;*</span></label>
                     </div>
                     <div class="col">
                         <select ngModel name="Country" [disabled]="!isUpdateProfile" #Country="ngModel" id="Country" [ngModel]="uProfile.selectedUserProfile?.Country" (ngModelChange)="uProfile.selectedUserProfile.Country" class="form-control input-sm" (change)="getState($event.target.value)" required>
@@ -262,8 +249,20 @@
                         </div>
                     </div>
 
-
+                    <div class="col-sm-2">
+                        <label style="font-weight: bold;" for="State">State<span style="color: red;">&nbsp;*</span></label>
+                    </div>
+                    <div class="col">
+                        <select ngModel name="State" [disabled]="!isUpdateProfile" #State="ngModel" id="State" [ngModel]="uProfile.selectedUserProfile?.State" (ngModelChange)="uProfile.selectedUserProfile.State" class="form-control input-sm" required>
+                            <option>Select State</option>
+                            <option [value]="st.StateName" *ngFor="let st of states">{{st.StateDisplayName}}({{st.StateName}})</option>
+                        </select>
+                        <div class="error_Message" *ngIf="State.invalid && (State.dirty || State.touched)">
+                            Please Select State
+                        </div>
+                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="col-sm-2">&nbsp;
                     </div>
@@ -443,7 +442,8 @@ emptype
                   
 
                     <div class="col">
-                        <select ngModel name="WorkAuthorization" #WorkAuthorization="ngModel" [hidden]="isWorkAuthHide" id="WorkAuthorization" [disabled]="!isUpdateProfile" #WorkAuthorization="ngModel" id="WorkAuthorization" [ngModel]="uProfile.selectedUserProfile?.WorkAuthorization" (ngModelChange)="uProfile.selectedUserProfile.WorkAuthorization" class="form-control input-sm" (change)="selectWorkAuthorization($event.target.value)" required>
+                        <select ngModel name="WorkAuthorization" #WorkAuthorization="ngModel" [hidden]="isWorkAuthHide" id="WorkAuthorization" [disabled]="!isUpdateProfile" #WorkAuthorization="ngModel" id="WorkAuthorization" [ngModel]="uProfile.selectedUserProfile?.WorkAuthorization" (ngModelChange)="uProfile.selectedUserProfile.WorkAuthorization" class="form-control input-sm" required>
+                        <!-- <select ngModel name="WorkAuthorization" #WorkAuthorization="ngModel" [hidden]="isWorkAuthHide" id="WorkAuthorization" [disabled]="!isUpdateProfile" #WorkAuthorization="ngModel" id="WorkAuthorization" [ngModel]="uProfile.selectedUserProfile?.WorkAuthorization" (ngModelChange)="uProfile.selectedUserProfile.WorkAuthorization" class="form-control input-sm" (change)="selectWorkAuthorization($event.target.value)" required> -->
                             <!-- <option >Select Work Authorization</option> -->
                             <option [value]="wauth.name" *ngFor="let wauth of workauthArray">{{wauth.name}}</option>
                             <!--option>USA</option-->
@@ -462,7 +462,7 @@ emptype
                         <option value="Other">Other</option>
                     </select> -->
  
-                        <input type="text" ngModel name="WorkAuthorization" maxlength="50" autocomplete="off" id="WorkAuthorization" [disabled]="!isUpdateProfile" placeholder= "Work authorization"  [hidden]="!isWorkAuthHide"  #WorkAuthorization="ngModel" id="WorkAuthorization" [ngModel]="uProfile.selectedUserProfile?.WorkAuthorization" (ngModelChange)="uProfile.selectedUserProfile.WorkAuthorization" class="form-control input-sm" required/>
+                        <!-- <input type="text" ngModel name="WorkAuthorization" maxlength="50" autocomplete="off" id="WorkAuthorization" [disabled]="!isUpdateProfile" placeholder= "Work authorization"  [hidden]="!isWorkAuthHide"  #WorkAuthorization="ngModel" id="WorkAuthorization" [ngModel]="uProfile.selectedUserProfile?.WorkAuthorization" (ngModelChange)="uProfile.selectedUserProfile.WorkAuthorization" class="form-control input-sm" required/> -->
                     </div>                    
                     <div class="col-sm-2">
                         <label style="font-weight: bold;" for="YearsofExperince">Years of Experience</label>

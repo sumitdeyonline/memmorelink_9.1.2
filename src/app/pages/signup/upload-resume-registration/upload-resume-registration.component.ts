@@ -29,7 +29,7 @@ export class UploadResumeRegistrationComponent implements OnInit {
   isNewUpload: boolean = false;
   uResume: UploadResume [];
   mobile: boolean=false;
-  signupSucessMessage = '';
+  signupSucessMessage =  "Registration complete. Please check your email to verify your email ID, if you don't find the email in your inbox, please check in the SPAM.";
   constructor(private route: ActivatedRoute,
               public rUploadService: UploadResumeService, 
               private uProfile: UserprofileService,
@@ -156,7 +156,7 @@ export class UploadResumeRegistrationComponent implements OnInit {
 
     //this.router.navigate(['/userprofile']);
 
-     this.signupSucessMessage = "Registration complete. Please check your email to verify your email ID";
+     //this.signupSucessMessage = "Registration complete. Please check your email to verify your email ID";
 
     } else {
       alert("Please check I'm not a robot");

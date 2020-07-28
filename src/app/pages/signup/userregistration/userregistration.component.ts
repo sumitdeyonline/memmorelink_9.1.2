@@ -426,9 +426,15 @@ export class UserregistrationComponent implements OnInit {
       uprofileForm.value.Education = "";
     }
 
-    if (uprofileForm.value.WorkAuthorization == 'Other') {
-      uprofileForm.value.WorkAuthorization = this.userProfile[0].WorkAuthorization;
-    }
+    /* 
+      This is for other work authorization 
+      if (uprofileForm.value.WorkAuthorization == 'Other') {
+        uprofileForm.value.WorkAuthorization = this.userProfile[0].WorkAuthorization;
+      }
+    */
+
+
+
     //console.log ('Education  ::: '+ uprofileForm.value.Education);
     //console.log ('SalaryExpectation  ::: '+ uprofileForm.value.SalaryExpectation);
 
@@ -512,6 +518,9 @@ export class UserregistrationComponent implements OnInit {
 
   selectWorkAuthorization(event) {
     //console.log("work auth :: "+event);
+
+    /*
+    If user select "Other", get option to enter text. 
     if (event == 'Other') {
       setTimeout(()=> {
         this.isWorkAuthHide = true;
@@ -523,6 +532,7 @@ export class UserregistrationComponent implements OnInit {
     }, 0);
 
     }
+    */
   }
 
   phoneNumberFormatCell(phone) {

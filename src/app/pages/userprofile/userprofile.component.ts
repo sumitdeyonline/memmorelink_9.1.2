@@ -301,14 +301,22 @@ export class UserProfileComponent implements OnInit {
 
   selectWorkAuthorization(event) {
     //console.log("work auth :: "+event);
+
+   /*
+    If user select "Other", get option to enter text. 
     if (event == 'Other') {
       setTimeout(()=> {
         this.isWorkAuthHide = true;
-        this.uProfile.selectedUserProfile.WorkAuthorization = this.userProfile[0].WorkAuthorization;
-        this.changeDetector.detectChanges();
+        if (this.userProfile[0] !=undefined && this.userProfile[0] !=null) {
+          this.uProfile.selectedUserProfile.WorkAuthorization = this.userProfile[0].WorkAuthorization;
+          this.changeDetector.detectChanges();
+        }
+
     }, 0);
 
     }
+    */
+
   }
 
 
@@ -411,9 +419,13 @@ export class UserProfileComponent implements OnInit {
       uprofileForm.value.Education = "";
     }
 
-    if (uprofileForm.value.WorkAuthorization == 'Other') {
-      uprofileForm.value.WorkAuthorization = this.userProfile[0].WorkAuthorization;
-    }
+
+        /* 
+      This is for other work authorization 
+      if (uprofileForm.value.WorkAuthorization == 'Other') {
+        uprofileForm.value.WorkAuthorization = this.userProfile[0].WorkAuthorization;
+      }
+    */
     //console.log ('Education  ::: '+ uprofileForm.value.Education);
     //console.log ('SalaryExpectation  ::: '+ uprofileForm.value.SalaryExpectation);
 

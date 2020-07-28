@@ -1453,7 +1453,7 @@ h4.m_1{
     text-decoration: none;
 }
 .pagination>li {
-    display: inline-block;
+    display: inline-block !important;
 }
 .pagination>li span{
 	padding:0;
@@ -3440,7 +3440,7 @@ p.sm_1{
 /* Pagination */
 
 .pagination {
-    display: inline-block;
+    display: inline-block !important;
   }
   
   .pagination a {
