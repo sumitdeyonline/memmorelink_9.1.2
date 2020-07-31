@@ -6,6 +6,15 @@
 <div class="container">
     <div class="single">
         <div class="form-container">
+
+
+            <div id="buttonHomePage" class="clearfix" *ngIf="isUpdateProfile">
+                <p style="color:#006309; font-size: 19px;" *ngIf="isUpdateProfile" >
+                    {{ signupSucessMessage }}         
+                </p>
+                <!-- <label class="btn2 btn-2 btn2-1b"><input type="button" routerLink="/signin" value="Sign In"></label> -->
+            </div>
+
             <br *ngIf="!mobile">
             <!-- <h2>User Profile</h2> -->
 
@@ -275,23 +284,23 @@
 
                 <div class="row">
                     <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="CurrentCompanySchool">Current Company/School<span style="color: red;">&nbsp;*</span></label>
+                        <label style="font-weight: bold;" for="CurrentCompanySchool">Current Company/School</label>
                     </div>
                     <div class="col">
-                        <input type="text" ngModel name="CurrentCompanySchool" maxlength="70" [disabled]="!isUpdateProfile" #CurrentCompanySchool="ngModel" id="CurrentCompanySchool" [ngModel]="uProfile.selectedUserProfile?.CurrentCompanySchool" (ngModelChange)="uProfile.selectedUserProfile.CurrentCompanySchool" class="form-control input-sm" required/>
-                        <div class="error_Message" *ngIf="CurrentCompanySchool.invalid && (CurrentCompanySchool.dirty || CurrentCompanySchool.touched)">
+                        <input type="text" ngModel name="CurrentCompanySchool" maxlength="70" [disabled]="!isUpdateProfile" #CurrentCompanySchool="ngModel" id="CurrentCompanySchool" [ngModel]="uProfile.selectedUserProfile?.CurrentCompanySchool" (ngModelChange)="uProfile.selectedUserProfile.CurrentCompanySchool" class="form-control input-sm"/>
+                        <!-- <div class="error_Message" *ngIf="CurrentCompanySchool.invalid && (CurrentCompanySchool.dirty || CurrentCompanySchool.touched)">
                             Please Enter Current Company/School
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="CurrentPosition">Current Position/Title<span style="color: red;">&nbsp;*</span></label>
+                        <label style="font-weight: bold;" for="CurrentPosition">Current Position/Title</label>
                     </div>
                     <div class="col">
-                        <input type="text" ngModel name="CurrentPosition" maxlength="50" [disabled]="!isUpdateProfile" #CurrentPosition="ngModel" id="CurrentPosition" [ngModel]="uProfile.selectedUserProfile?.CurrentPosition" (ngModelChange)="uProfile.selectedUserProfile.CurrentPosition" class="form-control input-sm" required/>
-                        <div class="error_Message" *ngIf="CurrentPosition.invalid && (CurrentPosition.dirty || CurrentPosition.touched)">
+                        <input type="text" ngModel name="CurrentPosition" maxlength="50" [disabled]="!isUpdateProfile" #CurrentPosition="ngModel" id="CurrentPosition" [ngModel]="uProfile.selectedUserProfile?.CurrentPosition" (ngModelChange)="uProfile.selectedUserProfile.CurrentPosition" class="form-control input-sm"/>
+                        <!-- <div class="error_Message" *ngIf="CurrentPosition.invalid && (CurrentPosition.dirty || CurrentPosition.touched)">
                             Please Enter Current Position/Title
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="row">
@@ -382,13 +391,13 @@ emptype
 
                 <div class="row">
                     <div class="col-sm-2">
-                        <label style="font-weight: bold;" for="DesiredPosition">Desired Position<span style="color: red;">&nbsp;*</span></label>
+                        <label style="font-weight: bold;" for="DesiredPosition">Desired Position</label>
                     </div>
                     <div class="col">
-                        <input type="text" ngModel maxlength="80" name="DesiredPosition" maxlength="70" [disabled]="!isUpdateProfile" #DesiredPosition="ngModel" id="DesiredPosition" [ngModel]="uProfile.selectedUserProfile?.DesiredPosition" (ngModelChange)="uProfile.selectedUserProfile.DesiredPosition" class="form-control input-sm" required/>
-                        <div class="error_Message" *ngIf="DesiredPosition.invalid && (DesiredPosition.dirty || DesiredPosition.touched)">
+                        <input type="text" ngModel maxlength="80" name="DesiredPosition" maxlength="70" [disabled]="!isUpdateProfile" #DesiredPosition="ngModel" id="DesiredPosition" [ngModel]="uProfile.selectedUserProfile?.DesiredPosition" (ngModelChange)="uProfile.selectedUserProfile.DesiredPosition" class="form-control input-sm"/>
+                        <!-- <div class="error_Message" *ngIf="DesiredPosition.invalid && (DesiredPosition.dirty || DesiredPosition.touched)">
                             Please Enter Desired Position
-                        </div>                  
+                        </div>                   -->
                     </div>
 
                     <div class="col-sm-2">
@@ -560,10 +569,10 @@ emptype
 
             <div class="row">
                 <div class="col-sm-2">
-                    <label style="font-weight: bold;" for="Education">Field of Study<span style="color: red;">&nbsp;*</span></label>
+                    <label style="font-weight: bold;" for="Education">Field of Study</label>
                 </div>
                 <div class="col">
-                    <input type="text" ngModel name="Education" maxlength="50" [disabled]="!isUpdateProfile" #Education="ngModel" id="Education" [ngModel]="uProfile.selectedUserProfile?.Education" (ngModelChange)="uProfile.selectedUserProfile.Education" class="form-control input-sm" required/>
+                    <input type="text" ngModel name="Education" maxlength="50" [disabled]="!isUpdateProfile" #Education="ngModel" id="Education" [ngModel]="uProfile.selectedUserProfile?.Education" (ngModelChange)="uProfile.selectedUserProfile.Education" class="form-control input-sm"/>
                 </div>
             </div>
             <div class="row">

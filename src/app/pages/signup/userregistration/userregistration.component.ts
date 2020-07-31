@@ -58,7 +58,8 @@ export class UserregistrationComponent implements OnInit {
   isWorkAuthHide: boolean =false;
   mobile: boolean=false;
   userEmail:String='';
-
+  signupSucessMessage =  "Registration complete. Please check your email to verify your user ID, if you don't find the email in your inbox, please check in the SPAM.";
+ 
   workauthArray : WorkAuthorization[];
 
   constructor(private route: ActivatedRoute,
