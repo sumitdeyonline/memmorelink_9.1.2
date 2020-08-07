@@ -62,7 +62,7 @@ export class EmployerpageComponent implements OnInit {
 
       //console.log("Last Updated ::: "+ Math.round(Math.abs(new Date().getTime() - this.pjob[3].LastModifiedDate.toDate().getTime())/(24*60*60*1000));
       // console.log("Last Updated ::: "+ this.getDateDiff(this.pjob[3].LastModifiedDate));
-      if (this.pjob.length == 0) {
+      if ((this.pjob.length == 0) || (this.pjob == undefined)) {
         //console.log("Company ::: "+this.aJob[0].company);
         //this.setPage(1);
         this.pjob = [];

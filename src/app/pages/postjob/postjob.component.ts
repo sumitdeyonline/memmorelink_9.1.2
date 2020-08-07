@@ -261,6 +261,8 @@ export class PostjobComponent implements OnInit {
       postJobForm.value.CompanyLogoURL = '';
     } 
 
+    //console.log("postJobForm.value.isTeleComute :::::===>>>> "+postJobForm.value.isTeleComute);
+
     if (postJobForm.value.isTeleComute === undefined) {
       postJobForm.value.isTeleComute = false;
     }     
@@ -546,7 +548,7 @@ export class PostjobComponent implements OnInit {
         // category: '',
         // details: ''
       }
-      this.postjobService.selectedPostJobc.isTeleComute=false;
+      this.postjobService.selectedPostJobc.isTeleComute=true;
       //this.postjobService.selectedPostJobc.TravelRequirements='No Travel';
       if (this.postjobService.selectedPostJobc.TravelRequirements == undefined) {
         this.postjobService.selectedPostJobc.TravelRequirements = "0";

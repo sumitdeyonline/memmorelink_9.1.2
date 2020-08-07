@@ -29,7 +29,7 @@ export class UploadResumeRegistrationComponent implements OnInit {
   isNewUpload: boolean = false;
   uResume: UploadResume [];
   mobile: boolean=false;
-  signupSucessMessage =  "Registration complete. Please check your email to verify your user ID, if you don't find the email in your inbox, please check in the SPAM.";
+  signupSucessMessage =  "Registration complete. Please check your email to verify your email ID. If you don't find the email in your inbox, then please check the SPAM folder.";
   constructor(private route: ActivatedRoute,
               public rUploadService: UploadResumeService, 
               private uProfile: UserprofileService,

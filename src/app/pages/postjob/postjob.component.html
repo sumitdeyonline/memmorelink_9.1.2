@@ -434,8 +434,8 @@
                     <div class="col">
               <!--input type="text" ngModel name="isTeleComute" #isTeleComute="ngModel" id="isTeleComute" [(ngModel)]="postjobService.selectedPostJobc.isTeleComute" class="form-control input-sm"/-->
                       <select ngModel name="isTeleComute" #isTeleComute="ngModel" id="isTeleComute" [ngModel]="postjobService.selectedPostJobc?.isTeleComute" (ngModelChange)="postjobService.selectedPostJobc.isTeleComute" class="form-control input-sm">
-                        <option value=false>No</option>
                         <option value=true>Yes</option>
+                        <option value=false>No</option>
                       </select>
                     </div>
                 </div>
