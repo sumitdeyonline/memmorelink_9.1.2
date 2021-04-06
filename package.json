@@ -29,7 +29,7 @@
     "@ckeditor/ckeditor5-alignment": "^18.0.0",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^18.0.0",
-    "@ckeditor/ckeditor5-image": "^18.0.0",
+    "@ckeditor/ckeditor5-image": "^27.0.0",
     "@ng-bootstrap/ng-bootstrap": "^6.0.3",
     "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
     "@ng-select/ng-select": "^4.0.0",
